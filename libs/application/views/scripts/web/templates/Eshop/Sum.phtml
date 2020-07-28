@@ -1,0 +1,16 @@
+              
+                    <p class="totalPrice">Cena za zboží celkem : <?=helper_FrontEnd::price($this->basketSum)?> Kč</p>
+                    
+                    <? if (($this->step == 4 || $this->step == 5) && $this->basketSum < 2000): ?>
+                    <p class="totalPrice">Cena včetně balného a poštovného : <?=helper_FrontEnd::price($this->basketSum + $this->settings->getSettingValue('basketDeliverySum'))?> Kč</p>
+                    <? endif; ?>
+                    
+                    <p class="sale">Při nákupu položek v košíku ušetříte celkem <strong><?=helper_FrontEnd::price($this->moneySave)?> Kč</strong></p>
+                    
+                    <p class="sale" style="color:#d14500; ">
+                    <? if($this->basketSum >= 2000): ?>  
+                     <strong>Poštovné a balné ZDARMA !</strong>
+                    <? else: ?>
+                    Cena za balné, dobírku a poštovné Obchodním balíkem České Pošty	<?=$this->settings->getSettingValue('basketDeliverySum') ?>,- Kč
+                    <? endif; ?>  
+                 	</p>

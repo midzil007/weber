@@ -1,0 +1,264 @@
+
+zbozi
+<?php 
+$this->obsahClass = $this->kategorie[$this->node->nodeId][0];
+// $logo = $this->znacky[$this->node->nodeId][1];
+$this->disableH1 = true;       
+$pocetSelect = array(
+	9 => 9,
+	18 => 18,
+	36 => 36,
+	45 => 45 
+);
+ 
+if(!function_exists('getUrl2')){
+	function getUrl2($view, $page){
+		
+		$a = (array) $view->inputGet;  
+		return Utils::addUrlParams($view->path, $a);
+	}
+}  
+	if($this->session->spocec < 9){
+		$this->session->spocec = 9; 
+	}
+	 
+	// $p = $this->session->spocec>0?$this->session->spocet:9;
+	$p = 9;   
+	  
+	$this->inputGet->pocet = $this->inputGet->pocet?$this->inputGet->pocet:$p;
+	$this->session->spocec = $this->inputGet->pocet;
+	   
+	$params = array( );  
+	if($this->inputGet->znackyAll){
+		$this->inputGet->znacka  = array(); 
+		$this->inputGet->znackyAll = 0; 
+	}
+	
+	$ds = 'title';
+	$dst = 'asc';
+	
+	if($this->node->nodeId ==  4863){ // novinky
+		$params['new'] = true;
+		$ds = 'n.id';
+		$dst = 'desc';
+	} elseif($this->node->nodeId ==  4862) { // akcni
+		$params['akce'] = true;  
+	} 
+	elseif($this->node->nodeId ==  6891) // trhak
+	{
+		$params['trhak'] = true;
+	}
+	elseif($this->node->nodeId ==  6893) // vyprodej
+	{
+		$params['vyprodej'] = true;
+	}
+	elseif($this->node->nodeId ==  4887) { // nejoblibenejsi
+		$params['nej'] = true;  
+		$ds = 'sold';
+		$dst = 'desc';   
+		if($this->inputGet->price){
+			$dst = 'asc';    
+			// $params['znacka'] = $this->inputGet->znacka ;
+		} 
+	} else {
+		$params['category'] = $this->node->nodeId;
+	}
+	
+	if($this->inputGet->sort == 'price'){
+		$this->inputGet->sortType = 'asc';       
+	}
+	
+	if($this->inputGet->cat){
+		$c = $this->tree->getNodeById($this->inputGet->cat);
+		$this->pageTitleRaw .= ' - ' . $c->title; 
+		if($c){ 
+			$params['category'] = $this->inputGet->cat; 
+		}
+	}
+	
+	$tableSort = $this->inputGet->sort = $this->inputGet->sort?$this->inputGet->sort:$ds;
+	$tableSortType = $this->inputGet->sortType = $this->inputGet->sortType?$this->inputGet->sortType:$dst;
+	 
+	$products = $this->mProducts->getProducts($tableSort, $tableSortType, 0, 5000, $params);
+ 	
+	  
+	$znacky = array();	 
+	foreach ($products as $p){  
+		$znacky[$p['znacka']] = $p['znacka'];
+	}   
+	// pr($znacky); 
+	
+	
+	$params['znacka'] = $this->inputGet->znacka ;
+	$products = $this->mProducts->getProducts($tableSort, $tableSortType, 0, 5000, $params);
+ 	// LISTING 		 
+    $this->ListingItemsCount =  count($products);
+	$this->listingPerPage = $this->inputGet->pocet;   
+	   
+	 
+	helper_Listing::init($this);   
+	
+	$products = $this->mProducts->getProducts($tableSort, $tableSortType, $this->listingSQLStartPos, $this->listingPerPage, $params);
+	  
+	
+    
+ 	 
+	 
+	
+	 
+	// 	pr($products);  
+	$productsNodes = $this->mProducts->getArticlesAsNodes($this->tree, $products); 
+	
+	 
+?>     
+          <div id="popis"> 
+          	<form method="get" name="pfilter" id="pfilter">
+          	<?=$this->formHidden('sort', $this->inputGet->sort)?>
+          	<?=$this->formHidden('znackyAll', $this->inputGet->znackyAll)?> 
+          	<?=$this->formHidden('cat', $this->inputGet->cat)?>  
+          	<?=$this->formHidden('sortType', $this->inputGet->sortType)?>
+            <div id="shortDesc">
+              <h1><?=$this->pageTitleRaw?></h1>  
+              <? if(count($znacky) > 1):?>
+				<div id="sorting">  
+                <p>Značky: <a onclick="return submitFilter('znackyAll', 1)" href="#">všechny</a></p>
+                <p> 
+                	<? foreach ($znacky as $zid):?>
+                	<label>  
+                    <input onchange = "submitFilter()" name="znacka[]" <?=(in_array($zid, $this->inputGet->znacka)?'checked="checked"':'')?> value="<?=$zid?>" type="checkbox">  
+                    <a href="<?=$this->znacky[$zid][3]?>"><?=$this->znacky[$zid][4]?></a></label> 
+                	<? endforeach;?>  
+                </p> 
+              </div>     
+              <? endif; ?>
+
+              <p class="sorting">Seřadit podle: &nbsp;&nbsp;   
+              	<a <?=($tableSort=='title'?'class="factive"':'')?> onclick="return submitFilter('sort', 'title')" href="#">názvu</a> &nbsp;&nbsp; 
+              	<a <?=($tableSort=='price'?'class="factive"':'')?> onclick="return submitFilter('sort', 'price')" href="#">ceny</a></p>
+              <p class="sorting">Produktů na stránce:</p>
+              <fieldset>    
+                <?=$this->formSelect('pocet', $this->inputGet->pocet, array('onchange' => 'submitFilter()', 'class' => 'w100'), $pocetSelect)?>
+              </fieldset>
+              <p><span>(Celkem <?=$this->ListingItemsCount?> produktů)</span> </p>
+            </div>
+            </form>
+          </div>
+          <div id="categoryListing">
+          
+          	<?php 
+          		$deleno = 1;
+          		$x = 0;
+            	foreach ($productsNodes as $child):
+            		$x++;
+            		$class="";
+            		if($x%3==0 && $x != 1){
+            			$class="lst";
+            		} elseif($x%($deleno+3)==0 || $x == 1){
+            			if($x == 1){
+            				
+            			} else {
+            				$deleno += 3;
+            			}
+            			 
+            			$class="fst"; 
+            		} 
+            		
+            		if($x > 3 && $class){  
+            			$class .= " wth"; 
+            		}   
+            		
+            		
+            		$c = $child->getPublishedContent();
+            		$p = helper_FrontEnd::getPhoto('photos', $c, $c->fotoThumbName);
+            		if(count($p)){
+            			$img = $p['path'];
+            		} else {
+            			$img = '/images/categoryImg.jpg';
+            		} 
+            		 
+            		$akce = $c->getPropertyValue('akce');
+            		$akce = (helper_MultiSelect::getMultiSelectValues($akce)); 
+            		$isVyprodej = $isAkce = $isNovinka = $isTip = false;
+            		if(in_array('1', $akce)){
+            			$isAkce = true;
+            		}
+            		if(in_array('2', $akce)){
+            			$isNovinka = true;
+            		}
+            		
+            		if(in_array('3', $akce)){ 
+            			$isTip = true;
+            		}
+					if(in_array('5', $akce)){ 
+            			$isVyprodej = true;
+            		}
+            		
+					$disabled = '';
+            		$skladem = $c->getPropertyValue('skladem');
+					if($skladem == 3){
+						$disabled = 'disabled';
+					}
+            		$price  = $c->getPropertyValue('price'); 
+            		$url = $c->getDetailUrl($this, $child);
+            		// $url = $this->path . '?p=' . $child->nodeId . '&t' . urlencode($child->title);
+            	?>  
+            	
+            	<div class="<?=$class?>">
+            		<? if(!$class ):?> 
+            		<div class="productBorder"></div> 
+					<div class="productInner <?=($x>2?'wth':'')?>"> 
+            		<? endif;?>
+		              <div class="flags">   
+		              	<? if($isAkce):?>
+		                <div class="akce"></div>
+		                <? endif;?> 
+		                <? if($isNovinka):?> 
+		                <div class="nove"></div>
+		                <? endif;?>   
+		                <? if($isTip):?> 
+		                <div class="tip"></div>
+		                <? endif;?>
+						<? if($isVyprodej):?> 
+						<div class="vyprodej">&nbsp;</div>
+						<? endif;?>  
+		              </div>     
+		              <p class="ttt"><a href="<?=$url?>"><?=$child->title?></a></p>
+		              <div class="img"><a href="<?=$url?>"><img src="<?=$img?>" alt="Obr" ></a></div>
+		              <div class="podrobnosti"> 
+		              	<?=$c->getSkladem(0, true)?>        
+		              	<form action="<?=$this->bp?>" method="post" name="orderForm"  class="orderForm">
+		              	<?=$this->formHidden('pid', $child->nodeId)?>   
+              			<?=$this->formHidden('action', 'buy')?>  
+              			<?=$this->formHidden('count', 1)?>  
+		                <div class="buy">   
+		                  <p><?=helper_FrontEnd::price($price)?> Kč</p>   
+		                  <input <?=$disabled?> name="kosik"  class="addToBasket <?=$disabled?>"  type="submit" value="" />
+		                  </div>
+		                </form>
+		              </div>
+		              <? if(!$class):?>
+	            		
+						</div>
+						<div class="productBorder"></div> 
+	            		<? endif;?>
+		            </div> 
+              <? endforeach;?>      
+          </div>    
+          <div class="spacer10"> </div>  
+          <?=$this->render('templates/Listing/Floating.phtml'); ?>  
+           
+          <div id="categorySeoText">
+          	<div class="spacer10"> </div>
+            <?=$this->pageText?>    			
+          </div>
+          
+          <script type="text/javascript">
+          	function submitFilter(v, val){ 
+              	if(v){ 
+              		$(v).set('value', val);
+              	}
+				document.getElementById('pfilter').submit();
+				return false; 
+          	}
+          </script>
+        

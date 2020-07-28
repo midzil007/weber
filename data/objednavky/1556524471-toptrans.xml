@@ -1,0 +1,1676 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<orders>
+	<order>
+		<label>166896</label>
+		<var_symbol>166896</var_symbol>
+		<payer_select>1</payer_select>
+		<loading_select>1</loading_select>
+		<term_id>1</term_id>   
+		<loading_date>29.04.2019</loading_date>   
+		<loading_time_from>10:04</loading_time_from>
+		<loading_time_to>10:54</loading_time_to>    
+		<discharge_date>30.04.2019</discharge_date>  
+		<discharge_time_from>08:00</discharge_time_from>
+		<discharge_time_to>16:00</discharge_time_to> 
+		<loading_personal_branch_id/>
+<discharge_personal_branch_id/>
+<payer/>
+<loading/>
+		<discharge>   
+		<address>
+			<country>Česká republika</country>
+			<city>Bor u Tachova</city>
+			<street>Ostrov</street>
+			<house_num>33</house_num>
+			<zip>34802</zip> 
+		</address>   
+		<name>Seigerschmid - kabelová kompletace s.r.o.</name><first_name>Petra</first_name>
+		<last_name>Šmatová</last_name>
+		<phone>+420777119469</phone>
+		<email>petra.smatova@comline-elektronik.com</email>
+		</discharge>
+		<loading_comfort_id>1</loading_comfort_id>
+		<discharge_comfort_id>1</discharge_comfort_id>
+		<twoway_shipment>0</twoway_shipment>
+		<yard>0</yard>
+		<delivery_notes_back>0</delivery_notes_back>
+		<euro_pallets_back>0</euro_pallets_back>
+		<loading_aviso>0</loading_aviso>
+		<discharge_aviso>0</discharge_aviso>
+		<aviso_sms>1</aviso_sms>
+		<consider>0</consider>
+		<oversize>0</oversize>
+		<label_fragile>1</label_fragile>
+		<label_dont_tilt>0</label_dont_tilt> 
+		<label_this_side_up>0</label_this_side_up>
+		<hydraulic_front_loading>0</hydraulic_front_loading>
+		<hydraulic_front_discharge>0</hydraulic_front_discharge>
+<loading_comfort_id>1</loading_comfort_id>
+<discharge_comfort_id>1</discharge_comfort_id>
+<twoway_shipment>0</twoway_shipment> 
+<twoway_shipment_description></twoway_shipment_description>
+<yard>0</yard>
+<delivery_notes_back>0</delivery_notes_back>
+<euro_pallets_back>0</euro_pallets_back>
+<loading_aviso>0</loading_aviso>
+<discharge_aviso>0</discharge_aviso>
+<aviso_sms>1</aviso_sms>
+<consider>1</consider>
+<oversize>0</oversize>
+<label_fragile>0</label_fragile>
+<label_dont_tilt>0</label_dont_tilt>
+<label_this_side_up>0</label_this_side_up>  
+<hydraulic_front_loading>0</hydraulic_front_loading>
+<hydraulic_front_discharge>0</hydraulic_front_discharge>
+		<cash_on_delivery> 
+			<type>1</type>
+			<price>1798</price>
+			<price_cur_id>1</price_cur_id>
+			<account2>2600340251</account2>
+			<bank>2010</bank>
+		</cash_on_delivery><kg>0.5</kg> 
+<m3/>
+<order_value>1798</order_value>
+<order_value_currency_id>1</order_value_currency_id>
+<note_loading></note_loading>
+<note_discharge></note_discharge>
+<packs>
+<pack>
+				<quantity>1</quantity>
+				<pack_id>1</pack_id>
+				<description>Přislušenství ke kávovaru</description>
+			</pack>
+</packs>
+</order>
+	<order>
+		<label>166895</label>
+		<var_symbol>166895</var_symbol>
+		<payer_select>1</payer_select>
+		<loading_select>1</loading_select>
+		<term_id>1</term_id>   
+		<loading_date>29.04.2019</loading_date>   
+		<loading_time_from>10:04</loading_time_from>
+		<loading_time_to>10:54</loading_time_to>    
+		<discharge_date>30.04.2019</discharge_date>  
+		<discharge_time_from>08:00</discharge_time_from>
+		<discharge_time_to>16:00</discharge_time_to> 
+		<loading_personal_branch_id/>
+<discharge_personal_branch_id/>
+<payer/>
+<loading/>
+		<discharge>   
+		<address>
+			<country>Česká republika</country>
+			<city>Prerov</city>
+			<street>NaOdpoledni</street>
+			<house_num>1042/19</house_num>
+			<zip>75002</zip> 
+		</address>   
+		<name>ING. KAREL ZEDEK</name><first_name>Ing. Karel</first_name>
+		<last_name>Zedek</last_name>
+		<phone>+420723623406</phone>
+		<email>zedek.karel@gmail.com</email>
+		</discharge>
+		<loading_comfort_id>1</loading_comfort_id>
+		<discharge_comfort_id>1</discharge_comfort_id>
+		<twoway_shipment>0</twoway_shipment>
+		<yard>0</yard>
+		<delivery_notes_back>0</delivery_notes_back>
+		<euro_pallets_back>0</euro_pallets_back>
+		<loading_aviso>0</loading_aviso>
+		<discharge_aviso>0</discharge_aviso>
+		<aviso_sms>1</aviso_sms>
+		<consider>0</consider>
+		<oversize>0</oversize>
+		<label_fragile>1</label_fragile>
+		<label_dont_tilt>0</label_dont_tilt> 
+		<label_this_side_up>0</label_this_side_up>
+		<hydraulic_front_loading>0</hydraulic_front_loading>
+		<hydraulic_front_discharge>0</hydraulic_front_discharge>
+<loading_comfort_id>1</loading_comfort_id>
+<discharge_comfort_id>1</discharge_comfort_id>
+<twoway_shipment>0</twoway_shipment> 
+<twoway_shipment_description></twoway_shipment_description>
+<yard>0</yard>
+<delivery_notes_back>0</delivery_notes_back>
+<euro_pallets_back>0</euro_pallets_back>
+<loading_aviso>0</loading_aviso>
+<discharge_aviso>0</discharge_aviso>
+<aviso_sms>1</aviso_sms>
+<consider>1</consider>
+<oversize>0</oversize>
+<label_fragile>0</label_fragile>
+<label_dont_tilt>0</label_dont_tilt>
+<label_this_side_up>0</label_this_side_up>  
+<hydraulic_front_loading>0</hydraulic_front_loading>
+<hydraulic_front_discharge>0</hydraulic_front_discharge>
+		<cash_on_delivery> 
+			<type>1</type>
+			<price>1459</price>
+			<price_cur_id>1</price_cur_id>
+			<account2>2600340251</account2>
+			<bank>2010</bank>
+		</cash_on_delivery><kg>0.5</kg> 
+<m3/>
+<order_value>1459</order_value>
+<order_value_currency_id>1</order_value_currency_id>
+<note_loading></note_loading>
+<note_discharge></note_discharge>
+<packs>
+<pack>
+				<quantity>1</quantity>
+				<pack_id>1</pack_id>
+				<description>Přislušenství ke kávovaru</description>
+			</pack>
+</packs>
+</order>
+	<order>
+		<label>166894</label>
+		<var_symbol>166894</var_symbol>
+		<payer_select>1</payer_select>
+		<loading_select>1</loading_select>
+		<term_id>1</term_id>   
+		<loading_date>29.04.2019</loading_date>   
+		<loading_time_from>10:04</loading_time_from>
+		<loading_time_to>10:54</loading_time_to>    
+		<discharge_date>30.04.2019</discharge_date>  
+		<discharge_time_from>08:00</discharge_time_from>
+		<discharge_time_to>16:00</discharge_time_to> 
+		<loading_personal_branch_id/>
+<discharge_personal_branch_id/>
+<payer/>
+<loading/>
+		<discharge>   
+		<address>
+			<country>Česká republika</country>
+			<city>Ckyne</city>
+			<street>Spule</street>
+			<house_num>25</house_num>
+			<zip>38481</zip> 
+		</address>   
+		<name>Dřevostroj Čkyně, a.s.</name><first_name>Marie</first_name>
+		<last_name>Bendová</last_name>
+		<phone>+420+420388407111</phone>
+		<email>bendova@drevostroj.cz</email>
+		</discharge>
+		<loading_comfort_id>1</loading_comfort_id>
+		<discharge_comfort_id>1</discharge_comfort_id>
+		<twoway_shipment>0</twoway_shipment>
+		<yard>0</yard>
+		<delivery_notes_back>0</delivery_notes_back>
+		<euro_pallets_back>0</euro_pallets_back>
+		<loading_aviso>0</loading_aviso>
+		<discharge_aviso>0</discharge_aviso>
+		<aviso_sms>1</aviso_sms>
+		<consider>0</consider>
+		<oversize>0</oversize>
+		<label_fragile>1</label_fragile>
+		<label_dont_tilt>0</label_dont_tilt> 
+		<label_this_side_up>0</label_this_side_up>
+		<hydraulic_front_loading>0</hydraulic_front_loading>
+		<hydraulic_front_discharge>0</hydraulic_front_discharge>
+<loading_comfort_id>1</loading_comfort_id>
+<discharge_comfort_id>1</discharge_comfort_id>
+<twoway_shipment>0</twoway_shipment> 
+<twoway_shipment_description></twoway_shipment_description>
+<yard>0</yard>
+<delivery_notes_back>0</delivery_notes_back>
+<euro_pallets_back>0</euro_pallets_back>
+<loading_aviso>0</loading_aviso>
+<discharge_aviso>0</discharge_aviso>
+<aviso_sms>1</aviso_sms>
+<consider>1</consider>
+<oversize>0</oversize>
+<label_fragile>0</label_fragile>
+<label_dont_tilt>0</label_dont_tilt>
+<label_this_side_up>0</label_this_side_up>  
+<hydraulic_front_loading>0</hydraulic_front_loading>
+<hydraulic_front_discharge>0</hydraulic_front_discharge>
+		<cash_on_delivery> 
+			<type>1</type>
+			<price>778</price>
+			<price_cur_id>1</price_cur_id>
+			<account2>2600340251</account2>
+			<bank>2010</bank>
+		</cash_on_delivery><kg>0.5</kg> 
+<m3/>
+<order_value>778</order_value>
+<order_value_currency_id>1</order_value_currency_id>
+<note_loading></note_loading>
+<note_discharge></note_discharge>
+<packs>
+<pack>
+				<quantity>1</quantity>
+				<pack_id>1</pack_id>
+				<description>Přislušenství ke kávovaru</description>
+			</pack>
+</packs>
+</order>
+	<order>
+		<label>166893</label>
+		<var_symbol>166893</var_symbol>
+		<payer_select>1</payer_select>
+		<loading_select>1</loading_select>
+		<term_id>1</term_id>   
+		<loading_date>29.04.2019</loading_date>   
+		<loading_time_from>10:04</loading_time_from>
+		<loading_time_to>10:54</loading_time_to>    
+		<discharge_date>30.04.2019</discharge_date>  
+		<discharge_time_from>08:00</discharge_time_from>
+		<discharge_time_to>16:00</discharge_time_to> 
+		<loading_personal_branch_id/>
+<discharge_personal_branch_id/>
+<payer/>
+<loading/>
+		<discharge>   
+		<address>
+			<country>Česká republika</country>
+			<city>Zdar nad Sazavou</city>
+			<street>Smetanova</street>
+			<house_num>34</house_num>
+			<zip>591 01</zip> 
+		</address>   
+		<name>Petr Michálek</name><first_name>Petr</first_name>
+		<last_name>Michálek</last_name>
+		<phone>+420603519185</phone>
+		<email>petr.michalek@aca.cz</email>
+		</discharge>
+		<loading_comfort_id>1</loading_comfort_id>
+		<discharge_comfort_id>1</discharge_comfort_id>
+		<twoway_shipment>0</twoway_shipment>
+		<yard>0</yard>
+		<delivery_notes_back>0</delivery_notes_back>
+		<euro_pallets_back>0</euro_pallets_back>
+		<loading_aviso>0</loading_aviso>
+		<discharge_aviso>0</discharge_aviso>
+		<aviso_sms>1</aviso_sms>
+		<consider>0</consider>
+		<oversize>0</oversize>
+		<label_fragile>1</label_fragile>
+		<label_dont_tilt>0</label_dont_tilt> 
+		<label_this_side_up>0</label_this_side_up>
+		<hydraulic_front_loading>0</hydraulic_front_loading>
+		<hydraulic_front_discharge>0</hydraulic_front_discharge>
+<loading_comfort_id>1</loading_comfort_id>
+<discharge_comfort_id>1</discharge_comfort_id>
+<twoway_shipment>0</twoway_shipment> 
+<twoway_shipment_description></twoway_shipment_description>
+<yard>0</yard>
+<delivery_notes_back>0</delivery_notes_back>
+<euro_pallets_back>0</euro_pallets_back>
+<loading_aviso>0</loading_aviso>
+<discharge_aviso>0</discharge_aviso>
+<aviso_sms>1</aviso_sms>
+<consider>1</consider>
+<oversize>0</oversize>
+<label_fragile>0</label_fragile>
+<label_dont_tilt>0</label_dont_tilt>
+<label_this_side_up>0</label_this_side_up>  
+<hydraulic_front_loading>0</hydraulic_front_loading>
+<hydraulic_front_discharge>0</hydraulic_front_discharge>
+		<cash_on_delivery> 
+			<type>1</type>
+			<price>1994</price>
+			<price_cur_id>1</price_cur_id>
+			<account2>2600340251</account2>
+			<bank>2010</bank>
+		</cash_on_delivery><kg>0.5</kg> 
+<m3/>
+<order_value>1994</order_value>
+<order_value_currency_id>1</order_value_currency_id>
+<note_loading></note_loading>
+<note_discharge></note_discharge>
+<packs>
+<pack>
+				<quantity>1</quantity>
+				<pack_id>1</pack_id>
+				<description>Přislušenství ke kávovaru</description>
+			</pack>
+</packs>
+</order>
+	<order>
+		<label>166892</label>
+		<var_symbol>166892</var_symbol>
+		<payer_select>1</payer_select>
+		<loading_select>1</loading_select>
+		<term_id>1</term_id>   
+		<loading_date>29.04.2019</loading_date>   
+		<loading_time_from>10:04</loading_time_from>
+		<loading_time_to>10:54</loading_time_to>    
+		<discharge_date>30.04.2019</discharge_date>  
+		<discharge_time_from>08:00</discharge_time_from>
+		<discharge_time_to>16:00</discharge_time_to> 
+		<loading_personal_branch_id/>
+<discharge_personal_branch_id/>
+<payer/>
+<loading/>
+		<discharge>   
+		<address>
+			<country>Česká republika</country>
+			<city>Brno</city>
+			<street>Jezeruvky</street>
+			<house_num>12</house_num>
+			<zip>62100</zip> 
+		</address>   
+		<name>Petr Koplík</name><first_name>Petr</first_name>
+		<last_name>Koplík</last_name>
+		<phone>+420602728086</phone>
+		<email>p.koplik@volny.cz</email>
+		</discharge>
+		<loading_comfort_id>1</loading_comfort_id>
+		<discharge_comfort_id>1</discharge_comfort_id>
+		<twoway_shipment>0</twoway_shipment>
+		<yard>0</yard>
+		<delivery_notes_back>0</delivery_notes_back>
+		<euro_pallets_back>0</euro_pallets_back>
+		<loading_aviso>0</loading_aviso>
+		<discharge_aviso>0</discharge_aviso>
+		<aviso_sms>1</aviso_sms>
+		<consider>0</consider>
+		<oversize>0</oversize>
+		<label_fragile>1</label_fragile>
+		<label_dont_tilt>0</label_dont_tilt> 
+		<label_this_side_up>0</label_this_side_up>
+		<hydraulic_front_loading>0</hydraulic_front_loading>
+		<hydraulic_front_discharge>0</hydraulic_front_discharge>
+<loading_comfort_id>1</loading_comfort_id>
+<discharge_comfort_id>1</discharge_comfort_id>
+<twoway_shipment>0</twoway_shipment> 
+<twoway_shipment_description></twoway_shipment_description>
+<yard>0</yard>
+<delivery_notes_back>0</delivery_notes_back>
+<euro_pallets_back>0</euro_pallets_back>
+<loading_aviso>0</loading_aviso>
+<discharge_aviso>0</discharge_aviso>
+<aviso_sms>1</aviso_sms>
+<consider>1</consider>
+<oversize>0</oversize>
+<label_fragile>0</label_fragile>
+<label_dont_tilt>0</label_dont_tilt>
+<label_this_side_up>0</label_this_side_up>  
+<hydraulic_front_loading>0</hydraulic_front_loading>
+<hydraulic_front_discharge>0</hydraulic_front_discharge>
+		<cash_on_delivery> 
+			<type>1</type>
+			<price>1272</price>
+			<price_cur_id>1</price_cur_id>
+			<account2>2600340251</account2>
+			<bank>2010</bank>
+		</cash_on_delivery><kg>0.5</kg> 
+<m3/>
+<order_value>1272</order_value>
+<order_value_currency_id>1</order_value_currency_id>
+<note_loading></note_loading>
+<note_discharge></note_discharge>
+<packs>
+<pack>
+				<quantity>1</quantity>
+				<pack_id>1</pack_id>
+				<description>Přislušenství ke kávovaru</description>
+			</pack>
+</packs>
+</order>
+	<order>
+		<label>166890</label>
+		<var_symbol>166890</var_symbol>
+		<payer_select>1</payer_select>
+		<loading_select>1</loading_select>
+		<term_id>1</term_id>   
+		<loading_date>29.04.2019</loading_date>   
+		<loading_time_from>10:04</loading_time_from>
+		<loading_time_to>10:54</loading_time_to>    
+		<discharge_date>30.04.2019</discharge_date>  
+		<discharge_time_from>08:00</discharge_time_from>
+		<discharge_time_to>16:00</discharge_time_to> 
+		<loading_personal_branch_id/>
+<discharge_personal_branch_id/>
+<payer/>
+<loading/>
+		<discharge>   
+		<address>
+			<country>Česká republika</country>
+			<city>Praha 8</city>
+			<street>Rohanskenabrezi15</street>
+			<house_num>(APOGEO)</house_num>
+			<zip>18600</zip> 
+		</address>   
+		<name>Josef Jaroš</name><first_name>Josef</first_name>
+		<last_name>Jaroš</last_name>
+		<phone>+420606667111</phone>
+		<email>jaros@3jg.cz</email>
+		</discharge>
+		<loading_comfort_id>1</loading_comfort_id>
+		<discharge_comfort_id>1</discharge_comfort_id>
+		<twoway_shipment>0</twoway_shipment>
+		<yard>0</yard>
+		<delivery_notes_back>0</delivery_notes_back>
+		<euro_pallets_back>0</euro_pallets_back>
+		<loading_aviso>0</loading_aviso>
+		<discharge_aviso>0</discharge_aviso>
+		<aviso_sms>1</aviso_sms>
+		<consider>0</consider>
+		<oversize>0</oversize>
+		<label_fragile>1</label_fragile>
+		<label_dont_tilt>0</label_dont_tilt> 
+		<label_this_side_up>0</label_this_side_up>
+		<hydraulic_front_loading>0</hydraulic_front_loading>
+		<hydraulic_front_discharge>0</hydraulic_front_discharge>
+<loading_comfort_id>1</loading_comfort_id>
+<discharge_comfort_id>1</discharge_comfort_id>
+<twoway_shipment>0</twoway_shipment> 
+<twoway_shipment_description></twoway_shipment_description>
+<yard>0</yard>
+<delivery_notes_back>0</delivery_notes_back>
+<euro_pallets_back>0</euro_pallets_back>
+<loading_aviso>0</loading_aviso>
+<discharge_aviso>0</discharge_aviso>
+<aviso_sms>1</aviso_sms>
+<consider>1</consider>
+<oversize>0</oversize>
+<label_fragile>0</label_fragile>
+<label_dont_tilt>0</label_dont_tilt>
+<label_this_side_up>0</label_this_side_up>  
+<hydraulic_front_loading>0</hydraulic_front_loading>
+<hydraulic_front_discharge>0</hydraulic_front_discharge>
+		<cash_on_delivery> 
+			<type>1</type>
+			<price>2386</price>
+			<price_cur_id>1</price_cur_id>
+			<account2>2600340251</account2>
+			<bank>2010</bank>
+		</cash_on_delivery><kg>0.5</kg> 
+<m3/>
+<order_value>2386</order_value>
+<order_value_currency_id>1</order_value_currency_id>
+<note_loading></note_loading>
+<note_discharge></note_discharge>
+<packs>
+<pack>
+				<quantity>1</quantity>
+				<pack_id>1</pack_id>
+				<description>Přislušenství ke kávovaru</description>
+			</pack>
+</packs>
+</order>
+	<order>
+		<label>166888</label>
+		<var_symbol>166888</var_symbol>
+		<payer_select>1</payer_select>
+		<loading_select>1</loading_select>
+		<term_id>1</term_id>   
+		<loading_date>29.04.2019</loading_date>   
+		<loading_time_from>10:04</loading_time_from>
+		<loading_time_to>10:54</loading_time_to>    
+		<discharge_date>30.04.2019</discharge_date>  
+		<discharge_time_from>08:00</discharge_time_from>
+		<discharge_time_to>16:00</discharge_time_to> 
+		<loading_personal_branch_id/>
+<discharge_personal_branch_id/>
+<payer/>
+<loading/>
+		<discharge>   
+		<address>
+			<country>Česká republika</country>
+			<city>Mikulov</city>
+			<street>Valticka</street>
+			<house_num>1639/21a</house_num>
+			<zip>69201</zip> 
+		</address>   
+		<name>Petr Jaskmanicki</name><first_name>Petr</first_name>
+		<last_name>Jaskmanicki</last_name>
+		<phone>+420777695315</phone>
+		<email>p.jaskmanicki@seznam.cz</email>
+		</discharge>
+		<loading_comfort_id>1</loading_comfort_id>
+		<discharge_comfort_id>1</discharge_comfort_id>
+		<twoway_shipment>0</twoway_shipment>
+		<yard>0</yard>
+		<delivery_notes_back>0</delivery_notes_back>
+		<euro_pallets_back>0</euro_pallets_back>
+		<loading_aviso>0</loading_aviso>
+		<discharge_aviso>0</discharge_aviso>
+		<aviso_sms>1</aviso_sms>
+		<consider>0</consider>
+		<oversize>0</oversize>
+		<label_fragile>1</label_fragile>
+		<label_dont_tilt>0</label_dont_tilt> 
+		<label_this_side_up>0</label_this_side_up>
+		<hydraulic_front_loading>0</hydraulic_front_loading>
+		<hydraulic_front_discharge>0</hydraulic_front_discharge>
+<loading_comfort_id>1</loading_comfort_id>
+<discharge_comfort_id>1</discharge_comfort_id>
+<twoway_shipment>0</twoway_shipment> 
+<twoway_shipment_description></twoway_shipment_description>
+<yard>0</yard>
+<delivery_notes_back>0</delivery_notes_back>
+<euro_pallets_back>0</euro_pallets_back>
+<loading_aviso>0</loading_aviso>
+<discharge_aviso>0</discharge_aviso>
+<aviso_sms>1</aviso_sms>
+<consider>1</consider>
+<oversize>0</oversize>
+<label_fragile>0</label_fragile>
+<label_dont_tilt>0</label_dont_tilt>
+<label_this_side_up>0</label_this_side_up>  
+<hydraulic_front_loading>0</hydraulic_front_loading>
+<hydraulic_front_discharge>0</hydraulic_front_discharge><kg>0.5</kg> 
+<m3/>
+<order_value>1256</order_value>
+<order_value_currency_id>1</order_value_currency_id>
+<note_loading></note_loading>
+<note_discharge></note_discharge>
+<packs>
+<pack>
+				<quantity>1</quantity>
+				<pack_id>1</pack_id>
+				<description>Přislušenství ke kávovaru</description>
+			</pack>
+</packs>
+</order>
+	<order>
+		<label>166886</label>
+		<var_symbol>166886</var_symbol>
+		<payer_select>1</payer_select>
+		<loading_select>1</loading_select>
+		<term_id>1</term_id>   
+		<loading_date>29.04.2019</loading_date>   
+		<loading_time_from>10:04</loading_time_from>
+		<loading_time_to>10:54</loading_time_to>    
+		<discharge_date>30.04.2019</discharge_date>  
+		<discharge_time_from>08:00</discharge_time_from>
+		<discharge_time_to>16:00</discharge_time_to> 
+		<loading_personal_branch_id/>
+<discharge_personal_branch_id/>
+<payer/>
+<loading/>
+		<discharge>   
+		<address>
+			<country>Česká republika</country>
+			<city>Bozi Dar</city>
+			<street>BoziDar</street>
+			<house_num>196</house_num>
+			<zip>36262</zip> 
+		</address>   
+		<name>Gabriela Savičová</name><first_name>Gabriela</first_name>
+		<last_name>Savičová</last_name>
+		<phone>+420+420725810400</phone>
+		<email>gabrielasavicova@seznam.cz</email>
+		</discharge>
+		<loading_comfort_id>1</loading_comfort_id>
+		<discharge_comfort_id>1</discharge_comfort_id>
+		<twoway_shipment>0</twoway_shipment>
+		<yard>0</yard>
+		<delivery_notes_back>0</delivery_notes_back>
+		<euro_pallets_back>0</euro_pallets_back>
+		<loading_aviso>0</loading_aviso>
+		<discharge_aviso>0</discharge_aviso>
+		<aviso_sms>1</aviso_sms>
+		<consider>0</consider>
+		<oversize>0</oversize>
+		<label_fragile>1</label_fragile>
+		<label_dont_tilt>0</label_dont_tilt> 
+		<label_this_side_up>0</label_this_side_up>
+		<hydraulic_front_loading>0</hydraulic_front_loading>
+		<hydraulic_front_discharge>0</hydraulic_front_discharge>
+<loading_comfort_id>1</loading_comfort_id>
+<discharge_comfort_id>1</discharge_comfort_id>
+<twoway_shipment>0</twoway_shipment> 
+<twoway_shipment_description></twoway_shipment_description>
+<yard>0</yard>
+<delivery_notes_back>0</delivery_notes_back>
+<euro_pallets_back>0</euro_pallets_back>
+<loading_aviso>0</loading_aviso>
+<discharge_aviso>0</discharge_aviso>
+<aviso_sms>1</aviso_sms>
+<consider>1</consider>
+<oversize>0</oversize>
+<label_fragile>0</label_fragile>
+<label_dont_tilt>0</label_dont_tilt>
+<label_this_side_up>0</label_this_side_up>  
+<hydraulic_front_loading>0</hydraulic_front_loading>
+<hydraulic_front_discharge>0</hydraulic_front_discharge>
+		<cash_on_delivery> 
+			<type>1</type>
+			<price>46596</price>
+			<price_cur_id>1</price_cur_id>
+			<account2>2600340251</account2>
+			<bank>2010</bank>
+		</cash_on_delivery><kg>5</kg> 
+<m3/>
+<order_value>46596</order_value>
+<order_value_currency_id>1</order_value_currency_id>
+<note_loading></note_loading>
+<note_discharge></note_discharge>
+<packs>
+<pack>
+				<quantity>1</quantity>
+				<pack_id>1</pack_id>
+				<description>Přislušenství ke kávovaru</description>
+			</pack>
+</packs>
+</order>
+	<order>
+		<label>166885</label>
+		<var_symbol>166885</var_symbol>
+		<payer_select>1</payer_select>
+		<loading_select>1</loading_select>
+		<term_id>1</term_id>   
+		<loading_date>29.04.2019</loading_date>   
+		<loading_time_from>10:04</loading_time_from>
+		<loading_time_to>10:54</loading_time_to>    
+		<discharge_date>30.04.2019</discharge_date>  
+		<discharge_time_from>08:00</discharge_time_from>
+		<discharge_time_to>16:00</discharge_time_to> 
+		<loading_personal_branch_id/>
+<discharge_personal_branch_id/>
+<payer/>
+<loading/>
+		<discharge>   
+		<address>
+			<country>Česká republika</country>
+			<city>Svoboda nad Upou</city>
+			<street>Rychorskesidliste</street>
+			<house_num>146</house_num>
+			<zip>542 24</zip> 
+		</address>   
+		<name>R BURGER - restaurace</name><first_name>Martin</first_name>
+		<last_name>Búš</last_name>
+		<phone>+420603173167</phone>
+		<email>bus.m@centrum.cz</email>
+		</discharge>
+		<loading_comfort_id>1</loading_comfort_id>
+		<discharge_comfort_id>1</discharge_comfort_id>
+		<twoway_shipment>0</twoway_shipment>
+		<yard>0</yard>
+		<delivery_notes_back>0</delivery_notes_back>
+		<euro_pallets_back>0</euro_pallets_back>
+		<loading_aviso>0</loading_aviso>
+		<discharge_aviso>0</discharge_aviso>
+		<aviso_sms>1</aviso_sms>
+		<consider>0</consider>
+		<oversize>0</oversize>
+		<label_fragile>1</label_fragile>
+		<label_dont_tilt>0</label_dont_tilt> 
+		<label_this_side_up>0</label_this_side_up>
+		<hydraulic_front_loading>0</hydraulic_front_loading>
+		<hydraulic_front_discharge>0</hydraulic_front_discharge>
+<loading_comfort_id>1</loading_comfort_id>
+<discharge_comfort_id>1</discharge_comfort_id>
+<twoway_shipment>0</twoway_shipment> 
+<twoway_shipment_description></twoway_shipment_description>
+<yard>0</yard>
+<delivery_notes_back>0</delivery_notes_back>
+<euro_pallets_back>0</euro_pallets_back>
+<loading_aviso>0</loading_aviso>
+<discharge_aviso>0</discharge_aviso>
+<aviso_sms>1</aviso_sms>
+<consider>1</consider>
+<oversize>0</oversize>
+<label_fragile>0</label_fragile>
+<label_dont_tilt>0</label_dont_tilt>
+<label_this_side_up>0</label_this_side_up>  
+<hydraulic_front_loading>0</hydraulic_front_loading>
+<hydraulic_front_discharge>0</hydraulic_front_discharge><kg>0.5</kg> 
+<m3/>
+<order_value>1390</order_value>
+<order_value_currency_id>1</order_value_currency_id>
+<note_loading></note_loading>
+<note_discharge></note_discharge>
+<packs>
+<pack>
+				<quantity>1</quantity>
+				<pack_id>1</pack_id>
+				<description>Přislušenství ke kávovaru</description>
+			</pack>
+</packs>
+</order>
+	<order>
+		<label>166884</label>
+		<var_symbol>166884</var_symbol>
+		<payer_select>1</payer_select>
+		<loading_select>1</loading_select>
+		<term_id>1</term_id>   
+		<loading_date>29.04.2019</loading_date>   
+		<loading_time_from>10:04</loading_time_from>
+		<loading_time_to>10:54</loading_time_to>    
+		<discharge_date>30.04.2019</discharge_date>  
+		<discharge_time_from>08:00</discharge_time_from>
+		<discharge_time_to>16:00</discharge_time_to> 
+		<loading_personal_branch_id/>
+<discharge_personal_branch_id/>
+<payer/>
+<loading/>
+		<discharge>   
+		<address>
+			<country>Česká republika</country>
+			<city>Lukov u Zlina</city>
+			<street>KLuckam</street>
+			<house_num>134</house_num>
+			<zip>76317</zip> 
+		</address>   
+		<name>Bretech Fly s.r.o.</name><first_name>Lubomír</first_name>
+		<last_name>Březík</last_name>
+		<phone>+420603594055</phone>
+		<email>bretechfly@volny.cz</email>
+		</discharge>
+		<loading_comfort_id>1</loading_comfort_id>
+		<discharge_comfort_id>1</discharge_comfort_id>
+		<twoway_shipment>0</twoway_shipment>
+		<yard>0</yard>
+		<delivery_notes_back>0</delivery_notes_back>
+		<euro_pallets_back>0</euro_pallets_back>
+		<loading_aviso>0</loading_aviso>
+		<discharge_aviso>0</discharge_aviso>
+		<aviso_sms>1</aviso_sms>
+		<consider>0</consider>
+		<oversize>0</oversize>
+		<label_fragile>1</label_fragile>
+		<label_dont_tilt>0</label_dont_tilt> 
+		<label_this_side_up>0</label_this_side_up>
+		<hydraulic_front_loading>0</hydraulic_front_loading>
+		<hydraulic_front_discharge>0</hydraulic_front_discharge>
+<loading_comfort_id>1</loading_comfort_id>
+<discharge_comfort_id>1</discharge_comfort_id>
+<twoway_shipment>0</twoway_shipment> 
+<twoway_shipment_description></twoway_shipment_description>
+<yard>0</yard>
+<delivery_notes_back>0</delivery_notes_back>
+<euro_pallets_back>0</euro_pallets_back>
+<loading_aviso>0</loading_aviso>
+<discharge_aviso>0</discharge_aviso>
+<aviso_sms>1</aviso_sms>
+<consider>1</consider>
+<oversize>0</oversize>
+<label_fragile>0</label_fragile>
+<label_dont_tilt>0</label_dont_tilt>
+<label_this_side_up>0</label_this_side_up>  
+<hydraulic_front_loading>0</hydraulic_front_loading>
+<hydraulic_front_discharge>0</hydraulic_front_discharge>
+		<cash_on_delivery> 
+			<type>1</type>
+			<price>1094</price>
+			<price_cur_id>1</price_cur_id>
+			<account2>2600340251</account2>
+			<bank>2010</bank>
+		</cash_on_delivery><kg>0.5</kg> 
+<m3/>
+<order_value>1094</order_value>
+<order_value_currency_id>1</order_value_currency_id>
+<note_loading></note_loading>
+<note_discharge></note_discharge>
+<packs>
+<pack>
+				<quantity>1</quantity>
+				<pack_id>1</pack_id>
+				<description>Přislušenství ke kávovaru</description>
+			</pack>
+</packs>
+</order>
+	<order>
+		<label>166883</label>
+		<var_symbol>166883</var_symbol>
+		<payer_select>1</payer_select>
+		<loading_select>1</loading_select>
+		<term_id>1</term_id>   
+		<loading_date>29.04.2019</loading_date>   
+		<loading_time_from>10:04</loading_time_from>
+		<loading_time_to>10:54</loading_time_to>    
+		<discharge_date>30.04.2019</discharge_date>  
+		<discharge_time_from>08:00</discharge_time_from>
+		<discharge_time_to>16:00</discharge_time_to> 
+		<loading_personal_branch_id/>
+<discharge_personal_branch_id/>
+<payer/>
+<loading/>
+		<discharge>   
+		<address>
+			<country>Česká republika</country>
+			<city>Varnsdorf</city>
+			<street>Jarosova</street>
+			<house_num>2838</house_num>
+			<zip>40747</zip> 
+		</address>   
+		<name>Michaela Košínová</name><first_name>Michaela</first_name>
+		<last_name>Košínová</last_name>
+		<phone>+420737777344</phone>
+		<email>kosinova.michaela@atlas.cz</email>
+		</discharge>
+		<loading_comfort_id>1</loading_comfort_id>
+		<discharge_comfort_id>1</discharge_comfort_id>
+		<twoway_shipment>0</twoway_shipment>
+		<yard>0</yard>
+		<delivery_notes_back>0</delivery_notes_back>
+		<euro_pallets_back>0</euro_pallets_back>
+		<loading_aviso>0</loading_aviso>
+		<discharge_aviso>0</discharge_aviso>
+		<aviso_sms>1</aviso_sms>
+		<consider>0</consider>
+		<oversize>0</oversize>
+		<label_fragile>1</label_fragile>
+		<label_dont_tilt>0</label_dont_tilt> 
+		<label_this_side_up>0</label_this_side_up>
+		<hydraulic_front_loading>0</hydraulic_front_loading>
+		<hydraulic_front_discharge>0</hydraulic_front_discharge>
+<loading_comfort_id>1</loading_comfort_id>
+<discharge_comfort_id>1</discharge_comfort_id>
+<twoway_shipment>0</twoway_shipment> 
+<twoway_shipment_description></twoway_shipment_description>
+<yard>0</yard>
+<delivery_notes_back>0</delivery_notes_back>
+<euro_pallets_back>0</euro_pallets_back>
+<loading_aviso>0</loading_aviso>
+<discharge_aviso>0</discharge_aviso>
+<aviso_sms>1</aviso_sms>
+<consider>1</consider>
+<oversize>0</oversize>
+<label_fragile>0</label_fragile>
+<label_dont_tilt>0</label_dont_tilt>
+<label_this_side_up>0</label_this_side_up>  
+<hydraulic_front_loading>0</hydraulic_front_loading>
+<hydraulic_front_discharge>0</hydraulic_front_discharge>
+		<cash_on_delivery> 
+			<type>1</type>
+			<price>1197</price>
+			<price_cur_id>1</price_cur_id>
+			<account2>2600340251</account2>
+			<bank>2010</bank>
+		</cash_on_delivery><kg>0.5</kg> 
+<m3/>
+<order_value>1197</order_value>
+<order_value_currency_id>1</order_value_currency_id>
+<note_loading></note_loading>
+<note_discharge></note_discharge>
+<packs>
+<pack>
+				<quantity>1</quantity>
+				<pack_id>1</pack_id>
+				<description>Přislušenství ke kávovaru</description>
+			</pack>
+</packs>
+</order>
+	<order>
+		<label>166882</label>
+		<var_symbol>166882</var_symbol>
+		<payer_select>1</payer_select>
+		<loading_select>1</loading_select>
+		<term_id>1</term_id>   
+		<loading_date>29.04.2019</loading_date>   
+		<loading_time_from>10:04</loading_time_from>
+		<loading_time_to>10:54</loading_time_to>    
+		<discharge_date>30.04.2019</discharge_date>  
+		<discharge_time_from>08:00</discharge_time_from>
+		<discharge_time_to>16:00</discharge_time_to> 
+		<loading_personal_branch_id/>
+<discharge_personal_branch_id/>
+<payer/>
+<loading/>
+		<discharge>   
+		<address>
+			<country>Česká republika</country>
+			<city>Jesenik</city>
+			<street>Lipovska</street>
+			<house_num>95</house_num>
+			<zip>79001</zip> 
+		</address>   
+		<name>RI OKNA a.s.</name><first_name>Vladislav</first_name>
+		<last_name>Krčmář</last_name>
+		<phone>+420603878697</phone>
+		<email>rijesenik@mail.ri-okna.cz</email>
+		</discharge>
+		<loading_comfort_id>1</loading_comfort_id>
+		<discharge_comfort_id>1</discharge_comfort_id>
+		<twoway_shipment>0</twoway_shipment>
+		<yard>0</yard>
+		<delivery_notes_back>0</delivery_notes_back>
+		<euro_pallets_back>0</euro_pallets_back>
+		<loading_aviso>0</loading_aviso>
+		<discharge_aviso>0</discharge_aviso>
+		<aviso_sms>1</aviso_sms>
+		<consider>0</consider>
+		<oversize>0</oversize>
+		<label_fragile>1</label_fragile>
+		<label_dont_tilt>0</label_dont_tilt> 
+		<label_this_side_up>0</label_this_side_up>
+		<hydraulic_front_loading>0</hydraulic_front_loading>
+		<hydraulic_front_discharge>0</hydraulic_front_discharge>
+<loading_comfort_id>1</loading_comfort_id>
+<discharge_comfort_id>1</discharge_comfort_id>
+<twoway_shipment>0</twoway_shipment> 
+<twoway_shipment_description></twoway_shipment_description>
+<yard>0</yard>
+<delivery_notes_back>0</delivery_notes_back>
+<euro_pallets_back>0</euro_pallets_back>
+<loading_aviso>0</loading_aviso>
+<discharge_aviso>0</discharge_aviso>
+<aviso_sms>1</aviso_sms>
+<consider>1</consider>
+<oversize>0</oversize>
+<label_fragile>0</label_fragile>
+<label_dont_tilt>0</label_dont_tilt>
+<label_this_side_up>0</label_this_side_up>  
+<hydraulic_front_loading>0</hydraulic_front_loading>
+<hydraulic_front_discharge>0</hydraulic_front_discharge><kg>0.5</kg> 
+<m3/>
+<order_value>1490</order_value>
+<order_value_currency_id>1</order_value_currency_id>
+<note_loading></note_loading>
+<note_discharge></note_discharge>
+<packs>
+<pack>
+				<quantity>1</quantity>
+				<pack_id>1</pack_id>
+				<description>Přislušenství ke kávovaru</description>
+			</pack>
+</packs>
+</order>
+	<order>
+		<label>166880</label>
+		<var_symbol>166880</var_symbol>
+		<payer_select>1</payer_select>
+		<loading_select>1</loading_select>
+		<term_id>1</term_id>   
+		<loading_date>29.04.2019</loading_date>   
+		<loading_time_from>10:04</loading_time_from>
+		<loading_time_to>10:54</loading_time_to>    
+		<discharge_date>30.04.2019</discharge_date>  
+		<discharge_time_from>08:00</discharge_time_from>
+		<discharge_time_to>16:00</discharge_time_to> 
+		<loading_personal_branch_id/>
+<discharge_personal_branch_id/>
+<payer/>
+<loading/>
+		<discharge>   
+		<address>
+			<country>Česká republika</country>
+			<city>Hnojnik</city>
+			<street>Tranovice</street>
+			<house_num>272</house_num>
+			<zip>73953</zip> 
+		</address>   
+		<name>Mgr. Kateřina Skupinová</name><first_name>Kateřina</first_name>
+		<last_name>Skupinová</last_name>
+		<phone>+420776311916</phone>
+		<email>skupinovaK@seznam.cz</email>
+		</discharge>
+		<loading_comfort_id>1</loading_comfort_id>
+		<discharge_comfort_id>1</discharge_comfort_id>
+		<twoway_shipment>0</twoway_shipment>
+		<yard>0</yard>
+		<delivery_notes_back>0</delivery_notes_back>
+		<euro_pallets_back>0</euro_pallets_back>
+		<loading_aviso>0</loading_aviso>
+		<discharge_aviso>0</discharge_aviso>
+		<aviso_sms>1</aviso_sms>
+		<consider>0</consider>
+		<oversize>0</oversize>
+		<label_fragile>1</label_fragile>
+		<label_dont_tilt>0</label_dont_tilt> 
+		<label_this_side_up>0</label_this_side_up>
+		<hydraulic_front_loading>0</hydraulic_front_loading>
+		<hydraulic_front_discharge>0</hydraulic_front_discharge>
+<loading_comfort_id>1</loading_comfort_id>
+<discharge_comfort_id>1</discharge_comfort_id>
+<twoway_shipment>0</twoway_shipment> 
+<twoway_shipment_description></twoway_shipment_description>
+<yard>0</yard>
+<delivery_notes_back>0</delivery_notes_back>
+<euro_pallets_back>0</euro_pallets_back>
+<loading_aviso>0</loading_aviso>
+<discharge_aviso>0</discharge_aviso>
+<aviso_sms>1</aviso_sms>
+<consider>1</consider>
+<oversize>0</oversize>
+<label_fragile>0</label_fragile>
+<label_dont_tilt>0</label_dont_tilt>
+<label_this_side_up>0</label_this_side_up>  
+<hydraulic_front_loading>0</hydraulic_front_loading>
+<hydraulic_front_discharge>0</hydraulic_front_discharge>
+		<cash_on_delivery> 
+			<type>1</type>
+			<price>1127</price>
+			<price_cur_id>1</price_cur_id>
+			<account2>2600340251</account2>
+			<bank>2010</bank>
+		</cash_on_delivery><kg>0.5</kg> 
+<m3/>
+<order_value>1127</order_value>
+<order_value_currency_id>1</order_value_currency_id>
+<note_loading></note_loading>
+<note_discharge></note_discharge>
+<packs>
+<pack>
+				<quantity>1</quantity>
+				<pack_id>1</pack_id>
+				<description>Přislušenství ke kávovaru</description>
+			</pack>
+</packs>
+</order>
+	<order>
+		<label>166879</label>
+		<var_symbol>166879</var_symbol>
+		<payer_select>1</payer_select>
+		<loading_select>1</loading_select>
+		<term_id>1</term_id>   
+		<loading_date>29.04.2019</loading_date>   
+		<loading_time_from>10:04</loading_time_from>
+		<loading_time_to>10:54</loading_time_to>    
+		<discharge_date>30.04.2019</discharge_date>  
+		<discharge_time_from>08:00</discharge_time_from>
+		<discharge_time_to>16:00</discharge_time_to> 
+		<loading_personal_branch_id/>
+<discharge_personal_branch_id/>
+<payer/>
+<loading/>
+		<discharge>   
+		<address>
+			<country>Česká republika</country>
+			<city>Roznov pod Radh.  1896</city>
+			<street>RoznovpodRadh.</street>
+			<house_num>1896</house_num>
+			<zip>756 61</zip> 
+		</address>   
+		<name>Peter Kovar</name><first_name>Peter</first_name>
+		<last_name>Kovar</last_name>
+		<phone>+420773  115 662</phone>
+		<email>Peter.kovar@yahoo.com.au</email>
+		</discharge>
+		<loading_comfort_id>1</loading_comfort_id>
+		<discharge_comfort_id>1</discharge_comfort_id>
+		<twoway_shipment>0</twoway_shipment>
+		<yard>0</yard>
+		<delivery_notes_back>0</delivery_notes_back>
+		<euro_pallets_back>0</euro_pallets_back>
+		<loading_aviso>0</loading_aviso>
+		<discharge_aviso>0</discharge_aviso>
+		<aviso_sms>1</aviso_sms>
+		<consider>0</consider>
+		<oversize>0</oversize>
+		<label_fragile>1</label_fragile>
+		<label_dont_tilt>0</label_dont_tilt> 
+		<label_this_side_up>0</label_this_side_up>
+		<hydraulic_front_loading>0</hydraulic_front_loading>
+		<hydraulic_front_discharge>0</hydraulic_front_discharge>
+<loading_comfort_id>1</loading_comfort_id>
+<discharge_comfort_id>1</discharge_comfort_id>
+<twoway_shipment>0</twoway_shipment> 
+<twoway_shipment_description></twoway_shipment_description>
+<yard>0</yard>
+<delivery_notes_back>0</delivery_notes_back>
+<euro_pallets_back>0</euro_pallets_back>
+<loading_aviso>0</loading_aviso>
+<discharge_aviso>0</discharge_aviso>
+<aviso_sms>1</aviso_sms>
+<consider>1</consider>
+<oversize>0</oversize>
+<label_fragile>0</label_fragile>
+<label_dont_tilt>0</label_dont_tilt>
+<label_this_side_up>0</label_this_side_up>  
+<hydraulic_front_loading>0</hydraulic_front_loading>
+<hydraulic_front_discharge>0</hydraulic_front_discharge>
+		<cash_on_delivery> 
+			<type>1</type>
+			<price>778</price>
+			<price_cur_id>1</price_cur_id>
+			<account2>2600340251</account2>
+			<bank>2010</bank>
+		</cash_on_delivery><kg>0.5</kg> 
+<m3/>
+<order_value>778</order_value>
+<order_value_currency_id>1</order_value_currency_id>
+<note_loading></note_loading>
+<note_discharge></note_discharge>
+<packs>
+<pack>
+				<quantity>1</quantity>
+				<pack_id>1</pack_id>
+				<description>Přislušenství ke kávovaru</description>
+			</pack>
+</packs>
+</order>
+	<order>
+		<label>166877</label>
+		<var_symbol>166877</var_symbol>
+		<payer_select>1</payer_select>
+		<loading_select>1</loading_select>
+		<term_id>1</term_id>   
+		<loading_date>29.04.2019</loading_date>   
+		<loading_time_from>10:04</loading_time_from>
+		<loading_time_to>10:54</loading_time_to>    
+		<discharge_date>30.04.2019</discharge_date>  
+		<discharge_time_from>08:00</discharge_time_from>
+		<discharge_time_to>16:00</discharge_time_to> 
+		<loading_personal_branch_id/>
+<discharge_personal_branch_id/>
+<payer/>
+<loading/>
+		<discharge>   
+		<address>
+			<country>Česká republika</country>
+			<city>Praha 4</city>
+			<street>Budejovicka</street>
+			<house_num>1667/64</house_num>
+			<zip>14000</zip> 
+		</address>   
+		<name>DBK PRAHA, a. s.</name><first_name>Mgr. Martin</first_name>
+		<last_name>Biskup</last_name>
+		<phone>+420720024299</phone>
+		<email>martin.biskup@dbkpraha.cz</email>
+		</discharge>
+		<loading_comfort_id>1</loading_comfort_id>
+		<discharge_comfort_id>1</discharge_comfort_id>
+		<twoway_shipment>0</twoway_shipment>
+		<yard>0</yard>
+		<delivery_notes_back>0</delivery_notes_back>
+		<euro_pallets_back>0</euro_pallets_back>
+		<loading_aviso>0</loading_aviso>
+		<discharge_aviso>0</discharge_aviso>
+		<aviso_sms>1</aviso_sms>
+		<consider>0</consider>
+		<oversize>0</oversize>
+		<label_fragile>1</label_fragile>
+		<label_dont_tilt>0</label_dont_tilt> 
+		<label_this_side_up>0</label_this_side_up>
+		<hydraulic_front_loading>0</hydraulic_front_loading>
+		<hydraulic_front_discharge>0</hydraulic_front_discharge>
+<loading_comfort_id>1</loading_comfort_id>
+<discharge_comfort_id>1</discharge_comfort_id>
+<twoway_shipment>0</twoway_shipment> 
+<twoway_shipment_description></twoway_shipment_description>
+<yard>0</yard>
+<delivery_notes_back>0</delivery_notes_back>
+<euro_pallets_back>0</euro_pallets_back>
+<loading_aviso>0</loading_aviso>
+<discharge_aviso>0</discharge_aviso>
+<aviso_sms>1</aviso_sms>
+<consider>1</consider>
+<oversize>0</oversize>
+<label_fragile>0</label_fragile>
+<label_dont_tilt>0</label_dont_tilt>
+<label_this_side_up>0</label_this_side_up>  
+<hydraulic_front_loading>0</hydraulic_front_loading>
+<hydraulic_front_discharge>0</hydraulic_front_discharge>
+		<cash_on_delivery> 
+			<type>1</type>
+			<price>1825</price>
+			<price_cur_id>1</price_cur_id>
+			<account2>2600340251</account2>
+			<bank>2010</bank>
+		</cash_on_delivery><kg>0.5</kg> 
+<m3/>
+<order_value>1825</order_value>
+<order_value_currency_id>1</order_value_currency_id>
+<note_loading></note_loading>
+<note_discharge></note_discharge>
+<packs>
+<pack>
+				<quantity>1</quantity>
+				<pack_id>1</pack_id>
+				<description>Přislušenství ke kávovaru</description>
+			</pack>
+</packs>
+</order>
+	<order>
+		<label>166865</label>
+		<var_symbol>166865</var_symbol>
+		<payer_select>1</payer_select>
+		<loading_select>1</loading_select>
+		<term_id>1</term_id>   
+		<loading_date>29.04.2019</loading_date>   
+		<loading_time_from>10:04</loading_time_from>
+		<loading_time_to>10:54</loading_time_to>    
+		<discharge_date>30.04.2019</discharge_date>  
+		<discharge_time_from>08:00</discharge_time_from>
+		<discharge_time_to>16:00</discharge_time_to> 
+		<loading_personal_branch_id/>
+<discharge_personal_branch_id/>
+<payer/>
+<loading/>
+		<discharge>   
+		<address>
+			<country>Česká republika</country>
+			<city>Kralupy nad Vltavou</city>
+			<street>VRuzovemudoli</street>
+			<house_num>556</house_num>
+			<zip>278 01</zip> 
+		</address>   
+		<name>ELMEP s.r.o.</name><first_name>Kateřina</first_name>
+		<last_name>Caklová</last_name>
+		<phone>+420315617312</phone>
+		<email>katerina.caklova@elmep.cz</email>
+		</discharge>
+		<loading_comfort_id>1</loading_comfort_id>
+		<discharge_comfort_id>1</discharge_comfort_id>
+		<twoway_shipment>0</twoway_shipment>
+		<yard>0</yard>
+		<delivery_notes_back>0</delivery_notes_back>
+		<euro_pallets_back>0</euro_pallets_back>
+		<loading_aviso>0</loading_aviso>
+		<discharge_aviso>0</discharge_aviso>
+		<aviso_sms>1</aviso_sms>
+		<consider>0</consider>
+		<oversize>0</oversize>
+		<label_fragile>1</label_fragile>
+		<label_dont_tilt>0</label_dont_tilt> 
+		<label_this_side_up>0</label_this_side_up>
+		<hydraulic_front_loading>0</hydraulic_front_loading>
+		<hydraulic_front_discharge>0</hydraulic_front_discharge>
+<loading_comfort_id>1</loading_comfort_id>
+<discharge_comfort_id>1</discharge_comfort_id>
+<twoway_shipment>0</twoway_shipment> 
+<twoway_shipment_description></twoway_shipment_description>
+<yard>0</yard>
+<delivery_notes_back>0</delivery_notes_back>
+<euro_pallets_back>0</euro_pallets_back>
+<loading_aviso>0</loading_aviso>
+<discharge_aviso>0</discharge_aviso>
+<aviso_sms>1</aviso_sms>
+<consider>1</consider>
+<oversize>0</oversize>
+<label_fragile>0</label_fragile>
+<label_dont_tilt>0</label_dont_tilt>
+<label_this_side_up>0</label_this_side_up>  
+<hydraulic_front_loading>0</hydraulic_front_loading>
+<hydraulic_front_discharge>0</hydraulic_front_discharge>
+		<cash_on_delivery> 
+			<type>1</type>
+			<price>2402</price>
+			<price_cur_id>1</price_cur_id>
+			<account2>2600340251</account2>
+			<bank>2010</bank>
+		</cash_on_delivery><kg>0.5</kg> 
+<m3/>
+<order_value>2402</order_value>
+<order_value_currency_id>1</order_value_currency_id>
+<note_loading></note_loading>
+<note_discharge></note_discharge>
+<packs>
+<pack>
+				<quantity>1</quantity>
+				<pack_id>1</pack_id>
+				<description>Přislušenství ke kávovaru</description>
+			</pack>
+</packs>
+</order>
+	<order>
+		<label>166864</label>
+		<var_symbol>166864</var_symbol>
+		<payer_select>1</payer_select>
+		<loading_select>1</loading_select>
+		<term_id>1</term_id>   
+		<loading_date>29.04.2019</loading_date>   
+		<loading_time_from>10:04</loading_time_from>
+		<loading_time_to>10:54</loading_time_to>    
+		<discharge_date>30.04.2019</discharge_date>  
+		<discharge_time_from>08:00</discharge_time_from>
+		<discharge_time_to>16:00</discharge_time_to> 
+		<loading_personal_branch_id/>
+<discharge_personal_branch_id/>
+<payer/>
+<loading/>
+		<discharge>   
+		<address>
+			<country>Česká republika</country>
+			<city>Lysa nad Labem</city>
+			<street>KOMENSKEHO</street>
+			<house_num>1534</house_num>
+			<zip>28922</zip> 
+		</address>   
+		<name>ZŠ J. A. KOMENSKÉHO</name><first_name>Jana</first_name>
+		<last_name>Králová</last_name>
+		<phone>+420325551220</phone>
+		<email>sekretarka@zsjaklysa.cz</email>
+		</discharge>
+		<loading_comfort_id>1</loading_comfort_id>
+		<discharge_comfort_id>1</discharge_comfort_id>
+		<twoway_shipment>0</twoway_shipment>
+		<yard>0</yard>
+		<delivery_notes_back>0</delivery_notes_back>
+		<euro_pallets_back>0</euro_pallets_back>
+		<loading_aviso>0</loading_aviso>
+		<discharge_aviso>0</discharge_aviso>
+		<aviso_sms>1</aviso_sms>
+		<consider>0</consider>
+		<oversize>0</oversize>
+		<label_fragile>1</label_fragile>
+		<label_dont_tilt>0</label_dont_tilt> 
+		<label_this_side_up>0</label_this_side_up>
+		<hydraulic_front_loading>0</hydraulic_front_loading>
+		<hydraulic_front_discharge>0</hydraulic_front_discharge>
+<loading_comfort_id>1</loading_comfort_id>
+<discharge_comfort_id>1</discharge_comfort_id>
+<twoway_shipment>0</twoway_shipment> 
+<twoway_shipment_description></twoway_shipment_description>
+<yard>0</yard>
+<delivery_notes_back>0</delivery_notes_back>
+<euro_pallets_back>0</euro_pallets_back>
+<loading_aviso>0</loading_aviso>
+<discharge_aviso>0</discharge_aviso>
+<aviso_sms>1</aviso_sms>
+<consider>1</consider>
+<oversize>0</oversize>
+<label_fragile>0</label_fragile>
+<label_dont_tilt>0</label_dont_tilt>
+<label_this_side_up>0</label_this_side_up>  
+<hydraulic_front_loading>0</hydraulic_front_loading>
+<hydraulic_front_discharge>0</hydraulic_front_discharge>
+		<cash_on_delivery> 
+			<type>1</type>
+			<price>2677</price>
+			<price_cur_id>1</price_cur_id>
+			<account2>2600340251</account2>
+			<bank>2010</bank>
+		</cash_on_delivery><kg>0.5</kg> 
+<m3/>
+<order_value>2677</order_value>
+<order_value_currency_id>1</order_value_currency_id>
+<note_loading></note_loading>
+<note_discharge></note_discharge>
+<packs>
+<pack>
+				<quantity>1</quantity>
+				<pack_id>1</pack_id>
+				<description>Přislušenství ke kávovaru</description>
+			</pack>
+</packs>
+</order>
+	<order>
+		<label>166859</label>
+		<var_symbol>166859</var_symbol>
+		<payer_select>1</payer_select>
+		<loading_select>1</loading_select>
+		<term_id>1</term_id>   
+		<loading_date>29.04.2019</loading_date>   
+		<loading_time_from>10:04</loading_time_from>
+		<loading_time_to>10:54</loading_time_to>    
+		<discharge_date>30.04.2019</discharge_date>  
+		<discharge_time_from>08:00</discharge_time_from>
+		<discharge_time_to>16:00</discharge_time_to> 
+		<loading_personal_branch_id/>
+<discharge_personal_branch_id/>
+<payer/>
+<loading/>
+		<discharge>   
+		<address>
+			<country>Česká republika</country>
+			<city>Plzen</city>
+			<street>Tachovska</street>
+			<house_num>1373/41</house_num>
+			<zip>32300</zip> 
+		</address>   
+		<name>PilsFree, z.s.</name><first_name>Jiří</first_name>
+		<last_name>Pytlík</last_name>
+		<phone>+420773528542</phone>
+		<email>faktury@pilsfree.net</email>
+		</discharge>
+		<loading_comfort_id>1</loading_comfort_id>
+		<discharge_comfort_id>1</discharge_comfort_id>
+		<twoway_shipment>0</twoway_shipment>
+		<yard>0</yard>
+		<delivery_notes_back>0</delivery_notes_back>
+		<euro_pallets_back>0</euro_pallets_back>
+		<loading_aviso>0</loading_aviso>
+		<discharge_aviso>0</discharge_aviso>
+		<aviso_sms>1</aviso_sms>
+		<consider>0</consider>
+		<oversize>0</oversize>
+		<label_fragile>1</label_fragile>
+		<label_dont_tilt>0</label_dont_tilt> 
+		<label_this_side_up>0</label_this_side_up>
+		<hydraulic_front_loading>0</hydraulic_front_loading>
+		<hydraulic_front_discharge>0</hydraulic_front_discharge>
+<loading_comfort_id>1</loading_comfort_id>
+<discharge_comfort_id>1</discharge_comfort_id>
+<twoway_shipment>0</twoway_shipment> 
+<twoway_shipment_description></twoway_shipment_description>
+<yard>0</yard>
+<delivery_notes_back>0</delivery_notes_back>
+<euro_pallets_back>0</euro_pallets_back>
+<loading_aviso>0</loading_aviso>
+<discharge_aviso>0</discharge_aviso>
+<aviso_sms>1</aviso_sms>
+<consider>1</consider>
+<oversize>0</oversize>
+<label_fragile>0</label_fragile>
+<label_dont_tilt>0</label_dont_tilt>
+<label_this_side_up>0</label_this_side_up>  
+<hydraulic_front_loading>0</hydraulic_front_loading>
+<hydraulic_front_discharge>0</hydraulic_front_discharge><kg>0.5</kg> 
+<m3/>
+<order_value>3590</order_value>
+<order_value_currency_id>1</order_value_currency_id>
+<note_loading></note_loading>
+<note_discharge></note_discharge>
+<packs>
+<pack>
+				<quantity>1</quantity>
+				<pack_id>1</pack_id>
+				<description>Přislušenství ke kávovaru</description>
+			</pack>
+</packs>
+</order>
+	<order>
+		<label>166856</label>
+		<var_symbol>166856</var_symbol>
+		<payer_select>1</payer_select>
+		<loading_select>1</loading_select>
+		<term_id>1</term_id>   
+		<loading_date>29.04.2019</loading_date>   
+		<loading_time_from>10:04</loading_time_from>
+		<loading_time_to>10:54</loading_time_to>    
+		<discharge_date>30.04.2019</discharge_date>  
+		<discharge_time_from>08:00</discharge_time_from>
+		<discharge_time_to>16:00</discharge_time_to> 
+		<loading_personal_branch_id/>
+<discharge_personal_branch_id/>
+<payer/>
+<loading/>
+		<discharge>   
+		<address>
+			<country>Česká republika</country>
+			<city>Lukov u Zlina</city>
+			<street>KLuckam</street>
+			<house_num>134</house_num>
+			<zip>76317</zip> 
+		</address>   
+		<name>Bretech Fly s.r.o.</name><first_name>Lubomír</first_name>
+		<last_name>Březík</last_name>
+		<phone>+420603594055</phone>
+		<email>bretechfly@volny.cz</email>
+		</discharge>
+		<loading_comfort_id>1</loading_comfort_id>
+		<discharge_comfort_id>1</discharge_comfort_id>
+		<twoway_shipment>0</twoway_shipment>
+		<yard>0</yard>
+		<delivery_notes_back>0</delivery_notes_back>
+		<euro_pallets_back>0</euro_pallets_back>
+		<loading_aviso>0</loading_aviso>
+		<discharge_aviso>0</discharge_aviso>
+		<aviso_sms>1</aviso_sms>
+		<consider>0</consider>
+		<oversize>0</oversize>
+		<label_fragile>1</label_fragile>
+		<label_dont_tilt>0</label_dont_tilt> 
+		<label_this_side_up>0</label_this_side_up>
+		<hydraulic_front_loading>0</hydraulic_front_loading>
+		<hydraulic_front_discharge>0</hydraulic_front_discharge>
+<loading_comfort_id>1</loading_comfort_id>
+<discharge_comfort_id>1</discharge_comfort_id>
+<twoway_shipment>0</twoway_shipment> 
+<twoway_shipment_description></twoway_shipment_description>
+<yard>0</yard>
+<delivery_notes_back>0</delivery_notes_back>
+<euro_pallets_back>0</euro_pallets_back>
+<loading_aviso>0</loading_aviso>
+<discharge_aviso>0</discharge_aviso>
+<aviso_sms>1</aviso_sms>
+<consider>1</consider>
+<oversize>0</oversize>
+<label_fragile>0</label_fragile>
+<label_dont_tilt>0</label_dont_tilt>
+<label_this_side_up>0</label_this_side_up>  
+<hydraulic_front_loading>0</hydraulic_front_loading>
+<hydraulic_front_discharge>0</hydraulic_front_discharge><kg>5</kg> 
+<m3/>
+<order_value>64448</order_value>
+<order_value_currency_id>1</order_value_currency_id>
+<note_loading></note_loading>
+<note_discharge></note_discharge>
+<packs>
+<pack>
+				<quantity>1</quantity>
+				<pack_id>1</pack_id>
+				<description>Přislušenství ke kávovaru</description>
+			</pack>
+</packs>
+</order>
+	<order>
+		<label>166814</label>
+		<var_symbol>166814</var_symbol>
+		<payer_select>1</payer_select>
+		<loading_select>1</loading_select>
+		<term_id>1</term_id>   
+		<loading_date>29.04.2019</loading_date>   
+		<loading_time_from>10:04</loading_time_from>
+		<loading_time_to>10:54</loading_time_to>    
+		<discharge_date>30.04.2019</discharge_date>  
+		<discharge_time_from>08:00</discharge_time_from>
+		<discharge_time_to>16:00</discharge_time_to> 
+		<loading_personal_branch_id/>
+<discharge_personal_branch_id/>
+<payer/>
+<loading/>
+		<discharge>   
+		<address>
+			<country>Česká republika</country>
+			<city>Pelhrimov</city>
+			<street>KSilu</street>
+			<house_num>2497</house_num>
+			<zip>39301</zip> 
+		</address>   
+		<name>RIMOWA CZ, spol. s r.o.</name><first_name>Lenka</first_name>
+		<last_name>Jírů</last_name>
+		<phone>+420565426774</phone>
+		<email>lenka.jiru@rimowa.com</email>
+		</discharge>
+		<loading_comfort_id>1</loading_comfort_id>
+		<discharge_comfort_id>1</discharge_comfort_id>
+		<twoway_shipment>0</twoway_shipment>
+		<yard>0</yard>
+		<delivery_notes_back>0</delivery_notes_back>
+		<euro_pallets_back>0</euro_pallets_back>
+		<loading_aviso>0</loading_aviso>
+		<discharge_aviso>0</discharge_aviso>
+		<aviso_sms>1</aviso_sms>
+		<consider>0</consider>
+		<oversize>0</oversize>
+		<label_fragile>1</label_fragile>
+		<label_dont_tilt>0</label_dont_tilt> 
+		<label_this_side_up>0</label_this_side_up>
+		<hydraulic_front_loading>0</hydraulic_front_loading>
+		<hydraulic_front_discharge>0</hydraulic_front_discharge>
+<loading_comfort_id>1</loading_comfort_id>
+<discharge_comfort_id>1</discharge_comfort_id>
+<twoway_shipment>0</twoway_shipment> 
+<twoway_shipment_description></twoway_shipment_description>
+<yard>0</yard>
+<delivery_notes_back>0</delivery_notes_back>
+<euro_pallets_back>0</euro_pallets_back>
+<loading_aviso>0</loading_aviso>
+<discharge_aviso>0</discharge_aviso>
+<aviso_sms>1</aviso_sms>
+<consider>1</consider>
+<oversize>0</oversize>
+<label_fragile>0</label_fragile>
+<label_dont_tilt>0</label_dont_tilt>
+<label_this_side_up>0</label_this_side_up>  
+<hydraulic_front_loading>0</hydraulic_front_loading>
+<hydraulic_front_discharge>0</hydraulic_front_discharge><kg>5</kg> 
+<m3/>
+<order_value>34990</order_value>
+<order_value_currency_id>1</order_value_currency_id>
+<note_loading></note_loading>
+<note_discharge></note_discharge>
+<packs>
+<pack>
+				<quantity>1</quantity>
+				<pack_id>1</pack_id>
+				<description>Přislušenství ke kávovaru</description>
+			</pack>
+</packs>
+</order>
+	<order>
+		<label>166801</label>
+		<var_symbol>166801</var_symbol>
+		<payer_select>1</payer_select>
+		<loading_select>1</loading_select>
+		<term_id>1</term_id>   
+		<loading_date>29.04.2019</loading_date>   
+		<loading_time_from>10:04</loading_time_from>
+		<loading_time_to>10:54</loading_time_to>    
+		<discharge_date>30.04.2019</discharge_date>  
+		<discharge_time_from>08:00</discharge_time_from>
+		<discharge_time_to>16:00</discharge_time_to> 
+		<loading_personal_branch_id/>
+<discharge_personal_branch_id/>
+<payer/>
+<loading/>
+		<discharge>   
+		<address>
+			<country>Česká republika</country>
+			<city>Prostejov</city>
+			<street>Slikova</street>
+			<house_num>876/22</house_num>
+			<zip>79601</zip> 
+		</address>   
+		<name>MUDr. Kateřina Machová</name><first_name>Kateřina</first_name>
+		<last_name>Machová</last_name>
+		<phone>+420777169796</phone>
+		<email>mudr.machova@seznam.cz</email>
+		</discharge>
+		<loading_comfort_id>1</loading_comfort_id>
+		<discharge_comfort_id>1</discharge_comfort_id>
+		<twoway_shipment>0</twoway_shipment>
+		<yard>0</yard>
+		<delivery_notes_back>0</delivery_notes_back>
+		<euro_pallets_back>0</euro_pallets_back>
+		<loading_aviso>0</loading_aviso>
+		<discharge_aviso>0</discharge_aviso>
+		<aviso_sms>1</aviso_sms>
+		<consider>0</consider>
+		<oversize>0</oversize>
+		<label_fragile>1</label_fragile>
+		<label_dont_tilt>0</label_dont_tilt> 
+		<label_this_side_up>0</label_this_side_up>
+		<hydraulic_front_loading>0</hydraulic_front_loading>
+		<hydraulic_front_discharge>0</hydraulic_front_discharge>
+<loading_comfort_id>1</loading_comfort_id>
+<discharge_comfort_id>1</discharge_comfort_id>
+<twoway_shipment>0</twoway_shipment> 
+<twoway_shipment_description></twoway_shipment_description>
+<yard>0</yard>
+<delivery_notes_back>0</delivery_notes_back>
+<euro_pallets_back>0</euro_pallets_back>
+<loading_aviso>0</loading_aviso>
+<discharge_aviso>0</discharge_aviso>
+<aviso_sms>1</aviso_sms>
+<consider>1</consider>
+<oversize>0</oversize>
+<label_fragile>0</label_fragile>
+<label_dont_tilt>0</label_dont_tilt>
+<label_this_side_up>0</label_this_side_up>  
+<hydraulic_front_loading>0</hydraulic_front_loading>
+<hydraulic_front_discharge>0</hydraulic_front_discharge><kg>5</kg> 
+<m3/>
+<order_value>25618</order_value>
+<order_value_currency_id>1</order_value_currency_id>
+<note_loading></note_loading>
+<note_discharge></note_discharge>
+<packs>
+<pack>
+				<quantity>1</quantity>
+				<pack_id>1</pack_id>
+				<description>Přislušenství ke kávovaru</description>
+			</pack>
+</packs>
+</order>
+</orders>

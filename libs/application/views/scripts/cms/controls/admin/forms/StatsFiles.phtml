@@ -1,0 +1,15 @@
+<h1>100 nejstahovanejších souborů</h1>
+
+<?php
+		echo $this->table( 
+				$this->fileAuditTable, 
+				$this->fileAuditTableHead,
+				$this->fileAuditTableActions, 
+				$this->tableSort, 
+				$this->tableSortType, 
+				$this->curentViewState, 
+				$this->tableParentTab,
+				array('class' => 'list') 
+			); 
+	?>
+	

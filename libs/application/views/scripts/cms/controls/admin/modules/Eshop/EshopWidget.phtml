@@ -1,0 +1,80 @@
+<?php 
+$menu = array(
+
+);
+
+$mProducts = new module_Products();
+$productsAll = $mProducts->getProductsCout();
+$mc = new module_Customers();
+$cc = $mc->getCustomersCout( 'id', 'Asc', 0, 5);
+
+$ordersCount = $this->mEshop->orders->getOrdersBackendCount('all',   
+					'all',   
+					'o.id',   
+					'desc', 0, 1
+				);
+
+?>
+<div id="eshopLeft">     
+<ul id="emenu">  
+	<li>
+		<a id="emenu1" class="emenu" href="#" onclick = "activateMenu('emenu1'); return refreshTab('vypisDole', '<?=$this->url(array('amodule' => 'items','action' => 'listItems'))?>');">
+		Zboží  
+		</a>  <small>(<?=$productsAll?>)</small>
+		<br /> 
+		&nbsp;  <small><a id="emenu2"  class="emenu" href="#" onclick = "activateMenu('emenu2');  return refreshTab('vypisDole', '<?=$this->url(array('amodule' => 'items','action' => 'addItem'))?>');">Vložit nové zboží</a></small>
+	</li>    
+	<li> 
+		<a id="emenu3" href="#" class="emenu" onclick = "activateMenu('emenu3');  return refreshTab('vypisDole', '<?=$this->url(array('amodule' => 'orders','action' => 'listOrders'))?>');">
+		Objednávky  
+		</a>    
+		 
+		<br /> 
+		&nbsp;  <small><a id="emenu7"  class="emenu" href="#" onclick = "activateMenu('emenu3');  return refreshTab('vypisDole', '<?=$this->url(array('amodule' => 'orders','action' => 'listOrders', 'tableFilter0' => 'on'))?>');">Nevyřízené</a></small> <br />
+		&nbsp;  <small><a id="emenu8"  class="emenu" href="#" onclick = "activateMenu('emenu3');  return refreshTab('vypisDole', '<?=$this->url(array('amodule' => 'orders','action' => 'listOrders', 'tableFilter0' => 'ov'))?>');">Vyřízené</a></small> <br />
+		&nbsp;  <small><a id="emenu9"  class="emenu" href="#" onclick = "activateMenu('emenu3');  return refreshTab('vypisDole', '<?=$this->url(array('amodule' => 'orders','action' => 'listOrders', 'tableFilter0' => 'wo'))?>');">Čekající</a></small> <br />
+		&nbsp;  <small><a id="emenu10"  class="emenu" href="#" onclick = "activateMenu('emenu3');  return refreshTab('vypisDole', '<?=$this->url(array('amodule' => 'orders','action' => 'listOrders', 'tableFilter0' => 'os'))?>');">Stornované</a></small> <br />
+		&nbsp;  <small><a id="emenu11"  class="emenu" href="#" onclick = "activateMenu('emenu3');  return refreshTab('vypisDole', '<?=$this->url(array('amodule' => 'orders','action' => 'listOrders', 'tableFilter0' => 'or'))?>');">Reklamované/vrácené</a></small> <br />
+		&nbsp;  <small><a id="emenu12"  class="emenu" href="#" onclick = "activateMenu('emenu3');  return refreshTab('vypisDole', '<?=$this->url(array('amodule' => 'orders','action' => 'listOrders', 'tableFilter0' => 'all'))?>');">Všechny</a></small> <br />
+	</li>     			
+	<li>    
+		<a id="emenu4" href="#" class="emenu" onclick = "activateMenu('emenu4');  return refreshTab('vypisDole', '<?=$this->url(array('amodule' => 'users','action' => 'listCustomers'))?>');">
+		Uživatelé 
+		</a> <small>(<?=$cc?>)</small>   
+	</li>   
+	<li> 
+		<a id="emenu5" class="emenu" href="#" > 
+			Banka      
+		</a>   
+	</li>     
+	<li>   
+		<a id="emenu6" href="#" class="emenu" onclick = "activateMenu('emenu6');  return refreshTab('vypisDole', '<?=$this->url(array('amodule' => 'stats','action' => 'stats'))?>');">
+		Přehledy    
+		</a>  
+	</li> 
+
+	<li>   
+		<a id="emenu14" href="#" class="emenu" onclick = "activateMenu('emenu14');  return refreshTab('vypisDole', '<?=$this->url(array('amodule' => 'jetovubecknecemu','action' => 'listVouchers'))?>');">
+		Dárkové vouchery
+		</a>  
+		<br /> 
+		&nbsp;  <small><a id="emenu15"  class="emenu" href="#" onclick = "activateMenu('emenu15');  return refreshTab('vypisDole', '<?=$this->url(array('amodule' => 'orders','action' => 'vouchersGen'))?>');">Generování voucherů</a></small> <br />
+	</li> 
+	
+	<li>
+		<a id="emenu16" href="#" class="emenu" onclick = "activateMenu('emenu16');  return refreshTab('vypisDole', '<?=$this->url(array('amodule' => 'jetovubecknecemu','action' => 'listDelivery'))?>');">
+		Doprava
+		</a>  
+		<br /> 
+		&nbsp;  <small><a id="emenu17"  class="emenu" href="#" onclick = "activateMenu('emenu17');  return refreshTab('vypisDole', '<?=$this->url(array('amodule' => 'orders','action' => 'listPayments'))?>');">Platby</a></small> 
+		<br /> 
+		<!--&nbsp;  <small><a id="emenu15"  class="emenu" href="#" onclick = "activateMenu('emenu15');  return refreshTab('vypisDole', '<?=$this->url(array('amodule' => 'orders','action' => 'listPriplatky'))?>');">Příplatky</a></small> <br />-->
+	</li>
+	<li>
+		<a id="emenu18" href="#" class="emenu" onclick = "activateMenu('emenu18');  return refreshTab('vypisDole', '<?=$this->url(array('controller' => 'settings','action' => 'tabs'))?>');">
+		Nastavení
+		</a>  
+	</li>
+
+</ul>   
+</div> 

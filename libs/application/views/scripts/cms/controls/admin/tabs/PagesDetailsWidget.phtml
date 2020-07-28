@@ -1,0 +1,9 @@
+<ul class="leftWidgetMenu">
+	<? if($this->config->instance->adminTags):?>
+	<li>
+		<a href="#" onclick = "refreshTab('pagesMain', '<?=$this->url(array('psection' => 'details','action' => 'tagsHome'))?>'); return refreshTab('vypisDole', '<?=$this->url(array('psection' => 'details','action' => 'tagsDetails'))?>');"> 
+		Štítky (tagy) 
+		</a> 
+	</li>
+	<? endif; ?>  
+</ul> 

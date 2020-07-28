@@ -1,0 +1,117 @@
+		<? if(is_array($this->souvisejici)):     ?>
+               <?
+				$x = 0;
+               foreach ($this->souvisejici as $alt): 
+               		if(is_object($alt))
+               		{
+               			$child = $alt;
+						$alt['id'] = $child->id;
+               		}
+               		else{
+               			$child = $this->tree->getNodeById($alt['id']);
+               		} 
+	              	
+	              	if(!$child){ continue; }
+	              	
+	              	$x++;
+	              	// if($x > 3){ break; }   
+	              	 list($totalRev,$rev) = $this->mReviews->showSingleRev($alt['id']);   	
+	              	$c = $child->getPublishedContent();
+	              	if(!$c){ continue; } 
+	              	
+					$akce = $c->getPropertyValue('akce');
+					$html = $c->getPropertyValue('html');
+					$akce = (helper_MultiSelect::getMultiSelectValues($akce)); 
+					$isVyprodej = $isAkce = $isNovinka = false;
+            		
+            		if(in_array('1', $akce)){
+            			$isAkce = true;
+            		}
+            		if(in_array('2', $akce)){
+            			$isNovinka = true;
+            		}
+            		if(in_array('3', $akce)){ 
+            			$isTip = true;
+            		}
+					if(in_array('5', $akce)){ 
+            			$isVyprodej = true;
+            		}
+					 
+					$photos = $this->mVarianta->getResizedPhotos($alt['obrazky']);
+					$p = helper_FrontEnd::getFirstPhoto($photos,'pShow2' , false);
+	            		if(count($p)){  
+	            			$img = $p['path'];
+	            		} else {
+	            			$img = '/images/icoFolderSmall.png';
+	            		} 
+	            		$price  = $alt['price'];  
+	            		$price2  = $alt['price2'] > 0  ? $alt['price2'] : '';
+	            		$dif = $price2 - $price; 
+         				$p = $price2/100;
+         				$dif= round($dif/$p, 1);
+         				$this->difp = '';  
+         				$this->difp =$this->difp = $dif ? '-'.$dif.' % ':'';
+						$skladem = $c->getPropertyValue('skladem');
+						$disabled ='';
+						if($skladem == 3){
+							$disabled = 'disabled';
+						}
+	            		$url = $c->getDetailUrl($this, $child);  
+	              if($this->schema):
+                if($price2):
+                	$googleOffer = 'itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer"';
+                	$googleHighPrice = 'itemprop="highPrice"';
+                	$googlePrice = 'itemprop="lowPrice"';
+                else:
+                	$googleOffer = 'itemprop="offers" itemscope itemtype="http://schema.org/Offer"';
+                	$googleHighPrice = '';
+                	$googlePrice = 'itemprop="price"';
+                	
+                endif;
+                	$googleLink = '<link itemprop="availability" href="http://schema.org/InStock" />In stock';
+                endif; ?>
+              <div class="item" itemscope itemtype="http://schema.org/Product">
+                <div class="flags">
+                   <? if($isAkce):?>  
+                <div class="akce"></div>
+                <? endif;?> 
+                <? if($isNovinka):?> 
+                <div class="nove"></div>
+            <? endif;?>   
+             <? if($isTip):?> 
+                <div class="tip">&nbsp;</div>
+            <? endif;?>  
+			<? if($isVyprodej):?> 
+                <div class="vyprodej">&nbsp;</div>
+            <? endif;?>   
+                </div>
+                	 
+                	<div class="img"><a href="<?=$url?>"><img itemprop="image" src="<?=$img?>" alt="<?=$pp['name']?>" /></a></div>
+             <div class="clear"></div> 
+                   <div class="revText items-rev hp-rev">  
+                                  	 <?if($totalRev->count>0):?>
+                                
+				<div class="emptyStarsMini marRight3"> 
+					
+					<div style="width:<?=$totalRev->total*20.8?>px;" class="fullStarsMini"></div> 
+				</div>
+			<span class="fs11 greyColor1 lineHeight20">(<?=$totalRev->count?>)</span>
+	
+		<?endif?>    
+			</div>   
+		   <div class="clear"></div>
+  
+		   			<p class="heading" ><a href="<?=$url?>" itemprop="url"><span class="spanH3" itemprop="name"><?=$child->title?></span></a></p>
+                  <div class="price" itemprop="offers" itemscope itemtype="http://schema.org/Offer" >
+                  	   <link itemprop="availability" href="http://schema.org/InStock"/>
+                  <? $price2 = $price2? $price2.' Kč' : '';
+                  if($price2):?>     
+                  <p class="tempPrice"><span class="overLine" <?=$googleHighPrice;?>><?=helper_FrontEnd::price($price2)?></span> <span class="green"><?=$this->difp?' Sleva ':''?><?=$this->difp?></span></p>
+                  <?endif?>   
+                  <p itemprop="priceCurrency" content="CZK"><span itemprop="price" content="<?=$price?>"><?=helper_FrontEnd::price($price)?> Kč</span></p>
+                  <p>s DPH</p>
+                  </div>
+                   
+                	</div>
+              <? endforeach;?> 
+              <? endif; ?>

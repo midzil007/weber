@@ -1,0 +1,11 @@
+<?=$this->pageText?>
+
+<? foreach ($this->children as $child):
+		if($content = $child->getPublishedContent()):
+			?>	
+			<div class="phrase">		
+				<h3><?=$child->title?></h3>
+				<?=$content->getPropertyValue('html')	?>
+			</div>	
+<? 		endif;
+	endforeach; ?>

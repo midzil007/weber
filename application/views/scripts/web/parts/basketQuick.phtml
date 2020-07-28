@@ -1,0 +1,35 @@
+<?$sum = $this->mEshop->basket->getSum($this);?>
+            <p>Nákupní košík - Celkem <?=$sum?> Kč </p>
+            <table class="quick-t">
+             <?php     
+$items = $this->mEshop->basket->getItems();  
+$itemsCount = count($items);  
+
+              $x = 0;     
+              $count = count($items);  
+              foreach ($items as $id => $data):
+                $x++;     
+                    $child = $data['item'];
+                    $count = $data['count'];   
+                    if(!$child){ continue; }  
+                    $c = $child->getTheRightContent();  
+                    $activeVariant = $this->mVarianta->getVariantById($data['variantId'],false); 
+                  //    pr($data);  e($activeVariant);
+                        $price  =  $data['price'];    
+                        $url = $c->getDetailUrl($this, $child);  
+                        $skladem = $activeVariant['skladem'];
+                        $barva = $activeVariant['title'] ? ', '.$activeVariant['title']:'';
+                        $velikost= $activeVariant['titleOption'] ? ', '.$activeVariant['titleOption']: '';
+                        $photos = $this->mVarianta->getResizedPhotos($activeVariant['obrazky']);
+                        $p = helper_FrontEnd::getFirstPhoto($photos,'pMinic2' , false);
+                    ?>       
+                      
+                                    <tr class="nodeId<?=$child->nodeId?>">  
+                                    <td><img src="<?=$p['path']?>" alt=" " /></td>
+                                    <td><?=$child->title?><?=$barva?><?=$velikost?></td>  
+                                    <td><?=$count?> KS</td>       
+                                    <td><?=helper_FrontEnd::price($price)?> Kč</td>    
+                                     <td><a onclick="remove(<?=$child->nodeId?>,'/?removeBasket=1&nodeId=<?=$child->nodeId?>&variant=<?=$activeVariant['id']?>')" href="#" >X</a></td>
+                                    </tr>
+                            <?endforeach?>
+                                </table>

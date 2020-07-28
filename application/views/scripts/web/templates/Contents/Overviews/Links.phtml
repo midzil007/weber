@@ -1,0 +1,29 @@
+<?=$this->pageText?>
+
+<? foreach ($this->children as $child):
+		if($content = $child->getPublishedContent()):
+			//$files = $content->getFilesNames();
+			$logo = $content->getPropertyValue('logo');
+			$url = Utils::checkUrl($content->getPropertyValue('url'));
+			?>	
+			<div class="link">				
+					<? if(strlen($logo) > 10): ?>
+					<div class="linkLogo">
+						<img src="<?=$logo?>" alt="<?=$child->title?>" />	
+					</div>
+					<? endif; ?>
+				
+				<div class="linkData">
+					<h3><a href="<?=$url?>" target="_blank" title="Otevřít v novém okně"><?=$child->title?></a></h3>
+					<div class="fsxs">
+					<? if(strlen($content->getPropertyValue('info') > 2)): ?>
+						<?=$content->getPropertyValue('info')?>				
+					<? endif; ?>	
+					<a href="<?=$url?>" target="_blank" title="Otevřít v novém okně"><?=$url?></a>					
+					</div>
+				</div>
+				<div class="clear">&nbsp;</div>
+			</div>
+	
+<? 		endif;
+	endforeach; ?>

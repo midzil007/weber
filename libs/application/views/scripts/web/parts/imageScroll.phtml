@@ -1,0 +1,140 @@
+<?php  
+
+$show = $this->inputGet->photo;
+$show = $show?$show:0;
+$photos = count($this->photos) - 1; 
+
+
+$prevUrl = '?photo=' .  max(0, $p);
+$nextUrl = '?photo=' . min($photos, $n); 
+ 
+
+?> 
+<? 
+
+foreach ($this->photos as $path => $name){
+
+	if(!$path){ continue; }	
+	list($nodeId, $n) = content_SFSFile::parseSFSPath($path);
+	
+	if($x < $show){
+		continue;
+	}
+	
+    $photoPathFullTemp = $this->config->sfFolder . '/' . $nodeId . '/' . $this->content->fotoFullName . '-' . content_SFSFile::getFileExtension($n) . '/' . $n;
+    $photoPathShow = $this->config->sfFolder . '/' . $nodeId . '/' . $this->content->fotoShowName . '-' . content_SFSFile::getFileExtension($n) . '/' . $n;
+    $photoPathThumb = $this->config->sfFolder . '/' . $nodeId . '/' . $this->content->fotoThumbName . '-' . content_SFSFile::getFileExtension($n) . '/' . $n; 
+ 	
+    $photoPathShow = content_SFSFile::getFileFullPath($photoPathShow);
+	$photoPathFullTemp = content_SFSFile::getFileFullPath($photoPathFullTemp); 
+			
+	
+	$photoTitle = $name;     
+	?>		
+				
+ 
+
+<?
+	
+	if($x == $show){
+		break; 
+	}
+	
+} 
+?>
+
+
+
+
+
+ 
+<div class="gallery_container" id="gallery_container">
+		
+		<div class="SlideItMoo_back"><!--slide back button--></div>
+			
+		<div class="thumb_container" id="thumb_container">					
+			<div class="thumbs" id="thumbs">
+
+
+				<?		
+
+				if(!$this->rowImages){
+		$images = array();
+		$galleries = $this->mGallery->getArticles('n.id', 'Desc', 0, 10);   
+		$cg = new content_OverviewGallery();
+		foreach ($galleries as $g){ 
+			$cp = $cg->getPropertyByName('photos'); 
+			$cp->value = $g['photos'];    
+			$photos = $cg->getFilesNames('photos');
+			if(count($photos)){ 
+				$i = helper_FrontEnd::getResizedPhotos($photos, 'pMini', 'pFull'); 
+				foreach ($i as $img){
+					$img['pagePath'] =  $g['path'];
+					$images[] = $img; 
+				}
+				 
+				// $images = array_merge($array1)
+			}
+		} 
+		
+		//$this->row = $images;
+		$this->rowImages=$images; 
+				}
+				
+				$x = 0; 
+				foreach ($this->rowImages as $img):
+				
+				// pr($img); 
+				$url = $x==0?$this->path:$this->path.'?photo=' . $x;
+				$url = $img['fullPath']; 
+				if($x > 30){ break; }   
+				$x++;   
+				
+				$photoPathThumb = $img['path'];
+				$name = $img['name'];
+				
+				?> 
+				<div class="SlideItMoo_element">
+				<div class="SlideBorder">
+				<?if(count($img)>0):?>
+				<? $href=$img['pagePath']?>
+				<?else:?>
+				<? $href=$photoPathThumb?>
+				<?endif;?>
+				<a class="imgThumb" href="<?=$img['pagePath']?>" title="<?=$name?>">      
+					<img src="<?=$photoPathThumb?>" alt="<?=$name?>"  title="<?=$name?>"  />  
+				</a>
+				</div>					 
+				</div> 
+				<? endforeach; ?>	  
+			</div>			 
+		</div>  
+		
+		<div class="SlideItMoo_forward"><!--slide forward button--></div> 
+		 
+	</div>
+		<script type="text/javascript"> 
+	<!--
+	<? if(count($this->rowImages) > 7): ?>   
+	window.addEvent('domready', function(){
+		 
+		new SlideItMoo({
+			overallContainer: 'gallery_container',
+			elementScrolled: 'thumb_container',
+			thumbsContainer: 'thumbs',		
+			itemsVisible:6,  
+			elemsSlide:3, 
+			duration:300,
+			itemsSelector: '.SlideItMoo_element',
+			itemWidth: 157,   
+			startIndex:<?=$show?>   
+
+		});
+		initImages('thumbs', 'photo');   	 
+	});  
+	<? endif; ?>	 
+	--> 
+	</script>
+		
+	 
+  

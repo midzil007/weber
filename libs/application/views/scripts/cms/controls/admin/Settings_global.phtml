@@ -1,0 +1,39 @@
+	<table class="normal">	
+		<? foreach ($this->lSettings as $groupName => $group): ?>    
+		<tr>
+			<td class="formcell tbold" colspan="2"><?=$this->s_Translate_groups[$groupName]?></td>
+		</tr>	
+		<? foreach ($group as $setting): ?>    	
+		<tr>
+			<td class="formcell"><?=$this->s_Translate[$setting['variable']] ?></td>			
+			<td class="formcell">
+				<?php 
+				switch ($setting['formType']){
+					default:
+					case 'Text':
+						echo $this->{'form'.$setting['formType']}($setting['variable'], $setting['value'], array('class' => 'ftext'));
+						break;
+						
+					case 'Select':						
+						
+						$options = array();
+						$o = explode(';', $setting['options']);
+						foreach ($o as $opt){
+							list($k, $v) = explode('=', $opt);
+							$options[$k] = $v;
+						}
+												
+						echo $this->{'form'.$setting['formType']}($setting['variable'], $setting['value'], array('class' => 'ftext', 'value'=>$setting['value']), $options );
+				}
+				 ?>
+			</td>						
+		</tr>
+		<? endforeach;?>	
+		<? endforeach;?>	
+		<tr>	
+			<td class="formcell" colspan="2">		
+				<?php echo $this->formSubmit('saveSetB', 'Uložit vše', array('class'=>'fsubmit', "onclick" => "return submitFormAjax('settingsForm', '".$this->url(array('controller' => 'settings','action' => 'saveAll'))."', 'settingsHome', 'tab-submit', '', 1 );", 'iconClass' => "noteIcon")) ?>											
+			</td>
+		</tr> 
+		
+	</table>

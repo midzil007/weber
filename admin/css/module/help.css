@@ -1,0 +1,36 @@
+#helpHead{
+	background:url(../../images/headbg.jpg) repeat-x top #4589df;
+	height:73px;
+	position:relative;
+	padding:0px;
+}
+
+#helpLogo {
+	background:url(../../images/help/help-logo.jpg) no-repeat;
+	display:block;
+	width:67px;
+	height:73px;
+	float:left;
+	margin:0px 10px 0px 0px;
+}
+
+#helpHead h1{ 
+	color:#FFFFFF;
+	font-size:1.5em;
+	margin:10px 0px 0px px;
+	line-height:73px;
+}
+
+#helpTree{
+	background:#c2f457;
+}
+
+.tundra .helpPaneWidget .dijitAccordionBody {
+	background:#c2f457;
+	font-size:0.9em;
+}
+
+.helpTab{
+	padding:5px 10px 10px 10px;
+	overflow:auto;
+}

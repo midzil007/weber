@@ -1,0 +1,31 @@
+<?
+
+if(isset($this->input->username) && isset($this->input->pass)){
+	$webUsers = new module_Customers();
+	list($state, $messages) = $webUsers->loginUser($this,$this->input->username, $this->input->pass);
+	Helpers::addMessage($state, $messages, $this);
+}
+
+if(isset($this->inputGet->logout)){
+	$webUsers = new module_Customers();
+	$webUsers->logout();
+}
+
+if(isset($this->inputGet->confirm)){
+	$webUsers = new module_Customers();
+	//pr($webUsers->confirmEmail($this->inputGet->confirm));
+	list($state, $messages) = $webUsers->confirmEmail($this->inputGet->confirm);
+	Helpers::addMessage($state, $messages, $this);
+}
+
+?>
+
+<? if(count($this->messages)): ?>
+	<?= $this->render('parts/messages.phtml'); ?>				
+<? endif; ?>
+
+<? if($this->webUserLogged): ?>		
+<p>Vítejte ve svém profilu. V levém menu si nyní mužete nastavit odesílání novinek na email.</p>
+<? else: ?>
+<?=$this->render('templates/Contents/App/User/Login.phtml');?> 
+<? endif; ?>

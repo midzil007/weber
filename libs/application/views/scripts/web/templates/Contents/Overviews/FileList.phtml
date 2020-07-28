@@ -1,0 +1,20 @@
+<?=$this->pageText?>
+<?
+if(count($this->documents)):
+	?>
+	 <div id="dl"> 
+		<?
+		foreach ($this->documents as $filepath => $name): 
+			$fullpath = content_SFSFile::getFileFullPath($filepath);
+			$ico = Utils::getFileIcoImage($fullpath);
+			?>	
+			<?= $ico ?> 
+			<a title="Otevřít '<?= $name ?>' do nového okna" target="_blank" href="<?=$filepath?>"> <?= $name ?> <i><?=Utils::getWebFileSize($fullpath)?></i></a> <br />														
+							
+			<? 
+		endforeach; 	
+		?>
+	</div> 
+	<?			
+endif;	
+?>

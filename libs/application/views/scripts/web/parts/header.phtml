@@ -1,0 +1,90 @@
+<div id="header" class="posAbsolute marLeft10">
+	<div id="nav">
+		<div class="fLeft fFaceArial fs12">
+			<ul>
+				<li><a class="grey" rel="nofollow" href="/bezpecny-nakup">Bezpečný nákup</a></li>
+				<?$nAstratex = $this->tree->getNodeSimple(13644)?>
+				<li><a class="grey" href="/obchodni-podminky">Obchodní podmínky</a></li>
+				<li><a  class="grey" href="/kontakty">Kontakty</a></li> 
+				<? if($this->webUserLogged):?>
+					<li><a class="grey" rel="nofollow" class="logged" href="<?=$this->profileUrl?>"><?=$this->webUser->getName()?></a></li>
+					<li><a class="grey" rel="nofollow" href="<?=$this->profileLogout?>">Odhlášení</a></li>
+				<?else:?>
+					<li><a class="grey" rel="nofollow" href="<?=$this->profileUrl?>">Přihlašení</a></li>  
+				<?endif;?> 
+			</ul> 
+		</div>
+	</div>
+
+	<div id="inner"> 
+		<a id="logo" href="/" title="Zpět na hlavní stránku" class="fLeft blockDisplay">
+		<img src=/images/logo.png alt="LIEBHERR Certifikovaný specializovaný obchod">
+		</a>
+		<p id="heureka" class="fLeft"><img id src="/images/heurekaOvereno.png" alt="Heureka Oveřeno zákazníky"></p>
+		<p id="hotline" class="fLeft"><img src="/images/hotLine.png" alt="Hotline 8-18 hod"></p>
+</div>
+		<?$bCount = $this->mEshop->basket->getSum($this);
+		$class= $this->mEshop->basket->getSum($this)>0 ? 'cartFull':'cartFull'?>
+		
+		<div id="basket" class="fs16 padLeft5 fRight marTop20 posRelative rounded1 bgrNoRep <?=$class?>">
+			<a href="<?=$bCount>0?$this->basketUrl:'/'?>" title="Nákupní košík">
+			<p id="innerBasket">        	
+				<?$count =$this->mEshop->basket->getItemsCount();
+				$piece = $this->mProducts->getWordPieces($count);?>
+
+				<?if($bCount >0):?>
+					<strong><span class="fs15">Nákupní košík</span></strong><br/> 
+					<span id="all"><span class="showPrice red" id="showPrice"><strong><?=helper_FrontEnd::price($bCount);?>  Kč</strong></span> <span class="showPrice fBold fs13" id="showPiece">(<?=$count;?> Ks)</span> </span>
+				<?else:?>
+					<strong><span class="fs15 colorGrey">Nákupní košík</span></strong><br/> 
+					 <span class="showPrice fs13" id="showPiece">Košík je prázdný</span>
+				<?endif;?>
+			</p>
+			</a>  
+			<?if($bCount>0):?>    
+				<div class="posAbsolute fontBase padBottom10 padTop10 noDisplay" id="basketDetail">
+				<?$items = $this->mEshop->basket->getItems();?>
+				<table class="blackText fs14 marLeft10 w318">
+				<?foreach ($items as $id => $data): 
+                	$child = $data['item'];
+                	$count = $data['count'];
+	              	if(!$child){ continue; } 
+	              	$c = $child->getPublishedContent();  
+	              	$activeVariant = $this->mVarianta->getVariantById($data['variantId'],false); 
+	            	$price  =  $data['price'];   
+	            	$url = $c->getDetailUrl($this, $child);  
+	            	$skladem = $activeVariant['skladem'];
+	            	$barva = $activeVariant['title'] ? ', '.$activeVariant['title']:'';
+	            	$velikost= $activeVariant['titleOption'] ? ', '.$activeVariant['titleOption']: '';
+	            	$photos = $this->mVarianta->getResizedPhotos($activeVariant['obrazky']);
+            		$p = helper_FrontEnd::getFirstPhoto($photos,'pMinic2' , false);
+            		$ti = $child->title.''.$barva.''.$velikost;?>	
+            		<tr class="w318 ">
+            			<td class="tAlignCenter padBottom5"><a href="<?=$url?>">
+                				<img src="<?=$p['path']?>" alt="<?=$p['title']?>" />
+                			</a>
+                		</td>
+                		<td  class="w160 padLeft55"><a href="<?=$url?>" class="fs14"><?=helper_FrontEnd::reduceText($ti,40)?></a></td>
+            			<td class="w45"><?=$count?> Ks</td>
+            			<td class="fBold w70 tAlignRight"><?=helper_FrontEnd::price($price*$count)?> Kč</td>
+            		</tr>
+            	<?endforeach;
+            	$doprava = $this->mEshop->basket->getDeliveryDetail();
+            	if($doprava)?>
+            	<tr>
+            		<td class="tAlignCenter"><img src="/images/transIco.png"></td>
+            		<td colspan="2" class="w160 padLeft5"><?=$doprava['nazev']?></td>
+            		<td class="fBold w70 tAlignRight"><?=$doprava['price']?$doprava['price']:0?> Kč</td>
+            	</tr>
+            	</table>
+            		<div class="fRight marRight10 marTop5">
+            			<p class="blackText marBottom10">Celkem: <span class="fBold"><?=helper_FrontEnd::price($bCount)?> Kč</span></p>
+            			<p class="fRight"><a href="<?=$this->basketUrl?>" class="butt i-block bgrNoRep"><span class="red fBold butt i-block fs16 bgrNoRep">Otevřít košík</span></a></p>
+            		</div>
+				</div>
+			<?endif;?>       
+		</div>
+		
+	</div>         
+	
+</div>

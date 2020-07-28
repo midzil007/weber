@@ -1,0 +1,57 @@
+
+
+
+<?
+
+$adresa = $this->content->getPropertyValue('adresa');
+$email = $this->content->getPropertyValue('cemail'); 
+$jmeno = $this->content->getPropertyValue('cjmeno'); 
+if(isset($this->input->send) || $this->input->send_x){
+	$webForm = new module_WebForm($this->input);	
+	 
+	$text = '
+		<h2 style="color:#0f4096; font-size: 12px;">Dotaz z webu</h2>
+		<table style="font-size: 11px; color: #708490;">
+			<tr><td>Jméno:</td><td>' . $webForm->fullname . '</td></tr>
+			<tr><td>Email:</td><td>' . $webForm->email . '</td></tr>
+			<tr><td>Telefon:</td><td>' . $webForm->input->phone . '</td></tr>
+			<tr><td>Zpráva:</td><td>' . nl2br($webForm->input->message) . '</td></tr>
+		</table>				
+		<p>
+	';
+	
+	  
+	list($state, $messages) = $webForm->sendEmail($text, array('fullname', 'email', 'message'), $email, $jmeno);
+	Helpers::addMessage($state, $messages, $this);
+}
+
+
+$this->formSubject = 'Zpráva z webu: ' . $this->curentNode->title;
+$this->content->getPropertyByName('html')->value = 0;
+?>
+
+<div class="contact">  
+				<h3>Kontaktní formulář</h3>		
+		<?=$this->render('templates/Contents/ContactForms/Simple.phtml')?>
+		
+		<div class="row">
+			<div class="col-sm-6">
+		<?=$this->html?>
+		</div> 
+	 
+	        
+	<div class="col-sm-6">
+				<? if($adresa):?>             
+				<div class="pull-right">  
+				<h3>Mapa</h3>    
+				<a id="mapLink" target="_blank" href="https://www.google.com/maps/place/Lonkova+510,+530+09+Pardubice+II-Polabiny,+%C4%8Cesko/@50.0464546,15.7593699,17z/data=!3m1!4b1!4m5!3m4!1s0x470dccc5b415fd9f:0xa1dc4d604014c52b!8m2!3d50.0464546!4d15.7615586"> 
+				<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2562.126871865129!2d15.759369915716798!3d50.04645457942174!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470dccc5b415fd9f%3A0xa1dc4d604014c52b!2sLonkova+510%2C+530+09+Pardubice+II-Polabiny%2C+%C4%8Cesko!5e0!3m2!1scs!2spt!4v1558341241482!5m2!1scs!2spt" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>  
+				</a>
+				<a target="_blank" href="https://www.google.com/maps/place/Lonkova+510,+530+09+Pardubice+II-Polabiny,+%C4%8Cesko/@50.0464546,15.7593699,17z/data=!3m1!4b1!4m5!3m4!1s0x470dccc5b415fd9f:0xa1dc4d604014c52b!8m2!3d50.0464546!4d15.7615586">Zvětšit mapu</a>
+				</div>  
+				<? endif;?>     			 
+	 </div>
+	</div> 
+</div>
+  <div class="clear">&nbsp;</div>
+  

@@ -1,0 +1,11 @@
+	<div class="mDiv">
+			<div class="ftitle">Filtr:</div> 
+		</div> 
+		<div class="tDiv"> 	
+			filtr: <?=$this->formSelect('category',$this->input->category,array("onchange"=> "$('#".$this->tableId."').flexReload()"), $this->category, '', true )?>
+		    <?=$this->formSelect('mount',$this->input->mount, array("onchange"=> "$('#".$this->tableId."').flexReload()"), $this->mount)?>
+		    <?=$this->formSelect('year',$this->input->year, array("onchange"=> "$('#".$this->tableId."').flexReload()"), $this->year)?>
+		    Hledat: <input id="fmFilterSel" name="search" type="text" />  
+		    <input type="button" onclick="$('#<?=$this->tableId?>').flexReload()" name="saveSetB" id="saveSetB" value="Filtrovat" class="fsubmit">
+		   
+ 		</div>   

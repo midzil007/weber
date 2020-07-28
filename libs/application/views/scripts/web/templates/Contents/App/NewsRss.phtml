@@ -1,0 +1,39 @@
+
+<?
+$this->txtPage = true;
+
+$state = false;
+if(isset($this->input->odeslat) || $this->input->send){
+	$news = new module_NewsOnEmail(); 
+
+	$state = $news->addReciever($this,$this->input->email, '');
+	}
+	if($this->inputGet->state ==1){ 
+		$messages = '<p>Děkujeme za Váš zájem. Odběr novinek nastaven.</p>';
+		$st = 1;
+		 
+	} else {
+		$st=0;
+		if($this->inputGet->state == 2){
+			$messages = "Zadejte platnou e-mailovou adresu.";
+		}
+		elseif($this->inputGet->state == 3)
+		{
+			$messages = "Je nám líto, ale zadaný email je již registrován.";
+			
+		}
+	}
+	if($this->inputGet->state){
+		Helpers::addMessage($st, $messages, $this);
+	} 
+
+?>
+
+<?php if(count($this->messages)): ?>
+	<?= $this->render('parts/messages.phtml'); ?>				
+<?php endif; ?> 
+
+<? if($this->inputGet->state != 1):?>
+<?=$this->html?>
+<?=$this->render('templates/Contents/ContactForms/News.phtml')?>
+<? endif;?>  

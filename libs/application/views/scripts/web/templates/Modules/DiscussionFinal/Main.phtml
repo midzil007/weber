@@ -1,0 +1,51 @@
+<?
+
+?>
+<a name="discussion"></a> 
+<?php if(count($this->messages)): ?>  
+	<?= $this->render('parts/messages.phtml'); ?>				
+<?php endif; ?> 
+<form method="POST">
+
+	<?=$this->formHidden('discussionId', $this->discussionId);?>
+	<?=$this->formHidden('replyId', $this->reply);?>
+		
+	<div class="discussion">
+		<a name="discussion"></a> 
+		<div class="discussionHead">
+			<? if(!$this->showForm): 
+				$this->inputGet->discussionAddPost = 1;
+				?>
+				<a  rel="nofollow"  <?=($this->ajaxDiscussion?'onclick="return showMessageForm()"':'')?>  href="<?=Utils::addUrlParams($this->discussionPath, $this->inputGet);?>#discussion" class="tbold discussionAdd">napsat komentář</a>  
+			<? endif; ?> 
+			<?
+			$this->inputGet->discussionAddPost = 0; 
+			$this->inputGet->discussionShowAll = 1;  
+			?>
+			<a href="<?=Utils::addUrlParams($this->discussionPath, $this->inputGet);?>#discussion" class="tbold"><?=helper_FrontEnd::reduceText($this->discussionTitle, 46)?></a>  <small>(<?=$this->postsCount?> příspěvků)</small>    
+		</div>     
+		<div class="discussionBody">  
+			<? if($this->showForm || $this->ajaxDiscussion): ?>  
+				<?=$this->render('templates/Modules/DiscussionFinal/Form.phtml'); ?>	
+			<? endif; ?>   
+			 			  
+			<? if($this->showAll): ?>
+				<?=$this->render('templates/Modules/DiscussionFinal/List.phtml'); ?>	
+			<? else: ?>
+				<?=$this->render('templates/Modules/DiscussionFinal/Overview.phtml'); ?>	
+			<? endif; ?>
+			   
+			<? 
+			$this->inputGet = new stdClass(); 
+			$this->inputGet->discussionId = $this->discussionId;
+			$this->inputGet->discussionShowAll = 1;
+			?>
+			<? if(!$this->showAll && $this->postsCount > 0): ?> 
+				<div class="spacer10"></div>			
+				<a  rel="nofollow"  class="discussionShowAll" href="<?=Utils::addUrlParams($this->discussionPath, $this->inputGet);?>#discussion">Zobrazit vše</a> 
+				<div class="spacer10"></div>   
+			<? endif; ?> 
+				 
+		</div>
+	</div>
+</form> 

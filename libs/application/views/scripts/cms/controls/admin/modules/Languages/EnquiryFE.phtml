@@ -1,0 +1,42 @@
+	<div class="box enquiry" <?=$this->enq_extra?>>
+		<div class="enquiry_top"></div>
+		<div class="enquiry_body">
+			<strong><?=$this->enq['title']?></strong>
+			<table id="tbl">
+				<?
+				$identificator = "rv_" . $this->enq['id'];		
+		    	
+				
+				if($_COOKIE[$identificator] || $this->votedForced){
+					$voted = true;
+				}
+				
+				$i = 0;
+				foreach ($this->enq['options'] as $option): 
+				
+					if(!$voted){
+						$url = '<a href="' . $this->curentPath . '?e='. $this->enq['id'] .'&amp;vote=' . $option['id'] . '">' . $option['question'] . '</a>';		
+					} else {
+						$url = '<b>' . $option['question'] . '</b>';
+					}
+					
+					/*
+					[id] => 33 [enq_id] => 10 [question] => Spíše ano [votes] => 0
+					*/	
+					//$percent		
+					//pr($option);
+					$votedPerc = $option['portion'];
+					if($option['portion'] == 1 && $option['votes'] == 0){
+						$votedPerc = 0;
+					}
+				?>
+					<tr><td class="bar"><div title="zvolilo <?=$option['votes']?> lidí tj. <?=$votedPerc?>%" class="voted bgcolor" style="background-color:#<?=$this->enquiry->colors[$i] ?>; width: <?=$option['portion']?>%;">&nbsp;</div></td><td class="question"><?=$url?></td></tr>					
+				<?
+					$i++;
+				endforeach;
+				?>				
+			</table>
+			<div class="fsxxsp">celkem hlasovalo <?=$this->votedSum?> lidí</div>
+		</div>
+		<div class="enquiry_bottom"></div>
+	</div>

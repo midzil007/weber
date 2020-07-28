@@ -1,0 +1,14 @@
+		<div class="clear"></div>   
+		<div id="minfooter">
+			<div id="mfRight">
+				<?=date("d.m.Y H:i:s");?>
+			</div>
+			<? if($this->languages->isMultiLanguage): ?>
+			<div id="loggedFooter">						
+				<b class="cwhite"><?=$this->user?></b> 
+				<span class="fs_xxs cwhite">(<?=$this->groups[$this->user->group];?>)</span>
+				 | <a title="odhlásit se" id="" href="/cms/login/logout">odhlásit se</a>
+			</div> 
+			<? endif; ?>
+			<div id="mfLeft"></div>			
+		</div>

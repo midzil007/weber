@@ -1,0 +1,8 @@
+<?php echo $this->render('parts/header.phtml'); ?>
+	<?php if(!$this->logged): ?>
+		<?php echo $this->render('controls/admin/login.phtml'); ?>	
+	<?php else: ?>
+		<?=$this->helpContent?>  
+		<!-- Layoutcontainer -->		 				
+	<?php endif; ?>
+<?php echo $this->render('parts/footer.phtml'); ?>

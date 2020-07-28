@@ -1,0 +1,77 @@
+<?php 
+$this->disableH1 = true;?>
+<h1>Vyhledáno: <?=$this->inputGet->search?></h1>  
+<?$this->pageDescription .= ' - ' .$this->inputGet->search?>
+<div class="spacer10"></div> 
+<?if(strlen($this->inputGet->search) >= 1){
+	 
+        $params = array(   
+        	'search' => $this->inputGet->search
+		);
+
+		
+		
+				$params['onWeb'] = 1;   
+		$params['showFirstVariant'] = true; 
+		$params['joinOption'] = false; 
+		$productsNodes = $this->mProducts->getProducts('title', 'asc', 0, 500, $params);
+		$productsNodesSearch = $this->mProducts->getArticlesAsNodes($this->tree, $products); 
+		$menuitem = $this->tree->getNodeById(3801);
+		if(count($productsNodesSearch) == 1){  
+			$child = current($productsNodesSearch);
+			$c = $child->getTheRightContent();   
+			$url = $c->getDetailUrl($this, $child );    
+			helper_FrontEnd::redirect($url, 301); 
+		}
+		$sections = helper_FrontEnd::checkChildren($menuitem->getChildren('FOLDER'));?>
+		<?foreach ($sections as $value) {
+			if($value->title == $this->inputGet->search){ 
+				helper_FrontEnd::redirect($value->path, 301);
+			}
+			else{
+				if(strstr($value->title, $this->inputGet->search) || strstr($value->title, ucfirst($this->inputGet->search))){?>
+					<a class="folderBig" href="<?=$value->path?>"><?=$value->title?></a>
+					<?$this->spacer = true;?>
+				<?}
+			};
+		}?>
+<?}
+?><!--<form action="<?=$_SERVER['REDIRECT_URL']?>" method="GET">
+<input type="hidden" name="searchIn" value="fulltext" />
+  
+<table class="formatTable">
+	<tr>
+		<td style="width:150px;">Hledaný výraz</td>
+		<td><?php echo $this->formText('search',$this->inputGet->search, array('class'=>'ftext', 'style' => 'width:25em;')) ?> </td>
+	</tr> 
+	<tr> 
+		<td colspan="2"><?=$this->formSubmit('hledej', '', array('class' => 'search'))?></td>
+	</tr> 
+</table>  
+	
+</form>
+--><? if($this->spacer):?>
+		<div class="spacer10"></div>
+	<?endif; 
+  
+if(strlen($this->inputGet->search) >= 1){ 
+	  
+	?>	
+	<div class="spacer10">&nbsp;</div> 
+	   <? if(count($productsNodes)<=0):?> 
+        	<p>Pro výraz <strong>"<?=$this->inputGet->search?>"</strong> nebylo nalezeno žádné zboží.</p>
+        <? else: ?>
+        <?$this->souvisejici = $productsNodes;
+         $this->mProducts->addToHistorySearch($this);?>
+         <div class="best-sellers">
+        <?=$this->render('parts/alternativeProducts1.phtml'); ?>
+        </div>        
+        <? endif;?>         
+        <?
+} elseif(isset($this->inputGet->hledej)) {
+	?>
+	<p>Výraz musí být alespoň 1 znaky dlouhý.</p>
+	<?
+}
+
+

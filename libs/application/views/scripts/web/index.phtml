@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" lang="cs">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+        <meta name="Language" content="czech" />  
+        <meta name="Distribution" content="global" />
+        <meta name="Robots" content="INDEX,FOLLOW" />
+        <meta name="Expires" content="never" />
+        <meta name="Revisit-after" content="7 Days" />
+        <meta name="Resource-type" content="document" />
+		<meta name="keywords" content="<?=$this->pageKw?>" />  
+		<meta name="description" content="<?=$this->pageDescription?>" />
+		<meta name="author" content="eportaly.cz"/> 
+		<meta name="google-site-verification" content="<?=$this->settings->getSettingValue('verifyCode')?>" />
+		
+		<!-- merchant -->
+		<meta name="google-site-verification" content="CM1IZJRVcBFGWh0VGJZyu2G6SJsiihXhHSWHkEONG0I" />
+		<!--<link rel="shortcut icon" href="/images/favicon-jotul.ico">-->
+		<title><?=($this->isHomepage?$this->pageTitleRaw:$this->pageTitle)?></title>  
+		
+		<link rel="stylesheet" href="/styles/screen1.css" type="text/css" media="screen"/>  
+       <link rel="stylesheet" href="http://www.eportaly.cz/styles/footer.css" type="text/css" media="screen"/> 
+        <link rel="stylesheet" href="/styles/print.css"  type="text/css" media="print"/>
+		  
+	<link rel="stylesheet" href="http://common.bestof.cz/css/multibox.css" type="text/css" media="screen"/>  
+		<!--[if lte IE 6]><link rel="stylesheet" href="http://common.bestof.cz/css/multiboxe6.css" type="text/css" media="screen"/> <![endif]-->		
+		
+		
+		<script type="text/javascript" src="/js/fb.js"></script>
+   		<script type="text/javascript" src="/js/mootools-core-1.4.5.js"></script>  
+		<script type="text/javascript" src="/js/mootools-more-1.4.0.1FULL.js"></script> 
+		<script type="text/javascript" src="http://common.bestof.cz/js/overlay-SB.js"></script>   
+		<script type="text/javascript" src="/js/multibox1.js"></script>
+		<script type="text/javascript" src="/js/site.js"></script>     
+		<script type="text/javascript" src="/js/MyTabs.js"></script>     
+		<script type="text/javascript" src="/js/functions9.js"></script>     
+		 
+		<script type="text/javascript" src="/js/Observer.js"></script>		
+		<script type="text/javascript" src="/js/Autocompleter.js"></script>		 
+		<script type="text/javascript" src="/js/Autocompleter.Request.js"></script>    
+		<script type="text/javascript" src="/js/start12.js"></script>         			
+		  		 
+		 
+        <script type="text/javascript" src="/js/site.js"></script>   
+         
+	 	<?$ga = $this->settings->getSettingValue('googleCode');?>  
+		<script type="text/javascript">   
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', '<?=$ga;?>']);
+		  _gaq.push(['_trackPageview']);		  
+	
+</script>
+		<link rel="shortcut icon" href="/images/favicon-up-on.ico" /> 
+	</head>	
+	<?if($this->popup):?>
+	<body style="background:#FFF">
+		<?$this->disableLeft = true?>
+		<?=$this->render('popup.phtml'); ?>	
+	</body>
+	<?else:?>
+	<body>     
+		
+		<div id="wrap">
+		<div id="wrap2">
+		<div id="container" class="posRelative">  
+				<?=$this->render($this->container); ?>	  
+			<?=$this->render('parts/header.phtml'); ?> 
+			<div class="clear"></div> 
+			 
+  		</div>
+			<?=$this->render('parts/footer.phtml'); ?>  
+  		</div>
+  		</div> 
+  		<script type="text/javascript">   
+    	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    	  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    	  ga('create', 'UA-45419536-1', 'kavablack.cz'); 
+    	  ga('send', 'pageview');
+
+    	</script> 
+	</body>
+	<?endif;?>
+</html>

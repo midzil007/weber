@@ -1,0 +1,65 @@
+#dashboard{
+	width:100%;
+	border-collapse:collapse;
+}
+
+#dashboard td{ padding:0px 10px 10px 0px; vertical-align:top; }
+
+.dPanel{
+	position:relative;
+	_height:20px;
+	min-height:20px;
+}
+
+.dHead{
+	background:#4888d8;
+	line-height:27px;
+	height:27px;
+	padding:0px 0px 0px 7px;
+}
+
+.dHead b{
+	color:#FFFFFF;
+	margin:0px;
+	padding:0px 0px 0px 10px;
+	line-height:27px;
+}
+
+.dBody{
+	padding:4px 0px 0px 0px;
+	_height:170px;
+	min-height:170px;
+	
+	border:1px solid #c7d8ed;
+}
+
+.dBody table{ width:100%; border-collapse:collapse; }
+.dBody table tr.suda{ background:#eef3f7;}
+.dBody table td{ padding:2px 4px 2px 8px; text-align:left; font-size:11px; line-height:18px; }
+
+.dFoot{
+	background:#c7d8ed;
+	line-height:20px;
+	height:20px;
+	position:relative;
+}
+
+.dbTL, .dbTR, .dbBL, .dbBR {
+	width:4px;
+	height:4px;
+	line-height:4px;
+	background-repeat:no-repeat;
+	background-position:top left;
+	position:absolute;
+}
+
+.dbTL{ background-image:url(../../images/dashboard/tl.gif); top:0px; left:0px; }
+.dbTR{ background-image:url(../../images/dashboard/tr.gif); top:0px; right:0px; _right:-1px; }
+.dbBL{ background-image:url(../../images/dashboard/bl.gif); bottom:0px; left:0px; }
+.dbBR{ background-image:url(../../images/dashboard/br.gif); bottom:0px; right:0px; _right:-1px; }
+
+.dLastEdit { background-image:url(../../images/dashboard/ico_edit.gif); }
+.dToConfirm {  }
+.dNewest { background-image:url(../../images/dashboard/ico_newest.gif); }
+.dIntranet { background-image:url(../../images/dashboard/ico_intranet.gif); }
+.dStats { background-image:url(../../images/dashboard/ico_stat.gif); }

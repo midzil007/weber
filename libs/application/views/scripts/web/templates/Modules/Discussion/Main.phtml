@@ -1,0 +1,42 @@
+<?
+
+?>
+<form method="POST">
+
+	<?=$this->formHidden('discussionId', $this->discussionId);?>
+	<?=$this->formHidden('replyId', $this->reply);?>
+		
+	<div class="discussion">
+		<a name="discussion"></a> 
+		<div class="discussionHead">
+			<? if(!$this->showForm): 
+				$this->inputGet->discussionAddPost = 1;
+				?>
+				<a href="<?=Utils::addUrlParams($this->curentPath, $this->inputGet);?>" class="tbold discussionAdd">napsat komentář</a> 
+			<? endif; ?> 
+			<a href="#" class="tbold">Diskuse: <?=$this->discussionTitle?></a>  <small>(<?=$this->postsCount?> příspěvků)</small> 
+		</div>
+		<div class="discussionBody">
+			<? if($this->showForm): ?>
+				<?=$this->render('templates/Modules/Discussion/Form.phtml'); ?>	
+			<? endif; ?>
+			 			 
+			<? if($this->showAll): ?>
+				<?=$this->render('templates/Modules/Discussion/List.phtml'); ?>	
+			<? else: ?>
+				<?=$this->render('templates/Modules/Discussion/Overview.phtml'); ?>	
+			<? endif; ?>
+			 
+			<?
+			$this->inputGet->discussionId = $this->discussionId;
+			$this->inputGet->discussionShowAll = 1;
+			?>
+			<? if(!$this->showAll && $this->postsCount > 0): ?> 
+				<div class="spacer10"></div>			
+				<a class="discussionShowAll" href="<?=Utils::addUrlParams($this->curentPath, $this->inputGet);?>">Zobrazit vše</a> 
+				<div class="spacer10"></div>  
+			<? endif; ?>
+				 
+		</div>
+	</div>
+</form>  

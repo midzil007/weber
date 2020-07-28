@@ -1,0 +1,62 @@
+<?
+if($this->inputGet->send){
+	$messages = 'Email úspěšně odeslán, budeme Vás kontaktovat.';
+	Helpers::addMessage(1, $messages, $this);	
+}
+if(count($this->messages)): ?>
+	<?= $this->render('parts/messages.phtml'); ?>				
+<?php endif; ?>
+
+<?php if(!$this->currentState):
+
+
+	$this->input->email = $this->input->email?$this->input->email:'@';
+	?>	
+	 
+	<form action="<?=$_SERVER['REDIRECT_URL']?>" method="POST" class="contact">
+	<?=$this->formHidden('subject', $this->formSubject)?>
+	
+	<div class="row">
+			<div class="col-sm-4">
+				<div class="form-group">
+					Vaše jméno <span class="cred">*</span>
+					<?=$this->formText('fullname', $this->input->fullname, array('class' => 'form-control'))?>
+				</div>
+			</div>
+			<div class="col-sm-4"> 
+				<div class="form-group">
+					E-mail : <span class="cred">*</span>
+					<?=$this->formText('email', $this->input->email, array('class' => 'form-control'))?>
+				</div>
+			</div>    
+			<div class="row"></div>   
+			<div class="col-sm-4"> 
+				<div class="form-group">
+					Telefon : <span class="cred">*</span> 
+					<?=$this->formText('phone', $this->input->phone, array('class' => 'form-control'))?>
+				</div>
+			</div>
+	</div>
+	<div class="row"></div>    
+	<div class="row">
+			<div class="col-sm-12">
+				<div class="form-group">
+					Zpráva pro nás <span class="cred">*</span> 
+					<textarea name="message" value="" class="form-control" placeholder=""></textarea>
+				</div>
+			</div>
+	</div> 
+  <div class="row">
+			<div class="col-sm-12">   
+		<div class="pull-right">  
+			<button type="submit" name="send" id="sendBtn" class="btnDetail"><strong>Odeslat</strong> 
+			</div>   
+		</div>
+		</div>  
+		</button> 
+
+	<?= $this->render('parts/SecurityCode.phtml'); ?>		 
+	<div class="space">&nbsp;</div> 
+	
+	</form>
+<?php endif; ?>

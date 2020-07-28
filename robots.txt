@@ -1,0 +1,4 @@
+User-agent: * 
+Allow: /
+Sitemap: https://www.svycarskekavovary.cz/sitemap.xml
+Sitemap: https://www.svycarskekavovary.cz/jura/sitemapimage.xml

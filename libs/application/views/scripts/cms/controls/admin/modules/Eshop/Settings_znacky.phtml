@@ -1,0 +1,47 @@
+<?$showNum = 5;?> 
+<table class="normal" id="znackyAll" >	
+	<tr><td id="znackyTable">
+	<?$i = 0;
+	foreach($this->znacky as $znacka):
+		$i++; 
+		$this->znacka = $znacka;
+		$this->znackaId = $i;     
+	    echo $this->render('controls/admin/modules/Eshop/Settings_znacka.phtml');  
+		
+	endforeach;  
+	//initMCE('znacka_<?=$i?_popis', '100%', '350px') ;
+	?>		 
+	</td></tr>  
+	</table>
+ <a onclick=" ShowNextOption('znacky'); loadZnacka(); return false; " id="nb" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false">
+			<span class="ui-icon ui-icon-circle-plus"></span><span class="ui-button-text">Přidat značku</span></a>  
+<script type="text/javascript" charset="utf-8">
+ var nextId = <?=$i?>;
+ function loadZnacka(){
+	 nextId++;
+	 $.get('/cms/eshop/loadznackahtml/nextid/' + nextId, function(data) {  
+        $('#znackyTable').append(data);  
+        $( "#znackyAll" ).sortable({ items: "table" }); 
+     });
+ 
+} 
+
+ function delZ(dclass){
+	 //if(confirm('Opravdu smazat?')){
+	 	$( "." + dclass ).remove();  
+	 //  }  
+	 return false  
+ }  
+ 
+
+	 function loadRada(tid, nextId, znackaID){
+		 nextId++; 
+		 $.get('/cms/eshop/loadradahtml/nextid/' + nextId + '/znacka/' + znackaID, function(data) {  
+	        $('#' + tid).append(data);  
+	        $( "#znackyAll" ).sortable({ items: "table" });
+	     });      
+	}   
+
+
+	    $( "#znackyAll" ).sortable({ items: "table" });
+</script>   

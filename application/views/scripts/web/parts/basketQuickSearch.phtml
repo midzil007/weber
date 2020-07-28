@@ -1,0 +1,28 @@
+        <?
+$params = array(); 
+
+  $params = array(      
+        	'search' => $this->input->autoquick
+		);  
+  $params['onWeb']            = 1;
+$mProducts = $this->mProducts->getProducts($tableSort, $tableSortType, 0, 1000000, $params);?>
+<table style="width: 100%;margin-bottom: 40px;">
+    <tr>
+        <td>Product</td> 
+        <td>Cena</td>
+        <td>Počet kůsu</td> 
+        <td>Nová cena</td>   
+        <td></td>  
+<?foreach ($mProducts as $key => $value):?>     
+    <tr>
+             <td><a href="<?=$value['path']?>"><?=$value["title"]?></a></td> 
+        <td><?=$value['price']?> Kč<input type="hidden"  id="idoldprice<?=$value['id']?>" value="<?=$value['price']?>" name="idoldprice<?=$value['id']?>"/></td>   
+        <td style="width: 50px"><input style="width: 40px" type="text" value="1" id="ks<?=$value['id']?>" name="ks<?=$value['id']?>"></td> 
+        <input type="hidden" name="variantId" id="variantId<?=$value['id']?>" value="<?=$value['variantId']?>">
+        <td><input style="width: 100px" type="text" value="<?=$value['price']?>" id="price<?=$value['id']?>" name="<?=$value['id']?>"></td>
+        <td><input  style="width: 50px" type="text" value="0" id="percent<?=$value['id']?>" name="per<?=$value['id']?>"></td>
+        <td><a onclick="math('percent<?=$value['id']?>','price<?=$value['id']?>','idoldprice<?=$value['id']?>')" href="#">Přepočítat</td>
+        <td><a onclick="buy(<?=$value['id']?>)" href="#">Koupit</td>
+    </tr>     
+<?endforeach?>     
+</table>   

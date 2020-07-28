@@ -1,0 +1,26 @@
+<?
+$this->disableLeft = true;
+$this->disableH1 = true;
+
+$this->txtPage = true;   
+if(isset($this->input->register)){	
+	  
+	list($state, $messages) = $this->mCustomers->updateUser($this, $this->input);
+	Helpers::addMessage($state, $messages, $this);
+	
+} else {
+	$this->input = Helpers::initFormValuesFromObject($this->session->webUser);
+	$this->input->fullname = $this->input->jmeno . ' ' . $this->input->prijmeni;
+} 
+?>
+<?php if(count($this->messages)): ?>
+	<?= $this->render('parts/messages.phtml'); ?>				
+<?php endif; ?>
+
+<?php if($this->webUserLogged): ?>	
+	<?
+ 	$this->userFormEdit = true; ?>	
+	<?= $this->render('parts/userForm.phtml'); ?>
+<?else:?>
+	<?helper_Frontend::redirect($this->profileUrl,301);?>
+<? endif; ?>

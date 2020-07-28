@@ -1,0 +1,16 @@
+<h1>Příplatky</h1>
+
+<a title="Nový způsob dopravy" class="nocio" href="#" onclick="return showModal('Připlatek','/cms/eshop/priplatekForm');">'Nový příplatek</a>
+	
+	<?php
+		echo $this->table( 
+				$this->ordersTable, 
+				$this->ordersTableHead, 
+				$this->ordersTableActions, 
+				$this->tableSort, 
+				$this->tableSortType, 
+				$this->curentViewState, 
+				$this->tableParentTab,
+				array('class' => 'list')
+			);  
+	?> 

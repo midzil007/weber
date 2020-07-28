@@ -1,0 +1,14 @@
+<div id="err_newContentVersionForm"></div>
+<h1>Nová verze</h1>
+<form action="" method="get" id="newContentVersionForm">
+<?php echo $this->formHidden('contentType_new',$this->contentType_new) ?>
+<table class="modalTable">	
+	<? $this->content->showAdmin($this); ?>	 
+	<tr>	
+		<td class="formcell" colspan="2">
+			<?php echo $this->formSubmit('saveContentB', 'Uložit', array('class'=>'fsubmit', "onclick" => "setWysiwygContent('fck_html'); return submitFormAjax('newContentVersionForm', '".$this->url(array('controller' => 'pages','action' => 'saveVersion', 'contentNode' => $this->cnode->nodeId))."', 'pageEditVersions', 'tab-submit', '', 1  );", 'iconClass' => "noteIcon")) ?>
+			<?php echo $this->formSubmit('backContentV', 'Zpět na výpis verzí', array('class'=>'fsubmit', "onclick" => "return refreshTab('pageEditVersions', '".$this->url(array('controller' => 'pages','action' => 'versions', 'contentNode' => $this->cnode->nodeId))."');", 'iconClass' => "noteIcon")) ?>								
+		</td>
+	</tr>
+</table>
+</form>

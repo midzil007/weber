@@ -1,0 +1,125 @@
+
+<? if(count($this->photos)):?>
+<div id="imgGallery">
+<?=$this->render('parts/ImagesGallery.phtml'); ?>
+</div> 
+<? endif;?>  
+ 
+<div class="bigger">
+<?=$this->html ?>   
+</div>
+
+<div class="spacer10"></div> 
+<div class="spacer10"></div> 
+
+<?php 
+$this->inputGet->seminar = $this->node->nodeId; 
+$n = $this->tree->getNodeById(4111);
+$c = $n->getPublishedContent();
+$url = helper_FrontEnd::getPath($this, $n->path);
+
+$options = content_OverviewMesta::getRegionsSelect($this);  
+$options2 = $this->tree->getNodesAsSelect(4111, 'FOLDER');
+$this->inputGet->misto = $this->inputGet->misto?$this->inputGet->misto:($this->language=='cz'?4192:4193); 
+?>
+<div class="semTop"> 
+	<h2><a href="<?=$url?>"><?=$n->title?></a></h2>  
+	<form method="get" action="<?=$url?>">
+		<div>
+		<?=$this->formSelect('misto', $this->inputGet->misto, array(), $options)?> 
+		<?=$this->formSelect('seminar', $this->inputGet->seminar, array(), helper_Input::addNotDefinedOption($options2, '-- ' . $this->Translate('vse') . ' --'))?>  
+		
+		<button type="submit" name="search" class="nicesubmit smaller"><?=$this->Translate('ok')?></button>
+		</div>   
+	</form>
+</div> 
+<div class="spacer10"></div> 
+
+<?
+$mesta = content_OverviewMesta::getCitiesSelect($this);
+$mestaAll = array();		 
+foreach ($mesta as $id => $title){
+	$mestaAll[$id] = $this->tree->getNodeById($id);
+}
+$this->mSeminare->seminar = $this->node->nodeId; 
+$seminareAll = $this->mSeminare->getArticles('dateShow', 'asc', 0, 350);  
+			?>	 
+	<table id="stable1" class="stable"> 
+		<tr>
+			<th><?=$this->Translate('datum')?></th>
+			<th><?=$this->Translate('nazev')?></th>
+			<th><?=$this->Translate('misto')?></th>
+			<th><?=$this->Translate('nazev-salonu')?></th>
+			<th><?=$this->Translate('adresa-salonu')?></th>
+		</tr>
+		 
+		<? 
+		$z = 0;
+		foreach ($seminareAll as $seminar): //pr($seminar); die();
+		
+		//	e($seminar['mesto']); 
+			if(!$seminar['mesto']){
+				continue;
+			}
+			 
+			$z++; 			
+			$nMesto = $mestaAll[$seminar['mesto']];
+			$cMesto = $nMesto->getPublishedContent(); 
+			$www = $cMesto->getPropertyValue('mwww');
+			 
+			
+			$class = $z%2==0?'hbg':'';			
+			
+			if($this->inputGet->t == $seminar['id']){
+				$class .= ' active';
+			}			
+		?> 
+		<tr class="<?=($class)?>">   
+			<td>
+				<?=Utils::formatDate($seminar['dateShow'])?>
+			</td>
+			<td>
+				<?=$this->node->title?> 
+			</td>
+			<td>
+				<?=$nMesto->title?>
+			</td>				  
+			<td>
+				<?=$cMesto->getPropertyValue('mmisto')?>
+				<? if($www):?> 
+					<?=$this->Archon($www, '_blank')?>
+				<? endif;?>
+			</td>
+			<td>
+				<?=$cMesto->getPropertyValue('madresa')?>
+			</td>
+		</tr>
+		<? endforeach; ?>
+	
+	</table> 
+<div class="clear"></div> 
+<?
+if(count($this->documents)): 
+	?>
+	<div id="files">
+		<h4>soubory ke stažení</h4> 
+		<ul>
+		<? 
+		foreach ($this->documents as $filepath => $name): 
+			$fullpath = content_SFSFile::getFileFullPath($filepath);
+			$ico = Utils::getFileIcoImage($fullpath);
+			?>			
+			<li>
+				<?= $ico ?>
+				<a title="Otevřít '<?= $name ?>' do nového okna" target="_blank" href="<?=$filepath?>"> <?= $name ?></a>							
+				<i><?=Utils::getWebFileSize($fullpath)?></i>
+			</li>						
+			<? 
+		endforeach; 	
+		?>
+		</ul>
+	</div>
+	<?			
+endif;	 
+ ?> 
+    

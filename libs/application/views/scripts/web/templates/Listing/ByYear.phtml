@@ -1,0 +1,25 @@
+<div class="listing" <?=$this->listingExtra?>>	
+	<?
+	$years = array();
+	foreach ($this->children as $child){	
+		if($content = $child->getPublishedContent()){
+			$year = substr($content->getPropertyValue('dateShow'), 0, 4);
+			$years[$year] = $year;
+			
+		}
+	}
+	//pr($years);
+	//e($this->curentPath);
+	if(count($years)){
+		echo 'rok: ';
+	}
+	foreach ($years as $y){
+		if($this->inputGet->year != $y):
+		?>
+		<a href="<?=$this->curentPath?>?year=<?=$y?>"><?=$y?></a>
+		<? else: ?>
+		<strong><?=$y?></strong>		
+		<? endif;
+	}
+	?>	
+</div>

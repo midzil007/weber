@@ -1,0 +1,74 @@
+	<?php 
+	
+	$params = $this->request->getParams();
+	$params['action'] = 'delete';		   
+	$params['isEdit'] = '0';					 
+	$url = Utils::getStrictUrl($this, $params, array('sort', 'sortType', 'contentType'));
+
+	?>	
+	<h1 class="fl_left wide"><?php echo $this->filenode->title ?> <!--<span>(/soubory<?=($this->filenode->path!='/'?$this->filenode->path . '/':$this->filenode->path)?>)</span>--></h1>
+		
+		<div class="fl_left" style="margin-left:20px;"> 
+			<? if($this->rootNodeId != $this->filenode->nodeId): ?>
+				<?php echo $this->ImageButton('Smazat adresář', $url, 'big/delete-folder.gif', 'big/delete-folder-o.gif', array('title' => "Smazat adresář '" . $this->filenode->title . "'", "onclick" => "return confirmSubmit2('Opravdu smazat?');")) ?>		
+			<? endif; ?>	
+		</div> 
+
+		<div class="buttons"> 
+		<?php echo $this->ImageButton('Nový podadresář', '#', 'big/new-subnode.gif', 'big/new-subnode-o.gif', array('title' => "Nový podadresář do adresáře '" . $this->filenode->title . "'", "onclick" => 'return $( "#dialog-form" ).dialog( "open" );')) ?>	
+			 
+		</div>  
+		
+		<div id="dialog-form" title="Nový podadresář">    
+		  <form id="dialogform" method="post">
+		  <fieldset>
+		    <label for="name">Název adresáře</label>
+		    <input type="text" name="newfoldername" id="name" class="text ui-widget-content ui-corner-all" />
+		  </fieldset>
+		  </form> 
+		</div>
+		
+		<div class="cb">&nbsp;</div>
+		 
+		<script>
+  $(function() {
+    var name = $( "#name" ),
+      email = $( "#email" ),
+      password = $( "#password" ),
+      allFields = $( [] ).add( name ).add( email ).add( password ),
+      tips = $( ".validateTips" );
+ 
+    function updateTips( t ) {
+      tips
+        .text( t )
+        .addClass( "ui-state-highlight" );
+      setTimeout(function() {
+        tips.removeClass( "ui-state-highlight", 1500 );
+      }, 500 );
+    }
+  
+ 
+    $( "#dialog-form" ).dialog({
+      autoOpen: false,
+      height: 200,
+      width: 450,
+      modal: true,
+      buttons: {
+        "Vytvořit": function() {
+          var bValid = true;
+          allFields.removeClass( "ui-state-error" );      
+          if ( bValid ) {
+        	  $('#dialogform').submit();
+          } 
+        }, 
+        "Zrušit": function() {
+          $( this ).dialog( "close" );
+        }
+      },
+      close: function() {
+        allFields.val( "" ).removeClass( "ui-state-error" );
+      }
+    });
+  
+  });
+  </script>

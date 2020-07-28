@@ -1,0 +1,16 @@
+<h1>Platby</h1>
+
+<a title="Nový způsob platby" class="nocio" href="#" onclick="return refreshTab('vypisDole','/cms/eshop/paymentForm');">'Nový způsob platby</a>
+	
+	<?php
+		echo $this->table( 
+				$this->ordersTable, 
+				$this->ordersTableHead, 
+				$this->ordersTableActions, 
+				$this->tableSort, 
+				$this->tableSortType, 
+				$this->curentViewState, 
+				$this->tableParentTab,
+				array('class' => 'list')
+			);  
+	?> 

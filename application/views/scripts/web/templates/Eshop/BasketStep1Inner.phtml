@@ -1,0 +1,59 @@
+<?$items = $this->mEshop->basket->getItems();
+if($items):?>
+       
+		  <? if(isset($this->voucher)):
+		  $voucherErr = false;
+		  $voucherInfo = "Kupón byl úspěšně vložen";
+			if($this->voucher === 0){
+				$voucherInfo = 'Zadaný kód "'.$this->input->kod.'" je neplatný.';
+				$voucherErr = true; 
+				unset($this->voucher);
+				}	
+			if($this->voucher['status'] == 2){
+				$voucherInfo = "Kupón \"".$this->input->kod."\" již byl použit!";
+				$voucherErr = true;
+				unset($this->voucher);
+				}
+			if($this->voucher['status'] == 3){
+				$date = new DateTime($this->voucher['valid']);
+				$voucherInfo = 'Je nám líto, ale kupón "'.$this->input->kod.'" byl platný pouze do: '. $date->format('j.n.Y').'.';
+				$voucherErr = true;
+				unset($this->voucher);
+				}
+			if($this->voucher['status'] == -1){
+				$voucherInfo = "Kupón \"".$this->input->kod."\" se nevztahuje na žádné zboží v košíku!";
+				$voucherErr = true;
+				unset($this->voucher);
+				}
+			$voucherClass = $voucherErr?'vErr':'vInfo';
+		  ?>
+		  <div id="voucherinfo" class="<?=$voucherClass?>">
+			<?=$voucherInfo?>
+		  </div>
+		  <?endif;?>
+		  <div class="clearfix"></div>
+			<div class="row" id="itse">     
+          	 	<?=$this->render('templates/Eshop/ItemsList.phtml'); ?>
+ 				 <div class="col-md-3 nopad dis-pad-l cba">
+  					 <?=$this->render('templates/Eshop/priceBlock.phtml'); ?>
+  					 <div class="spacer10"></div>
+				 </div>	    
+			</div> <!-- row -->  
+          <div class="row">   
+          	<div class="col-xs-6"> 
+          		<a  class="buttBack fLeft" href="javascript:history.back()"><span class="red fBold backw butt i-block bgrNoRep"></span>Zpět do obchodu</a>  
+     		</div>
+     		 
+     		<div class="col-xs-6">    
+     			<button type="submit" class="pull-right btn final buttons-new" name="step[2]">Další krok<span class="arr"></span></button>
+           	</div> 
+          </div>
+          <div class="spacerr10"></div>   
+<?else:?>  
+<div class="spacer10"> </div>   
+	<div class="spacer10"> </div>  
+	<div class="spacer10"> </div>   
+	<div class="tcenter">
+	<p>Nemáte v košíku žádné zboží.</p>
+	</div> 
+ <?endif;?>

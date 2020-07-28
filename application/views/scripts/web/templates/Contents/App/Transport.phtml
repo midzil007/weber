@@ -1,0 +1,27 @@
+<?=$this->html;?>
+<?
+$doprava = $this->mEshop->basket->deliveryOptions;
+$delivery = $this->mEshop->basket->getDelivery();
+?>
+<table id="transport">
+	<tr>
+		<th>Doprava</th>
+		<th>Cena za dopravu</th>
+		<th>Cena za platbu</th>
+	</tr>
+	<?foreach($doprava as $dop):?>
+		<?foreach($dop['payments'] as $payments):?>
+			<tr>
+				<td class="titleTab">
+					<?=$dop['nazev']?> / <?=$payments['nazev']?>
+				</td>
+				<td>
+					<?=$dop['price']?$dop['price'].' Kč':'0 Kč'?>
+				</td>
+				<td>
+					<?=$payments['price']?$payments['price'].' Kč':'0 Kč'?>
+				</td>
+			</tr>
+		<?endforeach;?>
+	<?endforeach;?>
+</table> 

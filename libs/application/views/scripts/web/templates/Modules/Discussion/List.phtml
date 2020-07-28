@@ -1,0 +1,39 @@
+		<?
+		function drawPost($view, $post, $level){
+			if($level){
+				$s = 'style="padding-left:' . ($level * 10) . 'px;"';
+			}
+			?>			
+			<div class="post" <?=$s?>>
+				<div class="pHeader">
+					<div class="pFrom">
+						<b><?=$post['user']?></b><br />						
+						<small><?=Utils::formatTime($post['added'])?></small>				
+					</div>
+					<h4><?=$post['title']?></h4>
+					<div class="clear">&nbsp;</div>
+				</div>				
+				<?
+				$view->inputGet->reply = $post['id'];
+				?>
+				
+				<a class="pReply" href="<?=Utils::addUrlParams($view->curentPath, $view->inputGet);?>">Reagovat</a>
+				<div class="clear">&nbsp;</div>				
+			</div>
+			<?
+			if($view->posts['r'][$post['id']]){
+				$level += 1;
+				foreach ($view->posts['r'][$post['id']] as $post){
+					drawPost($view, $post, $level);
+				}
+			}
+		}
+		?>
+		<div class="dList">
+			<?
+			foreach ($this->posts['p'] as $post){
+				drawPost($this, $post, 0);
+			}
+			?>
+			
+		</div>

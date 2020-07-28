@@ -1,0 +1,159 @@
+<div id="lines">
+<? 
+$y = 0;
+foreach ($this->lines as $child):
+	$t++;
+	 
+	$productLine = $child->getPublishedContent(); 
+	/*
+	if($t > 6){ break; } 
+	
+	if($productLine->_name != 'content_OverviewProductLine'){
+		continue; 
+	} */ 
+	
+	$sub = Instance::checkChildren($this, $child->getChildren());
+	   
+	if($child->nodeId == $this->node->nodeId){
+		$products = $sub;
+	}
+	
+	$visible = helper_FrontEnd::isActive($this->curentPath, $child->path); 						
+	$aClass = '';
+	if($visible){
+		$aClass = ' active'; 
+	}
+	
+	if($productLine->_name == 'content_OverviewProductLine'){ 
+		$color = $productLine->getColor();
+	}    
+?>
+ 
+	<a href="<?=helper_FrontEnd::getPath($this, $child->path)?>" class="lineMenuItem <?=($this->smallerMenu?'smaller':'')?> <?=$aClass?>" style="background-color:<?=$color?>;"><?=$child->title?> <small>(<?=count($sub)?>)</small></a> 
+<? endforeach; ?>     
+	<div class="clear"> </div>     
+</div> 
+
+<?php 
+$productLine = $this->node->getPublishedContent();
+$color = $productLine->getColor();   
+$logo = $productLine->getPropertyValue('plLogo'); 
+$img = $productLine->getPropertyValue('plbImage');
+
+$html = $productLine->getHtml();
+
+$html = str_replace('<h5>', '<h5 style="color:'. $color.';">', $html);
+$html = str_replace('<h6>', '<h6 style="color:'. $color.';">', $html);
+
+$logo = helper_FrontEnd::getSinglePhotoFull($logo); 
+$img = helper_FrontEnd::getSinglePhotoFull($img);
+?> 
+<div id="line" style="border-color:<?=$color?>;"> 
+	<div id="lineLeft">
+		<div id="lineLeftText"> 
+		<? if($logo['path']):?>
+		<img src="<?=$logo['path']?>" alt="<?=$this->node->title?>" />
+		<? endif;?>
+		<?=$html?>
+		</div>  
+	</div> 
+	<div id="lineRight"> 
+		<? 
+		$x = 0; 
+		foreach ($products as $child):
+			$x++; 
+			$product = $child->getPublishedContent();
+			$product->createFiles(); 
+			$image = helper_FrontEnd::getFirstPhoto($product->getFilesNames('pImage'), $product->fotoThumbName, $product->fotoFullName);							
+			
+			// pr($image);  
+			
+			$price = $product->getPrice($this);
+			// e($price); 
+			$obsah = $product->getPropertyValue('objem');
+			$private = $product->getPropertyValue('private');
+		?> 
+		<div class="productDetail <?=($private?'pprivate':'')?>">   
+			
+			<? if($image['path']):?>
+ 			  
+			<div class="multiBoxDesc xx<?=$x?>"><?=$child->title?></div>    
+			<a href="<?=$image['fullPath']?>" target="_blank" rel="[images_<?=$child->nodeId?>]" id="xx<?=$x?>" class="xx pimga">       
+				<img src="<?=$image['path']?>" alt="<?=$image['name']?>" />        
+			</a>    
+			
+			<? endif;?>    
+			
+			<? if(!$image['path']):?>
+			<div class="productLine">
+			<? else:?>
+			<div class="productLine hasImg">  
+			<? endif; ?> 
+			
+				<? if(Instance::isk($this)):
+					$priceK = $product->getPrice($this, true);
+				?>
+					<? if($priceK{0} != '0'):?> 
+					<div class="price private">
+						<?=$priceK?>
+					</div>
+					<? endif; ?> 
+				<? endif; ?> 
+				 
+				<? if($price{0} != '0'):?> 
+				<div class="price">
+					<?=$price?>
+				</div>
+				<? endif; ?>
+				
+				<big class="title tbold" style="color:<?=$color?>;"><?=$child->title?></big>  
+				<?=$product->getHtml()?>  
+				<? if($obsah):?>
+				<span class="objem"><?=helper_FrontEnd::price($obsah)?> ml</span>  
+				<? endif;?> 
+				  
+				<? if(Instance::isk($this)):
+					$private = $product->getPropertyValue('html_private');
+					if($private):
+					?>
+					<div class="text private">
+						<?=$private?>  
+					</div>  
+					<? endif; ?>  
+				<? endif; ?> 
+			</div>  
+			<div class="clear"></div> 
+		</div>
+	
+	<? endforeach; ?>
+	 
+	</div> 		
+	<div class="clear"></div> 
+</div>
+<div class="clear"></div> 
+
+<? if($img['path']):?>
+<img id="btmImg" src="<?=$img['path']?>" alt="<?=$this->node->title?>" />
+<? endif;?>    
+
+<script type="text/javascript">
+	 
+	var box = {};  
+	window.addEvent('domready', function(){ 
+
+		var initMultiBox = new multiBox({
+			mbClass: '.xx',//class you need to add links that you want to trigger multiBox with (remember and update CSS files)
+			container: $(document.body),//where to inject multiBox
+			descClassName: 'multiBoxDesc',//the class name of the description divs
+			showControls: false, 
+			useOverlay: true,//use a semi-transparent background. default: false;addRollover: true,//add rollover fade to each multibox link
+			addOverlayIcon: false,//adds overlay icons to images within multibox links
+			addChain: false,//cycle through all images fading them out then in 
+			recalcTop: false,//subtract the height of controls panel from top position
+			addTips: false,//adds MooTools built in 'Tips' class to each element (see: http://mootools.net/docs/Plugins/Tips)
+			autoOpen: 0//to auto open a multiBox element on page load change to (1, 2, or 3 etc)
+		}); 
+				   
+	});  
+		   
+</script>  

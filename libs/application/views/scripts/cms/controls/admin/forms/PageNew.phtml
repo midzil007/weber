@@ -1,0 +1,25 @@
+<div id="err_newContentForm"></div>
+<form action="" method="get" id="newContentForm" name="newContentForm">
+<?php echo $this->formHidden('parentId_new',$this->node->nodeId) ?>
+<?php echo $this->formHidden('contentType_new',$this->contentType_new) ?>
+<table class="modalTable">		
+	<tr>
+		<td class="formcell tkey"><?=$this->cp_Translate[$this->content->nodeTitle] ?></td>
+		<td class="formcell"><?php echo $this->formText('title_new',$this->title_new, array('class'=>'ftext100')) ?></td>
+	</tr>
+	<!--
+	<tr>
+		<td class="formcell">Popis</td>
+		<td class="formcell"><?php echo $this->formTextarea('description_new',$this->description_new, array('class'=>'ftext')) ?></td>
+	</tr>
+	-->
+	<? $this->content->showAdmin($this); ?>	
+	<? if(!$this->donotShowSaveButton): ?> 
+	<tr>	
+		<td class="formcell" colspan="2">
+			<?php echo $this->formSubmit('saveContentB', 'Uložit', array('class'=>'fsubmit', "onclick" => $this->addSubmitFunction . " setWysiwygContent('fck_html'); return submitFormAjax('newContentForm', '".$this->url(array('controller' => 'pages','action' => 'save'))."', 'vypisDole', 'modal', '', 1  );", 'iconClass' => "noteIcon")) ?>									
+		</td>
+	</tr>
+	<? endif; ?> 
+</table>  
+</form>

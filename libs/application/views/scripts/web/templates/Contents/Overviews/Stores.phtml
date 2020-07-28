@@ -1,0 +1,116 @@
+<form method="GET" name="sselect" id="sselect" action="<?=$this->curentPath?>">
+<div id="citySelect">
+<label for="city"><b>Zvolte město</b></label>	 	                
+<?
+
+$options = content_OverviewMesta::getRegionsSelect($this);   
+// pr($options); 
+$options = helper_Input::addNotDefinedOption($options, '-- ' . $this->Translate('vse') . ' --')
+ 
+?>
+<?=$this->formSelect('lokalita', $this->inputGet->lokalita, array('onChange' => 'document.sselect.submit()'), $options)?>   
+</div> 
+</form>
+<h1><?=$this->pageTitleRaw?></h1>  
+<?=$this->pageText?>
+<div id="products">
+	<? 
+	 
+	if(count($this->children)):
+	 
+	$cz = array(4368, 4365, 4363, 4367, 4362, 4371, 4369, 4364, 4366, 4370);
+	$sk = array(4375, 4373, 4376, 4374);
+	 
+	foreach ($this->children as $product):
+			if($content = $product->getPublishedContent()):		
+				$lokalita = $content->getPropertyValue('lokalita');
+				 
+				if($this->inputGet->lokalita > 0){ 
+					if($this->inputGet->lokalita == 4192){ //cz
+						$continue = !in_array($lokalita, $cz);
+					} elseif ($this->inputGet->lokalita == 4193){
+						$continue = !in_array($lokalita, $sk); 
+					} else {
+						$continue = $this->inputGet->lokalita != $lokalita;
+					}
+					
+					if($continue){
+						continue;
+					}  
+				}
+				
+				$mesto = $content->getPropertyValue('mesto');
+				//$content->onUpdate(); 
+				$url = Utils::getWebPath($product->path);				
+				?> 
+				<div class="store"> 
+					<table cellpadding="0" cellspacing="0">
+						<tr>
+							<td class="pT" colspan="2"><strong><?=$product->title?></strong></td>
+						</tr>
+		            	<tr>
+		            		<td class="pK">Adresa:</td>
+		            		<td class="pV"> 
+		            			<?
+		            			$googleUrl = 'http://maps.google.cz/maps?q=';
+		            			$search = $content->getPropertyValue('ulice') . ', ' . $mesto; 
+		            			$googleUrl .= urlencode($search); 
+		            			?> 
+		            			<a style="text-decoration:none;" href="<?=$googleUrl?>" target="_blank" title="Zobrazit lokalitu na mapě">  
+		            			<? helper_FrontEnd::echoIfExists($mesto, ', ', '')?>
+		            			<? helper_FrontEnd::echoIfExists($content->getPropertyValue('ulice'), ', ', '')?>
+		            			<? helper_FrontEnd::echoIfExists($content->getPropertyValue('psc'), ', ', ' ')?> 
+		            			<? helper_FrontEnd::echoIfExists(strtoupper($content->getPropertyValue('stat')), '', ' ', '')?>    
+		            			</a>
+		            		</td> 
+		            	</tr>  
+		            	<? $www = $content->getPropertyValue('www');?>
+		            	<? 
+		            	if($www){
+		            	?>
+		            	<tr>
+		            		<td class="pK">Www:</td>
+		            		<td class="pV">
+		            			<a href="<?=Utils::checkUrl($www)?>" target="_blank"><?=str_replace('http://', '', $www)?></a> 		            				
+		            		</td>
+		            	</tr>  
+		            	<?
+		            	}
+		            	?>  
+		            	
+		            	<? $email = $content->getPropertyValue('email');
+		            	if($email){
+		            	?>
+		            	<tr>
+		            		<td class="pK">Email:</td>
+		            		<td class="pV">
+		            			<?echo $this->Email($email);?>		            			
+		            		</td>
+		            	</tr> 
+		            	<? 
+            			}
+            			
+            			$tel = $content->getPropertyValue('tel');
+            			$fax = $content->getPropertyValue('fax');
+            			if($tel || $fax){
+            			?>
+		            	<tr>
+		            		<td class="pK">Tel/Fax:</td>
+		            		<td class="pV">
+		            			<? helper_FrontEnd::echoIfExists($tel, '', '')?>
+		            			<? helper_FrontEnd::echoIfExists($content->getPropertyValue('fax'), '', '', ', ')?>
+		            		</td>
+		            	</tr>  
+		            	<?
+		            	}
+		            	?>   
+		            </table>		 
+		            <a href="<?=$url?>"><?=$this->Translate('zobrazit-distributory')?></a> 
+	            </div> 
+		
+	<? 		endif;
+		endforeach; 
+	endif;	
+	?>
+    <div class="clear">&nbsp;</div>
+</div>

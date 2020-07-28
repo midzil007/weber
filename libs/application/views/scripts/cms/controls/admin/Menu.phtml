@@ -1,0 +1,93 @@
+ 
+	<div id="menu" style=" padding:0px;"> 
+		<?php 
+			if(!$this->isPageSelectPopup){
+				echo $this->render('controls/admin/Logged.phtml'); 
+			}
+		?>	
+		<ul id="nav">
+		<?php 
+		$menuItemNo = 0;
+		$this->smallMenu = '<ul id="navDrop" >';
+
+		foreach ($this->mainMenu as $menuitem){
+			if ($this->acl->isAllowed($this->user->group, $menuitem->url) || ($this->user->group =='OnlyEshop' && $menuitem->url == 'eshop')
+				|| ($this->user->group =='onlyProducts' && $menuitem->url == 'eshop') 
+				|| ($this->user->group =='Administrators' && $menuitem->url == 'eshop')){ /* prava */
+								
+				if($this->user->group != 'Superadmin' && $menuitem->url == 'sf'){
+					continue; 
+				} 
+				 
+				if($this->isPageSelectPopup || $this->isLinkPopup){
+					if($menuitem->url != 'pages' && $menuitem->url != 'sf' && $menuitem->url != 'structure'){
+						//continue;
+					}					
+				}
+					
+				$n = $this->request->getParam('parentnode')?$this->request->getParam('parentnode'):$this->request->getParam('node');
+				if($menuitem->url != 'sf' && $menuitem->url !='eshop'){
+					
+					$url = $this->url(array('controller' => $menuitem->url,'action' => 'index', 'node' => $n, 'ajax' => '0')); 
+				} elseif($menuitem->url == 'eshop'){
+					$url = $this->url(array('controller' => $menuitem->url,'action' => 'index', 'ajax' => '0', 'filenode' => $this->request->getParam('filenode')));
+				}
+				else{
+					$url = $this->url(array('controller' => $menuitem->url,'action' => 'index', 'ajax' => '0', 'filenode' => $this->request->getParam('filenode')));
+				}
+				
+				//echo '#mmpl_'.$menuitem->url.' { background:url(../images/menu/mm_'.$menuitem->url.'_o.jpg); }';
+				$active = '';
+				if($this->curentController == $menuitem->url){  
+					$active = ' class="active"';
+				}
+				
+				$this->smallMenu .= '
+					<li id="mis' . $menuItemNo . '">
+						<a id="mm_s_' . $menuitem->url . '" ' . $active . ' href="' . $url . '" title="'.$menuitem->description.'">
+							' . strip_tags($menuitem->title) . '
+						</a>
+					</li>
+				';
+				
+					
+				?>
+				<li id="mi<?=$menuItemNo?>">
+					<a title="<?=$menuitem->description?>" id="mm_<?=$menuitem->url?>" <?=$active?> href="<?=$url?>">
+						<?=$menuitem->title?>
+					</a>
+				</li>
+				
+			<?
+				$menuItemNo++;
+			}
+		}			
+		$this->smallMenu .= '</ul>';
+		?>
+		</ul>
+		<div id="ddMenuTriger" style="display:none;" onmouseover="showDDMenu()" onmouseout="hideDDMenu()">&nbsp;</div>
+		<style type="text/css">
+			/* fix - over u aktivni		 */
+			a#mm_<?=$this->curentController?>:hover { background:url(<?=$this->cmsFolderPath?>/images/menu/mm_<?=$this->curentController?>_a.jpg); }					
+		</style>
+		<!-- preload -->
+		<div class="preload" id="mmpl_index"></div> 
+		<div class="preload" id="mmpl_pages"></div>
+		<div class="preload" id="mmpl_structure"></div>
+		<div class="preload" id="mmpl_sf"></div>
+		<div class="preload" id="mmpl_events"></div>
+		<div class="preload" id="mmpl_mailing"></div>
+		<div class="preload" id="mmpl_users"></div>
+		<div class="preload" id="mmpl_stats"></div>
+		<div class="preload" id="mmpl_settings"></div>	
+		<div class="preload" id="mmpl_intranet"></div>	
+		<div class="preload" id="mmpl_enquiry"></div>	
+		<div class="preload" style="background:url(<?=$this->cmsFolderPath?>/images/menu/dd_menu-o.jpg) no-repeat;"></div>
+		<script type="text/javascript">	
+			var menuItemsCount = <?=$menuItemNo?>;
+		</script>
+		 
+	</div>  
+    <div id="dropdown" style="display:none;" onmouseover="showDDMenu()" onmouseout="hideDDMenu()">			
+		<?=$this->smallMenu?>
+	</div>

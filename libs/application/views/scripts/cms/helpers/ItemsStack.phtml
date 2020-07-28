@@ -1,0 +1,27 @@
+			<table cellpadding="0" cellspacing="0"> 
+				<tr>
+					<td> 
+					<?
+					$dojo = $this->useDojo;
+					$this->useDojo = false;
+					?>
+					<?=$this->formSelect( $this->stackName . '_options', null, array('ondblclick' => "return selectStackItems(dojo.byId('" . $this->stackName . "_options'), dojo.byId('" . $this->stackName . "'))", 'multiple' => 'multiple', 'style' => 'width:180px; height:120px;'), $this->stackOptions);?>
+					<?  
+					$this->useDojo = $dojo;  
+					?>
+					</td>
+					<td>
+					<? 
+						echo $this->formSubmit(
+							$this->stackName . '_trigger', 'Vybrat', 
+							array(
+								'onclick' => "return selectStackItems(dojo.byId('" . $this->stackName . "_options'), dojo.byId('" . $this->stackName . "'))"
+							)
+						);  
+					?>		
+					</td>
+					<td>
+					<?= $this->formTextarea($this->stackName, $this->stackValue, array('style' => 'border:1px solid #d1d1d1; background:#FFFFFF; width:350px;  height:80px; overflow:auto;"')) ?>			 
+					</td> 
+				</tr>
+			</table> 

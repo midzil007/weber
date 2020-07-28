@@ -1,0 +1,90 @@
+<ul class="row">
+	<?$inc = 0;   
+	foreach ($this->products as $product):
+		$photos = $this->mVarianta->getResizedPhotos($product['obrazky']);
+		$node = $this->tree->getNodeById($product['id']);
+		$c = $node->getPublishedContent();
+		 // $c->properties = array (
+				 // new ContentProperty ( 'obrazky', 'MultiFileSelect', '', array (), array (), array (
+						 // 'showSelectFile' => true,
+						 // 'inputWidth' => '300',
+						 // 'maxFiles' => 10,
+						 // 'showUploadFile' => true,
+						 // 'uploadFileDirectoryNodeId' => 3880 
+				 // ) ) 
+		 // );
+		 // $c->getPropertyByName ( 'obrazky' )->value = $product['obrazky'];
+		 // $c->createFilesVariant ();
+// 		
+		list($totalRev,$rev) = $this->mReviews->showSingleRev($product['id']);
+		$p = helper_FrontEnd::getFirstPhoto($photos,'pShow2' , false);
+		if($product['discount']>0){
+            			$googleOffer = $this->schema?'AggregateOffer':'';
+            			$googlePrice = $this->schema?'itemprop="lowPrice"':'';
+            		}
+            		else{
+            			$googleOffer = $this->schema?'Offer':'';
+            			$googleHighPrice = '';
+            			$googlePrice = $this->schema?'itemprop="price"':'';
+            		} ;
+		$first = '';
+		if($inc % 3 == 0 ):
+			//$first = 'prod-first';
+		endif;
+		$inc++;?>
+		<li class="col-sm-4 prod <?=$first?>" <?=$this->schema?'itemscope itemtype="http://schema.org/Product"':'';?>>
+			<div class="prod-padd">
+					 <img class="loading" id="load_<?=$product['id']?>" src="/images/ajax-loader.gif" alt="Loading"/>
+				  <?if($totalRev->total>0):?>
+									<div class="posAbsolute p-l producstStars">
+											<span class="emptyStarsMini marRight3 i-block vAlingMid">
+											<span class="i-block fullStarsMini p-l" style="width:<?=$totalRev->total*19?>px;" class="fullStarsMini"></span>
+										</span>
+									</div>
+								<?endif;?> 
+				<?if($product['discount']>0):?>
+					<span class="discount rounded">-<?=$product['discount']?>%</span>
+				<?endif?>
+				<div class="prod-im"><a <?=$this->schema?'itemprop="url"':''?>  href="<?=$product['path']?>">
+					<img id="<?=$product['id']?>" <?=$this->schema?'itemprop="image"':''?> class="image-load" data-src="<?=$p['path']?>" title="<?=$product['title']?>" alt="<?=$product['title']?>"></a>
+				</div>
+				<div>
+					<div class="prod-name"><a href="<?=$product['path']?>"  <?=$this->schema?'itemprop="name"':''?>><?=$product['title']?></a>
+					</div>
+					
+					<div class="description"><?=$product['preText']?></div>
+					<div class="spacer15"></div>
+					<div class="row" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+						 <link itemprop="availability" href="http://schema.org/InStock"/>
+					<div class="col-sm-7 price-height" itemprop="priceCurrency" content="CZK">
+						<?if($this->isAdminsLogin):?>
+ 					 		<span class="prod-price-new"><a data-url="/cms/inlineedit/setpropertiesvariant/variant/<?=$product['variantId']?>" href="#"  data-type="text" data-pk="price" data-title="<?=$product['price']?>" class="fs21 red lHeight0 editable price-list editable-click" style="display: inline;"><?=$product['price']?></a> Kč</span>
+ 					 	<?else:?>
+ 					 		<span class="prod-price-new" itemprop="price" content="<?=$product['price']?>"><?=helper_FrontEnd::price(round($product['price']))?> Kč</span> 
+ 					 	<?endif;
+ 					 	if($product['discount']>0):?> 
+ 					 			<span class="price-old"><?=helper_FrontEnd::price(round($product['price2']))?> Kč</span>	
+ 					 	<?endif;?>
+ 					 	
+					</div>
+					<div class="col-sm-5">
+						<a class="button f-r" href="<?=$product['path']?>" title="Zobrazit detail <?=$product['title']?>"><span>Detail</span></a>
+					</div>
+				</div>
+			</div>
+			</div>
+			</li>
+	<?endforeach;?>
+	</ul>
+	<script>
+		jQuery(document).ready(function($) 
+		{
+			all = $(this).find('.image-load'); //<-- Should return all input elements in that specific form.
+  				 all.each(function(){
+            			$(this).attr('src',$(this).attr('data-src'));
+            			$('#load_'+$(this).attr('id')).css('display','none');
+            		});
+				}
+			);
+	</script>
+	

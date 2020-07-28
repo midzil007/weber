@@ -1,0 +1,40 @@
+<?if($this->eshop)
+{
+	$url = $this->url;
+}
+else{
+	$url = $this->profileUrl;
+}?>
+<div class="login">
+              <form action="<?=$url?>" method="POST">
+              	<?=$this->formHidden('redir', $this->rurl)?>
+              	
+                <table class="login">
+                	<tr>
+                		<td>E-mail</td>
+                		<?$this->inputGet->email = $this->inputGet->email? $this->inputGet->email: '@';?>
+                		<td><input type="text" name="username" value="<?=$this->inputGet->email?>"/></td>
+                		<td>Heslo</td>
+                		<td><input type="password" name="pass" onkeypress="return submitenter(this,event)" /></td>
+                	</tr>
+                	</table>
+                <div class="clear"></div>
+                <div class="fLeft">  
+                  <p>   
+                	<input  type="checkbox" id="setauto" name="setauto" />
+                	Zapamatovat přihlášení  
+                </p>
+                <p>  
+            	<?if(!$this->eshop):?>
+            	<a href="/vas-profil/registrace" class="fsxxsp">Nová registace</a>
+            	<?endif;?>
+			<span class="red">|</span> <a href="/vas-profil/zapomeute-heslo" class="fsxxsp">Zapomenuté heslo</a>
+			</p>
+			</div>       
+                 <div class="fRight">
+                   
+                <button type="submit" class="butt" name="login"><span class="red fBold butt i-block fs16 bgrNoRep">Přihlásit</span></button>   
+                 </div>  
+                 <div class="clear"></div>   
+                 </form>
+</div>    

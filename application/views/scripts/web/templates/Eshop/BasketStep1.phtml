@@ -1,0 +1,15 @@
+<?php 
+$this->itemsListOverview = true; 
+$items = $this->mEshop->basket->getItems();
+
+$itemsCount = count($items); 
+?>
+<div class="clearfix"></div>
+
+	
+<div id="recalcArea" class="f-l full-width">
+	<?=$this->render('templates/Eshop/BasketStep1Inner.phtml'); ?>     
+</div>
+	 
+
+

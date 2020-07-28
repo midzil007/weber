@@ -1,0 +1,46 @@
+<?
+$this->disablePadding = 1;  
+	
+/*
+if($_SERVER['REMOTE_ADDR'] == '217.195.175.155'){	
+	$articles = $this->articles->getArticles('dateShow', 'Desc', 70, 10);                              
+	                               
+	        
+	   
+	$articlesNodes = $this->articles->getArticlesAsNodes($this->tree, $articles);
+	foreach ($articlesNodes as $article){
+		$a = $article->getPublishedContent();
+		$a->createFiles($this->domain); 
+	} 
+	 
+	die('ok');
+}
+ 
+*/ 
+$articles = array();
+if($this->inputGet->tag){
+	$this->inputGet->tag = trim($this->inputGet->tag);  
+	$this->pageTitleRaw = /*'Štítek: ' .*/ $this->inputGet->tag;
+	// $this->pageTitle = $this->inputGet->tag . ' - ' . $this->domainName;    
+	  
+	$articles = $this->mTags->getRelevantPages(array($this->inputGet->tag), array_keys(Zend_Registry::getInstance()->config->hasTags->toArray()), 20, true);     
+	$tagDetails = $this->mTags->getTagDetail($this->inputGet->tag);
+	//pr($tagDetails);  
+	if($tagDetails['description']){
+		echo $tagDetails['description']; 
+	}
+} elseif($this->inputGet->author){ 
+	$articles = $this->mArticles->getArticles('dateShow', 'Desc', 0, 50, 0, 0, $this->inputGet->author);    
+	$u = new User($this->inputGet->author);
+	
+	$this->pageTitleRaw = 'Články od autora: ' . $u;
+	$this->pageTitle = $this->pageTitleRaw . ' - ' . $this->config->instance->title; 
+	
+} 
+
+
+$this->onlyOverview = true;  
+$this->articlesNodes = $this->mArticles->getArticlesAsNodes($this->tree, $articles);
+echo $this->render($this->config->view->overviewsDir . 'Articles.phtml'); 
+ 
+?>

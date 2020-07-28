@@ -1,0 +1,21 @@
+<form action="<?=$_SERVER['REQUEST_URI']?>" method="POST" id="themeForm"> 
+	<input type="hidden" name="dAction" value="addTheme" />
+	<div id="newBOTheme"> 
+		<h3><small>Založit nové téma ve fóru</small> <br /> <?=$this->discussionTitle?></h3> 
+	
+		<div class="boForm">
+			<table class="addForm">   
+				<tr> 
+					<td>Název:</td>
+					<td><?=$this->formText('title', $this->input->title, array('id' => 'themeTitle', 'class' => 'nice sm200'))?> </td>		
+				</tr> 
+				<tr>
+					<td>Popis:</td>
+					<td><?=$this->formTextarea('message', $this->input->message, array('id' => 'themeMessage', 'class' => 'nice', 'rows' => 4))?></td>		
+				</tr>
+			</table>
+			<?= $this->render('parts/SecurityCode.phtml'); ?>		
+			<input type="submit" class="nicesubmit sm90" name="addTopic" value="Založit" />	  
+		</div> 
+	</div>
+</form>  

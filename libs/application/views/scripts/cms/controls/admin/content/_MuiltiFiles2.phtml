@@ -1,0 +1,285 @@
+<?php 
+$this->hasUpload = true;
+
+if(!$this->fileuploadIdent){
+	$this->fileuploadIdent = 1;
+} else {
+	$this->fileuploadIdent = $this->fileuploadIdent +1;
+}
+$ident = $this->fileuploadIdent;   
+$name = $this->MultiFileSelectName;
+
+if($this->uploadFolderNodeId){
+	$uploadUrl = $this->url(array('controller' => 'sf','action' => 'newfilemulti', 'filename' => 'files'.$ident, 'filenode' => $this->uploadFolderNodeId));
+} else {
+	$uploadUrl = $this->url(array('controller' => 'sf','action' => 'newfilemulti', 'filename' => 'files'.$ident));
+}  
+ 
+   
+  
+$filesCount = $filesLimit = $this->multiFileOptions['maxFiles']?$this->multiFileOptions['maxFiles']:20;
+
+ ?>     
+ 
+					<input name="<?=$name?>" id="<?=$name?>" value="" type="hidden" />  
+					 
+<div class="uploader" id="fileupload<?=$ident?>">      
+          
+        <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+        <table>  
+        	<tr>  
+        		<td>
+        			<span class="btn btn-success fileinput-button">
+	                    <i class="icon-plus icon-white"></i> 
+	                    <span>Nahrát soubor<?if($filesLimit>1):?>y<? endif;?></span>
+	                    <input type="file" name="files<?=$ident?>[]" multiple>  
+	                </span>  
+	            </td>
+	            <td style="min-width:10px;"> 
+	            	<!-- The global progress information -->
+		            <div stye="width:100%;" class="fileupload-progress fade">    
+		                <!-- The global progress bar --> 
+		                <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+		                    <div class="bar" style="width:0%;"></div>
+		                </div>
+		                <!-- The extended global progress information -->
+		                <div class="progress-extended">&nbsp;</div>
+		            </div>
+	            </td>
+	            <td> 
+        		<div id="dropzone<?=$ident?>" class="fade well dropzone">Přetažením sem nahrajete soubory.</div>   
+		        <!-- The loading indicator is shown during file processing --> 
+		        <div class="fileupload-loading"></div>
+		       </td></tr>
+        </table>    
+        <!-- The table listing the files available for upload/download -->
+        <table id="rowsls<?=$ident?>" role="presentation" class="filesTable table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery">
+        
+        
+        	<?
+        	if(count($this->prevFiles)):
+        	$i = 0;
+        	foreach ($this->prevFiles as $f): 
+        	$i++;
+        	?>
+             <tr class="template-download fade in">
+	           <td class="preview">
+	                <a href="<?=$f['path']?>" data-gallery="gallery">
+	                	<img src="<?=$f['previewImage']?>"></a>
+	            </td>
+	            <td class="name">    
+	            <? if($filesLimit == 999): ?> 
+	            	<input type="hidden" name="<?=$name?>" value="<?=$f['path']?>" id="<?=$name?>" />  
+					<input name="<?=$name?>_title" id="<?=$name?>_title" value="<?=$f['name']?>" type="text" /> 
+	            <? else:?>
+					<input type="hidden" name="<?=$name?>_fileSelect<?=$i?>" value="<?=$f['path']?>" id="<?=$name?>_fileSelect<?=$i?>" />  
+					<input name="<?=$name?>_fileSelect<?=$i?>_title" id="<?=$name?>_fileSelect<?=$i?>_title" value="<?=$f['name']?>" type="text" /> 
+				<? endif;?> 
+	            </td>   
+	            <td colspan="2"></td>  
+	        
+	        	<td class="delete">
+	              	<small><a class="remove nice" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ui-icon-trash"></span><span class="ui-button-text">smazat</span></a></small> 
+	        	</td>  
+	   		</tr> 
+	   		<?
+	   		endforeach;
+        	endif;
+        	
+        	?>
+		</tbody></table>  
+</div> 	  
+
+<? if(!$this->uploadLoaded): $this->uploadLoaded = true; ?>
+<!-- The template to display files available for upload -->
+<script id="template-upload" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-upload fade">
+        <td class="preview"><span class="fade"></span></td>
+        <td class="name"><span>{%=file.name%}</span></td> 
+        <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+        {% if (file.error) { %}
+            <td class="error" colspan="2"><span class="label label-important">Error</span> {%=file.error%}</td>
+        {% } else if (o.files.valid && !i) { %}
+            <td>
+                <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><div class="bar" style="width:0%;"></div></div>
+            </td>
+            <td class="start">{% if (!o.options.autoUpload) { %}
+                <button class="btn btn-primary">
+                    <i class="icon-upload icon-white"></i>
+                    <span>Start</span>
+                </button>
+            {% } %}</td>
+        {% } else { %}
+            <td colspan="2"></td> 
+        {% } %}
+        <td class="cancel">{% if (!i) { %}
+            <button class="btn btn-warning">
+                <i class="icon-ban-circle icon-white"></i>
+                <span>Zrušit</span>
+            </button> 
+        {% } %}</td>
+    </tr>
+{% } %}
+</script>
+<!-- The template to display files available for download -->
+<script id="template-download" type="text/x-tmpl">
+{% for (var i=0, file; file=o.files[i]; i++) { %}
+    <tr class="template-download fade">
+        {% if (file.error) { %}
+            <td></td>
+            <td class="name"><span>{%=file.name%}</span></td> 
+            <td class="size"><span>{%=o.formatFileSize(file.size)%}</span></td>
+            <td class="error" colspan="2"><span class="label label-important">Error</span> {%=file.error%}</td>
+        {% } else { %}
+             
+           <td class="preview">{% if (file.thumbnail_url) { %}
+                <a href="{%=file.url%}" title="{%=file.name%}" data-gallery="gallery" download="{%=file.name%}"><img src="{%=file.thumbnail_url%}"></a>
+            {% } %}</td>
+            <td class="name">      
+ 				{% if (file.inputId) { %}  
+					<input type="hidden" name="{%=file.filesnames%}_fileSelect{%=file.inputId%}" value="{%=file.path%}" id="{%=file.filesnames%}_fileSelect{%=file.inputId%}" />  
+					<input name="{%=file.filesnames%}_fileSelect{%=file.inputId%}_title" id="{%=file.filesnames%}_fileSelect{%=file.inputId%}_title" value="{%=file.name%}" type="text" /> 
+				{% } else { %}
+					<input type="hidden" name="{%=file.filesnames%}" value="{%=file.path%}" id="{%=file.filesnames%}" />  
+					<input name="{%=file.filesnames%}_title" id="{%=file.filesnames%}_title" value="{%=file.name%}" type="text" /> 
+
+				{% } %}  
+            </td>     
+            <td colspan="2"> </td>   
+        {% } %}  
+        <td class="delete"> 
+            <small><a class="remove nice" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ui-icon-trash"></span><span class="ui-button-text">smazat</span></a></small> 
+        </td>
+    </tr>  
+{% } %}
+</script>
+	<script src="/admin/js/jqfuploader/vendor/jquery.ui.widget.js"></script>	
+	<!-- The Templates plugin is included to render the upload/download listings -->
+	<script src="/admin/js/tmpl.min.js"></script>   
+	<script src="/admin/js/load-image.min.js"></script>	  
+	<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+	<script src="/admin/js/canvas-to-blob.min.js"></script>
+	<!-- Bootstrap JS and Bootstrap Image Gallery are not required, but included for the demo -->  
+	<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+	<script src="/admin/js/jqfuploader/jquery.iframe-transport.js"></script>
+	<!-- The basic File Upload plugin -->
+	<script src="/admin/js/jqfuploader/jquery.fileupload.js"></script> 
+	<!-- The File Upload file processing plugin -->
+	<script src="/admin/js/jqfuploader/jquery.fileupload-fp.js"></script>
+	<!-- The File Upload user interface plugin -->
+	<script src="/admin/js/jqfuploader/jquery.fileupload-ui.js"></script>
+	
+	<script src="/admin/js/jqfuploader/jquery.fileupload-process.js"></script>  
+	<!-- The XDomainRequest Transport is included for cross-domain file deletion for IE8+ -->
+	<!--[if gte IE 8]><script src="/admin/js/jqfuploader/cors/jquery.xdr-transport.js"></script><![endif]-->   
+	
+	<script type="text/javascript">
+	  
+	$(document).on('click', '.remove', function(e){
+	    e.preventDefault();   
+	    $(this).closest('tr').remove();  
+	});
+	</script>  
+<? endif; ?>
+	<!-- The main application script -->
+	<script type="text/javascript">
+		$(document).bind('drop dragover', function (e) {
+		    e.preventDefault();
+		});  
+
+
+		// dropzone
+		$(document).bind('dragover', function (e) {
+		    var dropZone<?=$ident?> = $('#dropzone<?=$ident?>'),
+		        timeout<?=$ident?> = window.dropZoneTimeout<?=$ident?>;
+		    if (!timeout<?=$ident?>) {
+		        dropZone<?=$ident?>.addClass('in');
+		    } else {
+		        clearTimeout(timeout<?=$ident?>);
+		    }
+		    var found = false,
+		      	node = e.target;
+		    do {
+		        if (node === dropZone<?=$ident?>[0]) {
+		       		found = true;
+		       		break;
+		       	}
+		       	node = node.parentNode;
+		    } while (node != null);
+		    if (found) {
+		        dropZone<?=$ident?>.addClass('hover');
+		    } else {
+		        dropZone<?=$ident?>.removeClass('hover');
+		    }
+		    window.dropZoneTimeout<?=$ident?> = setTimeout(function () {
+		        window.dropZoneTimeout<?=$ident?> = null;
+		        dropZone<?=$ident?>.removeClass('in hover');
+		    }, 100);
+		});
+
+		// upload
+		$(function () {  
+		    'use strict';
+		    <? if($filesLimit != 999): // 1 file fix?>    
+		    $( "#rowsls<?=$ident?>" ).sortable({ items: "tr" });
+		    <? endif; ?>   
+		    $('#fileupload<?=$ident?>').fileupload({   
+					dropZone: $('#dropzone<?=$ident?>'),     
+					autoUpload: true, 
+					maxNumberOfFiles: <?=$filesLimit?>,          
+					url: '<?=$uploadUrl?>',   
+					paramName: 'files<?=$ident?>[]',
+					<? if(!$this->disableJSFUTemplates):?>
+					uploadTemplateId: 'template-upload',  
+					downloadTemplateId: 'template-download',
+					<? else: ?>  
+					uploadTemplateId: null, 
+					downloadTemplateId: null,
+					<? endif; ?>  
+					formData: {filesnames: '<?=$name?>' <? if($filesLimit != 999): // 1 file fix?>, nextId: <?=(count($this->prevFiles)+1)?><? endif;?>},
+ 
+					<? if($filesLimit == 999): // 1 file fix?>   
+					send: function  (e, data) {    
+						var rowCount<?=$ident?> = $('#rowsls<?=$ident?> tr').length;  
+	
+						if(rowCount<?=$ident?> > 1){  
+							$('#rowsls<?=$ident?> tr:first-child').remove();  
+						}  
+
+						var rowCount<?=$ident?> = $('#rowsls<?=$ident?> tr').length;     
+						
+						if(rowCount<?=$ident?> > 1){       
+							return false; 
+						} else {
+		               		return true;
+						}
+		            }     
+					<? endif; ?>  
+		    }).bind('fileuploaddone', function (e, data) { 
+		    	<? if($filesLimit != 999): // 1 file fix?>    
+			    $( "#rowsls<?=$ident?>" ).sortable({ items: "tr" }); 
+			    $( "#rowsls<?=$ident?>" ).disableSelection(); 
+			    <? endif; ?>   
+			    <? if($this->refreshGrid):?>  
+			  	  $('#<?=$this->tableId?>').flexReload();  
+			    <? endif;?>
+
+			    <? if($this->fromWysiwg):?>    
+			    	var file= data.result.files[0];
+			        var filename = file.name; 
+			        var filepath = file.path;
+
+			        OpenFileNW( '<?=$this->callBackInput?>', filename, filepath);  
+					         
+			    <? endif;?>	 
+			    <? if($this->multiFileOptions['accordionId']):?>   
+			    $( "#<?=$this->multiFileOptions['accordionId']?>" ).accordion( "refresh" );
+			    <? endif;?>	 
+			      
+			} ).bind('fileuploadadd', function (e, data) {    
+				
+			}); 
+   
+		}); 
+	</script>    

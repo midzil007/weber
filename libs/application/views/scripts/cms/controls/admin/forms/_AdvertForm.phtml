@@ -1,0 +1,56 @@
+	<? // pr($this->banner); ?>
+		<?=$this->formHidden('identificator[' . $this->identificator . '][' . $this->banner->identificator .']', $this->banner->identificator)?>
+		<table class="banner" id="a_<?=$this->banner->identificator?>">
+			<tr>
+				<td style="width:90px;">Název</td>
+				<td style="width:370px;"><?=$this->formText('title[' . $this->identificator . '][' . $this->banner->identificator .']', $this->banner->title, array('class' => 'bs2'))?></td>
+				<td style="width:320px;" rowspan="6">náhled<br />
+					<? if($this->config->modules->adverts->disableLivePreview != 1): ?>
+			<iframe src="<?=$this->url(array('controller' => 'structure','action' => 'showBanner', 'bId' => $this->banner->identificator, 'pos' => $this->identificator))?>" class="bPreview" ></iframe> 
+				<? endif; ?>
+				</td>
+			</tr> 
+			<tr>
+				<td  style="width:90px;">Odkaz</td>
+				<td><?=$this->formText('url[' . $this->identificator . '][' . $this->banner->identificator .']', $this->banner->url)?> - do:  <?=$this->banner->target->renderAdmin($this, array('class' => 'bs3'));?></td>
+			</tr>
+			<tr>
+				<td>Popis</td>
+				<td><?=$this->formTextarea('description[' . $this->identificator . '][' . $this->banner->identificator .']', $this->banner->description, array('class' => 'bs2'))?></td>
+			</tr>
+			<tr>
+				<td>Google (jiný reklamní) kód</td>
+				<td><?=$this->formTextarea('google[' . $this->identificator . '][' . $this->banner->identificator .']', $this->banner->google, array('rows' => 3, 'class' => 'bs2'))?></td>
+			</tr>
+			<tr>
+				<td>Obrázek / flash</td>
+				<?
+				$this->fileuploadIdent = 1000 + rand(1000, 119888);   
+				$this->uploadLoaded = true; 
+				?>
+				<td><?=$this->banner->file->renderAdmin($this);?></td> 
+			</tr>	
+			<tr>
+				<td colspan="2">
+					<?
+					$stats = $this->aStats->getBannerStats($this->banner->identificator); 
+					?> 
+					Zobrazen: <b><?=$stats['shown']?></b>x &nbsp;&nbsp; Kliknuto: <b><?=$stats['clicked']?></b>x &nbsp;&nbsp; CTR: <b><?=round($stats['clicked']/$stats['shown'], 5)?></b> 
+				</td>  
+			</tr>
+			<?
+				$a = array();
+				if($this->banner->active){
+					$a['checked'] = 'checked'; 
+				}
+			?> 
+			<tr>
+				<td>Aktivní</td>
+				<td colspan="2">
+					<a href="#" class="fl_right" onclick="removeAdvert('a_<?=$this->banner->identificator?>')">SMAZAT</a>
+					<?=$this->formCheckbox('active[' . $this->identificator . '][' . $this->banner->identificator .']', $this->banner->active, $a, $a)?> &nbsp; |&nbsp; &nbsp;  
+					pouze od: <?=$this->banner->showFrom->renderAdmin($this, array('class' => 'bs3'));?> - 
+					do: <?=$this->banner->showUntil->renderAdmin($this, array('class' => 'bs3'));?>
+				</td>
+			</tr>	
+		</table>

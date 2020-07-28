@@ -1,0 +1,21 @@
+	<? 
+		$secCode = date('Ym');
+		$ident = uniqid();
+	?>
+	<noscript>
+		<p>Zkopírujte prosím tento text: <?=$secCode?> <input name="<?=$secCode?>" /> // ochrana proti spamu</p>
+	</noscript>
+	<div id="jsIn<?=$ident?>" class="nodisplay">
+	
+	</div>
+	<script type="text/javascript">
+		var sec = function(){
+			var i = document.createElement('input');
+				i.type = 'hidden';
+				i.name = '<?=$secCode?>';
+				i.value = '<?=$secCode?>';
+			var e = document.getElementById('jsIn<?=$ident?>');
+				e.appendChild(i);
+		};
+		sec();
+	</script>

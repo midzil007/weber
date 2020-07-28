@@ -1,0 +1,53 @@
+  
+	<h3>KONTAKTY - SKUPINY</h3> 
+	<?
+	$mm = new module_Mailing();    
+	$groupsAll = $mm->getGroupsSelect(); 
+	$groups = array();
+	foreach ($groupsAll as $ident => $title){ 
+		$groups[$ident] = $title . ' (' . $mm->getUsersCountByGroup($ident) . ')';
+	}    
+	?> 
+	<?=$this->formCheckboxGroup('group', $this->input->group, array(), $groups)?> 
+	<div class="spacer10"> </div> 
+	<?=$this->formSubmit('export', 'EXPORTOVAT ZVOLENOU (1) SKUPINU', array('class' => 'smaller')) ?> 
+	<?=$this->formSubmit('delete', 'SMAZAT ZVOLENÉ KONTAKTY', array('class' => 'smaller', 'onclick' => "return confirm('Opravdu smazat?')")) ?>	 
+	<?=$this->formSubmit('import', 'IMPORTOVAT KONTAKTY', array('class' => 'smaller', 'onclick' => "return toggle('importinput');")) ?>	
+	<div id="importinput" style="display:none;">
+		<div class="spacer10"> </div>  
+		<h3>IMPORT z CSV</h3>  
+		<p>Zvolte soubor k importu, vyberte stávající skupinu kontaktů, nebo napište název nové.</p>
+		<p>Soubor musí mít koncovku csv a hodnoty musí být oddělené středníkem. Pouze jeden sloupec s emaily.</p>
+		<table>
+			<tr>
+				<td>Soubor:</td>
+				<td><input type="file" name="csv"  /></td>
+			</tr>
+			<tr>     
+				<td>Existující skupina:</td>
+				<td><?=$this->formSelect('groupSelected', $this->input->groupSelected, array('style' => 'width:155px;'), helper_Input::addNotDefinedOption($groups, '-- zvolte --'))?></td>
+			</tr>
+			<tr>
+				<td>Nebo nová skupina:</td>
+				<td><?=$this->formText('groupName',$this->input->groupName, array('style' => 'width:150px;')) ?></td> 
+			</tr>
+			<tr>
+				<td> </td> 
+				<td><?=$this->formSubmit('import_csv', 'IMPORTOVAT SOUBOR', array('class' => 'smallest')) ?></td> 
+			</tr>
+		</table>
+		   
+			 
+	</div>
+	<div class="spacer10"> </div>
+	
+	<script type="text/javascript">  
+
+			function toggle(idee){
+				domnode = document.getElementById(idee);
+				s = domnode.style.display; 
+				domnode.style.display = s=='none'?'':'none';  
+				return false;    
+			} 
+		</script> 
+	 

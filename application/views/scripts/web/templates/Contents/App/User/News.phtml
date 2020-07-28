@@ -1,0 +1,50 @@
+<?
+if(isset($this->inputGet->signOut)){
+	$news = new module_EmailNews($this->input);
+	list($state, $messages) = $news->signOut(urldecode(base64_decode($this->inputGet->signOut)));	
+	Helpers::addMessage($state, $messages, $this);	
+}
+?>
+
+<?
+$state = false;
+$categories = $this->cars->getCategories();
+
+$news = new module_EmailNews($this->input);
+/*
+$signed = $news->getSignedUser($this->webUser->email);
+$isSigned = count($signed);
+$filter = unserialize($signed['filter']);
+*/
+$this->input->kategorie = $this->input->kategorie?$this->input->kategorie:$filter['kategorie'];
+$this->input->kraje = $this->input->kraje?$this->input->kraje:$filter['kraje'];
+$this->input->typ = $this->input->typ?$this->input->typ:$filter['typ'];
+
+if(isset($this->input->sign)){
+	if($isSigned){
+		list($state, $messages) = $news->updateUser($this->webUser->email);
+	} else {
+		list($state, $messages) = $news->addUser($this->input->email);
+	}
+	
+	Helpers::addMessage($state, $messages, $this);
+}
+?>
+<?php if(count($this->messages)): ?>
+	<?= $this->render('parts/messages.phtml'); ?>				
+<?php endif; ?>
+
+
+<form action="<?=$_SERVER['REDIRECT_URL']?>" method="POST">
+<b>Váš email</b>
+<?=$this->formText('email', $this->input->email)?> 
+<div class="spacer10">&nbsp;</div>
+<b>Vyberte kategorie, z kterých chcete odebírat nově přidané nemovitosti.</b>
+<p>Pokud nevyplníte nic, budete dostávat novinky ze všech kategorií.</p>
+<div class="inputs">
+	<?= $this->formCheckboxGroup('kategorie', $this->input->kategorie , array('class' => 'w5', 'style' => 'float:left; width:45%;'), $categories) ?>
+</div>
+
+<div class="space">&nbsp;</div>
+<input name="sign" type="submit" class="button" title="Odeslat požadavek" value="Nastavit" />
+</form>

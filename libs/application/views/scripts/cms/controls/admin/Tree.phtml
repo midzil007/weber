@@ -1,0 +1,53 @@
+<div id="trees">
+<?php
+	switch ($this->curentController){
+		case 'sf':			
+			?>
+			<div dojoType="dojo.data.ItemFileReadStore" jsId="structure"
+				url="/data/tree/files.json<?=$this->forceReload?>" data-dojo-props="
+  rootId:'0', childrenAttrs:'children'"></div>
+			<div dojoType="AdvancedTree" id="maintree" jsId="maintree"
+				store="structure" query="{type:'FILETREE'}"  
+				labelAttr="name" typeAttr="type" path="<? echo $this->currentFsPath?>" curentNode="<?=$this->curentTreeNode?>">			
+			</div>	
+			<?
+			break;
+		case 'structure':
+			//  /*selectTreeNodeById(maintree,  '3810' );*/
+			?>
+			 
+ 
+			<div dojoType="dojo.data.ItemFileReadStore" jsId="structure"
+				url="/data/tree/<?=$this->registry->languages->langPrefix?>structure.json<?=$this->forceReload?>"  data-dojo-props="
+  rootId:'0', childrenAttrs:'children'"></div>
+			 
+			<div dojoType="AdvancedTree" id="maintree" jsId="maintree"
+				store="structure" query="{type:'TREE' }"  
+				labelAttr="name" typeAttr="type" path="<?=$this->currentNodePath?>">	 
+			</div>      
+						   
+			<?
+			break;  
+		default: 
+			?>			
+			<div dojoType="dojo.data.ItemFileReadStore" jsId="structure"
+				url="/data/tree/<?=$this->registry->languages->langPrefix?>structure.json<?=$this->forceReload?>"></div>
+			<div dojoType="AdvancedTree" id="maintree" jsId="maintree"
+				store="structure" query="{type:'TREE'}"
+				labelAttr="name" typeAttr="type" path="<?=$this->currentNodePath?>" curentNode="<?=$this->curentTreeNode?>">	
+			</div>
+			
+			<?
+			break;
+	}
+	if($this->showSysTree && $this->curentController!='sf'): ?>
+		<div class="spacer">&nbsp;</div>
+		<div dojoType="dojo.data.ItemFileReadStore" jsId="sysPages"
+			url="/data/tree/<?=$this->registry->languages->langPrefix?>syspages.json<?=$this->forceReload?>"></div>
+		<div dojoType="AdvancedTree" id="systree" jsId="systree"
+			store="sysPages" query="{type:'TREE'}"
+			labelAttr="name" typeAttr="type" path="<?=$this->currentSysPath?>"  curentNode="<?=$this->curentTreeNode?>">	
+		</div>
+	<? endif; 
+?>	
+</div>

@@ -1,0 +1,15 @@
+	<p>
+	Tato stránka neexistuje. Pokud zadáváte stránku ručně, zkontrolujte ji.
+	</p>			
+		<div class="spacer10"> </div>
+	<?$params['onWeb'] = 1;   
+		$params['showFirstVariant'] = true; 
+		$params['joinOption'] = false;
+			$this->souvisejici = $this->mProducts->getProducts('soldPrice','asc',0, 9,$params);
+	if($this->souvisejici):?>
+			<div class="best-sellers">  
+			  <h2><span>N</span>ejprodávanější na našem e-shopu</h2>
+			<? $this->onHp = true; ?> 
+           <?=$this->render('parts/alternativeProducts1.phtml'); ?>
+       </div>    
+      <?endif;?>

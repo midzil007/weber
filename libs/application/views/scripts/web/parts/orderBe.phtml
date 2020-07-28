@@ -1,0 +1,219 @@
+<? /*if($_GET['v2'] == 1){
+	//print_r($this->basket->voucher);
+	print_r($this->faktura->voucher);
+}*/?>
+<h3>Obj. č. <?=$this->order['id']?></h3>  
+<h2 style="margin-bottom:0px; padding-bottom:0px;">Objednal</h2>
+		    <?php 
+		    
+		    //pr($this->order); 
+		    //pr($this->faktura);  
+		    
+	 		
+		    ?>
+			 <Strong>
+                  Email: <?=($this->order['email'])?><br />  
+                  Telefon: <?=($this->order['phone'])?>  <br />  
+                  </Strong>    
+			<br />   
+			<? if($this->order['fu_ico']):?>
+			IČO: <?=$this->order['fu_ico']?> <br />
+			<? endif;?> 
+			<? if($this->order['fu_dic']):?>
+            DIČ: <?=$this->order['fu_dic']?> <br />
+            <? endif;?> 
+            <strong><?=$this->order['efullname']?></strong> <br />
+            <?=$this->order['ulice']?><br />
+			<?=$this->order['psc']?>, <?=$this->order['mesto']?><br />
+            
+            
+            <? if($this->order['fu_jmeno'] && $this->order['fu_ulice']): ?> 
+            <br />
+            <h2 style="margin-bottom:0px; padding-bottom:0px;">Dodací údaje</h2>
+             <strong><?=$this->order['fu_jmeno']?></strong> <br />
+            <?=$this->order['fu_ulice']?><br />
+			<?=$this->order['fu_psc']?>, <?=$this->order['fu_mesto']?><br /> 
+			<? endif; ?> 
+            <br />
+            
+            
+            
+		<h2 style="margin-bottom:0px; padding-bottom:0px;">Doprava a platba</h2> 
+		<?=$this->basket->getDelivery2($this->order['delivery'])?> <br />  
+		<?=$this->basket->getPayment2($this->order['delivery'], $this->order['payment'])?>
+		
+		
+		<h2 style="margin-bottom:0px; padding-bottom:0px;">Zboží</h2> 
+		
+		<table border="1" style="width:100%; border-collapse:collapse;">
+            	<tr>
+                	<td valign="top">
+                    	<strong>Zboží</strong>
+                    </td>
+                    <td valign="top">
+                    	<strong>Počet</strong> 
+                    </td>
+                    <td valign="top">
+                    	<strong>Cena</strong>
+                    </td> 
+                </tr>
+                
+           	<? 
+				$voucher = $this->faktura->voucher;
+				$mv = new module_Voucher();
+				if($voucher['znacky'])
+				{
+					$znacky = explode(',',$voucher['znacky']);
+					foreach($znacky as $znacka)
+						$znackyCiselnik[$znacka] = $mv->getZnackaByNodeId($znacka);
+				}
+				
+				foreach ($this->faktura->items as $item) :
+				if($this->faktura->isProforma === 1 || $this->faktura->isProforma === 5){
+					$price = $item->getPrice();
+					$sum = $this->faktura->sum; 
+				} else {
+					$price = $item->getPrice(); 
+					$sum = $this->faktura->sum;  
+				}    
+				$mySum = $item->getPrice(); 
+				if($voucher['znacky'])
+				{
+					if(isset( $znackyCiselnik[ $item->productZnacka ] ))
+						$discountSum += $mySum;
+					else
+						$noDiscountSum += $mySum;
+				}
+				elseif($voucher['productCode'])
+				{
+					//print_r($c->getPropertyValue('kod'));
+					//print_r($voucher['productCode']);
+					if($item->productKod == $voucher['productCode'])
+						$discountSum += $mySum;
+					else
+						$noDiscountSum += $mySum;
+				}
+				else // pouze stare vouchery nemaji ani jedno! ... => sleva na vse
+				{
+					$discountSum += $mySum;
+				}
+			?> 
+				<tr>
+                	<td valign="top">
+                    	<?=$item->title?>
+                    </td>
+                    <td valign="top">
+                    	<?=$item->count?>
+                    </td>
+                    <td valign="top">
+                    	<?=helper_FrontEnd::price($price)?> Kč
+                    </td> 
+                </tr>	
+				
+		 	<? endforeach; 
+		 	 
+		 	// $sum += $this->faktura->deliveryPrice; 
+		 	
+			
+			
+			
+			$dph = $sum / 1.21 * 0.21;   
+			$dph = round($dph, 2);    
+			$sumBezdph = $sum - $dph;   
+ 			
+			$celkem = round($sum);   
+			$price = $celkem;
+			$priceD = $discountSum + $this->faktura->deliveryPrice;
+			$priceN = $noDiscountSum; 
+			
+			if($voucher){
+				$oldPrice = $price;
+					if( ($voucher['type']==1) OR ($voucher['type']==3) ){
+						$total = $priceD*$voucher['value']/100;
+						$price = $price - $total;
+						$price = round($price);
+						$helpText .= $voucher['value'] . "%";
+						$voucher['value'] .= '% ('.$total.' Kč)' ;
+					}
+					else{
+						$price = $priceD - $voucher['value'];
+						if($price < 0)
+							$price = 0;
+						$price +=  $priceN;
+						$voucher['value'] .= ' Kč';
+						$helpText .= $voucher['value'];
+					}
+			}
+			?>
+                
+                <tr>
+                	<td valign="top"colspan="2" style="text-align:right" align="right">Celkem bez DPH:</td>
+                    <td valign="top" style="background:#F3F3F3;"><strong><?=$sumBezdph?> Kč</strong></td>
+                </tr>
+                <tr>
+                	<td valign="top"colspan="2" style="text-align:right" align="right">DPH (20%):</td>
+                    <td valign="top" style="background:#F3F3F3;"><?=$dph?> Kč</td>
+                </tr>
+                <? if($this->faktura->deliveryPrice): ?>   
+				<tr>
+                	<td valign="top"colspan="2" style="text-align:right" align="right">Doručení:</td>
+                    <td valign="top" style="background:#F3F3F3;"><?=helper_FrontEnd::price($this->faktura->deliveryPrice)?> Kč</td>
+                </tr>
+                <? endif;?> 
+				<? if($voucher):?>
+				<tr>
+                	<td valign="top"colspan="2" style="text-align:right" align="right">Mezisoučet</td>
+                    <td valign="top" style="background:#F3F3F3;"><strong><?=helper_FrontEnd::price($oldPrice)?> Kč</strong></td>
+                </tr>  
+				<tr>
+                	<td valign="top"colspan="2" style="text-align:right" align="right">Kupón <?=$voucher['title'].' ('.$voucher['code'].')'?></td>
+                    <td valign="top" style="background:#F3F3F3;"><strong>- <?=$voucher['value']?></strong></td>
+                </tr>  
+            <? endif;?>
+				<tr>
+                	<td valign="top"colspan="2" style="text-align:right" align="right">Celkem k úhradě:</td>
+                    <td valign="top" style="background:#F3F3F3;"><strong><?=helper_FrontEnd::price($price)?> Kč</strong></td>
+                </tr>  
+				 
+            </table>
+            
+		<?php   
+/*
+		$sumAll = $this->order['suma']; 
+		$delivery = $this->order['deliveryPrice'];   
+		$discount = 0; 	   
+			$delivery = $delivery?$delivery:0;	                       	                       	
+			$sum = $sumAll - $discount ;
+			$dph = $sum / 1.2 * 0.2;   
+			$dph = round($dph, 2);    
+			$sumBezdph = $sum - $dph; 
+			$price = $sum; 
+					if($voucher){
+$oldPrice = $price;
+	if($voucher['type']==1){
+		$total = $price*$voucher['value']/100;
+		$price = $price - $total;
+		$price = round($price);
+		//$voucher['value'] .= '% ('.$total.' Kč)' ;
+	}
+	else{
+		$price = $price - $voucher['value'];
+		if($price < 0)
+			$price = 0;
+		//$voucher['value'] .= ' Kč';
+	}
+}*/
+			 
+		?>
+		<h2 style="margin-bottom:0px; padding-bottom:0px;">Cena</h2> 
+             Cena zboží bez DPH: &nbsp;&nbsp;<span><?=helper_FrontEnd::price($sumBezdph)?> Kč</span><br /> 
+             DPH 21%: &nbsp;&nbsp;<span><?=helper_FrontEnd::price($dph)?> Kč</span><br /> 
+            <? if($delivery):?>
+             Doprava s DPH 21%: &nbsp;&nbsp;<span><?=helper_FrontEnd::price($delivery)?> Kč</span><br /> 
+            <? endif;?>
+			<? if($voucher):?> 
+			Mezisoučet: <span><?=helper_FrontEnd::price($oldPrice)?> Kč</span><br />
+            Kupón <?=$voucher['title'].' ('.$voucher['code'].')'?>: <span>- <?=$voucher['value']?></span><br />
+            <? endif;?>
+            <strong>Celkem k úhradě: &nbsp;&nbsp;<span><?=helper_FrontEnd::price($price)?> Kč</span></strong>   
+	 	

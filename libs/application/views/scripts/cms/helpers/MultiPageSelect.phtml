@@ -1,0 +1,69 @@
+
+<?php 
+
+	$ident = $this->pageSelectName;  
+?>
+
+	
+			<?= $this->formTextarea($this->pageSelectName . '_title', $this->pageSelectValueShow, array('onclick' => '$( "#dialog-form_'.$ident.'" ).load(\'' . $this->pageSelectUrl . '\').dialog( "open" ); return false;','onkeypress' => 'return false;', 'style' => 'border:1px solid #d1d1d1; background:#FFFFFF; width:100%;  height:35px; overflow:auto;"')) ?>
+			<?
+				echo $this->formSubmit(
+					$this->pageSelectName . '_trigger', 'Vybrat / Změnit', 
+					array(
+						'onclick' => '$( "#dialog-form_'.$ident.'" ).load(\'' . $this->pageSelectUrl . '\').dialog( "open" ); return false;'  
+					)
+				);      
+			?>						
+			<?= $this->formHidden($this->pageSelectName, $this->pageSelectValue) ?>  
+			 
+			
+		<div id="dialog-form_<?=$ident?>" title="Vyberte">    
+		    
+		</div>
+		  
+		<div class="cb">&nbsp;</div>
+		  
+		   
+		<script>
+  
+		
+  $(function() { 
+ 
+    $( "#dialog-form_<?=$ident?>" ).dialog({  
+      autoOpen: false,
+      height: 600,
+      width: 550,
+      modal: true, 
+      buttons: { 
+        "Vybrat": function() {
+          var bValid = true;
+          if ( bValid ) {
+        	  selectedTitles = new Array();    
+        	  selectedIds = new Array();  
+
+					$('#dialog-form_<?=$ident?> input:checked').each(function() {
+        		  selectedTitles.push($(this).attr('title'));
+        		  val = $(this).attr('name');
+            	  val = val.replace("row_", "");
+        		  selectedIds.push(val);  
+        		  
+        		});
+ 			 
+
+        		$('#<?=$this->pageSelectName?>').val(selectedIds.join('|'));
+        		$('#<?=$this->pageSelectName?>_title').val(selectedTitles.join(', '));
+
+        		$( this ).dialog( "close" ); 
+          }  
+        },
+        "Zrušit": function() {
+          $( this ).dialog( "close" );
+        }
+      },
+      close: function(){
+      	
+      }
+    });
+  
+  });
+  </script>

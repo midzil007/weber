@@ -1,0 +1,48 @@
+<div id="err"></div>
+<form action="" method="post" id="uploadForm" enctype="multipart/form-data">
+<?php echo $this->formHidden('filenode',$this->filenode->nodeId, array('class'=>'ftext')) ?>
+<table class="modalTable">	
+	<? if($this->inVersions == 0 && $this->directUploadCallback == ''): ?>
+	<tr>
+		<td class="formcell tkey">Název</td>
+		<td class="formcell">
+			<?php echo $this->formText('fileName',$this->fileName, array('class'=>'ftext', 'style' => 'z-index:999;')) ?>
+			<a class="helpico" href="#" title="Pokud nevyplníte použije se název souboru.">&nbsp;</a>
+		</td>
+	</tr>
+	<!--
+	<tr>
+		<td class="formcell">Popis</td>
+		<td class="formcell"><?php echo $this->formTextarea('fileDescription',$this->fileDescription, array('class'=>'ftext')) ?></td>
+	</tr>	
+	-->
+	<? endif; ?>
+	<tr>
+		<td class="formcell tkey">Soubor</td>
+		<td class="formcell">
+			<?= $this->render('controls/admin/content/_File.phtml'); ?>
+		</td>  
+	</tr>				
+	<tr>	
+		<td class="formcell" colspan="2">		
+		<?
+		$directUpload = 0; 
+		$inVersion = 0;
+		$title = 'Nahrát';
+		
+		if($this->inVersions != 0){
+			$inVersion = 1;
+			$title = 'Nahrát novou verzi';
+		}
+		
+		if($this->directUpload){
+			$directUpload = 1;
+		}
+		
+		?>  
+		<?php echo $this->formSubmit('saveFileContentB', $title, array('class'=>'fsubmit', "onclick" => "return uploadFile('" . $this->url(array('controller' => 'sf','action' => 'list')) . "', $inVersion, $directUpload, '$this->directUploadCallback')", 'iconClass' => "noteIcon")) ?>		
+		</td>
+	</tr>
+</table>
+</form>
+		

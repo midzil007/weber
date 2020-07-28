@@ -1,0 +1,1 @@
+{"test":false,"price":1990,"curr":"CZK","status":"PENDING"}

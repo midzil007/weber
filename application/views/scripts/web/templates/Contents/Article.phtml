@@ -1,0 +1,108 @@
+<div class="article-content"><?= $this->html ?> 
+<div class="spacer20"></div> 
+<?$images = helper_FrontEnd::getResizedPhotos($this->photos, 'pThumb', 'pFull');
+		$imagesMini = helper_FrontEnd::getResizedPhotos($this->photos, 'pMini', 'pFull');?>
+		 <div id="gallery" class="artice-mini">
+		 				<?$str = 1; 
+		 				$inc = 0;
+							
+                    		foreach($images as $im):
+								$cp = '';
+                    			if(($str % 3) == 0):
+									$cp = 'lst';
+                    			endif;?>
+                    			<div class="gimg ">
+                    				<a href="<?=$this->node->path?>" title="" class="mb <?=$cp?> img-responsive openGallery" <?=$inc == 0 ? 'id="mb1"' :''?> rel="[images]" data-counter="<?=$inc?>"><img class="imges-clas" src="<?=$im['path']?>" alt="gal" /></a>
+                    			</div>
+                    		<?$inc++; 
+							$str++;
+                    		endforeach;?>
+                       <div class="clear"></div>
+         </div><!-- /productGallery -->   
+
+
+
+<?if($images):?>
+ 
+<div id="photoGalleryPop" class="hidden">
+<div id="galleryTop"><span id="photoDescription">Test description</span><span id="closeGallery" class="pull-right"><strong>zavřít ×</strong></span>
+<div class="clear"></div>
+</div><!-- /galleryTop -->
+
+    <!-- You can move inline styles to css file or css block. -->
+ <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 1200px;
+        height: 855px; background: #fff; overflow: hidden;"><!--h456 w800-->
+
+        <!-- Loading Screen -->
+        <div u="loading" style="position: absolute; top: 0px; left: 0px;background: #fff;">
+            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+                background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+            <div style="position: absolute; display: block; background: url(/img/loading.gif) no-repeat center center;
+                top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+        </div>
+  <style>
+            /* this line can be removed, but it really helps in case of css conflicts in your page */
+            .slider1 div { position: relative; margin: 0px; padding: 0px; }
+        </style>
+
+        <!-- Slides Container -->
+        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 1200px; height: 656px; overflow: hidden;"><!--h356 w800-->
+        	<?$inc = 0;
+        	foreach($imagesMini as $im):?>
+            <div>
+            	<img u="image" src="<?=$im['fullPath']?>" alt="gal" class="original<?=$inc?>" /> 
+            	<img u="thumb" src="<?=$im['path']?>" alt="gal" />                       
+				<div class="multiBoxDesc gal<?=$inc?> mbHidden"><?=$im['meta']['fileAlt']?></div>
+            </div>
+            <?$inc++;endforeach?>
+        	      
+        </div>
+                
+       
+        <!-- Arrow Left -->
+        <span u="arrowleft" class="jssora05l" style="width: 40px; height: 40px; top: 308px; left: 8px;"><!--top158-->
+        </span>
+        <!-- Arrow Right -->
+        <span u="arrowright" class="jssora05r" style="width: 40px; height: 40px; top: 308px; right: 8px"><!--top158-->
+        </span>
+        <!-- Arrow Navigator Skin End -->
+        
+        <!-- Thumbnail Navigator Skin Begin -->
+        <div u="thumbnavigator" class="jssort01" style="position: absolute; width: 1200px; height: 100px; left:0px; bottom: 0px;"><!--w800 h100-->
+               <div u="slides" style="cursor: move;">
+                <div u="prototype" class="p" style="position: absolute; width: 72px; height: 72px; top: 0; left: 0;">
+                    <div class=w><thumbnailtemplate style=" width: 100%; height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate></div>
+                    <div class=c>
+                    </div>
+                </div>
+            </div>
+            <!-- Thumbnail Item Skin End -->
+        </div>
+        <!-- Thumbnail Navigator Skin End -->
+    </div>
+    <!-- Jssor Slider End -->
+</div> <!-- /photoGalleryPop -->
+<?endif;?>
+	<?unset($this->documents[1]);
+										if(count($this->documents)):
+											?>
+											 <div id="dl">
+												<h4>Ke stažení:</h4>
+												<?  
+												foreach ($this->documents as $filepath => $name): 
+													$fullpath = content_SFSFile::getFileFullPath($filepath);
+													$ico = Utils::getFileIcoImage($fullpath);
+													?>	
+													<?= $ico ?> 
+													<a title="Otevřít '<?= $name ?>' do nového okna" target="_blank" href="<?=$filepath?>"> <?= $name ?> <i><?=Utils::getWebFileSize($fullpath)?></i></a> <br />														
+																	
+													<? 
+												endforeach; 	
+												?>
+											</div>
+											<?			
+										endif;	
+										?>	
+</div>  

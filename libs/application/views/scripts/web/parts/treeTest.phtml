@@ -1,0 +1,63 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/jstree/jquery.jstree.js"></script>
+
+</head>
+
+<body>
+<?php
+function renderTree($node)
+{
+	echo "<ul>";
+	foreach($node as $item):
+		?>
+		<li id="<?=$item['id']?>">
+			<a><?=$item['name']?></a>
+			<?=renderTree($item['children']);?>
+		</li>
+		<?
+	endforeach;
+	echo "</ul>";
+}
+?>
+<form method="POST">
+<div id="treeWrapper">
+<?=renderTree($this->data)?>
+</div>
+<input type="submit">
+</form>
+<script type="text/javascript">
+$(function(){
+	var tree = jQuery("#treeWrapper").jstree({
+        "plugins" : [ "themes", "html_data", "checkbox", "themes", "types", "ui" ],
+        /*"checkbox": { 	"override_ui" : "true",
+            			"real_checkboxes" : "false",
+            			"two_state" : "false" },
+        "themes": {		"icons" : false},
+        "types" : 	{
+            "types" :	{
+                "default" : {
+                    "select_node" : function(e){
+                        				this.toggle_node(e);
+                        				return false;
+                        			}
+                    		}
+                		}
+            		},*/
+        "checkbox": {	"override_ui" : "true",
+            			"two_state" : "true",
+            			"real_checkboxes" : "true"},
+		"ui" : { "initially_select" : [ "971" ]}
+    });
+
+	tree.bind("loaded.jstree", function (event, data) {
+        tree.jstree("open_all");
+    });
+});
+
+</script>
+
+</body>
+</html>

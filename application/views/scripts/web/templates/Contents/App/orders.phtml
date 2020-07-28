@@ -1,0 +1,128 @@
+<?
+if(isset($this->input->send) || $this->input->send_x){
+	$webForm = new module_WebForm($this->input);	
+	
+	$text = '
+		<h2 style="color:#0f4096; font-size: 12px;">Objednávka z webu</h2>
+		<table style="font-size: 11px; color: #708490;">
+			<tr><td>Jméno:</td><td>' . $webForm->fullname . '</td></tr>
+			<tr><td>Email:</td><td>' . $webForm->email . '</td></tr>
+			<tr><td>Telefon:</td><td>' . $webForm->input->tel . '</td></tr>
+			<tr><td>Fax:</td><td>' . $webForm->input->fax . '</td></tr>
+			<tr><td colspan="2">&nbsp;</td></tr>
+			<tr><td>Firma:</td><td>' . $webForm->input->firma . '</td></tr>
+			<tr><td>Město:</td><td>' . $webForm->input->mesto . '</td></tr>
+			<tr><td>Ulice:</td><td>' . $webForm->input->ulice . '</td></tr>
+			<tr><td>IČO:</td><td>' . $webForm->input->ico . '</td></tr>
+			<tr><td>DIČ:</td><td>' . $webForm->input->dic . '</td></tr>
+			<tr><td colspan="2">&nbsp;</td></tr>
+			<tr><td>Zpráva:</td><td>' . nl2br($webForm->input->note) . '</td></tr>
+		</table>				
+		
+	';
+	
+	$mandatory = array(
+		'fullname',
+		'email'
+	);
+	list($state, $messages) = $webForm->sendEmail($text, $mandatory	);
+	Helpers::addMessage($state, $messages, $this);
+}
+
+?>
+<div class="header">OBJEDNÁVKA</div>
+
+<?php if(count($this->messages)): ?>
+	<?= $this->render('parts/messages.phtml'); ?>				
+<?php endif; ?>
+
+<? if(!$state): ?>
+<br />
+<form action="<?=$_SERVER['REDIRECT_URL']?>" method="POST">
+    <input type="hidden" name="odeslat" value="objednavka">
+    <?=$this->formHidden('subject', 'WWW - objednávka')?>	
+    <table id="obj">
+        <tr>
+            <td class="subtitle">Jméno</td>
+            <td class="subtitle"><?=$this->formText('fullname', $this->input->fullname)?></td>
+            <td class="subtitle">Firma:</td>
+            <td class="subtitle"><?=$this->formText('firma', $this->input->firma)?></td>
+            <td class="subtitle"> Ulice:</td>
+            <td class="subtitle"><?=$this->formText('ulice', $this->input->ulice)?></td>
+        </tr>
+        <tr>
+            <td class="bold"> Město<strong>:</strong></td>
+            <td class="bold"><?=$this->formText('mesto', $this->input->mesto)?></td>
+            <td class="bold"> IČO:</td>
+            <td class="bold"><?=$this->formText('ico', $this->input->ico)?></td>
+            <td class="bold"> DIČ:</td>
+            <td class="bold"><?=$this->formText('dic', $this->input->dic)?></td>
+        </tr>
+        <tr>
+            <td class="subtitle"> Tel.:</td>
+            <td class="subtitle"><?=$this->formText('tel', $this->input->tel)?></td>
+            <td class="subtitle"> Fax:</td>
+           	<td class="subtitle"><?=$this->formText('fax', $this->input->fax)?></td>
+            <td class="subtitle"> Email:</td>
+            <td class="subtitle"><?=$this->formText('email', $this->input->email)?></td>
+        </tr>
+        <!--
+<br /><br />
+<table width="95%" cellspacing="0">
+	<tr>
+		<td class="subtitle">VÝROBEK:</td><td class="subtitle">NAPÁJENÍ:</td><td class="subtitle">ROK VÝROBY:</td><td class="subtitle">OPRAVIT/ KOUPIT:</td>
+	</tr>
+	<tr>
+		<td><select name="vyrobek"size=1>
+
+	<option value="695">Cash flow 695</option>
+	<option value="694">Cash flow 694</option>
+	<option value="690">Cash flow 690</option>
+	<option value="560">Cash flow 560</option>
+	<option value="350">Cash flow 350</option>
+
+	<option value="340">Cash flow 340</option>
+
+	<option value="330">Cash flow 330</option>
+	<option value="cf126">Cash flow 126</option>
+	<option value="1900">ME 1900-4</option>
+	<option value="100">MS 100/111</option>
+	<option value="115">MS 115</option>
+
+	<option value="me126">ME 126/129</option></select></td><td><select name="napajeni">
+
+	<option>230 V
+	<option>110 V
+	<option>24 V
+	<option>12 V</select></td><td><select name="rok"size=1>
+	<option value="&lt;1994">STARŠÍ JAK 1994</option>
+	<option value="1995">1995</option>
+
+	<option value="1996">1996</option>
+	<option value="1997">1997</option>
+
+	<option value="1998">1998</option>
+	<option value="1999">1999</option>
+	<option value="2000">2000</option>
+	<option value="2001">2001</option>
+
+	<option value="2002">2002</option>
+	<option value="2003">2003</option>
+
+	<option value="2004">2004</option></select></td><td><input type="radio" name="co" value="Oprava" checked>Opravit
+	<input type="radio" name="co" value="Koupì">Koupit</td>
+	</tr>
+-->
+        <tr>
+            <td colspan="6">
+            	<?=$this->formTextarea('note', $this->input->note, array('rows' => 6))?>
+                <br/>
+                <br/>
+                <?= $this->render('parts/SecurityCode.phtml'); ?>		
+				<div class="space">&nbsp;</div>
+                <input type="submit" name="send" value="Odeslat" />
+            </td>
+        </tr>
+    </table>
+</form>
+<? endif; ?>

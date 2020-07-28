@@ -1,0 +1,287 @@
+<?php
+
+$enerClass = $this->mProducts->getOptions('enerClass',$this);
+$color = $this->mProducts->getOptions('color',$this);
+$sort = $this->inputGet->sort?$this->inputGet->sort:'priceasc'; 
+?>
+<form id="sSubmit">
+<div id="sFilter marBottom5">
+	<div class="fLeft posRelative" id="filterElText">Filtr:</div>
+		<?if($enerClass):?>
+			<?=$this->formHidden('enerclass')?>
+  	  		<div class="fLeft marRight5 filterLeft"><strong>Materiál:</strong></div>
+  				<div class="filterEl fLeft posRelative">
+  					<span id="fitrMatSwith1">všechny</span>
+  					<div id="fitrMat1" class="option" style="display: none;">
+  						<?foreach ($enerClass as $key=>$val):?>
+  			  				<a href="#" rel="eneClass" atr="<?=$key?>"><?=$val?></a>
+  				  		<?endforeach;?>
+  					</div>
+  				</div>
+  		<?endif;?>
+  	  	<div class="fLeft marRight5 filterLeft"><strong>Barva:</strong></div>
+  	  	<div class="filterEl fLeft posRelative">
+  		<span id="fitrMatSwith2">všechny</span>
+  		<div id="fitrMat2" style="display: none;">
+  				  	<?foreach ($color as $key=>$val):?>
+  			  				  	<a href="?color=<?=$key?>"><?=$val?></a>
+  				  <?endforeach;?>
+  		</div>	
+  		</div>
+		  	<div class="fLeft marRight5 filterLeft"><strong>Technologie:</strong></div>
+  	  	<div class="filterEl fLeft posRelative">
+  			S BioFresh<?=$this->formCheckbox('bioFresh')?>
+  		</div>
+  </div>
+ </form>
+	<h1><?=$this->pageTitleRaw?></h1>
+	<?if(!$this->inputGet->sort):?> 
+		<div id="pageTopText">
+			<?=$this->pageText?> 
+		</div>
+	<?endif;?> 	
+<?
+$params['onSection'] = true;
+$producs = $this->mProducts->getProducts('sold','asc',0,2,$params);?>
+
+
+      <script type="text/javascript">
+            var maxx = <?=count($producs)?>;
+            window.addEvents({
+                'domready': function(){
+
+                    periodical = slideTips.periodical(5000); 
+						     
+                    $('slider-items').addEvent('mouseleave', function() { 
+                        $clear(periodical);  
+                        periodical = slideTips.periodical(5000);
+                    }); 
+						 
+                    $('slider-items').addEvent('mouseenter', function() { 			
+                        $clear(periodical);
+                    });  
+                }
+            }); 
+
+        </script>  
+
+           <div id="slider">
+                        <div id="slider-inner">
+                            <div id="slider-items">
+                            <?
+                            $zIndex = 9;
+                            $i=1;
+                            foreach ($producs as $prod):?>    
+                                <div class="panel  zindex<?=($zIndex--)?>" id="tip<?=$i?>">
+                                	<div class="inner">
+                                    	<?=$this->mProducts->renderBanerProduct($this,$prod);?>
+                                    </div>
+                                </div>
+                                <?$i++;?>
+                            <?
+                            endforeach;
+                            ?> 
+                            </div>
+                        </div>  
+                        <div class="control">
+                        
+                        <? for($index = 1; $index <= count($producs); $index++):?> 
+                        	<a href="#" id="tipTrigger<?=$index?>" onclick="return showTip(<?=$index?>)" <? if($index == 1):?>class="active"<? endif; ?>></a>
+                        <? endfor; ?> 
+                        </div>
+                    </div>
+<div class="clear"></div>
+	<div id="listing" <?=$this->inputGet->filter>0?'style="margin-top:200px"':''?>>	
+	<form method="get" name="pfilter"  id="pfilter">
+<div class="clear"></div>
+<div class="spacer10"></div>
+		<div class="sort">
+
+				<?=$this->formHidden('sort', $this->inputGet->sort)?>
+				<a <?=($sort=='soldPrice'?'class="selected textNoDec i-block fs17 fLeft posRelative"':'class="i-block textNoDec fs17 fLeft posRelative"')?> onclick="return submitFilter('sort', 'soldPrice')" href="Javascript://">Nejprodávanější</a>	
+	  			<a <?=($sort=='priceasc'?'class="selected textNoDec i-block fs17 fLeft posRelative"':'class="i-block textNoDec fs17 fLeft posRelative"')?> onclick="return submitFilter('sort', 'priceasc')" href="Javascript://">Od nejlevnejšího</a>
+	  			<a <?=($sort=='pricedesc'?'class="selected textNoDec i-block fs17 fLeft posRelative"':'class="i-block textNoDec fs17 fLeft posRelative"')?> onclick="return submitFilter('sort', 'pricedesc')" href="Javascript://">Od nejdražšího</a>
+	  			<a <?=($sort=='dateCreate'?'class="selected textNoDec i-block fs17 fLeft posRelative"':'class="i-block textNoDec fs17 fLeft posRelative"')?> onclick="return submitFilter('sort', 'dateCreate')" href="Javascript://">Od nejnovějšího</a>
+	
+		</div>
+		<div class="fRight"> 
+		<span class="count"><?=$count?> <?=$this->mProducts->getWordProdukt($count)?></span>
+			<?=$this->render('templates/Listing/Floating.phtml');?>
+	</div>	
+	</form>
+	<div class="clear"></div>
+	<div class="listing">
+		<div class="clear"></div>
+		<div class="listing-inner fLeft" id="infinity" <?=$this->schema?'itemscope itemtype="http://schema.org/Product"':''?>>
+	
+			<?
+          		$deleno = 1;
+          		$x = 0;
+          		$al = 1;
+            	foreach ($this->products as $product):
+            	//if pr($product['id_option']);
+            		$x++;
+            		$class1="";
+            		if($x % 3==0 ){
+            			$class1="";
+            		}
+            		$url = $product['path'];
+            		$difp = '';
+            		$difArray[] = $product['discount'];
+            		$priceArray[] = $product['price'];
+            		list($totalRev,$rev) = $this->mReviews->showSingleRev($product['id']);
+            		$photos = $this->mVarianta->getResizedPhotos($product['obrazky']);
+            		//$selectedVariant = $this->mVarianta->getVariantById($product['variantId']);
+            		
+            		$p = helper_FrontEnd::getFirstPhoto($photos,'pShow2' , false);
+            		$urlVar = $this->showVariantId ? '?variantId='.$product['variantId'] : '';
+            		//$p = helper_FrontEnd::getPhoto('varianta_'.$activeVariant['variantId'].'_obrazky', $c, $c->fotoCropShow2Name);
+            		$difp = $product['discount'] ? '-' . $product['discount'] . '% ' : '';
+            		$kotva = $al == 15?'id="all"':'';?>
+            		<div class="item fLeft posRelative <?=$class1?>" id="<?=$product['id']?>">
+       					<div class="posAbsolute prodPriznaky">
+ 							<?if($product['discount']>0):?>
+ 								<span class="blockDisplay discount">
+ 								<span class="fBold white fs16 marLeft10 i-block marTop5">-30%</span></span>
+ 							<?endif;?>
+ 							<?if($product['novinka']):?>
+ 								<span class="blockDisplay  novinka"></span>
+ 							<?endif;?>
+ 							<?if($product['akce']):?>
+ 								<span class="blockDisplay  akce"></span>
+ 							<?endif;?>
+ 							<?if($product['enerClass'] > 2 ):?>
+ 								<span class="blockDisplay  ECO" ></span>
+ 							<?endif;?>
+ 							<?if($product['enerClass'] > 0 ):?>
+ 								<span class="blockDisplay fRight  enerClass">
+ 									<span class="fBold fs16 marLeft10 greenColor1 i-block"><?=$this->mVarianta->variantProperty['enerClass']['selection'][$product['enerClass']]?></span>
+ 								</span>
+ 							<?endif;?>
+ 						</div>
+            				<h3>
+								<a <?=$this->schema?'itemprop="url"':''?> <?=$kotva?> href="<?=$url?><?=$urlVar?><?=$kotva?>">
+								<?$sTitle = $product['seoTitle']?', '.$product['seoTitle']: '';?>
+									<span class="fs17 fBold" <?=$this->schema?'itemprop="name"':''?>><?=$product['title']?><?=$sTitle?></span>
+								</a>
+		   					</h3>	        
+		   					<p class="fs13 preText"><?=helper_FrontEnd::reduceText($product['preText'],170);?></p>
+                            <div class="img posRelative tAlignCenter">
+								<div>
+     	                         	<a href="<?=$url?><?=$urlVar?>"><img <?=$this->schema?'itemprop="image"':''?> src="<?=$p['path']?>" title="<?=$altTitle?>" alt="<?=$altTitle?>"></a>
+                                </div>
+                                <?if($totalRev->total>0):?>
+									<div class="posAbsolute fLeft producstStars">
+											<span class="emptyStarsMini marRight3 i-block vAlingMid">
+											<span class="i-block fullStarsMini" style="width:<?=$totalRev->total*19?>px;" class="fullStarsMini"></span>
+										</span>
+									</div>
+								<?endif;?> 
+                            </div>
+							<div class="fLeft Pd">	
+ 								<p <?=$this->schema?'itemprop="offers" itemscope itemtype="http://schema.org/'.$googleOffer.'"':''?> class="price fLeft" <?=$s?>>
+ 					 			<strong><span class="fs21 red" <?=$googlePrice?>><?=helper_FrontEnd::price(round($product['price']))?> </span><span class="fs16 red">Kč</span></strong>
+                                <?if($product['discount']):?>
+                                	<span class="redBgr white fBold fs12">-<?=$product['discount']?>%</span><span class="tLineThrough fs12 colorGrey<?=$s?>"><?=helper_FrontEnd::price(round($product['price2']))?> Kč</span>
+                                <?endif;?>
+                               
+             					</p>
+             					<p class="fRight marTop5">
+             						<?if($this->showPrice):?>
+             							<?=helper_FrontEnd::price(round($product['priceNakup']))?> Kč
+             						<?else:?>
+             							<a href="<?=$product['path']?>"  class="smallBuy blockDisplay"></a>
+             						<?endif?>
+             					</p>
+ 				           </div>
+                            <div class="clear"></div>
+                            <p class=".i-table">
+           						 <span class="fs13 greySk i-block marRight10">SKLADEM ANO</span>
+           						 <span class="fs13 colorGrey i-block marRight10">ZÁRUKA 2+3 ROKY</span>
+           					 	<span class="vahaIco i-block vAlingMid"></span>
+             				</p>
+                        </div>		             
+              <? $al++; 
+              if($class1 ==' lst'):?>
+                            <div class="clear"></div>  
+                            <?endif; 
+              endforeach;?>
+              </div> 
+				<div class="clear"></div>                 
+          </div>
+         <?$this->pagginatorClass = 'fRight';?>
+         <?if($nextProdCount>0 && !$this->inputGet->all):
+         $path = $this->url;
+         $a['all']=1;
+         $path =  Utils::addUrlParams($path, $a);?>
+          
+          <?endif;?> 
+                       <?=$this->render('templates/Listing/Floating.phtml'); ?>
+    </div>
+           <div class="clear"></div>
+      <?$dif  = max($difArray)>0?', sleva až '.max($difArray).'%':''?>
+      <p><?=$this->pageTitle.' od '.helper_FrontEnd::price(round(min($priceArray))).' Kč do '.helper_FrontEnd::price(round(max($priceArray))).' Kč'.$dif?></p>
+      <p><?=$this->pageTi?$this->pageTi:'Nejprodávanější '?> zboží v sekci <?=$this->title?> jsou: 
+      <?
+      $this->pageTitleRaw .= ' od '.helper_FrontEnd::price(round(min($priceArray))).' Kč';
+      $i = 0;
+      
+      $seoProduts = $this->mProducts->getProducts($tableSort, $tableSortType, 0, 3, $this->params);
+      $seoProdutsCount = count($seoProduts);
+      foreach ($seoProduts as $val):
+      	$i++;?>
+      	<?=$val['title']?><?=$i!=$seoProdutsCount?',':''?>
+      <?endforeach;?>
+      </p>
+          <script type="text/javascript">
+          function submitFilter(v, val){   
+          	if(v){ 
+          		$(v).set('value', val);
+          	}
+				document.getElementById('pfilter').submit();
+				return false; 
+      	}
+    		if($('fitrMatSwith1')){
+              	  $('fitrMatSwith1').addEvent('click', function(){ 
+                		if( $('fitrMat1').getStyle('display')  == 'none')
+        				{
+        					$('fitrMat1').setStyle('display', 'block');
+        				}
+        				else
+        				{ 
+        					$('fitrMat1').setStyle('display', 'none');
+        					
+        				}
+                  	  
+                  	  });
+                	$('fitrMat1').addEvent('mouseleave', function(){ 
+            			$('fitrMat1').setStyle('display', 'none');
+              	  });
+    		}
+    		
+    		if($('fitrMatSwith2')){
+                	$('fitrMatSwith2').addEvent('click', function(){ 
+                		if( $('fitrMat2').getStyle('display')  == 'none')
+        				{
+        					$('fitrMat2').setStyle('display', 'block');
+        				}
+        				else
+        				{ 
+        					$('fitrMat2').setStyle('display', 'none');
+        					
+        				}
+                  	  
+                  	  });
+
+                	$('fitrMat2').addEvent('mouseleave', function(){ 
+                			$('fitrMat2').setStyle('display', 'none');
+                  	  });
+
+       
+                    
+                   
+    		}
+         	      
+          </script>
+
+		

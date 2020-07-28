@@ -1,0 +1,26 @@
+<?
+$link  = null;
+if($this->showEvent){
+ 	$link = "onclick=\"_gaq.push(['_trackEvent', 'Banner', 'PravýBanner', '".$this->escape($this->bFile)."']);\"";
+};
+if($this->homePage)
+{
+	$link = "onclick=\"_gaq.push(['_trackEvent', 'HPBanner', 'Homepage', '".$this->escape($this->bFile)."']);\"";
+}
+
+if($this->isExternal){       
+	
+	$aaa = explode('/', $this->bFile);
+	$btitle = array_pop($aaa);
+	$btitle = current(explode('.', $btitle));  
+	$this->bTarget = '_blank';
+	$this->bUrl .= '?rightExternalBanner=1&amp;utm_source=galerie&amp;utm_medium=banner&amp;utm_campaign=pravy&amp;utm_content=' . $this->escape($btitle);
+	$this->bFile = str_replace('/data', Utils::getWebUrl() . '/data', $this->bFile); 
+}      
+?>   
+<?if(!$this->disableMoore):?>
+ <div class="inner">
+ 	<a class="more" href="<?=$this->escape($this->bUrl)?>">» <span>Další informace</span><span class="end"></span></a>
+</div>
+<?endif;?> 
+<a href="<?=$this->escape($this->bUrl)?>" <?=$link?>><img src="<?=$this->escape($this->bFile)?>" alt="" /></a> 

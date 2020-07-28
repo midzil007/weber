@@ -1,0 +1,39 @@
+.banners{
+	width:98%;
+}
+
+.bannerPosition{
+	width:98%;
+}
+
+.banner{
+	width:98%;
+	margin:15px 1% 5px 1%;
+	border:1px solid #cad8f0;		
+}
+
+.banner td{
+	vertical-align:top;
+	padding:4px;
+}
+
+.banner td.show{
+	overflow:scroll;
+	width:400px;
+	border:1px dotted #CCCCCC;
+}
+
+.bs1{ width:100px; }
+.bs3{ width:80px; }
+.bs2{ width:320px; }
+
+.addB{
+	padding:5px 0px 5px 7px;
+}
+
+.bPreview{
+	width:320px;
+	height:250px;
+	background:none;
+	border:none;
+}

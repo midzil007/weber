@@ -1,0 +1,15 @@
+<table>	
+	<tr>
+		<td class="formcell tkey" style="width:160px;">Zobrazit stránku v těchto jazycích</td>
+		<td class="formcell">
+		<?
+//e($this->node->showInLanguages);
+
+?>
+			<?php echo $this->formCheckboxGroup('showInLanguages',$this->node->showInLanguages, array('class'=>'ftext', 'style' => 'width:inherit; padding:5px 0px;'), $this->languages->availableLanguages) ?>		
+			
+			<br />
+			<p>Pokud tato stránka ještě ve zvolených jazicích neexistuje, překopírují se do ní data z aktuální jazykové verze.</p>	 
+		</td>
+	</tr>	
+</table>

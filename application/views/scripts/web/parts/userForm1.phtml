@@ -1,0 +1,123 @@
+<script type="text/javascript">
+            window.addEvents({'domready': function(){
+            	var Tips1 = new Tips($$('.Tips1'));}
+        }); 
+	</script>  
+<?if(!$this->eshop):?>
+	<h1>Vaše údaje</h1>
+	<?$text = 'Registovat';?>
+	<?$height = 170;?>
+<?else:?>
+	<?$height = 170;?>
+	<div class="blockTitle">
+		<p>Vaše údaje</p>
+	</div>
+	<?$text= "Další krok";?>
+<?endif;?>
+
+		<div id="regInformation">
+	<?if(!$this->eshop):?>
+		<form method="post">
+	<?endif;?> 
+		
+		<div class="rozbaleny">
+		 
+                <table class="reg">
+                  <tr>
+                  	<td class="regAling label">Jméno a příjmeni: <span class="cred">*</span></td>
+                  	<td><?=$this->formText('fullname', $this->input->fullname)?></td>
+                  	<td class="regAling labelr">Telefonní číslo: <span class="cred">*</span></td>
+                  	<td>+420<?=$this->formText('telefon', $this->input->telefon, array('class'=>'phone','maxlength'=> '10'))?></td>
+                  </tr>
+                  <tr>
+                  	<?$this->input->email = !$this->input->email? '@':$this->input->email;?>
+                  	<td class="regAling label">E-mail: <span class="cred">*</span></td>
+                  	<td><?=$this->formText('email', $this->input->email)?></td>
+                  	<?if(!$this->eshop):?>
+                  	<td class="regAling labelr">Heslo: <span class="Tips1" title="Tips">(?)</span> <span class="cred">*</span></td>
+                  	<td><?=$this->formText('password', $this->input->password)?></td>
+                  	<?else:?>
+                  	<td></td>
+                  	<td></td>
+                  	<?endif;?>
+                  </tr>
+				  <tr>
+                  	<td class="regAling label">Ulice a číslo popisné: <span class="cred">*</span></td>
+                  	<td><?=$this->formText('ulice', $this->input->ulice)?></td>
+                  	<td class="regAling labelr">Město: <span class="cred">*</span></td>
+                  	<td><?=$this->formText('mesto', $this->input->mesto)?></td>
+                  </tr>
+                  <tr>
+                  	<td class="regAling label">PSČ: <span class="cred">*</span></td>
+                  	<td><?=$this->formText('psc', $this->input->psc,  array('maxlength'=> '5'))?></td>
+                  	<td></td>
+                  	<td></td>
+                  </tr>
+                </table>
+               </div>
+                <div id="showAdress">
+                 <div class="regLeft"><a onclick="return showBlock('cmi', <?=$height?>)" href="#" class="zabaleny z2">Doručit na jinou adresu / fakturační údaje<span class="downArr">▼</span><span class="upArr">▲</span></a></div>
+                <div id="regRight">	
+                Nezapomeňte vyplnit IČ a DIČ, pokud jste firma.
+			 	
+				</div> 
+                </div>
+                
+                <div id="cmi" class="rozCont">  
+                	<div class="rozbaleny r2">
+                	<table class="reg">
+                		<tr>   
+                			<td class="regAling label">Jméno a příjmeni:</td>
+                			<td class="inp"><?=$this->formText('ffullname', $this->input->ffullname)?></td>
+                			<td class="regAling labelr">Firma:</td>
+                			<td class="inp"><?=$this->formText('firma', $this->input->firma)?></td>
+                		</tr>
+                		<tr>
+                			<td class="regAling label">Ulice a číslo popisné:</td>
+                			<td class="inp"><?=$this->formText('fjmeno', $this->input->fulice)?></td>
+                			<td class="regAling labelr">Telefonní číslo:</td>
+                			<td class="inp">+420<?=$this->formText('ftelefon', $this->input->ftelefon, array('class'=>'phone', 'maxlength'=> '10'))?></td>
+                		</tr>
+                		<tr>
+                			<td class="regAling label">PSČ:</td>
+                			<td class="inp"><?=$this->formText('fpsc', $this->input->fpsc, array('maxlength'=> '5'))?></td>
+                			<td class="regAling labelr">Město:</td>
+                			<td class="inp"><?=$this->formText('fMesto', $this->input->fMesto)?></td>
+                		</tr>
+                		<tr>
+                			<td class="regAling label">IČO:</td>
+                			<td class="inp"><?=$this->formText('ico', $this->input->ico)?></td>
+                			<td class="regAling labelr">DIČ:</td>
+                			<td class="inp"><?=$this->formText('dic', $this->input->dic)?></td>
+                		</tr>
+                	</table> 
+                </div>
+                </div>    
+                 <div class="spacer10"></div>   
+                <div class="regLeft"> 
+                <span class="cred">*</span> Položky označené hvězdičkou jsou povinné
+                        
+	  <div class="spacer10"></div>
+	  <?if(!$this->userFormEdit || !$this->webUser->logged):?>
+	<script type="text/javascript"> 	 
+		window.addEvent('domready', function(){
+			initMultiBox  = new multiBox('mbb', {descClassName: 'multiBoxDesc', useOverlay: true});  
+		}); 
+	</script>
+			<p class="agree">Stisknutím tlačítka "<?=$text?>" souhlasíte s <a href="/obchodni-podminky?pop=1" id="mb1" class="mbb" title="" rel="width:600,height:400">Obchodními a přepravními podmínkami</a>.</p>
+	<div class="spacer10"></div>
+	<?endif;?>
+	</div>   
+	<?if(!$this->eshop):?>
+	<div class="right" style="padding:31px 13px 0 0">
+	<?$name = $this->userFormEdit?'change':'reg';?>
+		<button type="submit" name="register" id="<?=$name?>"> 
+		</button> 
+		</div>
+	<?endif;?>
+		<div class="spacer10"></div>
+		</div> 
+	<?= $this->render('parts/SecurityCode.phtml'); ?>	
+<?if(!$this->eshop):?>  	 
+	</form>
+<?endif;?>

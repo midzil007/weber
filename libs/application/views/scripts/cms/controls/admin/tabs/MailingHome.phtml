@@ -1,0 +1,8 @@
+	
+<form id="mailingHome" action="<?= $this->url(array('controller' => 'mailing','action' => 'send')) ?>" method="get">		
+	
+	<?php echo $this->formSubmit('nu', 'Nový e-mail', array('class'=>'fsubmit', "onclick" => "return showModal('Nový e-mail','". $this->url(array('controller' => 'mailing','action' => 'newMail')) ."');")) ?>
+		
+	<?php //echo $this->formSubmit('nu2', 'Použít koncept', array('class'=>'fsubmit', "onclick" => "return showModal('Výběr konceptu','". $this->url(array('controller' => 'mailing','action' => 'showConceptsForm')) ."');")) ?>
+	
+</form>

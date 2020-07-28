@@ -1,0 +1,43 @@
+<div id="help">			
+	<div id="helpText">
+		<?
+		if($this->helpNode){
+			?>
+			<h1><?=$this->helpNode->title ?></h1>
+			<?				
+			if($this->helpNode->type != 'ITEM'){			
+				$this->helpText = $this->helpNode->getPublishedContent()->getPropertyValue('html');				
+				echo $this->helpText;
+				$subNodes = $this->helpNode->getChildren('BOTH');
+				if(count($subNodes)){
+					?>
+					<ul>
+					<?
+					foreach ($subNodes as $hNode){
+						//e($hNode->type);
+						?>						
+						<li>
+							<?=($hNode->type=='ITEM'?' &nbsp; ':'')?><a href="" onclick="return refreshTab('helpDetailPane', '<?=$this->url(array('action' => 'fullHelpDetail', 'helpDetail' => $hNode->nodeId ))?>')" title="<?=Utils::getReducedText($hNode->description)?>">
+							<?=$hNode->title?>
+							</a>
+						</li>
+						<?
+					}
+					?>
+					</ul>
+					<?
+				}
+			} else {
+				echo $this->helpNode->getPublishedContent()->getPropertyValue('html');
+			}
+			
+		} else {
+			?>
+			<h1>Nápověda</h1>
+			<p>Vítejte v nápovědě. Pokračujte výběrem z levého menu.</p>	
+			<?
+		}
+		?>		
+	
+	</div>
+</div>

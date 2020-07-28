@@ -1,0 +1,55 @@
+
+	<form action="<?=$_SERVER['REDIRECT_URL']?>" method="POST">
+	<table class="formatTable">
+		<tr>
+			<td>Titul, jméno a příjmení</td>
+			<td style="width:360px;"><?=$this->formText('fullname', $this->input->fullname, array('class' => 'nice s300'))?> <span class="cred">*</span></td>		
+		</tr>
+		<tr>
+			<td>E-mail:</td>
+			<td><?=$this->formText('email', $this->input->email, array('class' => 'nice s300'))?> <span class="cred">*</span></td>		
+		</tr>
+		<tr>
+			<td>Kraj:</td>
+			<td><?=$this->formSelect('region', $this->input->region, array('class' => 'niceSelect s150'), helper_Input::addNotDefinedOption($this->reality->location->getKraje()))?> <span class="cred">*</span></td>		
+		</tr>
+		<? if($this->userFormEdit): ?>		
+		<tr>
+			<td>Heslo</td>
+			<td><?=$this->formPassword('password', '', array('class' => 'nice s100'))?> - <b class="fsxs">vypňte pouze pokud ho chcete změnit</b>
+			<?=$this->formHidden('id', $this->input->id, array('class' => 'nice s100'))?>
+			</td>		
+		</tr>
+		<tr>
+			<td>Heslo znovu</td>
+			<td><?=$this->formPassword('password2', '', array('class' => 'nice s100'))?> - <b class="fsxs">vypňte pouze pokud ho chcete změnit</b></td>		
+		</tr>
+		
+		<? endif; ?>
+	</table>
+	
+	<? if($this->userFormEdit != true): 
+		$secCode = date('Ym');
+	?>
+	<noscript>
+		<p>Zkopírujte prosím tento text: <?=$secCode?> <input name="<?=$secCode?>" /> // ochrana proti spamu</p>
+	</noscript>
+	<div id="jsIn" style="display: none;">
+	
+	</div>
+	<script type="text/javascript">
+		var sec = function(){
+			var i = document.createElement('input');
+				i.type = 'hidden';
+				i.name = '<?=$secCode?>';
+				i.value = '<?=$secCode?>';
+			var e = document.getElementById('jsIn');
+				e.appendChild(i);
+		};
+		sec();
+	</script>
+	<? endif; ?> 
+	
+	<?=$this->formSubmit('sign', ($this->userFormEdit?'Změnit':'Registrovat'), array('class' => 'nicesubmit'))?>
+	
+	</form>

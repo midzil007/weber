@@ -1,0 +1,27 @@
+<?php 
+// pr($this->references);
+?>  
+
+<div id="references">
+<? foreach ($this->references as $i => $ref):
+	$image = current(explode(';', $ref['previewImage']));
+	$promoImage = content_SFSFile::getFileFullPath($image);
+	$url = helper_FrontEnd::getPath($this, $ref['path']);  
+?>
+	<div class="ref" id="ref<?=$i?>">                    	
+	    <img src="<?=$promoImage?>" alt="<?=$ref['title']?>"  /> 
+	    <div class="corners"></div>
+	    <div class="descr"><p><?=$ref['title']?></p></div> 
+	    <a href="<?=$url?>" class="snod"><?=$ref['title']?></a> 
+    </div>  
+<? endforeach; ?> 
+</div> 
+
+
+<script type="text/javascript">
+	window.addEvent('load', function(){ 
+	<? foreach ($this->references as $i => $ref):?>
+	manageReference(<?=$i?>);       
+	<? endforeach; ?> 
+});                  
+</script>

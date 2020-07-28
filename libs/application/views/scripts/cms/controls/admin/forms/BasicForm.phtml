@@ -1,0 +1,11 @@
+<form method="post" action="<?=$this->action?>">
+<table class="modalTable">
+	<?foreach ($this->properies as $property):?>
+	<tr>
+		<td class="formcell tkey"><?=$this->cp_Translate[$property->name] ?> <?=$mandatory?> </td>
+						<td class="formcell"><?=$property->renderAdmin($this);?></td>
+	</tr>
+	<?endforeach;?>
+</table>
+<?=$this->render('controls/admin/forms/_Save.phtml'); ?>  
+</form>

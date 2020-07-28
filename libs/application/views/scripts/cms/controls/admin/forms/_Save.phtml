@@ -1,0 +1,7 @@
+<div class="spacer10"></div>
+<?
+$add = $this->addSubmitFunction;  
+echo $this->formSubmit('save', 'Uložit', array('class'=>'fsubmit fsBig', 'onclick' => $add));	 
+
+?>    
+<a onclick="window.history.back(); return false;" id="cancelLink" title="Změny nebudou uloženy">Zrušit</a>

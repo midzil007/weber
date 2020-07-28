@@ -1,0 +1,12 @@
+		<div class="mDiv">
+			<div class="ftitle">Filtr:</div> 
+		</div> 
+		<div class="tDiv"> 	  
+		    <?=$this->formSelect('filter1',$this->input->filter1,array("onchange"=> "$('#".$this->tableId."').flexReload()"), $this->filter1)?>
+		    <?=$this->formSelect('filter2',$this->input->filter2, array("onchange"=> "$('#".$this->tableId."').flexReload()"), $this->filter2)?>
+		    <?=$this->formSelect('filter3',$this->input->filter3, array("onchange"=> "$('#".$this->tableId."').flexReload()"), $this->filter3)?>
+		    <?=$this->formSelect('filter4',$this->input->filter4, array("onchange"=> "$('#".$this->tableId."').flexReload()"), $this->filter4)?>
+		    <?=$this->formSelect('filter5',$this->input->filter5, array("onchange"=> "$('#".$this->tableId."').flexReload()"), $this->filter5)?> 
+		    <input type="button" onclick="$('#<?=$this->tableId?>').flexReload()" name="saveSetB" id="saveSetB" value="Filtrovat" class="fsubmit">
+		   
+ 		</div>       

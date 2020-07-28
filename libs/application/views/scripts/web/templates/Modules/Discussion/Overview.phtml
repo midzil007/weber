@@ -1,0 +1,48 @@
+		<?
+		function drawPost($view, $post, $level){			
+			?>			
+			<tr>
+				<td><a href="" onclick="return showPost(<?=$post['id']?>);"><?=$post['title']?></a></td>
+				<td><?=$post['user']?></td>
+				<td class="dDate"><?=Utils::formatTime($post['added'])?></td>
+				<td class="pReplyColl">
+					<?
+						$view->inputGet->reply = $post['id'];
+					?>				
+					<a href="<?=Utils::addUrlParams($view->curentPath, $view->inputGet);?>">Reagovat</a>
+				</td>
+			</tr>		
+			<tr>
+				<td colspan="4" class="txt">
+					<div class="dText" id="p<?=$post['id']?>" style="display:none;">
+						<p><?=$view->escape($post['text'])?></p>
+					</div>
+				</td>	
+			<?
+			if($view->posts['r'][$post['id']]){
+				$level += 1;
+				foreach ($view->posts['r'][$post['id']] as $post){
+					drawPost($view, $post, $level);
+				}
+			}
+		}
+		?>
+		
+		<?
+		if(count($this->posts['p'])){
+			?>
+			<table class="dOverview">
+			<?
+			foreach ($this->posts['p'] as $post){
+				drawPost($this, $post, 0);
+			}
+			?>
+			</table>
+			<?			
+		}
+		?>
+			
+		
+			
+			
+		

@@ -1,0 +1,183 @@
+ <?$this->disableBread = true;?>
+ <div id="pageTopText" >   
+ 	<div class="fLeft w678"><h1><?=$this->pageTitleRaw?></h1> 
+ 		<div class="line"></div>
+		<?=$this->pageText ?>
+	</div>  
+</div>
+<div id="homeSM">
+	<?foreach ($this->hpSections as $sections):
+	$subSections = helper_FrontEnd::checkChildren($sections->getChildren('FOLDER'));
+	$cSection = $sections->getPublishedContent();
+	$p = helper_FrontEnd::getPhoto('photo', $cSection, $cSection->fotoShowName);?> 
+	<div class="fLeft homeSectionImg ">
+		<a href="<?=$sections->path?>"><img width="146" height="193" alt="<?=$sections->title?>" src="<?=$p['path']?>"></a>
+		<div class="posRelative"><a href="<?=$sections->path?>" class="homeSectionBorder blockDisplay tAlignCenter fs14"><?=$sections->title?></a>
+			<?if($subSections):?>
+				<div class="posAbsolute homeS noDisplay" >
+				<?foreach ($subSections as $v):?>
+					<a href="<?=$v->path?>" class="tAlignCenter fs14 homeSIn blockDisplay"><?=$v->title?></a>
+				<?endforeach;?>
+				</div>
+			<?endif;?>
+		</div>
+	</div>
+	<?endforeach;?>
+</div>
+<?
+$params['onHome'] = true;
+$producs = $this->mProducts->getProducts('sold','asc',0,2,$params);?>
+
+      <script type="text/javascript">
+            var maxx = <?=count($producs)?>;
+            window.addEvents({
+                'domready': function(){
+
+                    periodical = slideTips.periodical(5000); 
+						     
+                    $('slider-items').addEvent('mouseleave', function() { 
+                        $clear(periodical);  
+                        periodical = slideTips.periodical(5000);
+                    }); 
+						 
+                    $('slider-items').addEvent('mouseenter', function() { 			
+                        $clear(periodical);
+                    });  
+                }
+            }); 
+
+        </script>  
+
+           <div id="slider">
+                        <div id="slider-inner">
+                            <div id="slider-items">
+                            <?
+                            $zIndex = 9;
+                            $i=1;
+                            foreach ($producs as $prod):?>    
+                                <div class="panel  zindex<?=($zIndex--)?>" id="tip<?=$i?>">
+                                	<div class="inner">
+                                    	<?=$this->mProducts->renderBanerProduct($this,$prod);?>
+                                    </div>
+                                </div>
+                                <?$i++;?>
+                            <?
+                            endforeach;
+                            ?> 
+                            </div>
+                        </div>  
+                        <div class="control">
+                        
+                        <? for($index = 1; $index <= count($producs); $index++):?> 
+                        	<a href="#" id="tipTrigger<?=$index?>" onclick="return showTip(<?=$index?>)" <? if($index == 1):?>class="active"<? endif; ?>></a>
+                        <? endfor; ?> 
+                        </div>
+                    </div>
+<div class="clear"></div>
+
+<div class="clear"></div>
+<div class="posRelative" id="homePage">
+	<div class="posAbsolute" id="homeArrow">
+		<span class="i-block hovArrow lArrow" onclick="showProducts('left');"></span>
+		<span class="i-block hovArrow rArrow" onclick="showProducts('right');"></span>
+	</div>
+	<ul id="home">
+		<li class="homeLiSelected fLeft fs17 fBold"><a rel="tabsItem1" href="Javascript://" onclick="showTabs(this)" class="items">Nejprodávanější</a></li>
+		<li class="fLeft fs17 fBold"><a rel="tabsItem2" href="Javascript://" class="items" onclick="showTabs(this)">Nejnovější</a></li>
+		<li class="fLeft fs17 fBold"><a rel="tabsItem3" href="Javascript://" class="items" onclick="showTabs(this)">Nejlépe hodnocené <span id="starSection" class="i-block"></span></a></li>
+	</ul>
+		<div class="posAbsolute bgrNoRep noDisplay" id="ajaxFade"></div>
+	<?$params['showFirstVariant'] = 1;
+     $this->souvisejici = $this->mProducts->getProducts('order','',0, 6,$params);?>
+     <? $this->onHp = true; ?>
+	<div class="hpProducts" itemscope id="showTab1" itemtype="http://schema.org/Product" rel="0">
+		<?=$this->render('parts/alternativeProducts.phtml'); ?>
+	</div>  
+	        	 
+	<div class="clear"></div>
+	
+	<?$params['showFirstVariant'] = 1;
+     $this->souvisejici = $this->mProducts->getProducts('order','',0, 6,$params);?>
+     <? $this->onHp = true; ?>
+	<div class="hpProducts noDisplay" id="showTab2" rel="0">
+		<?=$this->render('parts/alternativeProducts.phtml'); ?>
+	</div>          	 
+	<div class="clear"></div>
+	
+	<?$params['showFirstVariant'] = 1;
+     $this->souvisejici = $this->mProducts->getProducts('dateCreate','DESC',0, 6,$params);?>
+     <? $this->onHp = true; ?>
+	<div class="hpProducts noDisplay" id="showTab3" rel="0">
+		<?=$this->render('parts/alternativeProducts.phtml'); ?>
+	</div>          	 
+	<div class="clear"></div>
+	
+	<?$params['showFirstVariant'] = 1;
+     $this->souvisejici = $this->mProducts->getProducts('rating','desc',0, 6,$params);?>
+     <? $this->onHp = true; ?>
+	<div class="hpProducts noDisplay" id="showTab4" rel="0">
+		<?=$this->render('parts/alternativeProducts.phtml'); ?>
+	</div>          	 
+	<div class="clear"></div>
+</div>
+
+ <script type="text/javascript">
+    function showTabs(elem){
+    	recalcArea = $('homePage'); 
+    	items = recalcArea.getElements('.hpProducts');
+  		items.each(function(elee){
+  			elee.addClass('noDisplay');
+		});
+  		sub = recalcArea.getElements('.items');
+  		sub.each(function(el){
+  			newEl = el.getParent();
+			newEl.removeClass('homeLiSelected');
+		});		
+  		newElem = elem.getParent();
+  		tab = elem.get('rel');
+  		res = tab.replace("tabsItem","");
+  		showProd = document.getElementById('showTab'+res);
+  		showProd.removeClass('noDisplay');
+        newElem.addClass('homeLiSelected'); 	 
+		history.pushState('', '', '<?=$this->path?>?'+'showTab'+res);	
+  	};
+
+    function showProducts(direction){
+		var query = location.href.split('?');
+		tab = 'showTab1';
+		if(query[1]){
+			tab = query[1];	
+		}
+    	recalcArea = $(tab);
+		position = parseInt(recalcArea.get('rel')); 
+		if(direction == 'left')
+		{
+			position = position-6;
+		}
+		else{
+			position = position+6;
+		}
+		var req = new Request.JSON({
+			method: 'get',
+            url: "<?=$this->path?>" + "?ajaxProducts=1&position="+position,    
+            onRequest: function() {
+            	recalcArea.fade(0.5);    
+            	$('ajaxFade').removeClass('noDisplay');
+			 },
+			onComplete: function(response) {
+				(function(){
+				//	var reset = response.split('resetPosition');
+					//if(reset[1]){
+						//el = response.getElementsByClassName('listing-inner11');
+					//	position = response.get('atr');  
+				//	}
+					recalcArea.set('html', response.html);
+					recalcArea.fade(1); 
+					console.log(response.position);
+					recalcArea.set('rel',response.position);   
+					$('ajaxFade').addClass('noDisplay');	 	
+				}).delay(100);	
+				}
+		}).send();    		 
+  	};
+    </script>

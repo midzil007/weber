@@ -1,0 +1,33 @@
+<?
+$rada = $this->rada;
+$i = $this->radaId;
+$r = $this->znackaId; 
+$znackaRealId = $this->radaZnackaId;   
+
+$options = array('accordionId' => 'accordion', 'noContent' => true, 'showSelectFile' => true, 'inputWidth' => '300', 'maxFiles' => 60, 'showUploadFile' => true, 'uploadFileDirectoryNodeId' => 51340 );
+
+
+?> 
+ 				<table>
+					<tr class="rada_<?=$r?>_<?=$i?>">
+						<td style="width:150px;">Název řady <?=$i?> </td>  
+						<td><?=$this->formText('rada_'. $r .'_'. $i .'_nazev',$rada['nazev'], array('class' => 'w320'))?>
+						
+						<a href="#" onclick="showText('radaTextArea_<?=$r?>_<?=$i?>');showText('radaImage_<?=$r?>_<?=$i?>'); return false; " id="nb" href="/cms/eshop/addItem/amodule/items" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false">
+						<span class="ui-icon ui-icon-carat-2-n-s"></span><span class="ui-button-text">Zobrazit/skrýt detaily řady</span></a>
+						     
+						<?=$this->formHidden('rada_'. $r .'_'. $i .'_id',$rada['id'])?>      
+						<?=$this->formHidden('rada_'. $r .'_sort[]',$rada['id'])?>        
+						&nbsp;&nbsp;&nbsp;&nbsp; <a href="#" onclick="return delZ('rada_<?=$r?>_<?=$i?>')">smazat</a> 
+						</td>       
+					</tr>   
+					<tr  class="rada_<?=$r?>_<?=$i?>" id="radaTextArea_<?=$r?>_<?=$i?>" style="display:none;">
+						<td>Popis řady</td>  
+						<td><?=$this->formWysiwyg('rada_'. $r .'_'. $i .'_popis',$rada['popis'],array('class'=>'w500 h70'))?></td>
+					</tr>    
+								 		 
+					<tr  class="rada_<?=$r?>_<?=$i?>" id="radaImage_<?=$r?>_<?=$i?>" style="display:none;">
+						<td>Logo řady</td>
+						<td><?=$this->formMultiFileSelect('rada_'. $r .'_'. $i .'_logo',$rada['logo'],$options,$options,$options)?></td>
+					</tr> 
+				</table>    

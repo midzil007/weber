@@ -1,0 +1,62 @@
+<form id="PageForm" name="PageForm" class="validate" method="post">
+
+<?php 
+if(!$this->isEdit){
+	echo $this->formHidden('parentId',$this->curentNode);
+}
+?>
+	
+<div id="tabsDetail" class="ui-tabs ui-widget ui-widget-content ui-corner-all">   
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all"> 
+        <li class="ui-state-default ui-corner-top ui-tabs-active ui-state-active"><a href="#tabsd-1">Vlastnosti</a></li> 
+        <?if(!$this->inFileBranch):?>
+        <li class="ui-state-default ui-corner-top"><a href="#tabsd-2">Optimalizace pro vyhledávače</a></li> 
+        <li class="ui-state-default ui-corner-top"><a href="#tabsd-3">Nastavení</a></li>   
+	        <?if($this->languages->isMultiLanguage):?>
+	        <li class="ui-state-default ui-corner-top"><a href="#tabsd-4">Jazykové verze</a></li> 
+	        <? endif; ?> 
+        <? endif; ?>
+        
+        <?if($this->advertsPositions):?>
+        <li class="ui-state-default ui-corner-top"><a href="#tabsd-5">Reklamní pozice</a></li> 
+        <? endif; ?>
+        <?if($this->isEdit):?>
+        <li class="ui-state-default ui-corner-top"><a href="#tabsd-6">Historie stránky</a></li> 
+        <? endif; ?>
+        
+    </ul>
+    <div id="tabsd-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom">  
+    	<?=$this->contentForm;?>
+    </div>
+    <?if(!$this->inFileBranch):?> 
+    <div id="tabsd-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom">  
+    	<?=$this->contentSEO;?>
+    </div>
+    <div id="tabsd-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom">  
+    	<?=$this->contentSettings;?>
+    </div>
+	    <?if($this->languages->isMultiLanguage):?>
+	    <div id="tabsd-4" class="ui-tabs-panel ui-widget-content ui-corner-bottom">  
+	    	<?=$this->contentLanguages;?>
+	    </div>
+	    <? endif;?>    
+    <? endif;?>
+    <?if($this->advertsPositions):?>
+    <div id="tabsd-5" class="ui-tabs-panel ui-widget-content ui-corner-bottom">  
+    	<?=$this->contentAdverts;?>
+    </div>
+    <? endif; ?>
+    <?if($this->isEdit):?>
+    <div id="tabsd-6" class="ui-tabs-panel ui-widget-content ui-corner-bottom">  
+    	<?=$this->contentHistory;?>
+    </div> 
+    <? endif; ?>
+</div> 
+<?=$this->render('controls/admin/forms/_Save.phtml'); ?>  
+</form>
+<script type="text/javascript">
+    $(function() {
+        $( "#tabsDetail" ).tabs();
+    }); 
+    </script>
+    

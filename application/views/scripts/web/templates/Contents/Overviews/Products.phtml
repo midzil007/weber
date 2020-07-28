@@ -1,0 +1,345 @@
+<?$this->disableH1 = true;?>
+<?php
+$this->obsahClass = $this->kategorie[$this->node->nodeId][0];
+// $logo = $this->znacky[$this->node->nodeId][1];
+$sectionTitle = $this->pageTitleRaw;
+$this->disableH1 = true;       
+?> 
+<div class="listing">
+	   <h1><?=$this->pageTitleRaw?></h1>
+	 <?php  
+			 // pr($params); 
+			 	$params['category'] = $this->node->nodeId;  
+				$params['onWeb'] = 1;   
+		$params['showFirstVariant'] = true; 
+		$params['joinOption'] = false;
+			$products = $this->mProducts->getProducts('soldPrice','desc',0, 3,$params);
+	  
+          ?>
+          <?if($products):?> 
+	      <div class="bestsellers">
+                            <p>Nejprodávanější:</p>
+		
+                            <?$x = 0;
+							 
+               foreach ($products as $prod):  
+				   
+				   $child = $this->tree->getNodeById($prod['id']);
+				
+	              	if(!$child){ continue; }
+	              	if($x == 9){
+	              		break;
+	              	}
+	              	$x++; 
+	              	$class = '';
+	              
+	              	if($x == 4):
+	              		$height = 33;?>
+	              		<div id="productsHidden"> 
+	              	<?endif;
+	              	$c = $child->getTheRightContent();	              	
+	              	
+	              	$photos = $this->mVarianta->getResizedPhotos($prod['obrazky']);
+
+					$p = helper_FrontEnd::getFirstPhoto($photos,'pMini4' , false);
+	            		if(count($p)){
+	            			$img = $p['path'];
+	            		} else {
+	            			$img = '/images/categoryImg.jpg';
+	            		} 
+	            		
+	            	$descr = $c->getPropertyValue('preText');
+	            	$descr = $descr?$descr:$c->getPropertyValue('html'); 
+	            	
+					$url = $prod['path'];
+            		
+	              ?>                              
+                            <div>
+                            	<span><?=$x?>.</span> 
+                            	<a class="img" href="<?=$url?>"><img src="<?=$img?>" height="30" alt="<?=$price['title']?>" /></a> 
+                            	<p><a href="<?=$prod['path']?>"><?=$prod['title']?></a> 
+                            	<span><?=helper_FrontEnd::ReduceText(strip_tags($descr),70,false, true); ?></span></p>    
+                            	<span class="price"><?=helper_FrontEnd::price($prod['price'])?> Kč</span>   
+                            </div>
+                            <?if($x > 3){
+                            	$heightTotal += $height;    
+                            }?>
+
+                           <?endforeach;?>
+                           <?=$end?>
+                           
+                            <?if($x >3):?>
+	              				</div>
+	              			<?endif;?>
+	              			<?if($x>3):?> 
+                            <a class="more" href="#" onclick="return showBlock2('productsHidden', <?=$heightTotal?>)"><span>Další nejprodávanejši</span> >>></a>
+                            <?endif;?>
+                          
+	</div>
+	  <div class="clear"></div>  
+	<?endif;?>
+
+<?php 
+	
+// $logo = $this->znacky[$this->node->nodeId][1];      
+$pocetSelect = array(
+	9 => 9,
+	18 => 18,
+	36 => 36,
+	45 => 45 
+);
+ 
+if(!function_exists('getUrl2')){
+	function getUrl2($view, $page){
+		
+		$a = (array) $view->inputGet;  
+		return Utils::addUrlParams($view->path, $a);
+	}
+}  
+	if($this->session->spocec < 9){
+		$this->session->spocec = 9; 
+	}
+	 
+	// $p = $this->session->spocec>0?$this->session->spocet:9;
+	$p = 9;   
+	  
+	$this->inputGet->pocet = $this->inputGet->pocet?$this->inputGet->pocet:$p;
+	$this->session->spocec = $this->inputGet->pocet;
+	   
+	$params = array( );  
+	if($this->inputGet->znackyAll){
+		$this->inputGet->znacka  = array(); 
+		$this->inputGet->znackyAll = 0; 
+	}
+	
+	$ds = 'priceasc';
+	$dst = 'asc';
+	/*
+	if($this->node->nodeId ==  4863){ // novinky
+		$params['new'] = true;
+		$ds = 'n.id';
+		$dst = 'desc';
+	} elseif($this->node->nodeId ==  4862) { // akcni
+		$params['akce'] = true;  
+	} 
+	elseif($this->node->nodeId ==  6891) // trhak
+	{
+		$params['trhak'] = true;
+	}
+	elseif($this->node->nodeId ==  6893) // vyprodej
+	{
+		$params['vyprodej'] = true;
+	}
+	elseif($this->node->nodeId ==  4887) { // nejoblibenejsi
+		$params['nej'] = true;  
+		$ds = 'sold';
+		$dst = 'desc';   
+		if($this->inputGet->price){
+			$dst = 'asc';    
+			// $params['znacka'] = $this->inputGet->znacka ;
+		} 
+	} else {
+		$params['category'] = $this->node->nodeId; 
+	}
+	*/
+	 
+ 
+	
+	
+?>
+<div class="fRight">
+<span class="count"><?=$count?> <?=$this->mProducts->getWordProdukt($count)?></span>  
+<?=$this->render('templates/Listing/Floating.phtml'); ?>
+</div>
+<div class="spacer10"> </div>
+          	<?php 
+          		$deleno = 1;
+          		$x = 0;
+            	foreach ($this->products as $prod):
+					$child = $this->tree->getNodeById($prod['id']);
+            		$x++;
+            		$class="";
+            		if($x%3==0 && $x != 1){
+            			$class="lst";
+            		} elseif($x%($deleno+3)==0 || $x == 1){
+            			if($x == 1){
+            				
+            			} else {
+            				$deleno += 3;
+            			}
+            			 
+            			$class="fst"; 
+            		} 
+            		
+            		if($x > 3 && $class){  
+            			$class .= " wth"; 
+            		}   
+            		//$c->createFiles();  
+            		   list($totalRev,$rev) = $this->mReviews->showSingleRev($prod['id']); 	 
+            		$c = $child->getTheRightContent();  
+					
+            		$descr = $c->getPropertyValue('preText');  
+            		$price2  = $prod['price2'];
+            		$price  = $prod['price'];
+					if($price2>0):    
+        				$this->price2 = $price2?helper_FrontEnd::price($price2).'  Kč':''; 
+        				$dif = $price2 - $price; 
+					endif;
+         			$p = $price2/100; 
+					   
+         			$dif= round($dif/$p, 1);
+         			$difArray[] = $dif;
+         			$priceArray[] = $price;
+         			$this->difp = '';  
+         			$this->difp =$this->difp = $dif ? '-'.$dif.'% ':'';
+         			$this->difp = str_replace('.', ',', $this->difp);   
+         		//	$darky = $c->getPropertyValue('darek'); 
+         			if($darky){
+            			$darky = helper_MultiSelect::getMultiSelectValues($darky); 
+            		}
+					
+            		
+						//$this->mVarianta->resizePhotos ($prod['obrazky']);
+					
+					$photos = $this->mVarianta->getResizedPhotos($prod['obrazky']);
+					$p = helper_FrontEnd::getFirstPhoto($photos,'pShow4' , false);
+            		if(count($p)){
+            			$img = $p['path'];
+            		} else {
+            			$img = '/images/categoryImg.jpg';
+            		} 
+            		 
+
+            		$disabled = '';
+            		$skladem = $prod['skladem'];
+					if($skladem == 3){
+						$disabled = 'disabled';
+					}
+            		$akce = $c->getPriznaky();    
+					$akceTop = $c->getPriznaky(true);  
+				 
+            		$url = $prod['path'];
+            		
+            		// $url = $this->path . '?p=' . $child->nodeId . '&t' . urlencode($child->title);
+            		 if($this->schema):
+                if($this->price2):
+                	$googleOffer = 'itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer"';
+                	$googleHighPrice = 'itemprop="highPrice"';
+                	$googlePrice = 'itemprop="lowPrice"';
+                else:
+                	$googleOffer = 'itemprop="offers" itemscope itemtype="http://schema.org/Offer"';
+                	$googleHighPrice = '';
+                	$googlePrice = 'itemprop="price"';
+                	
+                endif;
+                	$googleLink = '<link itemprop="availability" href="http://schema.org/InStock" />In stock';
+                endif;     	
+            	?>  
+	  	
+		   			<div class="item" <?=$this->schema?'itemscope itemtype="http://schema.org/Product"':'';?>>
+                            <div class="img">
+                                <a href="<?=$url?>"><img src="<?=$p['path']?>" alt="<?=$p['name'];?>"></a>
+                            </div>
+                            <div class="item-body">  
+                            	<div class="sek-title">
+                                <h3 class="cufon"><a <?=$this->schema?'itemprop="url"':'';?> href="<?=$url?>"><span class="" <?=$this->schema?'itemprop="name"':'';?>><?=$child->title?></span></a></h3>
+                                <?if($totalRev->count>0):?> 
+                                <div class="revText items-rev marBottom10"> 
+				<div class="emptyStarsMini marRight3">       
+					<div style="width:<?=$totalRev->total*20.8?>px;" class="fullStarsMini"></div> 
+				</div>    
+			<span class="fs11 greyColor1 lineHeight20">(<?=$totalRev->count?>)</span>  
+		</div>       
+		 
+	  
+		<?endif?>  
+		<div class="top-p">
+		<?if($akceTop): 
+		?>
+			<?foreach ($akceTop as $key => $value): 
+				if($value['id'] == 13 && $skladem != 1):    
+					continue;    
+				endif;?>      
+				<span class="priz-<?=$value['id']?>"><?=$value['nazev']?></span>
+			<?endforeach;?>
+	   
+		<?endif;?>
+				</div>
+			</div>       
+                                <?=$descr?>       
+								 	<div class="pakce">  
+											<? foreach ($akce as $a):?>
+								 
+									   <span class="tooltip">
+								 			<img class="botip" rel="<?=$a['nazev']?>" alt="<?=$a['nazev']?>" src="<?=$a['obrazek']?>" />
+								 		<span><?=$a['nazev']?></span>
+								 		</span>
+									
+								 	<?endforeach;?>          
+								 	</div>   
+								 <div class="clear"></div>
+								   <?if($sumd):?> 
+                               <div class="gifts">
+		 						<a class="giftsHref" href="<?=$url?>"><?=$c->getCestinaDarky($akce)?> ke zboží v hodnotě <?=helper_FrontEnd::price($sumd)?> Kč</a>
+		 						</div>
+		 						<?endif;?>  
+                                <div class="pull-right" itemprop="offers" itemscope itemtype="http://schema.org/Offer"> 
+                                <p class="price" itemprop="priceCurrency" content="CZK">   
+                                <? if($price2 > 0):?> 
+                                Běžná cena: <span class="underLine1"><?=$this->price2?></span> <span class="green"><?=$this->difp?' Sleva ':''?><?=$this->difp?></span>
+                                <? endif; ?>
+                                   <link itemprop="availability" href="http://schema.org/InStock"/>
+                                <span  itemprop="price" content="<?=$price?>"><?=helper_FrontEnd::price($price)?> Kč</span> s DPH
+                                <link itemprop="availability" href="http://schema.org/InStock" /></p>
+                                <div class="right">
+                                	<div class="btn">    
+		             					  <a href="<?=$url?>" class="btnDetail">Detail<span class="arr"></span></a>     
+                					</div>   
+									</div>  
+               					</div>
+               					
+                            </div>
+                            <div class="clear"></div>
+                        </div>		             
+              <? endforeach;?>        
+         <div class="fRight">
+          	<?=$this->render('templates/Listing/Floating.phtml'); ?>  
+           </div>
+           <div class="spacer10"> </div>
+            <h2><?=$this->pageTitleRaw?></h2>
+	 <?if(!$this->inputGet->page):?>
+	  <div>
+            <?=$this->pageText?>    			 
+         </div> 
+      <?endif;?>
+        <div class="spacer10"> </div>
+               <?$dif  = max($difArray)>0?', sleva až '.max($difArray).'%':''?>
+      <p><?=$sectionTitle.' od '.helper_FrontEnd::price(min($priceArray)).' Kč do '.helper_FrontEnd::price(max($priceArray)).' Kč'.$dif?>.</p>
+      <p><?=$sectionSort?$sectionSort:'Nejprodávanější '?> zboží v sekci <?=$sectionTitle?> jsou: 
+      
+      <?     
+      //$this->pageTitleRaw .= ' od '.helper_FrontEnd::price(min($priceArray)).' Kč';
+      $i = 0;
+      $seoProduts = $this->mProducts->getProducts($this->tableSort, $this->tableSortType, 0, 3, $this->paramsSeo);
+      $seoProdutsCount = count($seoProduts);
+      foreach ($seoProduts as $val): 
+      	$i++;?>
+      	<?=$val['title']?><?=$i!=$seoProdutsCount?',':'.'?>
+      <?endforeach;?>
+      </p>
+          
+          <script type="text/javascript">
+          	function submitFilter(v, val){ 
+              	if(v){ 
+              		$(v).set('value', val);
+              	}
+				document.getElementById('pfilter').submit();
+				return false; 
+          	}
+          </script>
+        
+	
+	
+	
+</div>
+

@@ -1,0 +1,33 @@
+<a href="<?=$this->bUrl?>" target="<?=$this->bTarget?>">
+<script language="javascript">
+	if (AC_FL_RunContent == 0) {
+		alert("This page requires AC_RunActiveContent.js.");
+	} else {
+		AC_FL_RunContent(
+			'codebase', 'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=<?=$this->bVersion?>,0,0,0',
+			'width', '<?=$this->bWidth?>',
+			'height', '<?=$this->bHeight?>',
+			'src', '<?=$this->bSrc?>',
+			'quality', 'high',
+			'pluginspage', 'http://www.macromedia.com/go/getflashplayer',
+			'align', 'middle',
+			'play', 'true',
+			'loop', 'true',
+			'scale', 'showall',
+			'wmode', 'window',
+			'devicefont', 'false',
+			'id', 'blesk-logo',
+			'bgcolor', '#ffffff',
+			'name', 'blesk-logo',
+			'menu', 'true',
+			'allowFullScreen', 'false',
+			'allowScriptAccess','sameDomain',
+			'movie', '<?=$this->bSrc?>',
+			'salign', ''
+			); //end AC code
+	}
+</script>
+<noscript>
+	<p>Javascript required</p>
+</noscript>
+</a>

@@ -1,0 +1,98 @@
+<?
+$nodeCategory = $this->tree->getNodeById($nid);
+$menuitem = $this->tree->getNodeById(3801);
+$leftmenu = helper_FrontEnd::checkChildren($menuitem->getChildren('FOLDER'));?> 
+<div id="left-column">        
+
+<nav class="navbar navbar-default" role="navigation">
+	<a href="/jura"><img src="/images/Jura.jpg" alt="Logo - Jura"/></a>      
+	<div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <table>
+                    <tbody><tr>
+                        <td>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>  
+                <span class="icon-bar"></span>
+                </td>
+                <td>
+                <span class="toggle-eshop">E-SHOP</span>
+                  </td>
+            </tr> 
+                </tbody></table>
+            </button>
+            <div class="mobile-basket">   
+					<a href="javascript:void(0)" class="second-search-show"><span></span></a>
+					<a href="/jura/nakupni-kosik" class="second-basket-show"><span></span></a>  
+				</div>    
+        </div>
+        <div class="second-search"> 
+			<form action="/jura/vyhledano">      
+				<input type="text" class="search-input-text autocomplete ui-autocomplete-input" value="" id="autocomplete-mini" name="search" placeholder="Vyhledávání" autocomplete="off">
+				<input type="submit" value="HLEDAT" class="search-button">    
+			</form>     
+</div>    
+<ul class="nav nav-stacked">
+ <?foreach ($leftmenu  as $menuItem):
+ if($menuItem->nodeId == 7238)
+ 	continue;
+ $visible = $subMenu = null;   
+ $visible = helper_FrontEnd::isPathInActivePath($menuItem->path, $this->curentPath);
+ $mClass = $md = ''; 
+ if($visible){
+ 	$mClass = 'class="active"';
+	 $md = ' sel';
+ } 
+ 
+ ?>
+	<li class="main-menu<?=$md?>"><a <?=$mClass?> href="<?=helper_FrontEnd::getPath($this, $menuItem->path)?>"><?=$menuItem->title?></a></li>
+	<?if($visible):?>
+		<?$subMenu = helper_FrontEnd::checkChildren($menuItem->getChildren('FOLDER'));
+		//pr($subMenu);   
+	endif; 
+	if($subMenu):?>
+	<li class="sub-menu-jura">
+		<ul> 
+		<?$mClass = '';
+	 	foreach ($subMenu as $sub):
+	 	$params['category'] = $sub->nodeId;
+	 	$products = count($this->mProducts->getProducts('title', 'asc', 0, 5000, $params));
+	 	if(!$products){
+	 		continue;
+	 	}
+		$products = $products? '<span class="smaller">('.$products.')</span>':'';   
+	 	$visible = null;
+		$visible = helper_FrontEnd::isPathInActivePath($sub->path, $this->curentPath);
+		$visible1 = $sub->nodeId==$nodeCategory->nodeId?true:false;		
+ if(($visible && !$mClass) || ($visible1 && !$mClass)){
+	$mClass = 'class="active"';
+ }
+ else{$mClass = '';}?>
+ 			 
+	 		<li <?=$mClass?>><a  href="<?=helper_FrontEnd::getPath($this, $sub->path)?>"><?=$sub->title?> <?=$products?></a></li>
+	 	<?endforeach;?>
+	</ul></li> 
+	<?endif;?>
+<?endforeach;?>
+</ul>
+<?$mImportHeurekaReviews = new module_Reviews($this); 
+$this->ListingItemsCount= $mImportHeurekaReviews->getCountReview();   
+helper_Listing::init($this); 
+list($total,$data1) = $mImportHeurekaReviews->show(0, 55555555555555);?>
+<div class="rev" itemscope itemtype="http://schema.org/Store">   
+<div class="rev-c">	   
+  <p class="heading"> 
+  	Hodnocení - <span itemprop="name">svycarskekavovary.cz</span></p>
+  	<div class="rating-content all" itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating">	
+    	<strong>Celkem </strong>(<span><span itemprop="ratingValue"><?=$total->total?></span> známka</span>/
+   		<span itemprop="reviewCount"><?=$total->count?></span> hlasů):  
+   		  <span class="emptyStarsMini marRight3 i-block vAlingMid ">        
+					<span class="i-block fullStarsMini" style="width:<?=$total->total*20.8?>px;"></span>   </span>    
+		</div>     
+		</div>          
+		<p class="f-img">  
+		<img itemprop="image" data-LL-src="/images/swiss.jpg" alt="logo">
+		<noscript><img itemprop="image" src="/images/swiss.jpg" alt="logo"></noscript></p>          
+              </div>  
+</nav>      
+</div>

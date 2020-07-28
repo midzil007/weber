@@ -1,0 +1,80 @@
+		<p class="f-16 tbold cwhi mt20 fLeft">Podívejte se na naši práci:</p>
+		<?php 
+		
+		$show = $this->inputGet->photo;
+		$show = $show?$show:0;
+		shuffle($this->rowImages);
+		shuffle($this->rowImages); 
+		?>
+		
+	
+	
+	<div class="gallery_container" id="gallery_container"> 
+		<? if(count($this->rowImages) > 5): ?>  
+		<div class="SlideItMoo_back nav prev fLeft"><!--slide back button--></div>
+		<? endif; ?>	
+		<div class="thumb_container" id="thumb_container">					
+			<div class="thumbs" id="thumbs">
+				<?
+				$x = 0; 
+				foreach ($this->rowImages as $img):
+				
+				// pr($img); 
+				$url = $x==0?$this->path:$this->path.'?photo=' . $x;
+				$url = $img['fullPath']; 
+				if($x > 30){ break; }   
+				$x++;   
+				
+				$photoPathThumb = $img['path'];
+				$name = $img['name'];
+				?> 
+				<div class="SlideItMoo_element"> 
+					<? if($img['pagePath']):?>
+					<a class="imgThumb" href="<?=$img['pagePath']?>" title="<?=$name?>">      
+						<img src="<?=$photoPathThumb?>" alt="<?=$descr?>" title="<?=$name?>" />  
+					</a> 
+					<? else:?>
+					<a target="_blank" rel="[row]" id="mb<?=$x?>" class="mb imgThumb" href="<?=$url?>" title="<?=$name?>">      
+						<img src="<?=$photoPathThumb?>" alt="<?=$descr?>" title="<?=$name?>" />  
+					</a>
+			        <div class="multiBoxDesc mb<?=$x?>"><?=$img['name']?></div> 
+			        <? endif; ?>
+				</div> 
+				<? endforeach; ?>	  
+			</div>			 
+		</div>  
+		<? if(count($this->rowImages) > 5): ?>   
+		<div class="SlideItMoo_forward nav next fLeft"><!--slide forward button--></div> 
+		<? endif; ?>	 
+	</div>
+	
+	<script type="text/javascript"> 
+	<!--
+	<? if(count($this->rowImages) > 5): ?>   
+	window.addEvent('domready', function(){
+		  
+		new SlideItMoo({
+			overallContainer: 'gallery_container', 
+			elementScrolled: 'thumb_container',
+			thumbsContainer: 'thumbs',		
+			itemsVisible:5,    
+			elemsSlide:3, 
+			duration:300,
+			itemsSelector: '.SlideItMoo_element',
+			itemWidth: 125,    
+			startIndex:<?=$show?>   
+
+		});	 
+	});   
+	<? endif; ?>	 
+	--> 
+	</script>
+	
+	<script type="text/javascript"> 	 
+				  
+		var box = {};   
+		window.addEvent('domready', function(){
+			box = new multiBox('mb', {descClassName: 'multiBoxDesc', useOverlay: true});  
+		}); 
+			  
+	</script>    

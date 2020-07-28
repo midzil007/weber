@@ -1,0 +1,204 @@
+<script type="text/javascript" charset="utf-8">
+		function showPay(){
+			del = $('#delivery').val();
+			$.ajax({
+			    url: "<?=Utils::getWebUrl()?>/cms/eshop/showpayments/id/"+del,
+			    type: "POST",
+			    dataType: "json",
+			    data: {"idDelivery": del},
+			    success: function(json ){
+			    	$('#payment option').remove();
+			    	 $.each(json.deliveries, function(i, value) {
+				    	 $('#payment').append($('<option>').text(value).attr('value', i));
+			         });
+			    	 $('#deliveryPrice').val(json.price);
+			    	 $('#paymentPrice').val(json.payPrice);
+			    },
+			    error: function(error){
+			    }
+			});
+		}
+
+		function showPrice(val){
+			$.ajax({
+			    url: "<?=Utils::getWebUrl()?>/cms/eshop/showpaymentprice/id/"+val.value,
+			    type: "POST",
+			    dataType: "json",
+			    data: {"idPayment": val.value},
+			    success: function(json ){
+			    	 $('#paymentPrice').val(json);
+			    },
+			    error: function(error){
+			    }
+			});
+			
+		}
+	</script>  
+<form method="post" id="PageForm" name="PageForm">
+	<div id="order">
+		<h2>Editace objédnavky č.<?=$this->order['id']?></h2>
+		<table class="editOrderTable">
+			<tr>
+				<th>Informace o zákazníkovi</th>
+			</tr>
+			<?if($this->order['firma']):?>
+			<tr>
+				<td>Firma: </td><td><input name="firma" type="text" value="<?=$this->order['firma']?>"></td>
+			</tr>
+			<?endif;?>
+			<?if($this->order['efullname']):
+				$ename = explode(' ', $this->order['efullname']);
+				$this->order['firstname'] = $ename[0];
+				$this->order['surname'] = $ename[1];
+			endif;?>
+			<tr>
+				<td>Jméno: </td><td><input name="firstname" type="text" value="<?=$this->order['firstname']?>"></td>
+			</tr>
+			<tr>
+				<td>Příjmení: </td><td><input name="surname" type="text" value="<?=$this->order['surname']?>"></td>
+			</tr>
+			<tr>
+				<td>Email: </td><td><input name="email" type="text" value="<?=$this->order['email']?>"></td>
+			</tr>
+			<tr>
+				<td>Telefon: </td><td><input name="phone" type="text" value="<?=$this->order['phone']?>"></td>
+			</tr>
+			<tr>
+				<td>Ulice: </td><td><input name="ulice" type="text" value="<?=$this->order['ulice']?>"></td>
+			</tr>
+			<tr>
+				<td>Město: </td><td><input name="mesto" type="text" value="<?=$this->order['mesto']?>"></td>
+			</tr>
+			<tr>
+				<td>PSČ: </td><td><input name="psc" type="text" value="<?=$this->order['psc']?>"></td>
+			</tr>
+		</table>
+		
+		<table class="editOrderTable"> 
+			<tr>
+				<th>Fakturační údaje:</th>
+			</tr>
+			<tr>
+				<td>Jméno a Příjmení: </td><td><input name="fu_jmeno" type="text" value="<?=$this->order['fu_jmeno']?>"></td>
+			</tr>
+			<tr>
+				<td>Firma: </td><td><input name="fu_firma" type="text" value="<?=$this->order['fu_firma']?>"></td>
+			</tr>
+			<tr>
+				<td>Telefon: </td><td><input name="fu_phone" type="text" value="<?=$this->order['fu_phone']?>"></td>
+			</tr>
+			<tr>
+				<td>Ulice: </td><td><input name="fu_ulice" type="text" value="<?=$this->order['fu_ulice']?>"></td>
+			</tr>
+			<tr>
+				<td>Město: </td><td><input name="fu_mesto" type="text" value="<?=$this->order['fu_mesto']?>"></td>
+			</tr>
+			<tr>
+				<td>PSČ: </td><td><input name="fu_psc" type="text" value="<?=$this->order['fu_psc']?>"></td>
+			</tr>
+			<tr>
+				<td>IČO: </td><td><input name="fu_ico" type="text" value="<?=$this->order['fu_ico']?>"></td>
+			</tr>
+			<tr>
+				<td>DIČ: </td><td><input name="fu_dic" type="text" value="<?=$this->order['fu_dic']?>"></td>
+			</tr>
+		</table>
+		<h2><strong>Poznámky k objednávce</strong></h2>
+		<p><span class="red"><?=$this->order['note']?></span></p>
+		<br /> 
+		
+		<?=$this->formHidden('orderId', $this->order['id']);?> 
+		
+		<h2>Zboží: </h2>
+		<table class="editOrderProducts">
+				<tr>
+					<th>Zboží</th><th>počet</th><th>cena za kus</th>
+				</tr>
+		<?
+		
+		// problemy s variantamy, faktura_item nema dost udaju, musi se to tahat pres m_o_items
+		// TODO vyresit poradne
+		//$items = $this->faktura->getItems();
+		//$faktId = $this->faktura->id;
+		//echo "faktid:" . $faktId;
+		//print_r($items);
+		
+		$i=0;
+		foreach($this->items as $item)		
+		{
+		// zbozi bude interne identifikovano podle titlu. 
+		?>
+			
+			<tr>
+				<td><?=$item['title']?> <input type="hidden" name="item_<?=$i?>" value="<?=$item['title']?>"></input>
+				<input type="hidden" name="item_<?=$i?>_nodeId" value="<?=$item['itemNodeId']?>"></input>
+				<input type="hidden" name="item_<?=$i?>_variantId" value="<?=$item['variant']?>"></input></td>
+				<td><input type="text" name="item_<?=$i?>_count" value="<?=$item['count']?>"></input> </td>
+				<td><input type="text" name="item_<?=$i++?>_price" value="<?=$item['price']?>"></input> Kč</td>
+			</tr>
+		<?}
+		
+		?>
+		</table>
+		
+		<h2>Přidat další zboží k objednávce:</h2>
+		<table style="width: 30%">
+			<tr>
+				<th>Nákupní kód zboží</th><th>Počet</th><th>Cena (Pokud není vyplňená bere se cena z webu)</th>
+			</tr>
+			<?
+			for($i=0; $i<3; $i++)
+			{?>
+				<tr>
+					<td><input type="text" name="newItem_<?=$i?>"></input></td> 
+					<td><input type="text" name="newItem_<?=$i?>_count"></input></td>
+					<td><input type="text" name="newItem_<?=$i?>_price"></input></td>
+				</tr>
+			<?}
+			?>
+		</table>
+		
+		
+		
+		<?//=$this->faktura->printOrder($this, $this->basket, $this->order)
+		echo $this->faktura->renderPriceCalc($this); 
+		?>
+		
+		
+		
+		<?php
+	 	$history = $this->mEshop->orders->getOrderHistory($this->order );
+	 	 
+	 	?>
+	 	<h2 style="margin-top:10px; padding-bottom:0px;">Doprava</h2>
+	 				<table>	
+				<tr>
+					<th>Název</th><th>Cena (Kč)</th>
+				</tr>
+				<tr>
+		        	<td><?=$this->formSelect('delivery', $this->order['delivery'], array('id'=> 'delivery', 'onchange' => 'showPay();'), $this->allDeliveries);?></td>
+		        	<td><?=$this->formText('deliveryPrice',$this->order['deliveryPrice'],array('id' => 'deliveryPrice'))?></td>
+		        </tr>
+		        
+		        	<td><?=$this->formSelect('payment', $this->order['payment'], array('id' => 'payment','onchange' => 'showPrice(this);'), $this->selectedPayment);?></td>
+		        	<td><?=$this->formText('paymentPrice',$this->order['paymentPrice'],array('id' => 'paymentPrice'))?></td>
+		        </table>
+	 	<Br />   
+
+		 
+	 	<h2 style="margin-bottom:0px; padding-bottom:0px;">Historie objednávky</h2>    
+	 	<table class="ohist">
+	 	<tr><th>Akce</th><th>Dne</th><th>Zpracoval</th></tr>
+	 	<? foreach ($history as $h):?>
+	 	<tr> 
+	 		<td><?=$h['message']?></td>
+	 		<td><?=$h['added']?></td>
+	 		<td><?=$this->systemUsers[$h['user']]?></td> 
+	 	</tr>
+	 	<? endforeach;?>
+	 	</table>
+		<br/>
+		<?=$this->formSubmit('saveContentB', 'Uložit', array('class'=>'fsubmit', "onclick" => "return submitFormAjax('PageForm', '".$this->url(array('action' => 'saveOrder'))."', 'vypisDole', 'tab-refresh', '', true );", 'iconClass' => "noteIcon")) ?>
+		 
+	</div> 
+</form>  

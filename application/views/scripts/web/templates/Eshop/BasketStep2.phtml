@@ -1,0 +1,14 @@
+<?$this->txtPage = true;
+$this->eshop = true;   
+//pr($this->mEshop->basket);
+ $basket = $this->basket = $this->mEshop->basket; 
+			$shopper = $basket->getShopper();      
+          if($this->webUser->id){
+          	$this->input = Helpers::setValuesToObject($this->input, $this->webUser);
+          	$this->input->fullname = $this->input->jmeno . ' ' . $this->input->prijmeni;
+          } else if($shopper){
+          	$this->input = Helpers::setValuesToObject($this->input, $shopper);  
+          } 
+?>
+<?= $this->render('parts/userForm.phtml'); ?>
+

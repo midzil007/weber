@@ -1,0 +1,34 @@
+<div id="err_PageForm"></div>
+<?php echo $this->formHidden('parentId_new',$this->node->nodeId) ?>
+<?php echo $this->formHidden('contentType',$this->contentType) ?>
+
+<table class="modalTable">		
+	<tr>
+		<td class="formcell tkey"><?=$this->cp_Translate[$this->content->nodeTitle] ?></td>
+		<td class="formcell"><?php echo $this->formText('pageTitle',$this->node->title, array('class'=>'ftext100')) ?></td>
+	</tr>
+	<tr>
+		<td class="formcell">Popis</td>
+		<td class="formcell"><?php echo $this->formTextarea('description',$this->node->description, array('class'=>'ftext')) ?></td>
+	</tr>
+	
+	<? if($this->isEdit || $this->isVersion): ?>
+	<tr>
+		<td class="formcell">Umístěno v</td>
+		<td class="formcell"><?php echo $this->formSelect('parentId', $this->node->parentId , array('autocomplete'=>'true','value'=>$this->node->parentId), $this->parentFileSelect, '', true) ?></td>	
+	</tr>
+	<? endif; ?> 
+	
+	<tr>	
+		<td class="formcell" colspan="2">
+				<?
+				$action = 'updateFile';
+				$refreshTab = 'vypisDole';
+				$jsAction = 'modal';
+				?>	
+			
+				<?php echo $this->formSubmit('saveContentB', 'Uložit', array('class'=>'fsubmit', "onclick" => $this->addSubmitFunction . " setWysiwygContent('fck_html'); return submitFormAjax('PageForm', '".$this->url(array('controller' => $this->curentViewState['controller'],'action' => $action))."', '$refreshTab', '$jsAction', '', 1  );", 'iconClass' => "noteIcon")) ?>									
+			
+		</td>
+	</tr>
+</table>

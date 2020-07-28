@@ -1,0 +1,20 @@
+	<? echo $this->ImageButton('vytvořit nový produkt', '#', 'big/new-page.gif', 'big/new-page-o.gif', 
+		array('title' => "Nový produkt ", "onclick" => "
+			return refreshTab('vypisDole', '" . $this->url(array('amodule' => 'items','action' => 'addItem')) . "');
+		")) ?>	
+ 	<br />  
+	
+	 
+  
+	<?php  
+		echo $this->table( 
+			$this->ordersTable, 
+			$this->ordersTableHead, 
+			$this->ordersTableActions, 
+			$this->tableSort, 
+			$this->tableSortType, 
+			$this->curentViewState, 
+			$this->tableParentTab, 
+			array('class' => 'list')
+		);  
+	?> 

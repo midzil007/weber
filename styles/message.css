@@ -1,0 +1,14 @@
+.errorm {
+  color: #603;
+  background: #FFECEC; }
+
+.message {
+  padding: 5px 10px;
+  border: 1px solid #CCC;
+  margin: 0 0 13px; }
+
+.message, .tAlignCenter {
+  text-align: center; }
+
+#buttBig, .errorm, .final {
+  font-weight: 700; }

@@ -1,0 +1,23 @@
+<?php 
+$this->disableH1 = true;
+if(isset($this->inputGet->succ)){   
+	//list($state, $messages) = $this->mCustomers->sendLoginInfo($this->input);
+	$state = 1;
+	$messages = 'Přihlašovací údaje Vám byly zaslány na email'; 
+	Helpers::addMessage($state, $messages, $this);
+	$this->rurl = $this->profileUrl;
+}
+$this->headBanner = false;  
+$this->headBannerHeight = 0;  
+$ref = $_SERVER['HTTP_REFERER'];
+$ref = $ref?$ref:$this->profileUrl;
+if($this->inputGet->p){
+	$this->rurl = $this->profileUrl;    
+}
+$this->rurl = $this->rurl?$this->rurl:$ref; 
+ 
+?><h3>Přihlášení</h3>
+<div class="clear"></Div> 
+<?=$this->render('parts/loginForm.phtml'); ?>      
+            
+            

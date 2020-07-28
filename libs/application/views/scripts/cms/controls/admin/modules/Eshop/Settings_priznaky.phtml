@@ -1,0 +1,33 @@
+<table>
+	<?for($i=1; $i<=20; $i++):
+	if( ($this->priznaky[$i - 1]) || ($i<4) )
+		$display = '';
+	else
+		$display = 'style="display:none"';
+	?>
+	<tbody class="priznaky" <?=$display;?>> 
+		<tr>
+			<td><strong>#<?=$i?></strong> Název:</td>
+			<td><?=$this->formText('priznak_' . $i, $this->priznaky[$i - 1]['nazev'], array('class' => 'w320'))?></td>
+			<?=$this->formHidden('pId_' . $i, $this->priznaky[$i - 1]['id'])?>
+			<td><?=$this->formCheckbox('priznakDelete_' . $i)?>Smazat příznak
+			
+			<a href="#" onclick="showText('propTextArea_<?=$i?>')" id="nb" href="/cms/eshop/addItem/amodule/items" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false">
+			<span class="ui-icon ui-icon-carat-2-n-s"></span><span class="ui-button-text">Zobrazit/skrýt popis</span></a> 
+			</td>  
+		</tr>
+		
+		<tr id="propTextArea_<?=$i?>" style="display:none;">
+			<td>Popis</td> 
+			<td><?=$this->formText('priznak_'. $i .'_popis', $this->priznaky[$i - 1]['popis'],array('class'=>'w500 h70'))?></td>
+		</tr> 
+		<tr>  
+			<td>Obrázek:</td><td colspan="2"><?=$this->formFileSelect('priznakImg_' . $i, $this->priznaky[$i - 1]['obrazek'],array(),array(), array('showSelectFile' => true, 'showUploadFile' => true, 'uploadFileDirectoryNodeId' => 7329 ));?></td>
+			
+		</tr>
+		
+		</tbody>  
+	<?endfor;?>
+	<tr><td><a onclick="return ShowNextOption('priznaky');" id="nb" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false"><span class="ui-icon ui-icon-circle-plus"></span><span class="ui-button-text">
+	Více příznaků</span></a></td></tr>
+</table>

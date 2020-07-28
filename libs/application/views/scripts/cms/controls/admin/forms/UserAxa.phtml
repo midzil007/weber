@@ -1,0 +1,42 @@
+<div id="err_userForm"></div>
+<!-- <h1><?php if($this->edit): ?>Editace uživatele<?php else: ?>Nový uživatel<?php endif; ?></h1>	-->
+
+<?php if($this->edit): ?>
+	<form id="userForm" action="<?= $this->url(array('controller' => 'users','action' => 'updateAxa')) ?>" method="post">
+	<?php echo $this->formHidden('username',$this->input->username) ?>
+	<?php echo $this->formHidden('password',$this->password) ?> 
+	<?php echo $this->formHidden('password2',$this->password2) ?>
+<?php else: ?>
+	<form id="userForm" action="<?= $this->url(array('controller' => 'users','action' => 'saveAxa')) ?>" method="post">
+<?php endif; ?>
+<table>		
+	<tr>
+		<td class="formcell tkey">Jméno</td> 
+		<td class="formcell"><?php echo $this->formText('fullname',$this->input->fullname, array('class'=>'ftext')) ?></td>
+	</tr>
+	<tr>
+		<td class="formcell">Login - AXA id</td>
+		<td class="formcell"><?php echo $this->formText('username',$this->input->username, array('class'=>'ftext')) ?></td>
+	</tr>
+	<tr>
+		<td class="formcell">Skupina</td>
+		<td class="formcell"><?php echo $this->formSelect('group', $this->input->group , array('autocomplete'=>'true','value'=>$this->input->group), array('OP' => 'OP', 'PR' => 'PR')) ?></td>
+	</tr>
+	<tr>
+
+		<td class="formcell">Email</td>
+		<td class="formcell"><?php echo $this->formText('email',$this->input->email, array('class'=>'ftext')) ?></td>
+	</tr>
+	<tr> 
+
+		<td class="formcell" colspan="2">
+			 
+			<?php if($this->edit): ?>
+				<?php echo $this->formSubmit('save', 'Uložit', array('class'=>'fsubmit', "onclick" => "return submitFormAjax('userForm', '".$this->url(array('controller' => 'users','action' => 'updateAxa'))."', 'vypisDole' );", 'iconClass' => "noteIcon")) ?>
+			<?php else: ?>
+				<?php echo $this->formSubmit('save', 'Uložit', array('class'=>'fsubmit', "onclick" => "return submitFormAjax('userForm', '".$this->url(array('controller' => 'users','action' => 'saveAxa'))."', 'vypisDole' );", 'iconClass' => "noteIcon")) ?>				
+			<?php endif; ?>  
+		</td>
+	<tr>
+</table>
+</form>

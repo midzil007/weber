@@ -1,0 +1,67 @@
+<form name="structureMainForm" id="structureMainForm" action="<?= $this->url(array('controller' => 'structure','action' => 'delete')) ?>" method="post">
+<?
+
+
+$c = $this->node->getTheRightContent();  
+$params = $this->request->getParams();
+$params['action'] = 'detail';		
+$params['isEdit'] = '1';			 
+$params['contentId'] = $c->id;			
+		
+$url = Utils::getStrictUrl($this, $params, array('sort', 'sortType', 'contentType'));
+
+
+ 			
+
+?>
+<h1 class="fl_left wide">
+	<a href="<?=$url?>" title="Editovat sekci: <?=$this->node->title?>"><?php echo $this->node->title ?></a>
+	<span><?=Utils::getFrontEndLink($this->node->path, false)?></span>
+</h1>
+
+<div class="fl_left" style="margin-left:20px;">
+<?
+echo $this->ImageButton('Editovat sekci', $url, 'big/edit-folder.gif', 'big/edit-folder-o.gif', array('title' => "Editovat sekci: '" . $this->node->title . "'", 'style' => '')) 
+			?>	
+ 
+<? if($this->rootNodeId != $this->node->nodeId && 0): ?>		
+
+	<?php echo $this->ImageButton('Smazat sekci', '#', 'big/delete-folder.gif', 'big/delete-folder-o.gif', array('title' => "Smazat sekci: '" . $this->node->title . "'", 'style' => '', "onclick" => "if(confirmSubmit2('Opravdu smazat?')){document.structureMainForm.submit(); }")) ?>	
+ 
+<? endif;
+  
+$this->contentType = $this->contentType?$this->contentType:current(array_keys($this->contentTypes));
+
+?>		
+</div>
+<div class="cb">&nbsp;</div>
+<div class="buttons">
+		 
+	<table>
+		<tr>
+			<td style="background:url(<?=$this->cmsFolderPath?>/images/sub.gif) no-repeat 0px 4px; padding-left:15px;">Nová podsekce </td>
+			<td><?php echo $this->formSelect('contentType', $this->contentType , array('autocomplete'=>'true', 'class' => 'fl_left','value'=>$this->contentType), $this->contentTypes) ?></td>
+			<td>
+			<?
+			$params = $this->request->getParams();
+			$params['action'] = 'new';					
+			$url = Utils::getStrictUrl($this, $params, array('sort', 'sortType', 'contentType'));
+			?>    
+			
+			<a type="submit" id="nbbb" onclick="window.location.href='<?=$url;?>/contentType/' + $('#contentType').val()">Nová podsekce</a>  
+ 
+				<script> 
+				  $(function() {  
+				    $("#nbbb" ).button({
+				      icons: {
+				        primary: "ui-icon-plusthick"
+				      }
+				    }); 
+				  });
+				  </script>	
+			</td>		 
+		</tr>
+	</table>	 
+</div>
+
+</form>	

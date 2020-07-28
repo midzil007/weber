@@ -1,0 +1,72 @@
+<?php  
+
+
+$items = $this->mEshop->basket->getItems();
+$voucher = $this->mEshop->basket->voucher;
+$itemsCount = count($items); 
+$sumAll = $discount = 0;
+$delivery = $this->mEshop->basket->getDeliveryPrice2();
+$payment = $this->mEshop->basket->getPaymentPrice();
+$mp = new module_Eshop_PriceCalc($voucher, $items, $delivery, $payment); 
+
+
+ 
+$base = SERVER_ROOT.'/application/classes/'; 
+$urlPay = 'https://testgateway.paysec.cz/GateWay.aspx'; 
+$urlPay = 'https://gateway.paysec.cz/gateway.aspx';
+$orderid = rand() ;       
+$merchantId = 2262106;  
+$merchantId = 6500208;     
+     
+$title = 'Platba v obchode kavablack.cz';    
+$sum = $mp->sum;
+  
+$base = 'http://www.kavablack.cz/paysec';    
+ 
+
+
+if($_GET['merchantOrderId']){
+	$paysecMapi = new SoapClient("https://mapi.paysec.cz/mapi.svc?wsdl");    
+	$resultCode = $paysecMapi->VerifyTransactionIsPaid("KAVABLACK", "KavaBlack1", $_GET['merchantOrderId'], $sum);   
+ 	
+	if($resultCode === 0){ // zaplaceno   
+		helper_Frontend::redirect($this->bp . '?step=4&successPay=1&success=1', 302); 
+	} else { //failed 
+		Utils::debug($resultCode, 'orlik@eportaly.cz'); 
+		Utils::debug($mp, 'orlik@eportaly.cz');  
+		?>   
+		<h2>Platba neproběhla, zkuste akci opakovat.</h2>	 
+		<?	 
+		//e($resultCode);
+		return;
+	}  
+}
+if($_GET['failed']){
+?>   
+		<h2>Platba neproběhla, zkuste akci opakovat.</h2>	 
+		<?	 
+		
+		return; 
+} 
+?>   
+<h2>Probíhá přesměrování</h2>
+<form action="<?=$urlPay?>" method="post" id="myform">   
+	<input type="hidden" name="MicroaccountNumber" value="<?=$merchantId?>" />
+	<input type="hidden" name="Amount" value="<?=$sum?>" />   
+	<input type="hidden" name="MerchantOrderId" value="<?=$orderid?>" />
+	<input type="hidden" name="MessageForTarget" value="<?=$title?>" /> 
+	<input type="hidden" name="BackURL" value="<?=$base?>?tid={0}&merchantOrderId={1}" /> 
+	<input type="hidden" name="CancelURL" value="<?=$base?>?failed=1" />     
+</form> 
+
+<script> 
+
+
+function submitform()    
+{ 
+	clearInterval(auto_refresh);
+   document.getElementById("myform").submit();
+   
+}
+   var auto_refresh = setInterval(function() { submitform(); }, 100); 
+</script>

@@ -1,0 +1,35 @@
+<div id="err_webuserForm"></div>
+<?
+$w = new module_Customer();
+
+$donotDisplay = array('id', 'active'); 
+$date = array('added'); 
+?>
+
+<table style="width"350px;">		
+	<?
+	foreach ($this->input as $k => $v):
+		if(in_array($k, $donotDisplay)){
+			continue;
+		}
+		
+		if($w->paramtOptionsMap[$k]){
+			$optionsPropertyName 	= $w->paramtOptionsMap[$k];
+			$options = helper_Input::addNotDefinedOption($w->$optionsPropertyName, '--nevybráno--');
+			$v = $options[$v];
+		}
+		
+		if(in_array($k, $date)){
+			$v = Utils::formatDate($v);
+		}
+	?>
+	<tr>
+		<td class="formcell tkey"><?=$this->cp_Translate[$k]?></td>
+		<td class="formcell"><?=$v?></td>
+	</tr>
+	<?
+	endforeach;
+	?>
+	
+</table>
+</form>

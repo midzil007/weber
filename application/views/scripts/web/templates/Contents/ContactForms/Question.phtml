@@ -1,0 +1,45 @@
+<?			
+if(isset($this->input->send2)){
+	$webForm = new module_WebForm($this->input);								
+	$text = '
+		<h2 style="color:#0f4096; font-size: 12px;">Byl Vám odeslán dotaz</h2>
+		<p>
+		Ze stránky <a href="' . Utils::getWebUrl() . $this->curentPath . '"><b>' . $this->curentNode->title . '</b> (' . Utils::getWebUrl() . $this->curentPath . ') </a>
+		</p>		
+		<b>Dotaz:</b>
+		<p>' . nl2br($this->input->text) . '</p>	
+	';							
+	
+	list($state, $messages) = $webForm->sendQuestion($text);							
+	?>
+	<script type="text/javascript">
+	alert('<?=$messages?>');
+	</script>
+	<?
+	if($state){
+		$this->input = '';
+	}
+	//Helpers::addMessage($state, $messages, $this);
+}
+
+$this->formSubject = 'Autobazar BLESK - zajímavý automobil';
+
+?>
+
+<?php if(count($this->messages)): ?>
+	<?= $this->render('parts/messages.phtml'); ?>				
+<?php endif; ?>
+
+<?php if(!$this->currentState): ?>	
+	<form action="<?=$_SERVER['REDIRECT_URL']?>" method="POST">
+	<?=$this->formHidden('subject', $this->formSubject)?>	
+	
+	
+	<?=$this->formTextarea('text', $this->input->text)?>
+	<label for="phone">Vaše tel. číslo:</label>
+	<input type="text" id="phone" class="textInput" value="" />
+	<?=$this->formText('phone', $this->input->phone, array('class' => 'textInput'))?>			
+	<?= $this->render('parts/SecurityCode.phtml'); ?>	
+	<?=$this->formSubmit('send2', 'Odeslat', array('class' => 'button64'))?>	
+	</form>
+<?php endif; ?>

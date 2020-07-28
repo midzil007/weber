@@ -1,0 +1,66 @@
+<?php
+	$this->disableForm = true;
+		echo $this->table( 
+				$this->versionsTable,  
+				$this->versionsTableHead, 
+				$this->versionsTableActions, 
+				$this->tableSort, 
+				$this->tableSortType, 
+				$this->curentViewState, 
+				$this->tableParentTab,
+				array('class' => 'list') 
+			); 
+	?>
+	
+	<?php
+		$params = $this->request->getParams();
+		$params['action'] = 'newVersion';
+		$params['isEdit'] = '1';
+		$params['showVersions'] = '0';
+		$params['node'] = $this->node->nodeId;
+		$params['isEdit'] = '1'; 
+				
+		$url = Utils::getStrictUrl($this, $params, array('sort', 'sortType', 'contentType'));
+		if($this->node->getSuperType() == 'files'):
+		/*	
+		echo $this->formSubmit(
+				'saveContentB', 
+				'Nahrát novou verzi souboru', 
+				array(
+					'class'=>'fsubmit', 
+					"onclick" => "uploadFile('" . $this->url(array('controller' => 'sf','action' => 'list')) . "')", 
+					'iconClass' => "noteIcon"
+				)
+			);
+			*/
+		/*
+			echo $this->ImageButton(
+				'Nahrát novou verzi souboru', 
+				'#', 
+				'big/new-file.gif', 'big/new-file-o.gif', 
+				array(
+					'title' => "Nová verze souboru '" . $this->node->title . "'", 
+					"onclick" => " return showModal('Nová verze souboru \'" . $this->node->title . "\'',
+					'". $this->url(array('controller' => 'sf','action' => 'newFile', 'filenode' => $this->node->nodeId)) ."', 2, 380);"
+				)
+			);
+				*/		
+
+		?>						
+	<? else: ?>
+	<table>
+		<tr>
+			<td>Nová verze typu</td>
+			<td><?php echo $this->formSelect('contentTypeNV', $this->contentType , array('autocomplete'=>'true','value'=>$this->contentType), $this->contentTypes) ?></td>
+			<td>
+		<?		
+		echo $this->formSubmit('nuC', 'Vytvořit', array(
+		'class'=>'fsubmit', 
+		"onclick" => "return refreshTab(
+			'pageFormTab',
+			'". $url ."/contentType/' + dijit.byId('contentTypeNV').getValue()
+		);")) ?>
+		</td>
+		</tr>
+	</table>
+	<? endif; ?>

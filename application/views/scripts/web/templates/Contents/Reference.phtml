@@ -1,0 +1,46 @@
+<?= $this->render('parts/lightbox.phtml'); ?>
+
+<div id="txtPart">
+	<?= $this->html ?>
+</div>
+<div id="imgPart">	  
+		<?	
+				
+		$photosGroup = 'mainPhotos';
+		$mainPhoto = false;
+		foreach ($this->obrazky as $path => $name){
+			if(!$path){ continue; }				
+			list($nodeId, $n) = content_SFSFile::parseSFSPath($path);
+		    $photoPathFullTemp = $this->config->sfFolder . '/' . $nodeId . '/' . $this->content->fotoFullName . '-' . content_SFSFile::getFileExtension($n) . '/' . $n;
+		    $photoPathShow = $this->config->sfFolder . '/' . $nodeId . '/' . $this->content->fotoShowName . '-' . content_SFSFile::getFileExtension($n) . '/' . $n;
+		    $photoPathThumb = $this->config->sfFolder . '/' . $nodeId . '/' . $this->content->fotoThumbName . '-' . content_SFSFile::getFileExtension($n) . '/' . $n; 
+		    $photoTitle = $name;    
+		
+			if($mainPhoto == false){	
+				$mainPhoto = true;
+				?>
+				<div id="mainPhoto">
+					<a rel="lightbox[<?=$photosGroup?>]" class="photo" href="<?=$photoPathFullTemp?>"><img src="<?=$photoPathShow?>" alt="<?=$photoName?>" /></a>			    			
+				</div>
+				<div class="clear">&nbsp;</div>
+				<div class="miniPhotos">
+				<?
+			} else {
+				?>
+				<a href="<?=$photoPathFullTemp?>" target="_blank" rel="lightbox[<?=$photosGroup?>]" class="imgBorder">
+					<img src="<?=$photoPathThumb?>" alt="<?=$name?>" />
+				</a>
+				<?
+			}		
+		}		
+		if($mainPhoto){
+			?>
+					<div class="clear">&nbsp;</div>
+				</div>
+				
+			<?
+		}
+		?>
+		
+	
+</div>

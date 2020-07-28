@@ -1,0 +1,58 @@
+<div id="err_webuserForm"></div>
+
+<form onsubmit = "return false; " id="webuserForm" action="" method="post">
+<?php echo $this->formHidden('id',$this->input->id) ?> 
+
+<table>		
+	<tr>
+		<td class="formcell tkey">Jméno</td>
+		<td class="formcell"><?php echo $this->formText('jmeno',$this->input->jmeno, array('class'=>'ftext')) ?></td>
+	</tr>
+	<tr>
+		<td class="formcell tkey">Příjmení</td>
+		<td class="formcell"><?php echo $this->formText('prijmeni',$this->input->prijmeni, array('class'=>'ftext')) ?></td>
+	</tr> 
+	<tr>
+		<td>Telefon:</td>
+		<td><?=$this->formText('telefon', $this->input->telefon, array('class' => 'ftext'))?></td>		
+	</tr>
+	<tr>
+		<td>E-mail:</td>
+		<td><?=$this->formText('email', $this->input->email, array('class' => 'ftext'))?></td>		
+	</tr> 
+	<tr>
+		<td>Firma:</td>
+		<td><?=$this->formText('firma', $this->input->firma, array('class' => 'ftext'))?></td>		
+	</tr>	
+	<tr>
+		<td>IČO:</td>
+		<td><?=$this->formText('ico', $this->input->ico, array('class' => 'ftext'))?></td>		
+	</tr>	
+	<tr>
+		<td>DIČ:</td>
+		<td><?=$this->formText('dic', $this->input->dic, array('class' => 'ftext'))?></td>		
+	</tr>	
+	<tr>
+		<td>Ulice</td>
+		<td><?=$this->formText('fulice', $this->input->fulice, array('class' => 'ftext'))?></td>		
+	</tr>	
+	<tr>
+		<td>Město</td>
+		<td><?=$this->formText('fmesto', $this->input->fmesto, array('class' => 'ftext'))?></td>		
+	</tr>	
+	<tr>
+		<td>PSČ</td>
+		<td><?=$this->formText('fpsc', $this->input->fpsc, array('class' => 'ftext'))?></td>		
+	</tr>	 
+	<tr>
+		<td>Zasílání novinek</td>
+		<td><?=$this->formSelect('mailing', $this->input->mailing, array(), array(1 => 'Ano zasílat', 0 => 'Nezasílat'))?>
+        </td>		 
+	</tr>	   
+	<tr>
+		<td class="formcell" colspan="2">  
+			<?php echo $this->formSubmit('save', 'Uložit', array('class'=>'fsubmit', "onsubmit" => "return false;", "onclick" => "submitFormAjax('webuserForm', '".$this->url(array('controller' => 'users','action' => 'updateWebuser'))."', 'vypisDole' );", 'iconClass' => "noteIcon")) ?>			
+		</td>
+	<tr>
+</table>
+</form>

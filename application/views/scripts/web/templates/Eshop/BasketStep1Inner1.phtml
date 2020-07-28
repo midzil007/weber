@@ -1,0 +1,45 @@
+          <div id="left-column">  
+		  <? if(isset($this->voucher)):
+		  $voucherErr = false;
+		  $voucherInfo = "Kupón byl úspěšně vložen";
+			if($this->voucher === 0){
+				$voucherInfo = 'Zadaný kód "'.$this->input->kod.'" je neplatný.';
+				$voucherErr = true;
+				unset($this->voucher);
+				}	
+			if($this->voucher['status'] == 2){
+				$voucherInfo = "Kupón \"".$this->input->kod."\" již byl použit!";
+				$voucherErr = true;
+				unset($this->voucher);
+				}
+			if($this->voucher['status'] == 3){
+				$date = new DateTime($this->voucher['valid']);
+				$voucherInfo = 'Je nám líto, ale kupón "'.$this->input->kod.'" byl platný pouze do: '. $date->format('j.n.Y').'.';
+				$voucherErr = true;
+				unset($this->voucher);
+				}
+			if($this->voucher['status'] == -1){
+				$voucherInfo = "Kupón \"".$this->input->kod."\" se nevztahuje na žádné zboží v košíku!";
+				$voucherErr = true;
+				unset($this->voucher);
+				}
+			$voucherClass = $voucherErr?'vErr':'vInfo';
+		  ?>
+		  
+		  <div id="voucherinfo" class="<?=$voucherClass?>">
+			<?=$voucherInfo?>
+		  </div>
+		  <?endif;?>
+          	 <?=$this->render('templates/Eshop/ItemsList.phtml'); ?>
+          	 <?=$this->render('templates/Eshop/deliveryBlock.phtml'); ?>
+          
+            <div class="clear"></div> 
+             
+          
+          </div>     
+          <?=$this->render('templates/Eshop/priceBlock.phtml'); ?>
+          <div class="clear"></div> 
+          <div id="buttons"> 
+          	<p class="zpet"><a href="/">&nbsp;</a></p>
+           	<input type="submit" id="dalsiKrok" name="step[2]" value="">
+          </div>

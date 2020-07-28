@@ -1,0 +1,31 @@
+<div id="addFormContainer">
+<?php if(count($this->messages)): ?>
+	<?= $this->render('parts/messages.phtml'); ?>				
+<?php endif; ?>
+
+<?php if(!$this->currentState): ?>	
+	<h3>Nový příspěvek</h3>
+	<table class="addForm">
+		<tr>
+			<td class="s120">Jméno / přezdívka</td>
+			<td><?=$this->formText('fullname', $this->input->fullname, array('class' => 'nice s300'))?> <span class="cred">*</span></td>		
+		</tr>
+		<!--
+		<tr>
+			<td>E-mail:</td>
+			<td><?=$this->formText('email', $this->input->email, array('class' => 'nice s300'))?> </td>		
+		</tr>
+		-->
+		<tr>
+			<td>Nadpis:</td>
+			<td><?=$this->formText('title', $this->input->title, array('class' => 'nice s300'))?> </td>		
+		</tr>
+		<tr>
+			<td>Zpráva:</td>
+			<td><?=$this->formTextarea('message', $this->input->message, array('class' => 'niceTa s300', 'rows' => 4))?> <span class="cred">*</span></td>		
+		</tr>
+	</table>
+	<?= $this->render('parts/SecurityCode.phtml'); ?>		
+	<input type="submit" name="addPost" value="Odeslat" />	
+<?php endif; ?>
+</div>

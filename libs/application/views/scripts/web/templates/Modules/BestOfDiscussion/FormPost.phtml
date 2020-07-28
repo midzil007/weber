@@ -1,0 +1,65 @@
+<?php  
+
+$smiles = array(
+  ':)' => 'smile1',
+  ';-)' => 'smile2',
+  ':-D' => 'smile3',
+  ':-*' => 'smile4',
+  ':(' => 'smile5',
+);              
+
+?>
+
+<script type="text/javascript">
+// <![CDATA[
+	var form_name = 'postForm';
+	var text_name = 'themeMessage'; 
+
+	// Define the bbCode tags
+	var bbcode = new Array();
+	var bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]', '[url=]','[/url]','[video]','[/video]');
+  
+   
+// ]]>                                                   
+</script>
+
+<a name="boForm"></a>             
+<form action="<?=$_SERVER['REQUEST_URI']?>" method="POST" id="postForm"> 
+	<input type="hidden" name="dAction" value="addPost" />
+	<div id="newBOTheme"> 	
+		<div class="boForm">
+			<h3 class="boReplyTitle">Vaše reakce</h3> 
+	
+			<table class="addForm">   
+			  <tr>
+			     <td>
+			       <? foreach($smiles as $ident => $img): ?>         
+			       <a href="#" class="boSmile" onclick="return insert_text('<?=$ident?>');"><img src="/images/diskuse/<?=$img?>.gif" alt="<?=$ident?>" /></a>  
+			       <? endforeach; ?>  
+             <span class="boSpacer"> <b>|</b> </span>                 
+             <a href="#" class="boIco" onclick="return bbstyle(0)"><img src="/images/diskuse/ico_bold.png" alt="" /></a>   
+             <a href="#" class="boIco" onclick="return bbstyle(2)"><img src="/images/diskuse/ico_italic.png" alt="" /></a>
+             <a href="#" class="boIco" onclick="return bbstyle(4)"><img src="/images/diskuse/ico_under.png" alt="" /></a>
+             <span class="boSpacer"> | </span>                 
+                                                                              
+                                                                        
+                                                                                                              
+             <a href="#" class="boIco" onclick="return bbfontstyle('[url=' + prompt('Zadejte odkaz') + ']', '[/url]');"><img src="/images/diskuse/ico_link.png" alt="" /></a>   
+             <a href="#" class="boIco" onclick="return bbstyle(8)"><img src="/images/diskuse/ico_video.png" alt="" /></a>
+             <? if($this->boHasImages): ?>         
+             <span class="boSpacer"> | </span>                  
+             <a href="#" class="boIco"><img src="/images/diskuse/ico_img.png" alt="" /> přidat obrázky</a> 
+             <? endif; ?>
+			     </td>                                                        
+			     <td> </td>
+			 </tr>
+				<tr>
+					<td><?=$this->formTextarea('message', $this->input->message, array('id' => 'themeMessage', 'class' => 'nice', 'rows' => 4))?></td>
+          <td> </td>		
+				</tr>
+			</table>
+			<?= $this->render('parts/SecurityCode.phtml'); ?>		
+			<input type="submit" class="nicesubmit sm90" name="addTopic" value="Odeslat" /> 	  
+		</div> 
+	</div>
+</form>  

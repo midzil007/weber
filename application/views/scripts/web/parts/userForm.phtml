@@ -1,0 +1,193 @@
+<div class="spacer10"></div>
+<div id="user-form">
+<?if($this->showPrice):?>    
+<div class="lineGrey pad-l-15">	  
+<a href="#" onclick="return showLog('showLog', 100,'showReg',430)"><strong>Jste stavající zákazník? Přihlášení</strong></a><span class="downArr1" style="display: inline;">▼</span><span class="upArr1" style="display: none;">▲</span>
+</div> 
+ <?endif?>    
+<div class="user-data"> 
+	<?if($this->showPrice):?>     
+<div class="row" id="showLog">  
+	<div class="col-md-6" id="showLog-name">  
+		<div class="col-sm-4">Email: <span class="cred">*</span></div>
+		<div class="col-sm-8">
+			<div class="form-group">
+					<input type="text" class="form-control" placeholder="@" id="loginEmail" name="login-email" value=""/>
+			</div>  
+		</div>
+	</div>   
+	<div class="col-md-3 second-cell"> 
+		<button type="submit" id="log" class="final buttons-new" name="login">Ověřit<span class="right-ar-basket"></span></button>
+	</div>         
+	<div class="col-md-3 second-cell">     
+		<button type="submit" id="noname" class="final buttons-new" name="noname">None - pok. doklad<span class="right-ar-basket"></span></button>
+	</div>
+</div>     
+ 
+<?endif?>   
+<div class="lineGrey pad-l-15"><strong>Vaše údaje</strong></div>
+<div class="row">
+		<div class="col-md-6"> 
+			<div class="col-sm-4">Jméno a příjmeni: <span class="cred">*</span></div>
+			<div class="col-sm-8"> 
+				<div class="form-group">
+					<input type="text" id="fullname" name="fullname" value="<?=$this->input->fullname?>" class="form-control"  placeholder="Jméno a příjmení">
+				</div>
+			</div>
+		</div>    
+		<div class="col-md-6">
+			<div class="col-sm-4 tempik">E-mail: <span class="cred">*</span></div>
+				<?$this->input->email = !$this->input->email? '@':$this->input->email;?>
+			<div class="col-sm-8">
+				<div class="form-group">
+					<input type="text" name="email" id="email" value="<?=$this->input->email?>" class="form-control" placeholder="Email">
+				</div>
+			</div> 
+		</div>
+	</div> 
+	<div class="row">
+		<div class="col-md-6">
+			<div class="col-sm-4">Telefonní číslo:  <span class="cred">*</span></div>
+			<div class="col-sm-8">
+				<div class="form-group">
+					<input type="text" name="telefon" id="telefon" value="<?=$this->input->telefon?>" class="form-control" placeholder="Telefonní číslo: ">
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="col-sm-4 tempik">Město: <span class="cred">*</span></div>
+			<div class="col-sm-8">
+				<div class="form-group">
+					<input type="text" name="mesto" id="mesto" value="<?=$this->input->mesto?>" class="form-control" placeholder="Město">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="col-sm-4">Ulice a číslo popisné: <span class="cred">*</span></div>
+			<div class="col-sm-8">
+				<div class="form-group">
+					<input type="text" name="ulice" id="ulice" value="<?=$this->input->ulice?>" class="form-control" placeholder="Ulice a číslo popisné ">
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="col-sm-4 tempik">PSČ: <span class="cred">*</span></div>
+			<div class="col-sm-8">
+				<div class="form-group">
+					<input type="text" name="psc" id="psc" value="<?=$this->input->psc?>" class="form-control"  placeholder="PSČ">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="lineGrey pad-l-15"><strong>Firemní údaje:</strong></div>
+		<div class="row">
+		<div class="col-md-6">
+			<div class="col-sm-4">Firma:</div>
+			<div class="col-sm-8"> 
+				<div class="form-group">
+					<input type="text" name="firma" id="firma" value="<?=$this->input->firma?>" class="form-control" placeholder="Firma">
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="col-sm-4 tempik">IČO:</div>
+			<div class="col-sm-8">
+				<div class="form-group">
+					<input type="text" name="ico" id="ico" value="<?=$this->input->ico?>" class="form-control" placeholder="IČO">
+				</div>
+			</div>
+		</div>
+	</div>  
+	<div class="row">
+		<div class="col-md-6">
+			<div class="col-sm-4">DIČ:</div> 
+			<div class="col-sm-8">  
+				<div class="form-group"> 
+					<input type="text" name="dic" id="dic" value="<?=$this->input->dic?>" class="form-control" placeholder="DIČ">
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			
+		</div>
+	</div>
+	<div class="lineGrey pad-l-15" ><a  href="#" class="red" id="showAdress"><strong>Doručit na jinou adresu </strong><span class="downArr" <?=$this->input->ffullname ? 'style="display: none;"':''?>>▼</span><span class="upArr" <?=$this->input->ffullname ? 'style="display: inline;"':''?>>▲</span></a></div>
+	<div id="otherAdress" <?=$this->input->ffullname ? 'style="display: block;"':''?>>
+	<div class="row">    
+		<div class="col-md-6">  
+			<div class="col-sm-4">Jméno a příjmeni:</div>
+			<div class="col-sm-8">
+				<div class="form-group">
+					<input type="text" name="ffullname" id="ffullname" value="<?=$this->input->ffullname?>" class="form-control"  placeholder="Jméno a příjmení">
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="col-sm-4 tempik">Firma:</div>
+			<div class="col-sm-8">
+				<div class="form-group">
+					<input type="text" name="ffirma" id="ffirma" value="<?=$this->input->ffirma?>" class="form-control" placeholder="Firma">
+				</div>
+			</div>
+		</div>
+	</div>  
+	<div class="row">
+		<div class="col-md-6">
+			<div class="col-sm-4">Ulice a číslo popisné:</div>
+			<div class="col-sm-8">
+				<div class="form-group">
+					<input type="text" name="fulice" id="fulice" value="<?=$this->input->fulice?>" class="form-control" placeholder="Ulice a číslo popisné">
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="col-sm-4 tempik">Telefonní číslo:</div>
+			<div class="col-sm-8">
+				<div class="form-group"> 
+					<input type="text" name="ftelefon" id="ftelefon" value="<?=$this->input->ftelefon?>" class="form-control" placeholder="Telefonní číslo">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="col-sm-4">Město: <span class="cred">*</span></div>
+			<div class="col-sm-8">
+				<div class="form-group"> 
+					<input type="text" name="fMesto" id="fMesto" value="<?=$this->input->fMesto?>" class="form-control" placeholder="Město">
+				</div>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="col-sm-4 tempik">PSČ: <span class="cred">*</span></div>
+			<div class="col-sm-8">
+				<div class="form-group">
+					<input type="text" name="fpsc" id="fpsc" value="<?=$this->input->fpsc?>" class="form-control"  placeholder="PSČ">
+				</div>
+			</div>
+		</div>
+	</div>  
+	</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+                <span class="cred">*</span> Položky označené hvězdičkou jsou povinné
+                	<div class="spacer10"></div>
+                <p class="agree">Stisknutím tlačítka "Další krok" souhlasíte s <a class="ajax" title="Obchodní podmínky" target="_blank" href="/jura/obchodni-podminky?pop=1">Obchodními a přepravními podmínkami</a>.</p>
+                 </div>
+	 	<div class="spacer10"></div>
+	</div>     
+	<div class="row"> 
+		<div class="col-xs-6">
+			<a class="buttBack fLeft" href="javascript:history.back()"><span class="red fBold backw butt i-block bgrNoRep"></span>Předchozí krok</a>
+		</div>
+		<div class="col-xs-6"> 
+			<button type="submit" class="pull-right btn final buttons-new" name="step[3]">Další krok<span class="arr"></span></button>
+		</div> 
+	</div> 
+</div>  
+<div class="spacerr10"></div>   
+
+

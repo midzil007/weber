@@ -1,0 +1,31 @@
+  	
+					 
+	        	<?  
+	        	$this->leftContents = array(
+	        		array(
+	        			'title' => 'Nápověda' ,
+	        			'content' => $this->helpContent
+	        		) 
+	        	);
+	        	if(count($this->leftContents)){
+	        		?>
+	        		<div id="accordionRight"> 
+	        		<?
+	        		foreach ($this->leftContents as $i => $c):
+	        			?>
+	        			<h3><?=$c['title']?></h3>
+	        			<div>
+	        				<?=$c['content']?>
+	        			</div>
+	        		<? endforeach;?>   
+	        		
+	        		</div> 
+	        		<script> 
+				    $(function() {
+				        $( "#accordionRight" ).accordion({ 
+				            heightStyle: "content"
+				        });
+				    }); 
+				    </script>
+	        		<?
+	        	}  

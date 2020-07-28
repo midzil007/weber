@@ -1,0 +1,27 @@
+<script src="/js/prototype.js" type="text/javascript"></script>
+<script src="/js/scriptaculous.js?load=effects,builder" type="text/javascript"></script>
+<script src="/js/lightbox.js" type="text/javascript"></script>
+
+<?= $this->html ?>
+<div class="photos">
+<?
+$i = 0;
+foreach ($this->content->getFilesNames() as $path => $name):
+	if(!$path){ continue; }			
+	if($i%3 == 0){
+		?>
+		<div class="spacer10">&nbsp;</div>
+		<?
+	}
+    list($nodeId, $n) = content_SFSFile::parseSFSPath($path);
+    $imgPath = $this->config->sfFolder . '/' . $nodeId . '/' . $this->content->fotoThumbName . '-' . content_SFSFile::getFileExtension($n) . '/' . $n;
+    $imgPathFull = $this->config->sfFolder . '/' . $nodeId . '/' . $this->content->fotoFullName . '-' . content_SFSFile::getFileExtension($n) . '/' . $n;
+?>	
+	<a class="photogallPhoto" href="<?=$imgPathFull ?>" rel="lightbox[gal<?=$this->content->id?>]" title="<?=$name?>">
+		<img src="<?=$imgPath ?>" alt="<?=$name?>" />
+	</a>			
+<?
+$i++;
+endforeach; 
+?>
+</div>

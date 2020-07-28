@@ -1,0 +1,24 @@
+	<?
+	//pr($this->content);
+	?>
+	<? foreach ($this->content->properties as $property): ?>    	
+		<tr>
+			<td class="formcell"><?=$this->cp_Translate[$property->name] ?> </td>
+			<?							
+			$param3 = array_merge(array('class' => 'ftext'), $property->dojoAtributies);	
+			switch ($property->type) {
+				case 'Wysiwyg':
+					$this->htmlContentName = 'fck_' . $property->name;
+					$input = $this->{'form'.$property->type}($property->name,$property->value);
+					break;
+				case 'CheckboxGroup':
+				case 'Select':
+					$input = $this->{'form'.$property->type}($property->name,$property->value, $param3, $property->options);
+					break;
+				default:									
+					$input = $this->{'form'.$property->type}($property->name,$property->value, $param3);
+			}
+			?>
+			<td class="formcell"><?=$input ?></td>
+		</tr>
+	<? endforeach;?>

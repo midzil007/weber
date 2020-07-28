@@ -1,0 +1,13 @@
+		 
+		<h2>Seznam diskuzí:</h2>  
+		<div id="themesList"> 
+		<?=$this->render('templates/Modules/BestOfDiscussion/ListThemesInner.phtml'); ?> 
+		</div> 
+		
+		<? if($this->mBODiscussion->onlyRegisteredUsers && !$this->webUserLogged):?>
+		<h3>Do diskuse mohou přispívat pouze registrovaní a přihlášení uživatelé.</h3> 
+		<? else: ?> 	  
+			<?=$this->render('templates/Modules/BestOfDiscussion/FormTheme.phtml'); ?> 	 
+		<? endif; ?>  
+		
+			    

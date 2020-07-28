@@ -1,0 +1,87 @@
+<?=$this->pageText?> 
+
+<?
+$display = $this->content->getPropertyValue('asGallery');
+
+$this->hasSlideshow = true;    
+
+if($display == 1):
+
+// pr($this->photos);
+
+$images = helper_FrontEnd::getResizedPhotos($this->photos, 'pThumb', 'pFull'); 	
+$keys = array_keys($this->photos);                                           
+shuffle($images);
+
+foreach ($images as $img): 
+	$f = next($keys); 
+	$full = $img['path'];
+	$descr = $img['name'];        
+	$fullImg = $img['fullPath']; 		  
+	$z++; 
+	?>                          
+		<div class="gimg <?=($z%3==0?'last':'')?>">  
+			<a target="_blank" rel="[images]" id="mb<?=$z?>" class="mbb" href="<?=$fullImg?>" target="_blank"><img src="<?=$full?>" alt="<?=$descr?>" title="<?=$descr?>" /></a>
+			<div class="multiBoxDesc mbb<?=$z?>"><?=$descr?></div>	
+		</div>  
+<? endforeach; ?>    
+ 
+	<div class="spacer10"></div> 
+	
+	<script type="text/javascript"> 	
+				  
+		var box = {};   
+		window.addEvent('domready', function(){
+			box = new multiBox('mbb', {descClassName: 'multiBoxDesc', useOverlay: true});  
+		}); 
+			  
+	</script> 
+			    
+<? else:
+	if(!$this->photos){
+		 
+		$images = array();
+		$galleries = $this->mGallery->getArticles('n.id', 'Desc', 0, 10, $this->node->nodeId);   
+		$cg = new content_OverviewGallery();
+		foreach ($galleries as $g){ 
+			$cp = $cg->getPropertyByName('photos'); 
+			$cp->value = $g['photos'];    
+			$photos = $cg->getFilesNames('photos');
+			if(count($photos)){ 
+				$i = helper_FrontEnd::getResizedPhotos($photos, 'pMini', 'pFull'); 
+				foreach ($i as $img){
+					// $img['pagePath'] =  $g['path'];
+					$images[] = $img; 
+				}
+				 
+				// $images = array_merge($array1)
+			}
+		} 
+		
+		$this->rowImages = $images;
+		
+	} else {
+		$this->rowImages = helper_FrontEnd::getResizedPhotos($this->photos, 'pMini', 'pFull'); 
+	}
+endif;
+$tagst = $this->content->getPropertyValue('tags');
+
+
+    	if(strlen($tagst)){
+    		$tags = explode(',', $tagst);  
+    		// $relevantPages = $this->mTags->getRelevantPages($this->tags, array('content_Article'), 7, false);    
+    	} 
+    	
+if(count($tags) > 1):?>
+<div class="tags">
+Štítky: 	 
+<?   
+foreach ($tags as $tag){ 
+	if($tag){
+		$links[] = '<a href="' . $this->articlesNodePath . '?tag=' . $tag . '">' . $tag . '</a>';   
+	} 
+} 
+?>
+<?=implode(', ', $links)?> 
+</div>
+<? endif; ?>

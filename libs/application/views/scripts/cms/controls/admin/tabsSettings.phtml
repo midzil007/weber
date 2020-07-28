@@ -1,0 +1,33 @@
+<script src="/js/settings.js"></script>
+<form action="" method="get" id="settingsForm">	
+	<div id="mainTabModalContainer" dojoType="dijit.layout.TabContainer" style="width:95%;height:1800px;">	
+		<div id="err_settingsForm"></div>
+		<div dojoType="dojox.layout.ContentPane"  title="Nastavení" class="tab" id="pageFormTab" refreshOnShow="false" >
+			<? include('Settings_global.phtml') ?>
+		</div>
+		<div dojoType="dojox.layout.ContentPane"  title="Kategorie" class="tab" id="pageFormTab2" refreshOnShow="false" >
+			<? include('Settings_kategorie.phtml') ?>
+		</div>
+		<div dojoType="dojox.layout.ContentPane"  title="Příznaky" class="tab" id="pageFormTab3" refreshOnShow="false" >
+			<? include('Settings_priznaky.phtml') ?>
+		</div>
+		<div dojoType="dojox.layout.ContentPane"  title="Značky" class="tab" id="pageFormTab4" refreshOnShow="false" >
+			<? include('Settings_znacky.phtml') ?>
+		</div>
+	</div>
+</form>
+
+<?/*
+	echo 'ALTER TABLE content_Product';
+	for($i=1; $i<=15; $i++)
+	{
+		echo ' ADD COLUMN varianta_' . $i . '_nazev VARCHAR(32) NULL,';
+		echo ' ADD COLUMN varianta_' . $i . '_id INT NULL,';
+		echo ' ADD COLUMN varianta_' . $i . '_EAN VARCHAR(32) NULL,';
+		echo ' ADD COLUMN varianta_' . $i . '_dostupnost VARCHAR(32) NULL,';
+		echo ' ADD COLUMN varianta_' . $i . '_poradi INT NULL,';
+		echo ' ADD COLUMN varianta_' . $i . '_obrazky TEXT NULL,';
+		echo ' ADD COLUMN varianta_' . $i . '_kategorie TEXT NULL,';
+	}*/
+?>
+		

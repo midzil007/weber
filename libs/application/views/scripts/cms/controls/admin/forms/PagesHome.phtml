@@ -1,0 +1,40 @@
+	<h1>
+		<?php echo $this->node->title ?> 
+		<span><?=Utils::getFrontEndLink($this->node->path, false)?></span>
+	</h1>
+	<?php  
+	
+	$this->contentType = $this->contentType?$this->contentType:current(array_keys($this->contentTypes));
+
+	if(!$this->isSuperAdmin && $this->node->nodeId == 1){
+
+	} else {
+	?>  
+	<table>
+		<tr>
+			<td>Nová stránka typu </td>
+			<td><?php echo $this->formSelect('contentType', $this->contentType , array('autocomplete'=>'true', 'class' => 'fl_left','value'=>$this->contentType), $this->contentTypes) ?></td>
+			<td>
+			<?
+			$params = $this->request->getParams();
+			$params['action'] = 'new';					
+			$url = Utils::getStrictUrl($this, $params, array('sort', 'sortType', 'contentType'));
+				?> 
+			<a type="submit" id="nbbb" onclick="window.location.href='<?=$url;?>/contentType/' + $('#contentType').val()">Nová stránka</a>  
+ 
+				<script> 
+				  $(function() {  
+				    $("#nbbb" ).button({ 
+				      icons: { 
+				        primary: "ui-icon-plusthick"
+				      }
+				    }); 
+				  });
+				  </script>	
+			</td>
+		</tr>
+	</table>
+	<?php } ?>
+
+	
+	

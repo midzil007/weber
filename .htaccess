@@ -1,0 +1,24 @@
+RewriteEngine On
+RewriteBase /
+
+RewriteRule robots - [L] 
+RewriteRule images - [L]     
+
+RewriteRule (data/|spaw|scripts|adodb|dojo|dijit|tiny_mce|fck) - [L] 
+   
+
+RewriteRule !\.(js|ico|gif|jpg|png|css|zip|pdf|rar|docx|swf|woff|psd|ttf|svg|htc|xml|txt|woff2)$ index.php 
+  
+
+     
+RewriteRule sitemap\.xml index.php [L]   
+RewriteRule sitemapimage\.xml index.php [L]   
+
+# One month for image files
+<filesMatch ".(jpg|jpeg|png|gif|ico)$">
+Header set Cache-Control "max-age=2628000, public"
+</filesMatch>
+# One year  for css and js 
+<filesMatch ".(css|js)$">
+Header set Cache-Control "max-age=31536000, public"
+</filesMatch> 

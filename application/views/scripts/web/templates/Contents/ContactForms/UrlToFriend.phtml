@@ -1,0 +1,40 @@
+<?			
+if(isset($this->input->send)){
+	$webForm = new module_WebForm($this->input);								
+	$text = '
+		<h2 style="color:#0f4096; font-size: 12px;">Byl Vám odeslán odkaz</h2>
+		<p>
+		<a href="' . Utils::getWebUrl() . $this->curentPath . '"><b>' . $this->curentNode->title . '</b> (' . Utils::getWebUrl() . $this->curentPath . ') </a>
+		</p>		
+	';							
+	
+	list($state, $messages) = $webForm->sendEmailToFriendOnlyEmail($text);							
+	?>
+	<script type="text/javascript">
+	alert('<?=$messages?>');
+	</script>
+	<?
+	if($state){
+		$this->input->email = '';
+	}
+	//Helpers::addMessage($state, $messages, $this);
+}
+
+$this->formSubject = 'Autobazar BLESK - zajímavý automobil';
+
+?>
+
+<?php if(count($this->messages)): ?>
+	<?= $this->render('parts/messages.phtml'); ?>				
+<?php endif; ?>
+
+<?php if(!$this->currentState): ?>	
+	<form action="<?=$_SERVER['REDIRECT_URL']?>" method="POST">
+	<?=$this->formHidden('subject', $this->formSubject)?>	
+	
+	<label for="email">Váš e-mail:</label>
+	<?=$this->formText('email', $this->input->email, array('class' => 'textInput'))?>
+	<?= $this->render('parts/SecurityCode.phtml'); ?>	
+	<?=$this->formSubmit('send', 'Odeslat', array('class' => 'button64'))?>	
+	</form>
+<?php endif; ?>

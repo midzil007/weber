@@ -1,0 +1,63 @@
+<div class="listing-inner11"  <?=$this->resetPosition?'rel="resetPosition"':'';?> <?=$this->resetPosition?'atr="'.$this->resetPosition.'"':'';?>>    
+	<?
+	$incTrackEvent = 1;
+	$x = 0;
+	if (is_array ( $this->souvisejici )) :
+		foreach ( $this->souvisejici as $product ):
+		$x++;
+		$altTitle = $product ['nazev'];
+		$price = $product ['price'];
+		$price2 = $product ['price2'];
+		$difp = $product['discount'] ? '-' . $product['discount'] . '% ' : '';
+		if ($this->homePage) {
+			$home = "onclick=\"_gaq.push(['_trackEvent', 'Nejprodávanější', 'Homepage', '$incTrackEvent']);\"";
+		}
+		if ($this->showNum) {
+			$home = "onclick=\"_gaq.push(['_trackEvent', 'ProklikZpredkosiku', 'Košík']);\"";
+		}
+		$incTrackEvent ++;
+		$class1="";
+		if($x % 6==0 ){
+			$class1=" lst";
+		}
+		$url = $product['path'];
+		$photos = $this->mVarianta->getResizedPhotos($product['obrazky']);
+		$p = helper_FrontEnd::getFirstPhoto($photos,'pShow2' , false);
+		?>
+       	<div class="productInnerItem fLeft posRelative <?=$class1?>">
+       		<h3>
+					<?$sTitle = $product['seoTitle']?', '.$product['seoTitle']: '';?>
+					<a href="<?=$product['path']?>"  itemprop="url" <?=$home?>>
+					<span class="fs17 fBold" itemprop="name"><?=$product['title']?><?=$sTitle?></span></a>
+			</h3>
+			<p class="fs13 preText">Energetická třída: A+++ energetické efektivnosti: 43,9 Spotřeba elektrické energie za 24 h: 0,341 Spotřeba el. en. za 365 dní: 125 kWh Čistý obsah celkem (l): 383 ...</p>
+			<div class="img tAlignCenter">
+                <div>							 
+                <a href="<?=$url?>" <?=$home?> title="<?=$altTitle?>">
+                	<img alt="<?=$altTitle?> <?=$pp['name']?>" itemprop="image" src="<?=$p['path']?>" /></a>
+				
+				</div>
+			</div>
+
+			<div class="fLeft Pd">	
+ 				<p <?=$this->schema?'itemprop="offers" itemscope itemtype="http://schema.org/'.$googleOffer.'"':''?> class="price fLeft" <?=$s?>>
+ 					 <strong><span class="fs21 red" <?=$googlePrice?>><?=helper_FrontEnd::price(round($product['price']))?> </span><span class="fs16 red">Kč</span></strong>
+                                <?if($product['discount']):?>
+                                	<span class="redBgr white fBold fs12">-<?=$product['discount']?>%</span><span class="tLineThrough fs12 colorGrey<?=$s?>"><?=helper_FrontEnd::price(round($product['price2']))?> Kč</span>
+                                <?endif;?>
+                               
+             	</p>
+             	<p class="fRight">
+             			<a href="<?=$product['path']?>"  class="smallBuy blockDisplay"></a>
+             	</p>
+            </div>
+            <div class="clear"></div>
+            <p class=".i-table">
+           		 <span class="fs13 greySk i-block marRight10">SKLADEM ANO</span>
+           	 	<span class="fs13 colorGrey i-block marRight10">ZÁRUKA 2+3 ROKY</span>
+           	 	<span class="vahaIco i-block vAlingMid"></span>
+             </p>              
+			</div>
+		<? endforeach;?>  
+	<? endif; ?>
+</div>

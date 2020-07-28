@@ -1,0 +1,125 @@
+
+
+<?
+if($this->input->send):
+	$mWebForm = new module_WebForm($this->input);
+	list($state, $messages)  = $mWebForm->sendQuery();
+	Helpers::addMessage($state, $messages, $this);?>
+	<?=$this->render('parts/messages.phtml'); ?>
+<?endif;?>
+<?if(!$state):?>
+<?if(!$this->input->send):?>
+<div id="back"><a href="javascript: history.go(-1)">Zpět<span id="bck"></span></a></div>
+<?endif?>
+<?if($this->inputGet->product):
+	$nProduct = $this->tree->getNodeById($this->inputGet->product);
+	if(is_object($nProduct)):
+		$cProduct = $nProduct->getTheRightContent(); 
+		$text  = $cProduct->getPropertyValue('html');
+		$var = $this->mVarianta->getVariantsByIdProduct($cProduct->id,true);
+		$photos = $this->mVarianta->getResizedPhotos($var['obrazky']);
+		
+		$price  = $var['price'];
+		$price2  = $var['price2'] > 0 ? $var['price2'] : '';
+		$dif = $price2 - $price;
+		$p = $price2/100;
+		$dif= round($dif/$p, 1);
+		$p = helper_FrontEnd::getFirstPhoto($photos,'pMini' , false);
+		$title = 'Dotaz k Výrobku - '.$nProduct->title;
+	endif;
+endif;
+switch ($this->inputGet->type):
+    case 'query':
+        $title = 'Dotaz k Výrobku - '.$nProduct->title;
+        break;
+    case 'price':
+        $title = 'Našli jste lepší cenu? '.$nProduct->title;
+        break;
+    case 'error':
+        	$title = 'Našli jste chybu na našel e-shopu?';
+        break;
+endswitch;
+?>
+<?if($title):
+	$this->disableH1 = true;
+	$this->pageTitleRaw = $title;?>
+	<h1><?=$this->pageTitleRaw?></h1>
+<?endif;?>
+<?if($nProduct):?>
+<div id="ansProduct">
+	<div id="ansProductLeft">
+		<a href="<?=$nProduct->path?>"><img alt="<?=$p['name']?>" src="<?=$p['path']?>"></a>
+		</div>
+	<div id="ansProductRight"> 
+		<h3><a href="<?=$nProduct->path?>"><?=$nProduct->title?></a></h3>
+		<?if($price2):?>
+			<p>bežná cena: <span class="underLine1"><?=helper_FrontEnd::price($price2)?> Kč</span> <span class="green"> Sleva -32,3% </span></p>
+		<?endif;?>
+		<p><strong>cena: </strong><span id="price"><?=helper_FrontEnd::price($price)?> Kč</span> s DPH</p>
+		<?$text = (str_replace('
+
+	','', str_replace('
+	', '', str_replace('<p>','', str_replace('<br />', '', $text)))));?>
+		<p><?=helper_FrontEnd::reduceText(strip_tags(trim($text)),300)?></p>
+	</div> 
+</div>
+<div class="spacer10"></div>
+<?endif;?>
+
+<div class="contact">
+	<form method="post">
+	<table class="formatTable">  
+		<?if(!$title):?>
+			<tr>  
+				<td style="width:102px;">Předmět dotazu: <span class="cred">*</span></td>     
+				<td colspan="3"><?=$this->formText('subject', $this->input->message, array('class' => 'niceTa', 'style' => 'width:627px;', 'rows' => 6))?> </td>		
+			</tr> 
+		<?else:?>
+			<?=$this->formHidden('subject', $title)?>
+		<?endif;?>
+		<tr>    
+			<td style="width:97px;"><?=$this->translate('vase-jmeno');?>: <span class="cred">*</span></td>
+			<td style="width:170px;"><?=$this->formText('fullname', $this->input->fullname, array('class' => 'nice s150'))?></td>
+			<td style="padding-left:44px"><?=$this->translate('e-mail');?>: <span class="cred">*</span></td>
+			<td><?=$this->formText('email', $this->input->email, array('class' => 'nice s150'))?></td>		 					
+		</tr> 	
+		<tr> 
+			<td style="width:97px;"><?=$this->translate('telefon');?>: <span class="cred">*</span></td>
+			<td style="width:170px;"><?=$this->formText('phone', $this->input->phone, array('class' => 'nice s150'))?> </td>
+			
+			
+		</tr> 
+		<?if($this->inputGet->type == 'error'):?>
+		
+			<tr>  
+				<td colspan="4"><strong>Prosím napiště nám na jaké internetové adrese se chyba nalézá.</strong> Dále nám pomohou informace o tom z jakého zařízení na chybu koukáte (počítač, tablet nebo mobil) a verzi Vašeho internetového prohlížeče.</td>
+				<?=$this->formHidden('error', '1')?>
+				<?=$this->formHidden('referal', $_SERVER['HTTP_REFERER'])?>
+				
+			</tr>
+		<?elseif($this->inputGet->type == 'price'):?>
+			<tr>  
+				<td colspan="4">Napiště nám do textu zprávy na jaké internetové adrese jste viděli tento produkt s lepší cenou. Pokud to bude možné, tak Vám zboží dodáme za lepší cenu.</td>
+				<?=$this->formHidden('error', '1')?>
+			</tr>
+		<?endif;?>
+		
+		<tr>  
+			<td><?=$this->translate('zprava-pro-nas');?>: <span class="cred">*</span></td>     
+			<td colspan="3"><?=$this->formTextarea('message', $this->input->message, array('class' => 'niceTa', 'style' => 'width:627px;', 'rows' => 6))?> </td>		
+		</tr> 
+		
+	</table>
+	<div id="buttons">
+	<p class="zpet"><a href="javascript: history.go(-1)">&nbsp;</a></p></td>     
+			<div class="right">
+			
+		<button type="submit" name="send" id="sendBtn" value="1"> 
+		</button> 
+	</div>
+	</div>
+	</form>
+</div>
+<?else:?>
+<?$this->disableH1 = true;?>
+<?endif;?>

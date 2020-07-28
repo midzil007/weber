@@ -1,0 +1,93 @@
+<form method="post" id="PageForm" name="PageForm">
+<div id="mainTabModalContainer" dojoType="dijit.layout.TabContainer" style="width:95%;height:1200px;">
+
+
+<div id="err_PageForm"></div>
+	<div id="order" style="width:600px">	
+		<h2>Platba - <?= $this->payment['nazev'];?></h2>
+		<?//=$a = print_r($this->payment, true)
+		//TO DO: doplnit helpicons
+		?>
+		<table class="normal">   
+			<tr> 
+				<td>Název </td>
+				<td><input name="nazev" type="text" value="<?=$this->payment['nazev']?>"></td>
+			</tr>
+			<tr> 
+				<td>Popis: </td>
+				<td><textarea name="popis"  rows="5" cols="50" ><?=$this->payment['popis']?></TEXTAREA></td>
+			</tr>
+			<tr> 
+				<td>Cena </td>
+				<td><input name="cena" type="text" value="<?=$this->payment['cena']?>"></td>
+			</tr>
+			<tr>
+				<td>Povoleno <input name="valid" type="checkbox" value="1" 
+					<? if( $this->payment['valid'] OR !$this->payment['nazev'])
+							echo 'checked' ;?>>
+				</td>
+			</tr>
+			
+			<tr>
+				<td> Platba proběhne 
+					<select name="paymentFirst">
+						<option value="1" <?=$this->payment['paymentFirst']?'selected="selected"':''?>>před</option>
+						<option value="0" <?=$this->payment['paymentFirst']?'':'selected="selected"'?>>po</option>
+					</select>
+				odeslání zboží <td>
+			</tr>
+
+			<tr>
+				<td>Text emailu - objednavka prijata <input type="checkbox" name="useEmailOR" value="1" <?=$this->payment['useEmailOR']?'checked':''?>></td>
+			</tr>
+			<tr>
+				<td>Předmět: </td><td><input type="text" name="emailORSubject" value="<?=$this->payment['emailORSubject']?>"></td>
+			</tr>
+			<tr>
+				<td colspan="2"><?php echo $this->formWysiwyg('emailOrderReceived',$this->payment['emailOrderReceived'], 200, '') ?></td>
+			</tr>	
+			
+			<tr>
+				<td>Text emailu - objednavka odeslana <input type="checkbox" name="useEmailOS" value="1" <?=$this->payment['useEmailOS']?'checked':''?>></td>
+			</tr>
+			<tr>
+				<td>Předmět: </td><td><input type="text" name="emailOSSubject" value="<?=$this->payment['emailOSSubject']?>"></td>
+			</tr>
+			<tr>
+				<td colspan="2"><?php echo $this->formWysiwyg('emailOrderSent',$this->payment['emailOrderSent'], 200, '') ?></td>
+			</tr>
+			
+			<tr>
+				<td>Text emailu - platba prijata <input type="checkbox" name="useEmailPR" value="1" <?=$this->payment['useEmailPR']?'checked':''?>></td>
+			</tr>
+			<tr>
+				<td>Předmět: </td><td><input type="text" name="emailPRSubject" value="<?=$this->payment['emailPRSubject']?>"></td>
+			</tr>
+			<tr>
+				<td colspan="2"><?php echo $this->formWysiwyg('emailPaymentReceived',$this->payment['emailPaymentReceived'], 200, '') ?></td>
+			</tr>	
+
+		</table>
+			<br/>
+		
+		<?php 
+		$wysiwyg = '';
+		foreach ($this->WysiwygIds as $wName){
+			$wysiwyg .= " setWysiwygContent('" . $wName ."'); ";
+		} 
+		 
+		//  echo "$wysiwyg return submitFormAjax('PageForm', '".$this->url(array('action' => 'savePayment'));
+		?>
+		
+		<?=$this->formSubmit('saveContentB', 'Uložit', array('class'=>'fsubmit', "onclick" => "$wysiwyg return submitFormAjax('PageForm', '".$this->url(array('action' => 'savePayment'))."', 'vypisDole', 'tab-refresh', '', true );", 'iconClass' => "noteIcon")) //setWysiwygContent('emailOrderReceived'); ?>
+		<?=$this->formHidden('id',$this->payment['id']);?> 
+		  
+		 
+		
+		 
+	</div> 
+ 
+
+	</div> 
+	
+</form>

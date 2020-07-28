@@ -1,0 +1,31 @@
+<?
+foreach ($this->certificates as $node):
+					$content = $node->getPublishedContent();
+					$photo = $content->getFilesNames('photo');
+    				$html = $content->getPropertyValue('html');?>
+    		<div class="certificates" id="<?=$node->nodeId;?>">
+  			<h3><?=$node->title?></h3>
+  			<p><?=$html?></p> 
+  			<?if($photo):
+  			$images = helper_FrontEnd::getResizedPhotos($photo, 'cThumb', 'pFull');
+  			$z=0;
+  			foreach ($images as $image):
+  			$z++;?>
+  			<div class="gimg ">
+				<a target="_blank" rel="[images]" id="mb<?=$z?>" class="mbb" href="<?=$image['fullPath']?>"><img src="<?=$image['path']?>" alt="<?=$image['name']?>" title="<?=$image['name']?>" /></a>
+				<div class="multiBoxDesc mbb<?=$z?>"><?=$image['name']?></div>	
+			</div>  
+			 	
+  			<?endforeach;?>
+  			<?endif;?>
+  			</div>
+<?endforeach;?>
+
+	<script type="text/javascript"> 	
+				  
+		var box = {};   
+		window.addEvent('domready', function(){
+			box = new multiBox('mbb', {descClassName: 'multiBoxDesc', useOverlay: true});  
+		}); 
+			  
+	</script> 

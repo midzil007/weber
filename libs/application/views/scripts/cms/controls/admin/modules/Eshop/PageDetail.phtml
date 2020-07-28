@@ -1,0 +1,279 @@
+<form id="PageForm" name="PageForm" method="post" class="validate">
+<?php
+
+if($this->isEdit){  
+	echo $this->formHidden('parentId',$this->parentNodeId); 
+	echo $this->formHidden('contentId',$this->content->id);  
+}
+  
+$properties = array();  
+$otherProperties = array('preText','parametry','files','znacka','video','akce','souvisejici','pece','alternativy','darek','epay','prodejny','sold');
+$skipProperties = array('rada');
+?> 
+<script src="/js/settings.js"></script>  
+<?=$this->formHidden('contentType','Product')?>
+<div id="tabsDetail" class="ui-tabs ui-widget ui-widget-content ui-corner-all"> 
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist">  
+        <li class="ui-state-default ui-corner-top ui-tabs-active ui-state-active"><a href="#tabsd-1">Základní vlastnosti</a></li>  
+        <li class="ui-state-default ui-corner-top"><a href="#tabsd-2">Rozšířené vlastnosti</a></li>     
+        <li class="ui-state-default ui-corner-top"><a href="#tabsd-4">Optimalizace pro vyhledávače</a></li>
+        <li class="ui-state-default ui-corner-top"><a href="#tabsd-5">Hodnocení produktu</a></li>
+    </ul> 
+    <div id="tabsd-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom">   
+    	<table class="modalTable">
+    	<tr>
+			<td class="formcell tkey tkey_form"><?=$this->cp_Translate[$this->content->nodeTitle] ?> <span class="redValid">*</span></td>
+			<td class="formcell"><?php echo $this->formText('pageTitle',$this->node->title, array('class'=>'ftext95 validate[required,length[0,100]] text-input')) ?></td>
+		</tr>
+		<?foreach ($this->content->properties as $property):
+			if(in_array($property->name, $otherProperties)):
+				$properties[$property->name] = $property; 
+				continue; 
+			elseif (in_array($property->name, $skipProperties)):
+				continue;
+			else:?>
+					<tr>
+						<td class="formcell tkey"><?=$this->cp_Translate[$property->name] ?> <?=$mandatory?> </td>
+						<td class="formcell"><?=$property->renderAdmin($this);?></td>
+					</tr>
+			<?endif;	
+		endforeach;?>
+    	</table> 
+    	<div id="accordion">
+    	<?
+    	foreach ($this->content->variantProperietes as $value):
+    		$i++;
+    	    		
+    		 $st = $this->content->variantShow>=$i ? '': 'style="display:none"';
+    		 
+			  $varClas = $this->content->variantShow>=$i ? '': 'class="noShow"';
+			  
+			   if($this->content->variantShow>=$i)
+			   {
+			   		$countVisibleVariant++;
+			   }
+    			
+    		?>
+  				<div class="group" <?=$st?>>
+    				<h3>Varianta <?=$i?></h3>
+    				<div>
+    
+						<input type="hidden" name="sort[<?=$i?>]" />
+	    				<table> 
+	    					
+		    				<?foreach ($value as $variant):?>
+		    				
+		    				<tr>
+		    					<td class="formcell tkey">
+		    						<?$mandatory= '';
+		    						if(is_numeric(strpos($variant->name, 'varianta_price_'.$i))):
+										$mandatory = '<span class="redValid">*</span>';
+			   						endif?>
+		    					<?=$this->cp_Translate[$variant->name] ?> <?=$mandatory?></td>
+		    					<?if($variant->name == 'varianta_id_'.$i):?>
+		    					 <?$idVariant = $variant->value;?>
+		    					<?endif?>
+		    					<td class="formcell"><?echo $variant->renderAdmin($this);?></td>
+		    				</tr>
+		    				<?endforeach;?>
+		    				<?if($this->content->variantCategories):?>
+			    				<?foreach ($this->content->variantCategories as $value):?>
+			    				<tr>
+			    				<td><?=$value['title']?></td>
+			    				<td>
+		
+			    						<?foreach($value['options'] as $key=>$op):
+			    						
+			    							$pn = 'varianta_options_' . $i;
+			    							$checked = $this->input->$pn;
+			    							$check = $this->mVariant->isCheckVariantOption($idVariant,$key); 
+			    							if($check>0 || in_array($key, $checked)){
+			    								$check = ' checked="checked"';  
+			    							}    
+			    							?> 
+			    							
+			    							<input type="checkbox" name="<?=$pn?>[]" id="<?=$pn?><?=$key?>" value="<?=$key?>" <?=$check?> /> <label for="<?=$pn?><?=$key?>"><?=$op['name']?></label>&nbsp;&nbsp;|&nbsp;&nbsp;
+			    						 
+			    				<?endforeach;?>
+			    				</td>
+			    				</tr>
+			    			
+			    				<?endforeach;?>
+				    		<?endif;?>
+				    	</table>
+    			</div>
+    			
+    </div>
+  
+  <?endforeach;?>
+  
+  <?
+  if(($this->mVariant->variantCount-1) != $countVisibleVariant):?>
+  	<span style="padding: 2; cursor: pointer; width: 18px" id="addNext" onclick="showVariants(<?=$i?>);"><img alt="Přidat variantu" src="/admin/css/images/add.png"> Přidat variantu</span>
+  <?endif?>
+	</div>
+    </div>   
+    <div id="tabsd-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom">  
+    	<table class="modalTable">
+		<?
+		foreach ($this->content->properties as $property):
+			if(!in_array($property->name, $otherProperties)):
+				$properties[$property->name] = $property;
+				  
+				continue;
+			else: //pr($property); 
+				$pv = $property->name;
+				$property->value = $property->value?$property->value:$this->input->$pv;
+				$radaProp = false; 
+				if($property->name == 'znacka'){ 
+					$mProducts = new module_Products(); 
+					$rada = $this->content->getPropertyValue('rada');
+					/*
+					if($rada > 0){
+						$property->value = $rada; 
+					}*/   
+					$radyOrig = $mProducts->getRady($property->value);  
+					$rady =  helper_Input::addNotDefinedOption($radyOrig, ' - vyberte -', 0);   
+					
+					$znacky =  helper_Input::addNotDefinedOption($mProducts->getZnackyRady(false), ' - vyberte -', 0);   
+		    		$property->options = $znacky;    
+		    		$radaProp = $this->content->getPropertyByName('rada');
+		    		$radaProp->options = $rady;  
+		    		$radaProp->value = $rada;  
+		    		?> 
+					<tr>
+						<td class="formcell tkey"><?=$this->cp_Translate[$property->name] ?> <?=$mandatory?> </td>
+						<td class="formcell">
+							<?=$property->renderAdmin($this, array('onchange' => 'loadSelect(this)'));?>
+							<? if($radaProp):?>  
+							<span id="rsel">
+								<? if(count($radyOrig)):?>
+									<Span style="line-height:20px;">řada:</Span> <?=$radaProp->renderAdmin($this, array('style' => 'width:180px;'));?>
+								<? else:?>
+									<?=$this->formHidden('rada', 0)?>   
+								<? endif;?>
+							</span> 
+							<? endif; ?>    
+							
+							<script type="text/javascript" charset="utf-8"> 
+							 function loadSelect(sel){ 
+								 zz = $( "#znacka" );
+								 //$( "#rsel" ).fadeOut(); 
+								 z = zz.val();  
+								 $('#rsel').load('/cms/eshop/loadRadySelect/znacka/' + z, function() {
+									 $( "#rsel" ).blink();  
+								 });  
+							       
+							} 	
+								</script>
+						</td>
+					</tr>
+				<?php 
+				} else {  
+				?> 
+					<tr>
+						<td class="formcell tkey"><?=$this->cp_Translate[$property->name] ?> <?=$mandatory?> </td>
+						<td class="formcell">
+							<?=$property->renderAdmin($this);?>
+							<? if($radaProp):?>
+							řada: <?=$radaProp->renderAdmin($this);?> 
+							<? endif; ?>  
+						</td>
+					</tr>
+				<?php 
+				}
+				?>
+			<?endif;	
+		endforeach;?>
+			<tr><td class="formcell">Stav obsahu</td>		
+			<td class="formcell">
+			<?php echo $this->formSelect('state', $this->content->state , array('autocomplete'=>'true','value'=>$this->content->state), $this->contentStates) ?>
+			
+			<?= Utils::getHelpIco('Obsah je vidět na webu pouze pokud je ve stavu “publikovaný”.'); ?>
+			</td></tr>
+		</table>
+    </div> 
+    <div id="tabsd-4" class="ui-tabs-panel ui-widget-content ui-corner-bottom">   
+    	<?=$this->render('controls/admin/forms/PageFormSEO.phtml')?>
+    </div>   
+         <div id="tabsd-5" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
+    	<?=$this->reviewAdd;?>   
+    	<?=$this->pagesReviews;?>
+    </div>
+</div> 
+
+    
+<script type="text/javascript">
+    $(function() {  
+        $( "#tabsDetail" ).tabs();
+    }); 
+    </script>
+    
+     <script type="text/javascript">
+  $(function() {
+    $("#accordion" )
+      .accordion({  
+        header: "> div > h3",
+        collapsible:true
+      })
+      .sortable({
+    	placeholder: "ui-state-highlight",
+        axis: "y", 
+        handle: "h3", 
+        revert: 100,    
+        helper : 'clone',
+        heightStyle: 'content', 
+        stop: function( event, ui ) {
+          // IE doesn't register the blur when sorting
+          // so trigger focusout handlers to remove .ui-state-focus
+          ui.item.children( "h3" ).triggerHandler( "focusout" );
+        }
+      });
+      
+      $('#title').bind('click', function(){
+    		//$("#accordion").accordion("enable");
+ 	    
+});
+  });
+  </script>
+<?=$this->render('controls/admin/forms/_Save.phtml'); ?>    
+</form>  
+  <script type="text/javascript" charset="utf-8">
+  	function setInvisibleVarinat(start,end)
+			   {
+			   	invisible = 'varianta_price_';
+			   	start++;
+			   	end--; // count variants je vždy o jedno vetší
+			   	for (i = start; i <= end; i++) {
+			   		classEl = $('#varianta_price_'+i).attr('class');
+			   		$('#varianta_price_'+i).attr('attr',classEl);
+			   		$('#varianta_price_'+i).removeClass(classEl);
+			   		}
+			   	}
+	$(document).ready(function() {
+					setInvisibleVarinat(<?=$countVisibleVariant?>,<?=$this->mVariant->variantCount?>);
+	})
+			   
+  </script>
+  <script type="text/javascript" charset="utf-8">
+  
+  function showVariants(countVarinats)
+  {	
+  
+	set = false;
+	$('.group').each(function( index ) {
+	if($(this).css('display')=='none' && set==false){
+	set = true;
+	variantIndex = index + 1;
+	if(variantIndex == countVarinats)
+	{
+		$('#addNext').css({'display' : 'none'})
+	}
+			classEl = $('#varianta_price_'+variantIndex).attr('attr');
+			$('#varianta_price_'+variantIndex).addClass(classEl);
+		$(this).css({'display' : 'block'});
+	}
+	});
+	return false;   
+	}	
+  </script>

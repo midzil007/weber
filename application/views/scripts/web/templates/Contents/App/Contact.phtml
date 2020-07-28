@@ -1,0 +1,41 @@
+<div id="contact">
+<?
+if(isset($this->input->send) || $this->input->send_x){
+	
+	$webForm = new module_WebForm($this->input);	
+	 
+	$text = '
+		<h2 style="color:#0f4096; font-size: 12px;">Dotaz z webu</h2>
+		<table style="font-size: 11px; color: #708490;">
+			<tr><td>Jméno:</td><td>' . $webForm->fullname . '</td></tr>
+			<tr><td>Email:</td><td>' . $webForm->email . '</td></tr>
+			<tr><td>Telefon:</td><td>' . $webForm->input->phone . '</td></tr>
+			<tr><td>Kraj:</td><td>' . $select[$webForm->input->region] . '</td></tr>
+			<tr><td>Zpráva:</td><td>' . nl2br($webForm->input->message) . '</td></tr>
+		</table>	 
+	';
+	list($state, $messages) = $webForm->sendEmail($text);
+	Helpers::addMessage($state, $messages, $this);
+
+}
+if($this->curentNode->title == 'Poptávka')
+{
+	$this->formSubject = $this->curentNode->title.' z webu www.lj-kuchyne.cz';
+}
+else{
+	$this->formSubject = 'Zpráva z webu: ' . $this->curentNode->title;	
+}
+
+
+$this->content->getPropertyByName('html')->value = 0;
+?>
+<div id="cTxt">
+	<?=$this->html?>
+</div>
+<div class="spacer10"></div>  
+<div id="cForm">
+ 	<?$this->url.= '?sendSuccess';?>
+<?=$this->render('templates/Contents/ContactForms/Simple.phtml')?>
+</div>
+<Div class="spacer10"></Div>
+</div>

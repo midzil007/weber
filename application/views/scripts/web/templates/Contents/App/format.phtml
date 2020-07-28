@@ -1,0 +1,31 @@
+<?
+
+	if($this->input->tl0): 
+	   
+	?>
+	<div class="line-test">start</div> 
+	<?$n = "tl".$i;     
+			$nc = "tr".$i;
+		
+			$r = $rex .='<div class="t" id="myInput">       
+		<div class="t-left">'.$this->input->tl0.'</div>
+		<div class="t-right">'.$this->input->tr0.'</div>
+	</div>';  
+		echo($rex);          
+	endif?>    
+  <div class="line-test">end</div>     
+  
+<form method="post" style="
+    /* margin: 200px; */
+    float: left;    border-top: 1px solid;  
+    width: 100%;
+    ">  
+	<button>ok</button>    
+
+<?for ($i=0; $i < 1; $i++):?>
+	<div class="t"> 
+		<div class="t-left"><textarea name="tl<?=$i?>"></textarea></div>
+		<div class="t-right"><textarea name="tr<?=$i?>"></textarea></div>
+	</div>
+<?endfor?>
+</form>

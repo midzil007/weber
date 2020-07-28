@@ -1,0 +1,34 @@
+<div class="popup">
+	<?$url=Utils::getWebUrl();?>         
+	<div class="popup-inner" id="cofidis-pop">
+		<img src="/images/logo-cofidis.png" />  
+		<div class="clearfix"></div>
+		<div class="col-md-6">  
+		<form method="post" id="cofis" action="/?calculator=1">  
+		<?$value = $this -> mCalculator -> getDeposit($this -> input); ?>
+		<p>Cena zboží Kč:</p>   
+		<input type="text" name="amount" onchange="sendCalculator();" class="form-control auto_submit_itemisisis" value="<?=helper_FrontEnd::price($this -> mCalculator -> getPrice()) ?>">
+		<div class="clearfix"></div> 
+		<p>Produtky:</p>   
+			<?=$this -> formSelect('product', $this->mCalculator->getSelectedProduct(), array('onchange'=> 'sendCalculator();','class' => 'form-control auto_submit_itemisisis'), $this -> mCalculator -> getProducts()) ?>
+		<div class="clearfix"></div>   
+		<p>Platba v hotovosti Kč:</p> 
+			<input type="text" name="deposit" onchange="sendCalculator();" class="form-control auto_submit_itemisisis" value="<?=helper_FrontEnd::price($value)?>">   
+		<div class="clearfix"></div>
+		<p>Počet splátek:</p>        
+		<?=$this -> formSelect('selected_installment', $this->mCalculator->getSelectetedNumInstallmenst(), array('onchange'=> 'sendCalculator();','class' => 'form-control auto_submit_itemisisis'), $this -> mCalculator -> getInstallments()) ?> 
+		<div class="clearfix"></div>     
+		<a href="#" class="middleBig button-orange ">Přepočítat</a>   
+		<a href="<?=$this -> mCalculator ->getUrlBasket()?>" class="buttons-new middleBig ">Koupit na splátky</a>        
+			</form>
+		</div>   
+		<div class="col-md-6">
+		<?=$this -> mCalculator -> renderResult(); ?>
+		</div> 
+	</div>  
+		</div> 
+		   
+
+      
+  
+  

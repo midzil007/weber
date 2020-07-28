@@ -1,0 +1,23 @@
+<?=$this->pageText?>
+
+<?
+$images1 = $this->content->getFilesNames('files');
+if(count($images1)): 
+	?> 
+	 <div class="dl"> 
+		<? 
+		foreach ($images1 as $filepath => $name): 
+			$fullpath = content_SFSFile::getFileFullPath($filepath);
+			$ico = Utils::getFileIcoImage($fullpath);
+			?>	
+			<div>
+			<?= $ico ?> 
+			<a title="<?=$name ?>" target="_blank" href="<?=$filepath?>"> <?= $name ?> </a> <i><?=Utils::getWebFileSize($fullpath)?></i>											
+			</div> 	 			
+			<? 
+		endforeach; 	
+		?>
+	</div> 
+	<div class="spacer10"></div>
+	<?			
+endif;	

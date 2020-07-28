@@ -1,0 +1,27 @@
+<?
+if($_SERVER["REMOTE_ADDR"] == '147.32.120.238'){
+echo "muj string".$_SESSION['ecommerce']['123456789'];
+die;
+}
+?>
+<!--<?=$_SERVER["REMOTE_ADDR"]?>-->
+<h1>Děkujeme, Vaše objednávka je dokončena!</h1>
+
+<div id="orderDone"> 
+		<h3>Na Vaši emailovou adresu jsme zaslali email s informacemi o objednávce. </h3>
+		<h4>Děkujeme za Vaši důvěru a věříme, že se budete rádi vracet!</h4>
+		
+		<br /><br /><br /> 
+		<A href="http://www.facebook.com/Proficocky" target="_blank">
+		<img src="/images/banner-konec-obj.jpg"	alt="vyhrajte IPHONE" />
+		</A>   
+</div> 
+<?
+$id = base64_de(code($this->inputGet->z));
+$price = base64_decode($this->inputGet->price);
+$id = '&uniqueId='.$id;
+$price = '&price='.$price;
+
+
+?>
+<iframe src="http://www.zbozi.cz/action/19737/conversion?chsum=JwuWy6ZC0gteix_DCLpCNw==<?=$id?><?=$price?>" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="position:absolute; top:-3000px; left:-3000px; width:1px; height:1px; overflow:hidden;"></iframe>   

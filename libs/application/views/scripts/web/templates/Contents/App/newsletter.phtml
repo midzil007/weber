@@ -1,0 +1,30 @@
+<? 
+$mm = new module_Mailing();   
+if($_GET['noNews']){ 
+	$u = base64_decode($_GET['u']);
+	list($email, $id) = explode('__', $u);
+	if($email && $id){ 
+		$mm->logoutUser($email, $id);
+		?>
+		<div style="text-align:center; padding:50px;">
+		<p>Odhlášení proběhlo úspěšně. Hezký den.</p> 
+		</div> 
+		<?php 
+	}
+	return ; 
+	
+}
+
+if($_GET['redir']){
+	$url = $mm->getOrigUrl($_GET['redir']);
+	if($url){ 
+		helper_FrontEnd::redirect($url, 303); die();
+	} else { 
+		?>
+		<div style="text-align:center; padding:50px;">
+		<p>Stránka již neexistuje..</p> 
+		</div> 
+		<?php 
+	}
+	return ; 
+} 

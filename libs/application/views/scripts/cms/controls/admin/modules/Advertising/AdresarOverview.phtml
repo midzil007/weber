@@ -1,0 +1,54 @@
+	<h1>Přehled pozic</h1> 
+	<? 
+	$nodesDomainsMap = $this->config->instance->nodesDomainsMap->toArray();	
+	$domains = $this->config->instance->domains->toArray();
+	// pr($this->positions);
+	
+	foreach ($nodesDomainsMap as $id => $ident):
+		$title = $domains[$ident];
+		$menu = helper_FrontEnd::checkChildren($this->tree->getNodeById($id)->getChildren('FOLDER'), 1);
+		?>
+		<h2 style="margin:15px 0px 0px 0px;"><?=$title?></h2>    
+		<table class="advertTable"> 
+		<tr>
+			<th style="width:150px;">Sekce</th> 
+			<? foreach ($this->kraje as $kid => $ktitle):?>
+			<th><?=str_replace('kraj', 'k.', $ktitle)?></th> 
+			<? endforeach; ?>
+		</tr>
+		<? foreach ($menu as $mitem):?>  			
+			<tr>
+				<th> 
+					<a target="_blank" href="<?=helper_FrontEnd::getPathOneAdmin($this, $mitem->path)?>"><?=$mitem->title?></a> 
+				</th>
+				<? foreach ($this->kraje as $kid => $ktitle):
+					$url = $this->url(array('action' => 'newRecord', 'cid' => 0, 'domain' => $ident, 'kraj' => $kid, 'section' => $mitem->nodeId)); 
+				?>
+				<td>
+					<a class="addPosition" title="Přidat zápis na tuto pozici" href="#" onclick="showModal('Nový zápis','<?=$url?>', 0 , 600, 400 ); return fales;">P+</a> 
+					 
+					<?
+					$details = $this->positions[$mitem->nodeId];
+					if($details){  
+						foreach ($details as $detail){ 
+							if($detail['kraj'] != $kid){
+								continue; 
+							}  
+							$company = $this->tree->getNodeById($detail['cid']); 
+							$url = $this->url(array('action' => 'editRecord',  'zid' => $detail['aid'], 'cid' => $company->nodeId, 'domain' => $ident, 'kraj' => $kid, 'section' => $mitem->nodeId));
+							?> 
+							<a class="client" title="Editovat zápis" href="#" onclick="showModal('Zápis - <?=$company->title?>','<?=$url?>', 0 , 600, 400 ); return fales;">
+								<?=$company->title?>  
+							</a>
+							<?
+						}
+					} 
+					?>
+				</td>         
+				<? endforeach; ?>     
+			</tr>
+		<? endforeach; ?> 
+		</table>
+		<?		
+	endforeach;
+	?>

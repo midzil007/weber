@@ -1,0 +1,106 @@
+<h2>ZÁLOHOVÁ FAKTURA č. JUCZ<?=$this->order['id-doklad']?></h2>
+<table style="width:100%;">
+	<tr>  
+    	<td valign="top" width"50%;" align="left">
+        	Dodavatel:         
+     	</td>   
+        <td valign="top"  width"50%;" align="right">
+        	Číslo dokladu: JUC<?=$this->order['id-doklad']?>
+        </td>
+   </tr> 
+    <tr>
+    	<td valign="top"  width"50%;" align="left">
+    		<strong>specSHOP s.r.o.</strong>       
+     </td>         
+        <td valign="top"  width"50%;" align="right">
+        	Datum vystavení: <?=date ("d.m.Y",strtotime($this->order['date-print']))?>
+        </td> 
+    </tr>          
+</table>	
+<br>  	        
+        	<table class="pad-r" style="width:100%; border-collapse:collapse;">
+        	  <tr>
+                	<td valign="top" colspan="5" >
+                    	<strong>Objednávka</strong>
+                    </td>
+           
+               </tr> 
+            	<tr>
+                	<td valign="top">
+                    	<strong>Zboží</strong>
+                    </td>
+                    <td valign="top" align="right">
+                    	<strong>Počet</strong>
+                    </td>      
+                     <td valign="top" align="right">
+                    	<strong>DPH</strong>
+                    </td>
+                    <td valign="top" align="right"> 
+                    	<strong>Kč / Jednotka</strong>
+                    </td> 
+                    <td valign="top" align="right"> 
+                    	<strong>Kč / Celkem</strong>
+                    </td> 
+                </tr>
+                
+           	<? foreach ($this->items as $item) :?> 
+				<tr>
+                	<td valign="top" > 
+                    	<?=$item['title']?>
+                    </td>
+                    <td valign="top" align="right">  
+                      	<?=$item['count']?>x
+                    </td>
+                       <td valign="top" align="right">
+                      	<?=$item['dph']?>%     
+                    </td>  
+                    <td valign="top" align="right">   
+                    	<?=helper_FrontEnd::price($item['price'])?> Kč
+                    </td> 
+                     <td valign="top" align="right"> 
+                     	<?$temp = $item['price'] * $item['count'];?>    
+                    	<?=helper_FrontEnd::price($temp)?> Kč
+                    </td> 
+                </tr>	
+				<?$sum += $temp;
+						$dph = round( ($temp / (1 + ($item['dph']/100)) * ($item['dph']/100)), 2);
+	            		if($item['dph'] == 21)   
+							$dph21 += round($dph);
+						if($item['dph'] == 15)      
+	            			$dph15 += round($dph);
+	            		$sumBezDPH += $temp-$dph;?>
+		 	<? endforeach;?>  
+                 <?$sumBezDPH = round($sumBezDPH);?> 
+                 <tr>             
+                	<td valign="top"colspan="5" align="right" style="color: #fff;" > </td>
+                </tr> 
+                <tr style="background-color:#F3F3F3;">        
+                	<td valign="top"colspan="4" align="right" >Celkem bez DPH:  </td>
+                    <td valign="top" align="right" style="background:#F3F3F3;"><strong><?=$sumBezDPH?> Kč</strong></td>
+                </tr>     
+                <?if($dph21):?>         
+                	<tr style="background-color:#F3F3F3;">  
+                		<td valign="top"colspan="4" align="right" >DPH (21%):</td>  
+                   	 <td align="right" style="background:#F3F3F3;"><span style="display:block;"><?=$dph21?> Kč</span></td>
+                	</tr>    
+   				<?endif?>    
+   				 <?if($dph15):?>
+                	<tr style="background-color:#F3F3F3;">
+                		<td valign="top"colspan="4" align="right" ><span style="display:block;">DPH (15%):</span></td>
+                   	 <td valign="top" align="right" style="background:#F3F3F3;"><?=$dph15?> Kč</td>
+                	</tr>   
+   				<?endif?>                    
+					<tr style="background-color:#F3F3F3;">       
+                	<td valign="top" colspan="4" align="right" >Celkem k úhradě:</td>
+                    <td valign="top" align="right" style="background:#F3F3F3;"><b><?=helper_FrontEnd::price($this->order['suma'])?> Kč</b></td>
+                </tr>  
+            </table>   
+            
+         
+<strong>Vystavil:</strong><br>
+specSHOP s.r.o.<br>  
+IČO: 28858506<br>   
+DIČ: CZ28858506<br>     
+Chrudimská 1146, Zelené Předměstí<br>
+	Pardubice<br>530 02 Pardubice 
+<p style="height:100px;"></p>  

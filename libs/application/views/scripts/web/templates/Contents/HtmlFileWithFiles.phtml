@@ -1,0 +1,19 @@
+<?= $this->html ?>
+<div class="files">
+<?
+foreach ($this->content->getFilesNames() as $path => $name):
+			if(!$path){
+				continue;
+			}
+			$ico = '/admin/images/icons/filetype/' . content_SFSFile::getFileExtension($path) . '.gif';
+			if(!file_exists($this->config->htdocsRoot . $ico)){
+				$ico = '/admin/images/icons/filetype/file.gif';
+			}
+			
+		?>	
+		<div class="file">
+			<a href="<?=$path?>"> <img src="<?=$ico?>" alt="" /><?=$name?></a>				
+			<div class="clear">&nbsp;</div>
+		</div>
+<? endforeach; ?>
+</div>

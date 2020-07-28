@@ -1,0 +1,104 @@
+<table style="border:1px solid black;width:100%;border-collapse:collapse;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+	<thead>
+		<tr>
+			<th width="34%" style="padding:10px;text-align:left;background-color:#ededed;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+			Název
+			</th>
+			<th width="11%" style="text-align:center;padding:10px;background-color:#ededed;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">Množství</th><th width="18%" style="text-align:right;padding:10px;background-color:#ededed;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+Jednotková cena&nbsp;s DPH
+			</th><th width="18%" style="text-align:right;padding:10px;background-color:#ededed;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">Celkem bez DPH</th><th width="18%" style="text-align:right;padding:10px;background-color:#ededed;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+Celkem&nbsp;s DPH</th>
+		</tr>
+	</thead>
+	<?php  
+			$items = $this->mEshop->basket->getItems(); 
+			$detailDoprava = $this->mEshop->basket->getDeliveryDetail();
+			$detailPlatba = $this->mEshop->basket->getPaymentDetail();
+			$itemsCount = count($items);
+			
+			 
+			$voucher = $this->mEshop->basket->voucher;
+			$deliveryPrice = $this->mEshop->basket->getDeliveryPrice2();
+			$delivery = $this->mEshop->basket->getDeliveryPrice();
+			$payment = $this->mEshop->basket->getPaymentPrice();
+			$mp = new module_Eshop_PriceCalc($voucher, $items, $this->delivery, $this->payment);
+			    foreach ($items as $id => $data): 
+              	$x++;
+                	$child = $data['item'];
+                	$count = $data['count'];
+                	
+	              	if(!$child){ continue; }  
+	              	$c = $child->getTheRightContent();  
+	              	 
+	              	$dphQuote = ($c->getPropertyValue('dphQuote'));    
+	              	
+	              	$activeVariant = $this->mVarianta->getVariantById($data['variantId'],false);
+			 			 
+	            		$price  = $data['price'];    
+	            		$url =  $c->getDetailUrl($this, $child,true);
+	            		  
+	            		$skladem = $activeVariant['skladem'];
+	            		$barva = $activeVariant['title'] ? ', '.$activeVariant['title']:'';
+	            		$velikost= $activeVariant['titleOption'] ? ', '.$activeVariant['titleOption']: '';
+	            		$sum = ($price*$count);
+	            		$dph = round( ($sum / (1 + ($dphQuote/100)) * ($dphQuote/100)), 2);
+	            		$sumBezDPH = $sum - $dph;
+	            		$dphDel = round( ($mp->delivery / (1 + ($dphQuote/100)) * ($dphQuote/100)), 2);
+	            		$sumDelBezDPH = $mp->delivery - $dphDel;
+	            		$dphPay = round( ($mp->payment / (1 + ($dphQuote/100)) * ($dphQuote/100)), 2);
+	            		$sumPayBezDPH = $mp->payment - $dphPay;
+	            		 
+	                ?>
+	<tbody>
+    	<tr>
+        	<td style="padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important"><a href="<?=$url?>"><?=$child->title?></a><br/>
+				
+			</td>
+			<td style="text-align:center;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important"><?=$count?> ks</td>
+			<td style="text-align:right;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+<?=helper_FrontEnd::price($price)?>&nbsp;Kč</td>
+			<td style="text-align:right;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important"><?=helper_FrontEnd::price(round($sumBezDPH))?>&nbsp;Kč</td><td style="text-align:right;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+<?=helper_FrontEnd::price($sum)?>&nbsp;Kč</td>
+		</tr>
+<?endforeach;?>
+		<tr>
+			<td style="padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important"><?=$detailDoprava['nazev']?>
+			</td>
+			<td style="text-align:center;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+1 x
+			</td>
+			<td style="text-align:right;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+              &nbsp;
+            </td>
+            <td style="text-align:right;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important"><?=helper_FrontEnd::price($sumDelBezDPH)?>&nbsp;Kč
+            </td>
+            <td style="text-align:right;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+<?=helper_FrontEnd::price($mp->delivery)?>&nbsp;Kč</td>
+		</tr>
+		<tr>
+			<td style="padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important"><?=$detailPlatba['nazev']?>
+			</td>
+			<td style="text-align:center;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+1 x
+			</td>
+			<td style="text-align:right;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+              &nbsp;
+            </td>
+            <td style="text-align:right;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important"><?=$sumPayBezDPH?>&nbsp;Kč
+            </td>
+            <td style="text-align:right;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+<?=helper_FrontEnd::price($mp->payment)?>&nbsp;Kč
+			</td>
+		</tr>     
+		<tr style="font-weight:bold">  
+			<td colspan="3" style="text-align:left;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">Celkem</td>
+			<?$priceWDPH = $mp->sumBezDph +($sumDelBezDPH + $sumPayBezDPH);?>        
+			<td style="text-align:right;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important"><?=helper_FrontEnd::price($priceWDPH)?>&nbsp;Kč
+			</td>      
+			<td style="text-align:right;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+<?=helper_FrontEnd::price($mp->sum)?>&nbsp;Kč
+			</td>
+		</tr>
+		</tbody>
+</table>
+          

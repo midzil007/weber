@@ -1,0 +1,23 @@
+<?if(!$this->disableLeft):?>
+                <?=$this->render('parts/leftColl.phtml'); ?>
+                 <div id="right-column">        
+                 	  <? if(!$this->disableBread): ?> 
+                <div class="breadcrumbs-menu">
+                 <?=helper_FrontEnd::generateBreadCrumbs($this, array('/e-shop'),'JURA Švýcarské Kávovary.cz')?>
+                </div>   
+               <? endif; ?>      
+                        <? if(!$this->disableH1):?>
+							<h1><?=$this->pageTitleRaw?></h1> 
+						<? endif;?> 
+                	<?=$this->page;?>	 	 
+                   	</div> 
+                   	 <div class="clear"></div> 
+               <?else:?>  
+               <div id="inner">
+              <?=$this->page;?>	
+                   	 <div class="clear"></div>
+              </div>
+              <?endif;?> 
+              
+                	
+                 

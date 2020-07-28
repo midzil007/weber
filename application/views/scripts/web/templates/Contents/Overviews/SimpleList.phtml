@@ -1,0 +1,23 @@
+<?=$this->pageText?>
+<div class="clear">&nbsp;</div>
+<ul>
+<? foreach ($this->children as $child):
+		if($content = $child->getPublishedContent()):
+		$subNodes = helper_FrontEnd::checkChildren($child->getChildren('BOTH'), 0);
+		?>	
+		<li>
+			<a href="<?=helper_FrontEnd::getPath($this, $child->path)?>"><?=$child->title?></a>
+			<?
+			if(count($subNodes)):
+			?>
+			<ul>
+			<? foreach ($subNodes as $node): ?>
+				<li><a href="<?=helper_FrontEnd::getPath($this, $node->path)?>"><?=$node->title?></a></li>
+			<? endforeach; ?>
+			</ul>
+			<? endif; ?>
+		</li>
+	
+<? 		endif;
+	endforeach; ?>
+</ul>

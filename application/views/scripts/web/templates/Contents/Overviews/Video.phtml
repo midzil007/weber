@@ -1,0 +1,53 @@
+  
+<?
+$videos = $this->mVideos->getVideos('', '','','','');
+$countVideos = count($videos) - 1; 
+foreach ($videos as $i => $item){
+		if($item['videoUrl'] == $this->videoUrl){
+			$current = $i;
+			$prev = $i-1; 
+			$next = $i+1;
+		}
+}
+	$prev = max(0, $prev);
+	$next = min($countVideos, $next);
+
+	if($current == 0){ 
+		$prev = $countVideos;
+	} 
+	if($current == $countVideos){
+		$next = 0; 
+	}?>
+<div class="articles">
+	<?foreach ($videos as $i => $item): 
+	$cl = $cds= '';     
+						$clColor = $counter == 2 ? " bcg-pink" : " bcg-grey";    
+                        if($counter == 0 || $counter == 4)   
+						$cl = 'art-it-np';  
+						if($counter == 2 || $counter == 6)        
+						$cl = 'art-it-np-r';   
+						if(($counter+1)%4 == 0)
+						{
+						$cds = ' ar-l';
+						}    
+		$noo = $this->tree->getNodeById($item['id']);
+							$article = $noo->getPublishedContent();   
+							$authorPhoto = helper_FrontEnd::getPhoto('photos', $article, $article->fotoShowName , $article->fotoShowName, 1);   ?>
+				<div class="item <?=$cl?><?=$cds?>">   
+                        	<div class="<?=$clColor?>">  
+                        			<a href="<?=$noo->path?>"><img src="<?=$authorPhoto['path']?>"  alt="<?=$authorPhoto['name']?>"/></a>
+                            <div>                 
+                                  <h3><a href="<?=$noo->path?>?>"><?=$noo->title;?></a></h3>    
+                                <p><?=helper_Frontend::reduceText(strip_tags($article->getPropertyByName('html')->value),60, false, true);?>  
+                               	<a class="more" rel="nofollow" href="<?=$url?>">Viac informácií ></a></p> 
+                            </div> 
+                        </div>  
+                        </div>  
+	<?$counter++;
+	endforeach?>
+</div>
+
+
+
+
+	

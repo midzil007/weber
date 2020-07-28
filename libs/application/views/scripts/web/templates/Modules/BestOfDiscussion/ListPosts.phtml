@@ -1,0 +1,27 @@
+<div id="forumPosts">
+		<?
+		$user = new module_WebUser($this->theme->author);   
+		?>
+		<div id="BOzalozil">
+			<div id="BOzalozilUser"><?=$user->getUserInfo($this)?></div> 
+			<? if($this->theme->description):?>    
+			<div id="BOzalozilDesc">
+				<h2><?=$this->theme->title?></h2> 
+				<p><span>&nbsp;„&nbsp;</span><?=$this->theme->description?><span>&nbsp;“&nbsp;</span></p>
+			</div>     
+			<? endif; ?>
+			<div class="spacer10"> </div> 
+		</div> 
+		
+		<div id="postsList">
+		<?=$this->render('templates/Modules/BestOfDiscussion/ListPostsInner.phtml'); ?>
+		</div>  
+		
+		<? if($this->mBODiscussion->onlyRegisteredUsers && !$this->webUserLogged):?>
+		<h3>Do diskuse mohou přispívat pouze registrovaní a přihlášení uživatelé.</h3> 
+		<? else: ?> 	  
+			<?=$this->render('templates/Modules/BestOfDiscussion/FormPost.phtml'); ?>  	 
+		<? endif; ?> 
+		 
+		
+</div> 

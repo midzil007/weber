@@ -1,0 +1,18 @@
+<h2 style="margin-bottom:0px; padding-bottom:0px;">Cena</h2> 
+             Cena zboží bez DPH: &nbsp;&nbsp;<span><?=helper_FrontEnd::price($this->mp->sumBezDph)?> Kč</span><br /> 
+             DPH <?=$this->dph?>%: &nbsp;&nbsp;<span><?=helper_FrontEnd::price($this->mp->dph)?> Kč</span><br /> 
+            <? if($this->mp->delivery):?>
+             Doprava s DPH <?=$this->dph?>%: &nbsp;&nbsp;<span><?=helper_FrontEnd::price($this->mp->delivery)?> Kč</span><br /> 
+            <? endif;?>
+			<? if($this->order['deliveryPrice']): ?>   
+				Doručení: <span><?=helper_FrontEnd::price($this->order['deliveryPrice'])?> Kč</span><br/>
+             
+            <? endif;?> 
+			<? if($this->mp->payment): ?>   
+			<?=$this->order['paymentText']?>: <span><?=helper_FrontEnd::price($this->mp->payment)?> Kč</span><br/>
+			<? endif;?> 
+			<? if($voucher):?>
+			Mezisoučet: <span><?=helper_FrontEnd::price($oldPrice)?> Kč</span><br />
+            Kupón <?=$voucher['title'].' ('.$voucher['code'].')'?>: <span>- <?=$this->mp->voucher['value']?></span><br />
+            <? endif;?>
+            <strong>Celkem k úhradě: &nbsp;&nbsp;<span><?=helper_FrontEnd::price($this->mp->sum)?> Kč</span></strong>

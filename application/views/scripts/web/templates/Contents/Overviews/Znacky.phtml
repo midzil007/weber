@@ -1,0 +1,22 @@
+<? 
+$x = 0;
+foreach ($this->childrenf as $node):
+$x++;
+$c = $node->getPublishedContent();
+
+$photo = helper_FrontEnd::getSinglePhotoFull($c->getPropertyValue('logoMain'));
+?> 
+<div class="znacka <?=($x%3==0?'last':'')?>">
+	<div class="iii"><a href="/eshop<?=$c->getPropertyValue('url')?>"><img src="<?=$photo['path']?>" alt="<?=$node->title?>" title="<?=$node->title?>" /></a></div>
+	<div class="ttt"><?=$c->getPropertyValue('html');?></div>
+	<a href="/eshop<?=$c->getPropertyValue('url')?>">zobrazit produkty</a> 
+
+    <div class="spacer10"> </div> 
+
+	<a href="<?=$node->path?>">více o značce</a>  
+	<div class="clear"></div>  
+</div>    
+<?php        
+endforeach;
+?>  
+<Div class="spacer20"></Div>

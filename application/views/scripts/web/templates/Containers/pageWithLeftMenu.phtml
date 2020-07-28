@@ -1,0 +1,35 @@
+<div id="page">
+
+  
+       <div id="banner"><img src="/images/Preview.jpg" width="919" height="226" alt="Banner" /></div>
+	
+
+
+	<div id="content" >
+		<div id="leftColumn">
+    		<?= $this->render('parts/leftColl.phtml')?>
+		</div>
+	
+     	
+     	<div id="breadcrumbs">
+          <p><a href="/" class="home">Mivet</a>
+          <?=helper_FrontEnd::generateBreadCrumbs($this,'','')?>
+     		<a href="javascript:history.back();" class="back">zpět</a>
+          
+           </p>
+        </div>
+     	
+     	
+     	<div id="rightColumn">
+			<h1><?=$this->pageTitleRaw?></h1> 
+			<?=$this->page;?>                  		   
+		</div>
+   
+	
+    </div>
+    <div class="clear">&nbsp;</div> 
+    <div id="pas">
+                <?= $this->render('parts/imageScroll.phtml')?>
+        </div>
+</div>
+              

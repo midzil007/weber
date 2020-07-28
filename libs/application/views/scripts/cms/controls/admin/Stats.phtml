@@ -1,0 +1,88 @@
+<?
+	switch ($this->curentAction){
+		default: 
+		case 'index';
+			?> 
+				<div id="tabsright" class="ui-tabs ui-widget ui-widget-content ui-corner-all"> 
+				    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+				        <li class="ui-state-default ui-corner-top ui-tabs-active ui-state-active"><a href="#tabs-1">Statistiky návštěvnosti</a></li> 
+				        <li class="ui-state-default ui-corner-top"><a href="#tabs-2">Historie uživatelských akcí</a></li> 
+				        <!-- <li class="ui-state-default ui-corner-top"><a href="#tabs-3">Statistiky publikování obsahu</a></li>   -->
+				    </ul> 
+				    <div id="tabs-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom">   
+				    	<? if(1):?>
+				    	 <iframe frameborder="0" name="mainright" id="mainright" src="/statsframe" style="width:100%; height:800px;  margin:0px -20px 0px -10px; border:none;"></iframe>  
+					 	<? endif; ?> 
+				    </div> 
+					<div id="tabs-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom">    
+				    	<?=$this->statsUserHistory?> 
+					</div>   
+					<!-- <div id="tabs-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom">     
+				    	<?=$this->statsPublicated?>  
+					</div>  -->
+				</div>
+                <script type="text/javascript">  
+			    $(function() {
+			        $( "#tabsright" ).tabs(); 
+			    });
+			    </script>  
+			<? 
+			break;  
+		case 'detail';
+		case 'useraudit'; 
+		case 'contentsaudit';  
+		case 'fileaudit';  
+		
+			?>
+			<?=$this->pageContent;?>   
+			<?
+			break; 
+	}  
+?> 
+	<script type="text/javascript">  
+	function checkIframe(url){
+		var newUrl = url;
+		var curentTabUrl= new String($('statsHome').href);		
+		var ifr = document.getElementById('mainright');
+		
+		if(curentTabUrl.search('/home') < 0){
+			// refreshTab('statsHome', '/cms/stats/home');  
+			$( "#tabsright" ).tabs(  "select", 0 ); 
+			setTimeout( 
+				function() {  
+					try { 	  
+						var ifr = document.getElementById('mainright');
+						ifr.src= newUrl;
+					}
+					catch(err)	{ 
+						
+					}					
+				}, 1500);							
+		} else {
+			ifr.src= newUrl;
+		}
+		 
+		return false;  
+	}
+	
+	function checkTarget(){
+		try { 		
+			form = window.frames['mainright'].document.FormDateFilter;
+			form.target = '_self';
+			
+			//form.action = '/cgi-bin/' + form.action;
+			//form.action = '/cgi-bin/awstats.pl?framename=mainright#countries';
+			
+			var str= new String(form.action);
+			if(str.search('framename=mainright') < 0){
+				form.action = str.replace('awstats.pl?', "awstats.pl?framename=mainright&");
+			}
+						
+			//framename
+			form.elements['framename'].value = "mainright";
+			
+		}
+		catch(err)	{ setTimeout("checkTarget()", 100);	} 
+	}	
+    // setTimeout("checkTarget()", 350);  
+	</script>

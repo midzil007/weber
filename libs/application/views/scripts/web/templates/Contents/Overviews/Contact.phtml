@@ -1,0 +1,54 @@
+<?
+	
+$this->disableH1 = true; 
+?>   
+
+<div id="fLeft"> 
+	<h1 class="h1"><?=$this->pageTitleRaw?></h1> 
+
+	<?
+	 
+	$adresa = $this->content->getPropertyValue('adresa');
+	$email = $this->content->getPropertyValue('cemail'); 
+	$jmeno = $this->content->getPropertyValue('cjmeno'); 
+	if(isset($this->input->send) || $this->input->send_x){
+		$webForm = new module_WebForm($this->input);	
+		 
+		$text = '
+			<h2 style="color:#0f4096; font-size: 12px;">Dotaz z webu</h2>
+			<table style="font-size: 11px; color: #708490;">
+				<tr><td>Jméno:</td><td>' . $webForm->fullname . '</td></tr>
+				<tr><td>Email:</td><td>' . $webForm->email . '</td></tr>
+				<tr><td>Telefon:</td><td>' . $webForm->input->phone . '</td></tr>
+				<tr><td>Zpráva:</td><td>' . nl2br($webForm->input->message) . '</td></tr>
+			</table>				
+			<p>
+		';
+		
+		
+		list($state, $messages) = $webForm->sendEmail($text, array('fullname', 'email', 'message'), $email, $jmeno);
+		Helpers::addMessage($state, $messages, $this);
+	}
+	
+	
+	$this->formSubject = 'Zpráva z webu: ' . $this->curentNode->title;
+	$this->content->getPropertyByName('html')->value = 0;
+	?>
+	
+	<div class="contact">
+					
+			
+		<h3>Kontaktní formulář</h3>		
+			<?=$this->render('templates/Contents/ContactForms/Simple.phtml')?>   
+			<?=$this->html?> 
+	</div>
+  <div class="clear">&nbsp;</div>
+
+</div> 
+
+<div id="rightPage"> 
+	<h2 class="h1"></h2> 
+	<img alt="" src="/images/operatorka.jpg" />
+</div>
+
+<div class="spacer10"> </div>

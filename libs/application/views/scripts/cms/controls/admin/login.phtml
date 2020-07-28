@@ -1,0 +1,36 @@
+		<div id="loginHead">
+			<div id="lImg">&nbsp;</div>
+			<h1>Vstup do administračního rozhraní</h1>
+			<h2><?=$this->webTitle?></h2>
+			<ul>
+				<li><a  id="t1">Přihlášení</a></li>
+				<!--
+				<li><a href="#" id="t2">Co administrace umí?</a></li>
+				<li><a href="#" id="t3">Jak pracovat s administrací</a></li>
+				-->
+			</ul>
+		</div>
+		
+		<form method="post" action="/cms/login">
+		<div id="login">					
+				<?php echo $this->formHidden('requestUrl', $this->requestUrl) ?>
+				Vaše přihlašovací jméno:<br />
+				<input type="text" class="dojoLike" name="username" />
+				<div class="spacer2">&nbsp;</div>
+				Heslo:<br />
+				<input type="password" class="dojoLike" name="pass" />
+				<div class="spacer2">&nbsp;</div>
+				<?php echo $this->formSubmit('log', 'vstup', array('class'=>'fsubmit')) ?>
+				
+				<?php if(count($this->messages)): ?>
+					<?php echo $this->render('errors.phtml'); ?>				
+				<?php endif; ?>			
+		</div>
+		</form>  
+		<div class="preload" style="background:url(<?=$this->cmsFolderPath?>/images/tab-login-i.jpg);"></div>
+		<div class="preload" style="background:url(<?=$this->cmsFolderPath?>/images/tab-about-i.jpg);"></div>
+		<div class="preload" style="background:url(<?=$this->cmsFolderPath?>/images/tab-help-i.jpg);"></div>
+		<div class="preload" style="background:url(<?=$this->cmsFolderPath?>/images/tab-login-o.jpg);"></div>
+		<div class="preload" style="background:url(<?=$this->cmsFolderPath?>/images/tab-about-o.jpg);"></div>
+		<div class="preload" style="background:url(<?=$this->cmsFolderPath?>/images/tab-help-o.jpg);"></div>
+		

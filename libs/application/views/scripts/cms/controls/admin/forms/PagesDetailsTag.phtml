@@ -1,0 +1,19 @@
+<div class="dijitTabContainer dijitContainer dijitLayoutContainer" style="width:100%; height:400px; overflow:auto;">
+<div id="err_PageForm"></div> 
+<form method="post" id="PageForm" name="PageForm">
+<?=$this->formHidden('domain', $this->domain);?>    
+<?=$this->formHidden('tagOrig', $this->input->tag);?> 
+<table class="modalTable">		 
+	<tr>
+		<td class="formcell tkey">Štítek</td>
+		<td class="formcell"><?php echo $this->formText('tag',$this->input->tag, array('class'=>'ftext', 'trim'=>'true', 'required'=>'true')) ?></td>
+	</tr>
+	<tr>
+		<td class="formcell">Popis</td>
+		<td class="formcell"><?php echo $this->formWysiwyg('description',$this->input->description, 300, '') ?></td>
+	</tr>   
+</table>
+<?php echo $this->formSubmit('saveContentB', 'Uložit', array('class'=>'fsubmit', "onclick" => $this->addSubmitFunction . " setWysiwygContent('description'); return submitFormAjax('PageForm', '".$this->url(array('action' => 'saveTag'))."', 'vypisDole', '', '', 1 );", 'iconClass' => "noteIcon")) ?>		
+
+</form>
+</div>

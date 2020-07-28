@@ -1,0 +1,60 @@
+<?
+$znacka = $this->znacka;
+$i = $this->znackaId; 
+
+$options = array('accordionId' => 'accordion', 'noContent' => true, 'showSelectFile' => true, 'inputWidth' => '300', 'maxFiles' => 60, 'showUploadFile' => true, 'uploadFileDirectoryNodeId' => 51340 );
+
+?>  
+	<table>
+		<tr  class="znacka_<?=$i?>"> 
+			<td>Název značky <?=$i?></td>
+			<td><?=$this->formText('znacka_'. $i .'_nazev',$znacka['nazev'], array('class' => 'w320'))?>
+			<a href="#" onclick="showText('propTextArea_<?=$i?>');showText('propTextArea_<?=$i?>_9'); showText('propTextArea_<?=$i?>_5'); showText('propTextArea_<?=$i?>_1'); return false;" id="nb" href="/cms/eshop/addItem/amodule/items" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false">
+			<span class="ui-icon ui-icon-carat-2-n-s"></span><span class="ui-button-text">Zobrazit/skrýt detaily</span></a>
+			<?=$this->formHidden('znacka_'. $i .'_id',$znacka['id'])?>  
+			<?=$this->formHidden('znackysort[]',$znacka['id'])?>    
+			&nbsp;&nbsp;&nbsp;&nbsp; <a href="#" onclick="return delZ('znacka_<?=$i?>')">smazat</a> 
+			</td>	  		   
+		</tr>    
+		<tr class="znacka_<?=$i?>" id="propTextArea_<?=$i?>" style="display:none;">  
+			<td>Popis</td>
+			<td><?=$this->formWysiwyg('znacka_'. $i .'_popis',$znacka['popis'],array('class'=>'w500 h70'))?></td>
+		</tr>  	
+		<tr class="znacka_<?=$i?>" id="propTextArea_<?=$i?>_9" style="display:none;">  
+			<td>Delší popis</td>
+			<td><?=$this->formWysiwyg('znacka_'. $i .'_popis2',$znacka['popis2'],array('class'=>'w500 h70'))?></td>
+		</tr>  		 
+		<tr class="znacka_<?=$i?>" id="propTextArea_<?=$i?>_1" style="display:none;">  
+			<td>Logo</td>
+			<td><?=$this->formMultiFileSelect('znacka_'. $i .'_logo',$znacka['logo'],$options,$options,$options)?></td>
+		</tr>   
+		<tr class="znacka_<?=$i?>" id="propTextArea_<?=$i?>_5" style="display:none;">
+			<td></td> 
+			<td>      
+				<h2>Produktvé řady této značky</h2>  
+				<table cellpadding="5" cellspacing="0">
+					<tr><td id="rady_<?=$i?>" >
+					<?    
+					$this->znackaId = $i; 
+					$n = 0;
+					foreach ($znacka['rady'] as $rada){ 
+						$n++;     
+						$this->rada = $rada;
+						$this->radaId = $n;   
+						$this->radaZnackaId = $znacka['id'];      
+				    	echo $this->render('controls/admin/modules/Eshop/Settings_znacka_rada.phtml');
+						
+					}   
+				    ?>  
+				    </td></tr>   
+				</table> 
+				<script type="text/javascript" charset="utf-8">
+ 				var nextRada<?=$i?> = <?=$n?>;
+ 				</script>	   
+				<a onclick="loadRada('rady_<?=$i?>', nextRada<?=$i?>++, <?=$i?>); return false; " id="nb" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false">
+			<span class="ui-icon ui-icon-circle-plus"></span><span class="ui-button-text">Přidat řadu</span></a>  
+				
+			</td> 
+		</tr>    
+		<tr class="znacka_<?=$i?>"><td colspan="2"><br /><div style="border-bottom:2px solid #cccccc;"></div><br /></td></tr> 
+	</table>

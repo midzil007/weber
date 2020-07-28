@@ -1,0 +1,56 @@
+<? if($this->searchPerformed): ?>
+	<h2>Výsledek hledání pro slovo &bdquo;<?=$this->searchString?>&ldquo;</h2>
+	<? if(strlen($this->searchString) < 3): ?>
+		<p>Hledaný výraz musí být alespoň 3 znaky dlouhý.</p>
+	<? else: ?>			
+		<?
+			//pr($this->request);
+			//pr($this->searchResults);
+			foreach ($this->searchResults as $sectionName => $section):
+				if(count($section) == 0){
+					continue;
+				}
+				?>
+				<h4><?=$this->searchSections[$sectionName]?></h4>
+				<ol>
+				<?
+				foreach ($section as $row):	
+					//pr($row);
+					$found = true;
+					$controller = $this->superTypeControllerMap[$row['superType']];
+					$identificator = $this->controllerIdentificatorMap[$controller]; 
+					if($row['superType'] != 'structure' && (strpos($row['path'], '/eshop') !== false || strpos($row['path'], '/e-shop') !== false)){
+						$controller = 'eshop';
+					}  
+					switch ($controller) {
+						default:
+						case 'pages':
+						case 'structure':
+							$url = $this->url(array('controller' => $controller,'action' => 'detail', 'node' => $row['nodeId'], 'ajax' => 0, 'contentId' => 0)); 
+							break; 
+						case 'eshop':
+							$url = $this->url(array('controller' => $controller,'action' => 'editproduct', 'id' => $row['nodeId'], 'ajax' => 0, 'contentId' => 0));
+							break; 
+					}
+				?>
+				<li>
+					<a class="tbold" href="<?=$url?>"><?=$row['title']?> &raquo;</a>
+					<br/>
+				    <span class="fs_xxs"><?=Utils::getFrontEndLink($row['path'], true)?></span>
+
+				</li>
+				<?
+				endforeach;
+				?>
+				</ol>
+				<div class="cb"></div>
+				<?
+			endforeach;
+			if(!$found):
+			?>
+				<p>Pro hledaný výraz nebylo nic nalezeno.</p>
+			<? endif; ?>	
+	<? endif; ?>	
+<? else: ?>
+	<p>Zadejte hledaný výraz</p>
+<? endif; ?>

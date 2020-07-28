@@ -1,0 +1,37 @@
+<h1><?php echo $this->node->title ?> <span>(<?=$this->node->path?>)</span></h1>
+
+
+<form id="mainHelpForm" name="mainHelpForm" action="<?= $this->url(array('controller' => 'help','action' => 'delete', 'node' =>  $this->node->nodeId)) ?>" method="post">
+<div class="buttons">
+<?php echo $this->ImageButton('Nová podsekce', '#', 'big/new-subnode.gif', 'big/new-subnode-o.gif', array("onclick" => "return showModal('Nová sekce','". $this->url(array('controller' => 'structure','action' => 'new','helpnode' => $this->node->nodeId,'node' => $this->node->nodeId,  'inRemoteModule' => '1',  'contentType' => 'Overview', 'parentId' => $this->node->nodeId )) ."');")) ?>	
+	
+		<?php echo $this->ImageButton('Editovat sekci', '#', 'big/edit-folder.gif', 'big/edit-folder-o.gif', array("onclick" => "return showModal('Editace sekce','". $this->url(array('controller' => 'structure','action' => 'detail', 'inRemoteModule' => '1', 'helpnode' => $this->node->nodeId,'node' => $this->node->nodeId )) ."');")) ?>	
+						
+		<?php echo $this->ImageButton('Smazat', '#', 'big/delete-folder.gif', 'big/delete-folder-o.gif', array("onclick" => "if(confirmSubmit2('Opravdu smazat?')){document.mainHelpForm.submit(); }")) ?>	
+	
+		
+		
+</div>
+</form>	
+
+<div class="buttons">
+		
+<?php echo $this->ImageButton('Nová stránka', '#', 'big/new-page.gif', 'big/new-page-o.gif', array("onclick" => "return showModal(
+		'Nová stránka nápovědy',
+		'". $this->url(array('controller' => 'pages','action' => 'new', 'node' => $this->node->nodeId, 'contentType' => 'HelpFile' )) ."'
+	);")) ?>	
+	<?php 
+	
+		/*
+		echo $this->formSubmit('nu', 'Nová stránka', array(
+		'class'=>'fsubmit', 
+		"onclick" => "return showModal(
+			'Nová stránka nápovědy',
+			'". $this->url(array('controller' => 'pages','action' => 'new', 'node' => $this->node->nodeId, 'contentType' => 'HelpFile' )) ."'
+		);")) 
+		*/
+	?>	
+</div>
+
+
+	

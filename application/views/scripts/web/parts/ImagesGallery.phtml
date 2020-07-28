@@ -1,0 +1,73 @@
+
+<? 
+$this->hasSlideshow = true;  
+$images = $this->photos; 	
+$z = 0;  
+
+$this->mainImgSrc = 'http://' . $_SERVER['SERVER_NAME'] . $this->mainImg; 
+ 
+$descr = $this->pageTitleRaw; 
+ ?>
+ 
+ 	<div id="img"><img id="mainImage" src="<?=$this->mainImg?>" alt="<?=$descr?>" title="<?=$descr?>" /> </div> 
+	 
+	 <div id="list">	
+		<div class="gallery_container images" id="gallery_container">
+			
+	 		<? if(count($images) > 4): ?>   
+				<div class="SlideItMoo_back navLeft"><a>&nbsp;</a></div>
+				<? endif; ?>  
+							   
+			<div class="thumb_container" id="thumb_container">		
+				 
+				
+				<div class="thumbs" id="thumbs">
+					<?  
+					$x = 0;  
+					foreach ($images as $img):    	
+						$x++;  
+						$mini = $img['path'];     
+						$show = $img['fullPath']; 					
+						?>
+						<div class="SlideItMoo_element">				 
+						<a onclick = "return setImg(this.href);" href="<?=$show?>"  target="_blank" class="imgThumb"  title="<?=$img['name']?>">      
+							<img src="<?=$mini?>" alt="<?=$descr?>" title="<?=$descr?>" />  
+						</a>					 
+						</div>
+					<? endforeach; ?>	   
+				</div>  	  
+			</div>  
+			
+				<? if(count($images) > 4): ?>    
+				<div class="SlideItMoo_forward navRight"><a >&nbsp;</a></div> 
+				<? endif; ?>    
+		</div> 
+	
+		
+		<script type="text/javascript"> 
+		
+		<? if(count($images) > 4): ?>  
+		window.addEvent('domready', function(){
+			  
+			new SlideItMoo({
+				overallContainer: 'gallery_container',
+				elementScrolled: 'thumb_container',
+				thumbsContainer: 'thumbs',		
+				itemsVisible:4,   
+				elemsSlide:3,  
+				duration:300,  
+				itemsSelector: '.SlideItMoo_element',
+				itemWidth: 88,         
+				startIndex:0     
+		
+			});  
+			   
+		});
+		<? endif; ?>
+			function setImg(h){
+				$('mainImage').set('src', h); 
+				return false; 
+			}
+				   
+		</script>   
+</div>

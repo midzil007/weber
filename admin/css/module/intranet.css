@@ -1,0 +1,11 @@
+/* INTRANET */
+/*
+.tundra #intranetPane div.dijitAccordionBody{
+	background:#fdffbf;
+	border:1px solid red;
+}
+*/
+
+.tundra .yellowPane .dijitAccordionBody {
+	background:#fdffbf;
+}

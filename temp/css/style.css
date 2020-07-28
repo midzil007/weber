@@ -1,0 +1,33 @@
+*{margin:0;padding:0;border:0;outline:none}
+body{font-family:Arial}
+#container{margin:0 auto;width:768px}
+#container h1{font-weight:normal;color:#252525;margin:10px 0;text-align:center}
+#container h2{font-weight:normal;color:#45c2f3;font-size:20px}
+#inner{border:1px solid #aaa;padding:20px;min-height:325px}
+#right{float:right;width:410px}
+p{margin:10px 0 0}
+p.info{color:#282828;font-size:12px;margin:10px 0;text-align:center}
+.links{padding:20px 0 10px 0;display:inline-block}
+.links a{color:#efefef;font-weight:bold;text-decoration:none;margin:0 20px;background:#45c2f3;padding:10px}
+.links a:hover{color:#fff;font-weight:bold;background:#282828}
+.small_info{padding:10px;border:1px solid #8a8a8a;background:#ccc;text-align:justify;color:#282828;font-size:12px;border-radius:3px}
+.small_info a{display:block;margin:5px 0 0;color:#d91900;text-decoration:none;font-weight:bold}
+p.like{color:#282828;text-align:center;border:2px solid #d91900;background:#fff;padding:10px 0;font-weight:bold}
+p.like a{color:#d91900;text-decoration:none}
+
+.action{
+background:#BAF765;
+background:linear-gradient(#BAF765,#A7E059) repeat scroll 0 0 transparent;
+border-radius:0 0 5px 5px;
+box-shadow:0 2px 5px #487C00;
+display:none;
+padding:5px 10px;
+position:fixed;
+text-shadow:1px 1px 0 #D6F3AE;
+top:0;
+width:100%;
+z-index:999;
+text-align:center
+}
+.action h3{color:#282828;display:inline-block}
+.action img{margin:0 10px 0px 0}

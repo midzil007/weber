@@ -1,0 +1,81 @@
+<?if(isset($this->input->pass)):
+		$this->mVarianta->secure($this);//$notSecure = false;
+endif; 
+if(!$this->session->login):?>
+	<form action="<?=$_SERVER['REDIRECT_URL']?>" method="post">
+	Zadejte heslo:
+	<?=$this->formPassword('password', '', array('class' => 'nice sm200'))?>
+	<input class="nicesubmit sm90" type="submit" name="pass" value="Přihlásit">
+	</form>
+
+<?else:
+
+if($this->input->send):
+	$this->mVarianta->removePhotosVariant($this);
+	$this->mVarianta->setNotAvalablePhotos($this);
+endif?>
+<?$this->disableLeft = true;
+$shopNode = $this->tree->getNodeById(3801);
+$categories = helper_FrontEnd::checkChildren($shopNode->getChildren('FOLDER'));
+foreach ($categories as $value) {
+	$ids[] = $value->nodeId;
+}
+$params['category'] = $ids;
+$params['isBlancheporte']  = 0;
+$this->listingPerPage = 100;
+$this->ListingItemsCount = count($this->mProducts->getProducts('dateCreate', 'desc', 0, 5000, $params));
+helper_Listing::init($this); 
+$products = $this->mProducts->getProducts('dateCreate', 'desc', $this->listingSQLStartPos, $this->listingPerPage, $params); 
+$productsNodes = $this->mProducts->getArticlesAsNodes($this->tree, $products);
+?>
+  <?=$this->render('templates/Listing/Floating.phtml'); ?>
+<form method="post">
+<input type="hidden" page="<?=$this->inputGet->page?>">
+
+<?foreach ($productsNodes as $value):?>
+	<div class="adminProd">
+		
+		<?$content = $value->getPublishedContent();
+		  $variants = $this->mVarianta->getGroupSizes($content->id, true);?>
+		  <?if($variants):?>
+		  <h3><?=$value->title?> (<?=$value->nodeId;?>)</h3>
+		  <input type="hidden" name="products[]" value="<?=$content->id?>">
+			<?foreach ($variants as $item):?>			
+			<div class="bor">
+			<div class="adminProdInner">
+				
+							<?=$item['nazev']?> <?=$item['color']?> (<?=$item['EAN']?>)
+						</div>
+					<?$photos = $content->getFilesNames('varianta_'.$item['variantId'].'_obrazky');
+					if($photos):
+					$images = $this->full = helper_FrontEnd::getResizedPhotos($photos, 'pThumbc', 'pShowc');
+					foreach ($photos as $key=>$ph):
+						foreach ($images as $value):
+							if($value['name'] == $ph)
+							{
+								$path = $value['path'];
+							};
+						endforeach;?>
+						
+						
+						<div class="adminProdInnerPhotos">
+						<?$checked = !$item['isAvailablePhoto']?'checked="checked"':'';?>
+						<p><input type="checkbox" name="noAvailable[]" <?=$checked?> value="<?=$content->id?>_<?=$item['variantId']?>"/>Neodpovídá</p>
+							<img alt="<?=$ph['name']?>" src="<?=$path?>" height="60"/>
+							
+								<p><input type="checkbox" name="check[]" value="<?=$content->id?>_<?=$item['variantId']?>_<?=$key.';'.$ph?>"/>Smazat</p>
+							
+						</div>
+						
+					<?endforeach?>
+					<?endif;?>
+					</div>
+			<?endforeach;?>
+			
+			<div class="spacer10"></div>
+		  <?endif?>
+	</div>
+<?endforeach;?>
+<input type="submit" class="normalBtn" name="send" value="Odeslat"/>
+</form>
+<?endif;?>

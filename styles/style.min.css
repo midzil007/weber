@@ -1,0 +1,23 @@
+.spacer20 {
+    clear: both;
+    line-height: 20px;
+    height: 20px;
+}
+
+.spacer10 {
+    clear: both;
+    line-height: 10px;
+    height: 10px;
+}
+
+html {
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    margin: 0;
+     background-color:red;    
+
+}

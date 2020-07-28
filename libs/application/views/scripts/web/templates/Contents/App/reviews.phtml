@@ -1,0 +1,125 @@
+<?$mImportHeurekaReviews = new module_Reviews($this);?>
+<?
+$this->ListingItemsCount= $mImportHeurekaReviews->getCountReview();
+helper_Listing::init($this);
+list($total,$data) = $mImportHeurekaReviews->show($this->listingSQLStartPos, 12);
+?>
+
+<h1>Hodnocení <?=str_replace('http://www.','', Utils::getWebUrl());?></h1>
+<div class="fLeft" id="revSummary">
+				<div class="fLeft padTop10 fs14" id="revResG" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+						<strong>Celkem </strong>(<span itemprop="ratingValue"><?=$total->total?> známka</span>/<span itemprop="reviewCount"><?=$total->count?></span> hlasů):</div>
+				<div class="emptyStars fLeft posRelative">
+					<div style="width:<?=$total->total*27.6?>px;" class="fullStars posAbsolute"></div>
+				</div>
+				<div class="clear"></div>
+				<p class="fLeft padTop10 fs14">Doba doručení:</p>
+				<div class="emptyStars fLeft posRelative">
+					<div style="width:<?=$total->delivery*27.6?>px;" class="fullStars posAbsolute"></div>
+				</div>
+				<div class="clear"></div>
+				<p class="fLeft padTop10 fs14">Doprava:</p>
+				<div class="emptyStars fLeft posRelative">
+					<div style="width:<?=$total->transport*27.6?>px;" class="fullStars posAbsolute"></div>
+				</div>
+				<div class="clear"></div>	
+				<p class="fLeft padTop10 fs14">Přehlednost obchodu:</p>
+				<div class="emptyStars fLeft posRelative">
+					<div style="width:<?=$total->webUsa*27.6?>px;" class="fullStars posAbsolute"></div>
+				</div>
+				<div class="clear"></div>
+				<p class="fLeft padTop10 fs14">Komunikace:</p>
+				<div class="emptyStars fLeft posRelative">
+					<div style="width:<?=$total->communication*27.6?>px;" class="fullStars posAbsolute"></div>
+				</div>
+				<div class="clear"></div>
+				
+</div>	
+<div id="revSummaryText" class="fRight">
+<?=$this->content->getPropertyByName('html')->value?></div>	
+<div class="lineGrad"></div>
+<div class="spacer10"></div>	
+
+<div>
+	<h3 class="fLeft">Recenze uživatelů:</h3>
+	<div class="fRight"> <?=$this->render('templates/Listing/Floating.phtml'); ?></div>
+</div>
+
+<div class="spacer10"></div>	
+<?
+if($data):
+$inc = 0;
+foreach ($data as $item):
+			$inc++;
+			if($inc > 11){
+				break;
+			}
+			if(!$item['date'])
+				continue;
+			$name = '';?>
+			<div class="revName fLeft fstRev marRight15 marTop5 tAlignCenter">
+			<span class="userIcon blockDisplay"></span>
+			<?$name = $item['name']?$item['name']:'Ověřený zákazník';?>
+			<span class="fBold"><?=$name?></span>			
+			<p class="11 marTop5"></p>
+			</div>
+			<div class="revName fLeft">
+				<div class="emptyStars">
+					<div style="width:<?=$item['total_rating']*28?>px;" class="fullStars"></div>
+				</div>
+				<table>
+					<?if($item['pros']):?>
+					<tr>
+						<td><span class="plus">+</span></td>
+						<td><span class="plus"><?=$item['pros']?></span></td>
+					</tr>
+					<?endif?>
+					<?if($item['cons']):?>
+					<tr>
+						<td><span class="minus">-</span></td>
+						<td><span class="minus"><?=$item['cons']?></span></td>
+					</tr>
+					<?endif?>
+					<?if($item->reaction):?>
+					<tr>
+						<td>?</td>
+						<td><?=$item->reaction?></td>
+					</tr>
+					<?endif?>
+					<?if($item['summary']):?>
+					<tr>
+						<td></td>
+						<td colspan="1"><?=$item['summary']?></td>
+					</tr>
+					<?endif?>
+				</table>
+			</div>	
+			<div class="revText fs11 fLeft">
+				<p class="fLeft">celkem:</p>
+				<div class="emptyStarsMini fLeft posRelative">
+					<div style="width:<?=$item['total_rating']*19?>px;" class="fullStarsMini posAbsolute"></div>
+				</div>
+				<p class="fLeft">doručovací doba:</p>
+				<div class="emptyStarsMini fLeft posRelative">
+					<div style="width:<?=$item['delivery']*19?>px;" class="fullStarsMini posAbsolute"></div>
+				</div>
+				<p class="fLeft">doprava:</p>
+				<div class="emptyStarsMini fLeft posRelative">
+					<div style="width:<?=$item['transport']*19?>px;" class="fullStarsMini posAbsolute"></div>
+				</div>
+				<p class="fLeft">přehlednost:</p>
+				<div class="emptyStarsMini fLeft posRelative">
+					<div style="width:<?=$item['webUsa']*19?>px;" class="fullStarsMini posAbsolute"></div>
+				</div>
+				<p class="fLeft">komunikace:</p>
+				<div class="emptyStarsMini fLeft posRelative">
+					<div style="width:<?=$item['communication']*19?>px;" class="fullStarsMini posAbsolute"></div>
+				</div>
+				
+			</div>
+			<div class="lineGrad"></div>	
+			
+		<?endforeach;
+endif;
+?>
+<div class="fRight"> <?=$this->render('templates/Listing/Floating.phtml'); ?></div>

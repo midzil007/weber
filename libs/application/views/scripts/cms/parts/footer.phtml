@@ -1,0 +1,67 @@
+<? 
+  $reg = Zend_Registry::getInstance(); 
+if($this->currentNodePath):
+ 
+	if($this->curentViewState['controller'] == 'pages'){
+		$controller = 'pages';
+		$add = '/inpages/1'; 
+	} else {
+		$controller = 'structure'; 
+		$add = '';
+	} 
+	
+	if($reg->languages->language){  
+		$add .= '/language/' . $reg->languages->language;
+	}
+	$params = $this->request->getParams(); 		 
+	$params['controller'] = $controller;	
+	$params['action'] = 'index';
+	$lang = $reg->languages->language?$reg->languages->language:'cz';
+	$params['language'] = $lang; 
+	$url = Utils::getStrictUrl($this, $params, array('node', 'ajax')); 
+	
+?>
+	<script>   
+	var treePath = <?=$this->currentNodePath?>;      
+	var treePathSelected = ['node_<?=$this->nodeId?>'];      
+	var cmsNodePath = '<?=$url?>';  
+	var treeURlAdd = '<?=$add?>';     
+	</script>   
+	<script type="text/javascript" src="/admin/js/tree.js"></script>	     
+	<script type="text/javascript" src="/admin/js/jquery.jstree.js"></script> 
+	<link type="text/css" rel="stylesheet" href="/admin/css/tree/style.css"/>   
+	<script type="text/javascript" src="../_docs/syntax/!script.js"></script>
+	 
+<? elseif($this->currentFsPath):
+	$controller = 'sf'; 
+	$params = $this->request->getParams(); 		 
+	$params['controller'] = $controller;	
+	$params['action'] = 'index';
+	
+	$lang = $reg->languages->language?$reg->languages->language:'cz';
+	$params['language'] = $lang; 
+	
+	$url = Utils::getStrictUrl($this, $params, array('filenode', 'ajax'));
+	//  e($url);   
+?>	 
+<script>   
+	var treePath = <?=$this->currentFsPath?>;  
+	var treePathSelected = ['node_<?=$this->nodeId?>'];   
+	var cmsNodePath = '<?=$url?>';   
+</script>    
+	<script type="text/javascript" src="/admin/js/tree2.js"></script>	  
+	<script type="text/javascript" src="/admin/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="/admin/js/jquery.hotkeys.js"></script> 
+	<script type="text/javascript" src="/admin/js/jquery.jstree.js"></script> 
+	<link type="text/css" rel="stylesheet" href="/admin/css/tree/style.css"/>
+	<script type="text/javascript" src="../_docs/syntax/!script.js"></script>
+<? endif; ?> 
+ 	<script src="/admin/js/jquery.validationEngine-cs.js" type="text/javascript"></script>
+	<script src="/admin/js/jquery.validationEngine.js" type="text/javascript"></script>
+	<script src="/admin/js/validation.js" type="text/javascript"></script>
+	<script>
+
+ 
+
+</body>
+</html>

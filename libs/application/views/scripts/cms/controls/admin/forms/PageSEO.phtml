@@ -1,0 +1,36 @@
+<div id="err_editSEOPageForm"></div>
+<form id="editSEOPageForm" action="<?= $this->url(array('controller' => 'structure','action' => 'saveSEO')) ?>" method="post">
+<table>	
+	<tr>
+		<td class="formcell tkey">Cesta</td>
+		<td class="formcell">
+			<?php echo $this->formText('nodePath',$this->cnode->path, array('class'=>'ftext')) ?>
+			 <a class="helpico" href="#" title="Cesta nesmí obsahovat žádné speciální znaky ani koncovku .html a podobně.">&nbsp;</a>
+		</td>
+	</tr>	
+	<tr>
+		<td class="formcell">Titulek stránky</td>
+		<td class="formcell">
+			<?php echo $this->formText('pageTitle',$this->cnode->getPropertyValue('pageTitle'), array('class'=>'ftext')) ?>
+			<a class="helpico" href="#" title="Pokud je vyplněn použije se místo názvu uzlu jako titulek stránky - okno prohlížeče">&nbsp;</a>
+		</td>
+	</tr>
+	<tr>
+		<td class="formcell">Klíčová slova</td>
+		<td class="formcell">
+			<?php echo $this->formTextarea('pageKw',$this->cnode->getPropertyValue('pageKw'), array('class'=>'ftext')) ?>
+			<a class="helpico" href="#" title="Zadávejte oddělé čárkami">&nbsp;</a>	
+		</td>
+	</tr>
+	<tr>
+		<td class="formcell">
+		Popis stránky</td>
+		<td class="formcell"><?php echo $this->formTextarea('pageDescription',$this->cnode->getPropertyValue('pageDescription'), array('class'=>'ftext')) ?></td>
+	</tr>
+	<tr>
+		<td class="formcell" colspan="2">
+			<?php echo $this->formSubmit('updateSEOStr', 'Uložit', array('class'=>'fsubmit', "onclick" => "return submitFormAjax('editSEOPageForm', '".$this->url(array('controller' => 'structure','action' => 'saveSEO', 'node' => $this->cnode->nodeId))."', 'vypisDole', 'modal', '', 1 );", 'iconClass' => "noteIcon")) ?>			
+		</td>		
+	<tr>
+</table>
+</form>

@@ -1,0 +1,33 @@
+		<div>
+		<? if($this->node->nodeId > 2 && 0): 			
+			?>
+			<a href="<?=$this->url(array('controller' => 'sf','action' => 'index', 'node' => $this->filenode->parentId), null, false)?>" title="O úroveň výš" class="ico uplevel fl_right">&nbsp;</a>
+		<? endif; ?>
+		</div>		
+		
+		<?
+		
+		if(!$this->dojoResources->Tooltip):
+			$this->dojoResources->Tooltip = true;
+			?>
+			<script type="text/javascript">
+				dojo.require("dijit.Tooltip");	
+		    </script>
+		    <?
+		endif;
+		echo $this->preview;
+		?>
+	
+		<?php
+		
+		echo $this->table( 
+				$this->filesTable, 
+				$this->filesTableHead, 
+				$this->filesTableActions, 
+				$this->tableSort, 
+				$this->tableSortType, 
+				$this->curentViewState, 
+				'vypisDole',
+				array('class' => 'list') 
+			); 
+		?>

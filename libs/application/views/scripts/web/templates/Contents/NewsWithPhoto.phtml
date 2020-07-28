@@ -1,0 +1,120 @@
+<?
+$this->inputGet->year = $this->inputGet->year?$this->inputGet->year:date('Y');
+$this->disableH1 = true;  
+?>
+
+<div id="leftPage"> 
+	<h1 class="h1"><?=$this->pageTitleRaw?></h1> 
+	
+		<div class="dateDetail"><?= $this->date ?></div>
+		<? if($this->nPhoto): ?>
+			<a  class="newsPhoto" style="float:right; margin:0px 0px 10px 10px;"><?=$this->nPhoto?></a>
+		<? endif; ?>
+		<?= $this->html ?>
+		
+		<div class="spacer20"></div>
+		<a href="/archiv-novinek" class="fRight btn">Archiv novinek</a>
+		
+		<div class="spacer20"></div>
+		<h2 class="h1">Proč si vybrat naše kávy?</h2> 
+		<?=$this->tree->getNodeById(52830)->getHtml();?>  
+		<a class="back" href="<?=Helpers::back($this->curentNode->parentId, $this->curentPath)?>"> &laquo; Zpět </a>
+		
+	</div> 
+
+<div id="rightPage">
+	<big class="head">Kalendář prezentací</big> 
+
+	<?
+	if($this->inputGet->detail){  
+		echo $this->render('Events/Event.phtml');
+		if($this->inputGet->ajax){  exit; } 
+		return;   
+	} 
+	
+	$this->days = $this->eventsModule->createCalendar($this->inputGet->m, $this->inputGet->y);		
+	$this->eventsPrevMonth = $this->eventsModule->getPrevMonth($this->inputGet->m, $this->inputGet->y);
+	$this->eventsNextMonth = $this->eventsModule->getNextMonth($this->inputGet->m, $this->inputGet->y);
+	$this->monthTitle = $this->eventsModule->monthTitle;
+	$this->yearTitle = $this->inputGet->y?$this->inputGet->y:date('Y');
+	
+	?> 
+	<div id="months">
+		<div class="month">
+			<a class="fLeft" title="Předchozí měsíc" href="<?=Utils::addUrlParams($this->curentPath . '?a=' . $this->inputGet->a, $this->eventsPrevMonth);?>">
+				&laquo;</a>
+			<span>
+				 <?=$this->monthTitle?>  
+				 <?=$this->yearTitle?> 
+			</span>
+			<a class="fRight" title="Následující měsíc" href="<?=Utils::addUrlParams($this->curentPath, $this->eventsNextMonth);?>">
+				 &raquo;</a>
+		</div>
+	</div>
+	<div id="calendar"> 
+		<div id="c-body">
+			<span class="headers">Po</span><span class="headers">Út</span><span class="headers">St</span><span class="headers">Čt</span> 
+			<span class="headers">Pá</span><span class="headers sn">So</span><span class="headers sn">Ne</span> 
+			<?php 
+				// pr($this->days); 
+				 
+				$types = $this->eventsModule->getEventTypes();
+				$typesColors = $this->eventsModule->getEventTypesColors();
+			 	$xxx = 0;
+				foreach ($this->days as $day){ 
+					$c = $classAdd = $title = ''; 
+					if($day['isToday']){
+						$classAdd = ' today';
+					}
+					if($day['isWeek']){
+						$classAdd .= ' week';
+					}  		
+					$akce = '';
+					$xxx++;
+					if(!$day){
+						echo '<strong>&nbsp;</strong>';
+					} else {								
+						$url = '#';   
+						if(count($day['event'])){   
+							$e = $day['event'];   
+								 
+							$boTitle = $e['title']; 
+							  
+							if($e['path']){   
+								$boTitle .= '<br /> <br /> <small>pro více informací klikněte</small> </a>';
+							} 
+							   
+							$akce .=  '<a title="' . $e['title'] . '"  href="' . $e['path'] . '">  
+								'.$day['dayNo'].'  
+							</a>';   
+							
+							$c = 'class="event"';   
+						} else {
+							if($classAdd){ 
+								$c = ' class="'.$classAdd.'"';
+							}
+						}
+						if($akce){
+							echo '<strong '.$c.'> 						
+								'.$akce .'							
+								</strong>
+							';
+						} else {
+							echo '<strong '.$c.'>
+								'.$day['dayNo'].' 				
+								</strong>
+							';
+						}
+						
+					}
+				}
+			?>	
+			<div class="clear">&nbsp;</div>
+		</div>
+	</div> 
+	
+	
+	<div class="spacer10">&nbsp;</div>
+	<img alt="" src="/images/ondraorez2.png" />
+	
+	</div>  

@@ -1,0 +1,6 @@
+<? 
+$oid = $this->inputGet->merchantref;      
+ob_clean();    
+if($this->inputGet->currencycode == $this->config->instance->curency && $this->inputGet->amountcents &&  $this->config->instance->merchantid == $this->inputGet->merchantid && $this->config->instance->salesPass == $this->inputGet->password && $this->inputGet->exponent == 2): 
+?><html><head></head><body>[OK]</body></html><? else:?><html><head></head><body>[ERR]</body></html><? endif; ?> 
+<? die(); ?>    

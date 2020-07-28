@@ -1,0 +1,69 @@
+	<h1>Přehled článků</h1>  
+	<? 
+	$nodesDomainsMap = $this->config->instance->nodesDomainsMap->toArray();	
+	$domains = $this->config->instance->domains->toArray();
+
+	// e($this->positionsByKraje); 
+	// pr($this->positions);
+	
+	foreach ($this->positionsByKraje as $ident => $positionsByKraje):
+		$title = $domains[$ident];
+		?>
+		<h2 style="margin:15px 0px 0px 0px;"><?=$title?></h2>    
+		<? foreach ($positionsByKraje as $kraj => $positions):?>
+			<h3><?=$this->kraje[$kraj]?></h3>
+			<table class="articlesTable"> 
+			<? foreach ($positions as $position):
+				$section = $this->tree->getNodeById($position['section']);
+				$articles = $this->mArticles->getArticles('dateShow', 'Desc', 0, 50, 0, 0, false, $position['section']);     
+				 
+				$articlesNodes = $this->mArticles->getArticlesAsNodes($this->tree, $articles);	 
+				// pr($articles);  
+			?>
+				<tr>
+					<td colspan="3"> 						 
+						<a target="_blank" href="<?=helper_FrontEnd::getPathOneAdmin($this, $section->path)?>"><?=$section->title?></a>
+						- 
+						<a href="#" class="addArticle" onclick="return showModal('Nový článek','/cms/pages/new/amodule/articles/company/<?=$this->companyId?>/node/<?=$section->nodeId?>/contentType/Article?dojo.preventCache=1273480390729',0,0,600)"">PŘIDAT ČLÁNEK</a>  
+					</td> 
+					
+					
+				</tr>
+				<? if(count($articles) >= 1):?>
+				<tr>
+					<th style="width:120px;"> 
+						Název článku
+					</th>
+					<th>
+						Vložen
+					</th> 
+					<th>
+						Zobrazit na webu
+					</th>
+				</tr>
+				<? foreach ($articles as $article):?>
+				<tr>
+					<td style="width:120px;"> 
+						<a href="#"  onclick="return showModal('Nový článek','/cms/pages/detail/amodule/articles/company/<?=$this->companyId?>/node/<?=$article['id']?>?dojo.preventCache=1273480390729',0,0,600)"">						
+						<?=$article['title']?>  
+						</a>
+					</td>
+					<td>
+						<?=Utils::formatDate($article['dateCreate'])?>
+					</td>
+					<td>
+						<?=Utils::getFrontEndLink($article['path'], false)?> 
+					</td>
+				</tr>
+				<? endforeach; ?>
+				<? else :?>
+				<tr>
+					<td colspan="3">
+						zatím žádné články v této sekci a kraji
+					</td> 
+				</tr>
+				<? endif;?>
+			<? endforeach; ?>
+			</table>
+		<? endforeach; ?>
+	<? endforeach; ?>

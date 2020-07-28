@@ -1,0 +1,25 @@
+<div id="err_editSEOPageForm"></div>
+	<?php
+		echo $this->table( 
+				$this->versionsTable, 
+				$this->versionsTableHead, 
+				$this->versionsTableActions, 
+				$this->versionsTableSort, 
+				$this->versionsTableSortType, 
+				$this->curentViewState, 
+				$this->versionsSubmitFormUrl,
+				$this->versionsTableParentTab,
+				array('class' => 'list') 
+			); 
+					
+	?>
+	
+	<?php echo $this->formSelect('contentTypeNV', $this->contentType , array('autocomplete'=>'true','value'=>$this->contentType), $this->contentTypes) ?>
+	xx   
+	<?php echo $this->formSubmit('nuC', 'Vytvořit novou verzi', array(
+		'class'=>'fsubmit', 
+		"onclick" => "return refreshTab(
+			'pageEditVersions',
+			'". $this->url(array('controller' => 'pages','action' => 'newContentVersion', 'contentNode' => $this->cnode->nodeId, 'contentType' => '' )) ."' + dijit.byId('contentTypeNV').getValue()
+		);")) ?>
+	

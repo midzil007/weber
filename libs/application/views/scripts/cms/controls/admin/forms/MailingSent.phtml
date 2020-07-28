@@ -1,0 +1,42 @@
+<? 
+$mm = new module_Mailing();   
+
+?> 
+ 
+	<h3>ODESLANÉ EMAILY</h3> 
+	<?
+	$params = array();
+	$sent = $mm->getSentEmails($params);
+	//pr($sent);
+
+
+	?>  
+	<table class="mformattable">
+		<tr>
+			<th>Odesláno</th>
+			<th>Příjemci</th>
+			<th>Náhled</th>
+		</tr>	
+		<? foreach ($sent as $data):
+
+
+		$xx = preg_match('/<center>(.*)<\/center>/s', $data['emailText'], $matches);  
+
+		?>
+		<tr>
+			<td><?=Utils::formatDate($data['sentAt'], 'd.m.Y H:i')?></td>
+			<td><?=$data['sentTo']?></td>
+			<td>
+				<div class="mnahled">
+					<div class="mmm">
+					<?=$matches[0]?>
+					</div> 
+				</div> 
+			</td> 
+		</tr> 
+		<? endforeach;?>
+	</table>
+	
+	<script type="text/javascript">  
+	 
+	</script>  

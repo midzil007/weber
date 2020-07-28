@@ -1,0 +1,35 @@
+    <style type="text/css">
+        @import "http://o.aolcdn.com/dojo/0.9.0/dijit/themes/tundra/tundra.css";
+        @import "http://o.aolcdn.com/dojo/0.9.0/dojo/dojo.css"
+    </style>
+    <script type="text/javascript" src="http://o.aolcdn.com/dojo/0.9.0/dojo/dojo.xd.js"
+                djConfig="parseOnLoad: true"></script>
+    <script type="text/javascript">
+       dojo.require("dojo.parser");
+       dojo.require("dijit.Menu");
+     </script>
+
+        <style>
+        .myIcon {
+           background-image:
+              url(<a href="http://o.aolcdn.com/dojo/0.9.0/dijit/themes/tundra/images/checkmark.gif" title="http://o.aolcdn.com/dojo/0.9.0/dijit/themes/tundra/images/checkmark.gif">http://o.aolcdn.com/dojo/0.9.0/dijit/themes/tundra/images/checkmark.gif</a>);
+           background-position: -16px 0px;
+           width: 16px;
+           height: 16px;
+        }
+        </style>
+       
+        <div dojoType="dijit.Menu" id="submenu1"
+                 contextMenuForWindow="true" style="display: none;">
+                <div dojoType="dijit.MenuItem" iconClass="myIcon"
+                     onClick="alert('Hello world');">Enabled Item</div>
+                <div dojoType="dijit.PopupMenuItem" id="submenu2">
+                    <span>Submenu</span>
+                    <div dojoType="dijit.Menu">
+                                <div dojoType="dijit.MenuItem"
+                                     onClick="alert('Submenu 1!')">Submenu Item One</div>
+                                <div dojoType="dijit.MenuItem"
+                                     onClick="alert('Submenu 2!')">Submenu Item Two</div>
+                    </div>
+                </div>
+        </div>

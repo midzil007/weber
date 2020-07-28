@@ -1,0 +1,40 @@
+ 
+table.mformattable{
+	border:1px solid #F7F7F7;
+	width:100%;
+}
+
+table.mformattable th{ 
+	font-weight:bold;
+	background:#F7F7F7;
+} 
+
+table.mformattable td, table.mformattable th{
+	padding:4px 15px 4px 0px;
+}
+
+textarea#additionalRecievers{
+	width:820px;
+}
+ 
+
+.mnahled{
+	overflow:auto; 
+	width:660px; 
+	max-height:180px;
+	border:1px solid #CCC;
+}
+
+.mnahled:hover{
+	max-height:800px;
+}
+
+.mnahled .mmm{
+	/*
+	-ms-zoom:0.4;  
+	zoom: 40%; 
+	-moz-transform :scale(0.4);
+	*/  
+}
+
+ 

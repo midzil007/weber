@@ -1,0 +1,6 @@
+<div class="dateDetail"><?= $this->date ?></div>
+<? if($this->nPhoto): ?>
+	<a  class="newsPhoto" style="float:right; margin:0px 0px 10px 10px;"><?=$this->nPhoto?></a>
+<? endif; ?>
+<?= $this->html ?>
+<a class="back" href="<?=Helpers::back($this->curentNode->parentId, $this->curentPath)?>"> &laquo; Zpět </a>

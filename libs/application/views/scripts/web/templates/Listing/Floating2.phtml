@@ -1,0 +1,43 @@
+<div class="listing" <?=$this->listingExtra?>>	
+	<?
+	$input = (array) $this->inputGet;
+	
+	$start = max(0, $this->listingCurentPage - 7);
+	$end = min($this->ListingPagesCount, $this->listingCurentPage + 7);
+	$prev = max(0, $this->listingCurentPage-1);
+	$next = min($this->ListingPagesCount-1, $this->listingCurentPage+1);
+	
+	
+	if($this->ListingPagesCount > 1){
+		$input['page'] = $prev;
+		?>
+		<a href="<?=Utils::addUrlParams($this->curentPath, $input)?>" class="noU">«</a>&nbsp;
+		<?
+		if($start > 0){
+			?>
+			... 
+			<?
+		}
+		for ($i=$start; $i<$end; $i++){		
+			if($i != $this->listingCurentPage):
+				$input['page'] = $i;
+				$path = Utils::addUrlParams($this->curentPath, $input);
+			?>	
+			<a class="numb" href="<?=$path?>"><?=($i+1)?></a>
+			<? else: ?>
+			<strong class="numb"><?=($i+1)?></strong>		
+			<? endif;
+		}
+		if($end< $this->ListingPagesCount){
+			?>
+			... 
+			<?
+		}
+		
+		$input['page'] = $next;
+		?>
+		&nbsp;<a href="<?=Utils::addUrlParams($this->curentPath, $input)?>" class="noU">»</a>
+		<?
+	}
+	?>	
+</div>

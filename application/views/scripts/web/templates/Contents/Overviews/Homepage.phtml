@@ -1,0 +1,115 @@
+<?=$this->render('parts/banners.phtml');?>
+<? 
+		$params['onWeb'] = 1;     
+		$params['showFirstVariant'] = true;   
+		$params['joinOption'] = false;
+			$this->souvisejici = $this->mProducts->getProducts('soldPrice','asc',0, 8,$params);
+			if($this->souvisejici):?>    
+			<div class="best-sellers"> 
+			  <span class="hp-t"><strong>Nejprodávanější</strong> na našem e-shopu</span>
+          	   <?=$this->render('parts/alternativeProducts1.phtml'); ?>
+          	</div>
+          	   <?endif;?>   
+				   <div class="clear"></div> 
+				      <div class="articles">
+                        <?$inc = 0;    
+                        foreach ($this->sections as $node):    
+                        $cl = ''; 
+						//$clColor = $inc == 0 ? " bcg-pink" : " bcg-grey";
+						$clColor = " bcg-grey";   
+						if($inc == 2)        
+						$cl = 'art-it-np-r';
+                        if($inc == 0)    
+						$cl = 'art-it-np';?>       
+                        <?$cont = $node->getPublishedContent();     
+                       // pr($cont->getFilesNames('onHPImage'));
+						list($firstKey) = array_keys($cont->getFilesNames('onHPImage'));
+						$imP = '/data/sharedfiles'.content_SFSFile::getSFSFullPath($firstKey);?>   
+                        <div class="item <?=$cl?>">  
+                        	<div class="<?=$clColor?>">  
+                        		<img data-LL-src="<?=$imP?>" alt="<?=$node->title?>"/>   
+                        		<noscript><img src="<?=$imP?>" alt="<?=$node->title?>"/></noscript>     
+                            <div>                
+                                <h3><a href="<?=$node->path?>"><?=ucfirst($node->title);?></a></h3>      
+                                <p><?=helper_Frontend::reduceText(strip_tags($cont->getPropertyByName('html')->value),120, false, true);?>  
+                               	<a class="more" rel="nofollow" href="<?=$node->path?>">Více informací ></a></p>
+                            </div> 
+                        </div>
+                        </div> 
+                        <?$inc++;?>
+                        <?endforeach;?>    
+                    </div> 
+                        <div class="clear"></div>        
+                     <div id="pageTopText">   
+ 	<img data-LL-src="/images/Jura-world-of-coffee-visit-review-v2-min.jpg" alt="Jura - world of coffee"/>
+ 	<noscript><img src="/images/Jura-world-of-coffee-visit-review-v2-min.jpg" alt="Jura - world of coffee"/></noscript>  
+ 	<div> 
+ 	<h1><?=$this->pageTitleRaw?></h1>
+<?$this->schema = false;?>
+<?=$this->pageText ?>      
+</div>  
+</div>
+        <div class="clear"></div>   
+				   <?$countArticles = count($this->mVideos); ?>
+				   <?if($this->mVideos):?>
+				      <div class="articles b-a">  
+				      <span class="hp-t"><a href="/jura/klicove-technologie">Klíčové <strong>technologie</strong></a></span>  
+                        <?$inc = 0;   
+                        foreach ($this->mVideos as $node):
+							$noo = $this->tree->getNodeById($node['id']);
+							$article = $noo->getPublishedContent();   
+							$authorPhoto = helper_FrontEnd::getPhoto('photos', $article, $article->fotoShowName , $article->fotoShowName, 1);     
+                        $cl = 'art-it-in';  
+                        if($inc == 0)
+						$cl = 'art-it-np'; 
+						if($inc == 2)    
+						$cl = 'art-it-np-r';?>
+                        <div class="item <?=$cl?>">  
+                        	<div>      
+                        		 <div class="img">      
+                        		 	<a class="play" href="<?=$node['path']?>"></a> 
+                        		 	<a href="<?=$node['path']?>"> 
+                        		 		<img data-LL-src="<?=$authorPhoto['path']?>"  alt="<?=$node['title']?>"/>
+                        		 		<noscript><img src="<?=$authorPhoto['path']?>"  alt="<?=$node['title']?>"/></noscript>
+                        		 		</a></div> 
+                            <div>       
+                                <h3><a href="<?=$node['path']?>"><?=$node['title']?></a></h3>
+                                <?$text = strip_tags($node['html']);
+                                $text = trim($text);
+                             
+                                ?>       
+                                <p><?=helper_Frontend::reduceText($text, 80, false, true);?><a class="more" rel="nofollow" href="<?=$node['path']?>">Více informací ></a></p>
+                            </div>   
+                        </div>     
+                        </div>   
+                        <?$inc++;?> 
+                        <?endforeach;?>
+              </div>         
+     <?endif;?>
+				   <?$countArticles = count($this->articles); ?>
+				   <?if($this->articles):?>
+				      <div class="articles">     
+				      <span class="hp-t"><strong>Novinky</strong></span>  
+                        <?$inc = 0;   
+                        foreach ($this->articles as $node):  
+                        $cl = ''; 
+						//$clColor = $inc == 2 ? " bcg-pink" : " bcg-grey";
+						$clColor = " bcg-grey";   
+                        if($inc == 0)   
+						$cl = 'art-it-np'; 
+						if($inc == 2)        
+						$cl = 'art-it-np-r';?>      
+                        <?$cont = $node->getPublishedContent();?>
+                        <div class="item <?=$cl?>">  
+                        	<div class="<?=$clColor?> news">
+                            <div class="hp-n">         
+                                <h3><a href="<?=$node->path?>"><?=$node->title;?></a></h3>   
+                                <p><?=helper_Frontend::reduceText(strip_tags($cont->getPropertyByName('html')->value),80, false, true);?>  
+                               	<a class="more" rel="nofollow" href="<?=$node->path?>">Více informací ></a></p>
+                            </div>   
+                        </div>
+                         </div>  
+                        <?$inc++;?>
+                        <?endforeach;?>
+                    </div> 
+     <?endif;?>

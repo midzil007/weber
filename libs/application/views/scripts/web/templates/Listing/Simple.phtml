@@ -1,0 +1,16 @@
+<div class="listing" <?=$this->listingExtra?>>	
+	<?
+	if($this->ListingPagesCount > 1){
+		echo 'stránky: ';
+	
+		for ($i=0; $i<$this->ListingPagesCount; $i++){		
+			if($i != $this->listingCurentPage):
+			?>	
+			<a href="<?=$this->curentPath?>?page=<?=$i?>"><?=($i+1)?></a>
+			<? else: ?>
+			<strong><?=($i+1)?></strong>		
+			<? endif;
+		}
+	}
+	?>	
+</div>

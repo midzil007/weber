@@ -1,0 +1,31 @@
+.ui-menu .ui-menu-item {
+  position: relative;
+  margin: 0;
+  padding: 3px 1em 3px .4em;
+  cursor: pointer;
+  min-height: 0; }
+
+ul.ui-autocomplete {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: block;
+  outline: 0;
+  background-color: #fff; }
+  ul.ui-autocomplete li {
+    line-height: 1.2em;
+    height: 47px;
+    border-bottom: 1px solid #d8d8d8; }
+    ul.ui-autocomplete li img {
+      float: left;
+      width: auto;
+      margin: 6px 8px 4px 4px; }
+    ul.ui-autocomplete li .searchText {
+      white-space: normal;
+      font-weight: 700;
+      color: #af0917;
+      font-size: 14px; }
+    ul.ui-autocomplete li .searchPrice {
+      font-style: italic;
+      font-size: .8em;
+      font-weight: 400; }

@@ -1,0 +1,94 @@
+<?
+$rootEshop = $this->tree->getNodeById(3801);
+$menu = helper_FrontEnd::checkChildren($rootEshop->getChildren('FOLDER'))?>
+<ul id="menu">
+	<li class="fs14 padLeft10 fBold upperCase" id="eshop">E-SHOP</li>
+	<?foreach ($menu as $m):?>
+		<?$menu = helper_FrontEnd::checkChildren($m->getChildren('FOLDER'));
+		$c = $sel =  $re ='';
+		$pos = 'posRelative';
+		$active = helper_FrontEnd::isPathInActivePath($m->path, $this->curentPath);
+		if($active)
+		{
+			$re = 'id="menuLiActvie"';
+			$pos = 'posRelative';
+		}
+		
+		
+			$c = '<span class="arrowMenu noDisplay"></span>';
+		if($menu):
+			$sel = 'selection';
+		endif;
+		// active <li class="posRelative selection"><a class="fBoldupperCase padLeft10  fs14 i-table" href="/e-shop/plavky">Plavky</a></li>
+		//<li class="posRelative" id="menuLiActvie"><a class="fBold upperCase padLeft10 fs14 i-table" href="/e-shop/obleceni-a-doplnky">Oblečení a doplňky (A)</a>
+		//<span class="posAbsolute i-table" id="activeArrow"></span></li>
+		?>
+		<li class="<?=$pos?> <?=$sel?>" <?=$re?>><a class="fBold active padLeft10 upperCase fs14 i-table" href="<?=$m->path?>"><?=$m->title?><?=$c?></a>
+		<?if($m->path == $this->curentPath):?>
+			<span id="activeArrow" class="i-block posAbsolute"></span>
+		<?endif;?>	
+		<?if($menu && !$active):?>
+			<ul class="posAbsolute noDisplay" >
+					<?foreach ($menu as $sM):?>
+						<li><a href="<?=$sM->path?>" class="fBold fs14"><?=$sM->title?></a></li>
+					<?endforeach;?>
+				</ul>
+			
+		<?endif;
+		?>
+		</li>
+		<?if($active):?>
+			<li class="blockDisplay sub">
+				<ul id="subMenu" class="blockDisplay">
+				<?foreach ($menu as $sM):?>
+					<li class="blockDisplay"><a href="<?=$sM->path?>" class="fBold fs14"><?=$sM->title?></a></li>
+				<?endforeach;?>
+				</ul>
+			</li>
+		<?endif;?>
+	
+	<?endforeach;?>
+</ul>
+<div id="greyBox">
+	<span class="blockDisplay padLeft10" id="transPost"></span>
+	<p class="fs17"><strong>Online linka </strong><span class="colorGrey 
+
+fs14">8 - 18 hod<br />
+		(dotazy, konzultace)</span><br />
+		+420 <strong>605 727 860</strong></p>
+	<div class="spacer15"></div>	
+	<ul class="standartUL padLeft10">
+		<li class="fs14 fBold">Doprava po celé České republice ZDARMA!
+
+</li>
+		<li class="fs14 fBold">Vozíme 7 dní v týdnu!</li>
+		<li class="fs14 fBold">Oficiální česká distribuce!</li>
+	</ul>
+	<span class="blockDisplay padLeft10" id="leftVlajka"></span>
+	<ul class="standartUL padLeft10">
+		<li class="fs14 fBold">Svoz starého elektrospotřebiče!</li>
+	</ul>
+	<p class="colorGrey fs13 padLeft10">Prosím v případě zájmu o svoz uveďte 
+
+do poznámky při objednávce.</p>
+<div class="spacer15"></div>	
+<p class="colorGrey fs13 padLeft10">Tento obchod je součástí sítě 
+
+specializovaných ověřených obchodů specSHOP.cz:</p>
+<div id="preFB">
+<div id="fb1">
+<script type="text/javascript">(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 
+
+"//connect.facebook.net/cs_CZ/all.js#xfbml=1&amp;appId=175907572462977";
+  fjs.parentNode.insertBefore(js, fjs); 
+}(document, 'script', 'facebook-jssdk'));</script>
+<script type="text/javascript">
+	document.write(fb);
+	</script>
+	</div>
+</div>
+</div>

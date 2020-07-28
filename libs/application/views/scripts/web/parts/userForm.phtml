@@ -1,0 +1,155 @@
+<script type="text/javascript">
+            window.addEvents({'domready': function(){
+            	var Tips1 = new Tips($$('.Tips1'));}
+        }); 
+	</script>  
+<?if(!$this->eshop):?>
+	<h1 class="marLeft10">Vaše údaje</h1>
+	<?$text = 'Registovat';?>
+	<?$height = 130;
+	$minHeight = 'min-height:550px;'?>
+<?else:?>
+	<?$height = 130;?>
+	<div class="blockTitle">
+		<div class="fLeft"><p>Vaše údaje</p></div>
+		<div class="fRight">	
+                Nezapomeňte vyplnit IČ a DIČ, pokud jste firma.
+				</div>
+	</div>
+	<?$text= "Další krok";?>
+<?endif;?>
+
+		<div id="regInformation" style="margin-bottom:15px;<?=$minHeight?>">
+	<?if(!$this->eshop):?>
+		<form method="post">
+	<?endif;?> 
+		
+		<div class="rozbaleny">
+		 
+                <table class="reg">
+                  <tr>
+                  	<td class="regAling label">Jméno a příjmeni: <span class="cred">*</span></td>
+                  	<td><?=$this->formText('fullname', $this->input->fullname)?></td>
+                  	<?$this->input->email = !$this->input->email? '@':$this->input->email;?>
+                  	<td class="regAling labelr">E-mail: <span class="cred">*</span></td>
+                  	<td><?=$this->formText('email', $this->input->email)?></td>
+                  </tr>
+                  <?if(!$this->eshop):?>
+                  <tr>
+                  	<td class="regAling label">Heslo: <span class="cred">*</span></td>
+                  	<td><?=$this->formText('password', $this->input->password)?></td>
+                  	<td></td>
+                  	<td></td>
+                  </tr>
+                  <?endif;?>
+                  <tr>
+                  	<td class="regAling label">Telefonní číslo: <span class="cred">*</span></td>
+                  	<td>+420<?=$this->formText('telefon', $this->input->telefon, array('class'=>'phone', 'id'=>'ph1' ,'maxlength'=> '10'))?></td>
+                  	<td class="regAling labelr">Město: <span class="cred">*</span></td>
+                  	<td><?=$this->formText('mesto', $this->input->mesto)?></td>
+                  	
+                  </tr>
+				  <tr>
+                  	<td class="regAling label">Ulice a číslo popisné: <span class="cred">*</span></td>
+                  	<td><?=$this->formText('ulice', $this->input->ulice)?></td>
+                  	<td class="regAling labelr">PSČ: <span class="cred">*</span></td>
+                  	<td><?=$this->formText('psc', $this->input->psc,  array('maxlength'=> '6'))?></td>
+                  </tr>
+                  <tr>
+                  	<td class="regAling label">Firma:</td>
+                	<td class="inp"><?=$this->formText('firma', $this->input->firma)?></td>
+                	<td class="regAling labelr">IČO:</td>
+                	<td class="inp"><?=$this->formText('ico', $this->input->ico)?></td>
+                  </tr>
+                  <tr>
+                		<td class="regAling label">DIČ:</td>
+                		<td class="inp"><?=$this->formText('dic', $this->input->dic)?></td>
+                		<td></td>
+                		<td></td>
+                </tr>
+                </table>
+               </div>
+               <?if($this->eshop):?>
+                <div id="showAdress">
+                 <div class="regLeft"><a onclick="return showBlock('cmi', <?=$height?>)" href="#" class="zabaleny z2">Doručit na jinou adresu <span class="downArr">▼</span><span class="upArr">▲</span></a></div>
+                 
+                </div>
+                
+                <div id="cmi" class="rozCont">  
+                	<div class="rozbaleny r2">
+                	<table class="reg">
+                		<tr>   
+                			<td class="regAling label">Jméno a příjmeni:</td>
+                			<td class="inp"><?=$this->formText('ffullname', $this->input->ffullname)?></td>
+                			<td class="regAling labelr">Firma:</td>
+                			<td class="inp"><?=$this->formText('ffirma', $this->input->ffirma)?></td>
+                		</tr>
+                		<tr>
+                			<td class="regAling label">Ulice a číslo popisné:</td>
+                			<td class="inp"><?=$this->formText('fulice', $this->input->fulice)?></td>
+                			<td class="regAling labelr">Telefonní číslo:</td>
+                			<td class="inp">+420<?=$this->formText('ftelefon', $this->input->ftelefon, array('class'=>'phone', 'id'=>'ph2', 'maxlength'=> '10'))?></td>
+                		</tr>
+                		<tr>
+                			<td class="regAling label">PSČ:</td>
+                			<td class="inp"><?=$this->formText('fpsc', $this->input->fpsc, array('maxlength'=> '5'))?></td>
+                			<td class="regAling labelr">Město:</td>
+                			<td class="inp"><?=$this->formText('fMesto', $this->input->fMesto)?></td>
+                		</tr>
+                	</table> 
+                </div>
+                </div>    
+                 <div class="spacer10"></div>   
+                 <?endif;?>
+                <div class="regLeft fLeft"> 
+                <span class="cred">*</span> Položky označené hvězdičkou jsou povinné
+                	<div class="spacer10"></div>
+                <p class="agree">Stisknutím tlačítka "<?=$text?>" souhlasíte s <a href="/obchodni-podminky?pop=1" id="mb1" class="mbb" title="" rel="width:600,height:400">Obchodními a přepravními podmínkami</a>.</p>
+                 </div>    
+	  <?if(!$this->userFormEdit || !$this->webUser->logged):?>
+	<script type="text/javascript"> 	 
+		window.addEvent('domready', function(){
+			initMultiBox = new multiBox({
+				mbClass: '.mbb',//class you need to add links that you want to trigger multiBox with (remember and update CSS files)
+				container: $(document.body),
+				descClassName: 'multiBoxDesc',//the class name of the description divs
+				path: './Files/',//path to mp3 and flv players
+				useOverlay: true,//use a semi-transparent background. default: false;
+				maxSize: {w:600, h:400},//max dimensions (width,height) - set to null to disable resizing
+				addDownload: false,//do you want the files to be downloadable?
+				addRollover: false,//add rollover fade to each multibox link
+				addOverlayIcon: false,//adds overlay icons to images within multibox links
+				addChain: false,//cycle through all images fading them out then in
+				recalcTop: false,//subtract the height of controls panel from top position
+				addTips: false,//adds MooTools built in 'Tips' class to each element (see: http://mootools.net/docs/Plugins/Tips)
+				autoOpen: 0//to auto open a multiBox element on page load change to (1, 2, or 3 etc)
+			});
+		});
+	</script>
+			
+
+	<?endif;?>
+	</div>   
+	<?if(!$this->eshop):?>
+	<div class="fRight" style="padding:31px 13px 0 0">
+	<?$name = $this->userFormEdit?'change':'reg';?>
+		<button type="submit" name="register" id="<?=$name?>"> 
+		</button> 
+		</div>
+	<?else:?>
+		<div class="fRight">
+          	<div class="fLeft marRight10">
+          		<a class="butt fLeft" href="?step=0"><span class="red fBold butt i-block fs16 bgrNoRep">Zpět</span></a>
+          	</div>
+          	<div class="fLeft">   
+           		<button type="submit" class="butt fRight" name="step[3]"><span class="red fBold butt i-block fs16 bgrNoRep">Další krok</span></button>
+           	</div> 
+           	
+          </div>
+          <div class="spacer20"></div> 
+	<?endif;?>
+		<div class="spacer10"></div> 
+	<?= $this->render('parts/SecurityCode.phtml'); ?>	
+<?if(!$this->eshop):?>  	 
+	</form>
+<?endif;?>

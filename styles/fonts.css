@@ -1,0 +1,154 @@
+ 
+@font-face {
+    font-family: 'fira_sansregular';
+    src: url('../fonts/FiraSans-Regular-webfont.eot');
+    src: url('../fonts/FiraSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/FiraSans-Regular-webfont.woff2') format('woff2'),
+         url('../fonts/FiraSans-Regular-webfont.woff') format('woff'),
+         url('../fonts/FiraSans-Regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'fira_sanslight';
+    src: url('../fonts/FiraSans-Light-webfont.eot');
+    src: url('../fonts/FiraSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/FiraSans-Light-webfont.woff2') format('woff2'),
+         url('../fonts/FiraSans-Light-webfont.woff') format('woff'),
+         url('../fonts/FiraSans-Light-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'fira_sansmedium';
+    src: url('../fonts/FiraSans-Medium-webfont.eot');
+    src: url('../fonts/FiraSans-Medium-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/FiraSans-Medium-webfont.woff2') format('woff2'),
+         url('../fonts/FiraSans-Medium-webfont.woff') format('woff'),
+         url('../fonts/FiraSans-Medium-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+@font-face {
+    font-family: 'fira_sansbold';
+    src: url('../fonts/FiraSans-Bold-webfont.eot');
+    src: url('../fonts/FiraSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/FiraSans-Bold-webfont.woff2') format('woff2'),
+         url('../fonts/FiraSans-Bold-webfont.woff') format('woff'),
+         url('../fonts/FiraSans-Bold-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'fira_sansbold_italic';
+    src: url('../fonts/FiraSans-BoldItalic-webfont.eot');
+    src: url('../fonts/FiraSans-BoldItalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/FiraSans-BoldItalic-webfont.woff2') format('woff2'),
+         url('../fonts/FiraSans-BoldItalic-webfont.woff') format('woff'),
+         url('../fonts/FiraSans-BoldItalic-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'fira_sanslight';
+    src: url('../fonts/FiraSans-Light-webfont.eot');
+    src: url('../fonts/FiraSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/FiraSans-Light-webfont.woff2') format('woff2'),
+         url('../fonts/FiraSans-Light-webfont.woff') format('woff'),
+         url('../fonts/FiraSans-Light-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'fira_sanslight_italic';
+    src: url('../fonts/FiraSans-LightItalic-webfont.eot');
+    src: url('../fonts/FiraSans-LightItalic-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/FiraSans-LightItalic-webfont.woff2') format('woff2'),
+         url('../fonts/FiraSans-LightItalic-webfont.woff') format('woff'),
+         url('../fonts/FiraSans-LightItalic-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+@font-face {
+    font-family: 'uni_sans_heavy_caps';
+    src: url('../fonts/uni-sans.heavy-caps-webfont.eot');
+    src: url('../fonts/uni-sans.heavy-caps-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/uni-sans.heavy-caps-webfont.woff2') format('woff2'),
+         url('../fonts/uni-sans.heavy-caps-webfont.woff') format('woff'),
+         url('../fonts/uni-sans.heavy-caps-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'uni_sans_thin_caps';
+    src: url('../fonts/uni-sans.thin-caps-webfont.eot');
+    src: url('../fonts/uni-sans.thin-caps-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/uni-sans.thin-caps-webfont.woff2') format('woff2'),
+         url('../fonts/uni-sans.thin-caps-webfont.woff') format('woff'),
+         url('../fonts/uni-sans.thin-caps-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+@font-face {
+    font-family: 'fira_sans_otbold';
+    src: url('../fonts/FiraSansOT-Bold-webfont.eot');
+    src: url('../fonts/FiraSansOT-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/FiraSansOT-Bold-webfont.woff2') format('woff2'),
+         url('../fonts/FiraSansOT-Bold-webfont.woff') format('woff'),
+         url('../fonts/FiraSansOT-Bold-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'fira_sans_otregular';
+    src: url('../fonts/FiraSansOT-Regular-webfont.eot');
+    src: url('../fonts/FiraSansOT-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/FiraSansOT-Regular-webfont.woff2') format('woff2'),
+         url('../fonts/FiraSansOT-Regular-webfont.woff') format('woff'),
+         url('../fonts/FiraSansOT-Regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}

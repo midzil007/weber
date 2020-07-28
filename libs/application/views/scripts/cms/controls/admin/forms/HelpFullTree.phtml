@@ -1,0 +1,8 @@
+		
+		<div dojoType="dojo.data.ItemFileReadStore" jsId="helpFullStructure"
+			url="/data/tree/helpFull.json<?=$this->forceReload?>"></div>
+		<div dojoType="AdvancedTree" id="helpFulltree" jsId="helpFulltree"
+			store="helpFullStructure" query="{type:'TREE'}"
+			labelAttr="name" typeAttr="type" path="<?=$this->currentHelpPath?>">
+		</div>	
+		

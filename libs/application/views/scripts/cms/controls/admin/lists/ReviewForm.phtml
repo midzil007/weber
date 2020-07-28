@@ -1,0 +1,20 @@
+<table>
+	<tr>
+		<td class="formcell tkey tkey_form">Pro</td>
+		<td class="formcell"><?=$this->formTextarea('pros', array(), array('style' => 'width:350px; height:90px;'));?></td>
+		<td class="formcell tkey tkey_form">Proti</td>
+		<td class="formcell"><?=$this->formTextarea('cons', array(), array('style' => 'width:350px; height:90px;'));?></td>
+	</tr>
+	<tr>
+		<td class="formcell tkey tkey_form">Celkem</td>
+		<td class="formcell"><?=$this->formTextarea('summary', array(), array('style' => 'width:350px; height:90px;'));?></td>
+		<td class="formcell tkey tkey_form">Jméno</td>
+		<td class="formcell"><?=$this->formText('name', array(), array('style' => 'width:350px; height:90px;'));?></td>	
+	</tr> 
+	<tr>
+		<td class="formcell tkey tkey_form">Celkem známka</td>
+		<td class="formcell"><input type="number" name="rating" min="0" max="5"></td>
+		<td class="formcell tkey tkey_form">Datum hodnocení</td>
+		<td class="formcell"><?=$this->formTextDate('date',date("Y-m-d"),array())?></td>
+	</tr>
+</table>

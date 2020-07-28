@@ -1,0 +1,9 @@
+<?if($this->homePage)
+{
+	$link = "onClick=\"_gaq.push(['_trackEvent', 'HPBanner', 'Homepage', '".$this->escape($this->bFile)."']);\"";
+}
+?>
+ <div class="inner">
+                                     
+                                    </div> 
+                                    <a href="<?=$this->escape($this->bUrl)?>" <?=$link?> target="<?=$this->bTarget?>"><img src="<?=$this->escape($this->bFile)?>" alt="" /></a> 

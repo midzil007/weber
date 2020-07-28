@@ -1,0 +1,42 @@
+
+	<? 
+	 
+	 
+	//pr($this->content);
+	foreach ($this->content->properties as $property): 
+		//echo "zadek";
+		$mandatory = '';
+		//pr($property);
+		if(count($this->content->mandatoryExportItems)){
+			$mandatory = in_array($property->name, $this->content->mandatoryExportItems)?'<span class="cred tbold">&nbsp;!</span>':'';
+		}		
+		
+		if($this->registry->languages->isMultiLanguage){
+			$prefix = substr($property->name, 0 , 3);			
+			if($this->registry->languages->isDefaultLanguage){ // zorbzim ty bez prefixu
+				if(in_array($prefix, $this->registry->languages->languageFullPrefixMap)){
+					continue;
+				}
+				$name = $property->name;
+			} else { // zobrazitm ty se spravnym prefixem a ne ty co se prekladaji - ty jsou default
+				
+				// pr($property); 
+				if($property->translate || (in_array($prefix, $this->registry->languages->languageFullPrefixMap) && $prefix!=$this->registry->languages->fullLangPrefix)){
+					continue;
+				}
+				
+				$name =  substr($property->name, 3); 
+				if(!$this->cp_Translate[$name]){
+					$name =  $property->name;
+				}
+			}
+		} else {
+			$name = $property->name;
+		}
+		
+	?>    	
+		<tr>
+			<td class="formcell tkey"><?=$this->cp_Translate[$name] ?> <?=$mandatory?> </td>
+			<td class="formcell"><?=$property->renderAdmin($this);?></td>
+		</tr>
+	<? endforeach;?>

@@ -1,0 +1,75 @@
+<form method="post">
+<div id="tabsDetail" class="ui-tabs ui-widget ui-widget-content ui-corner-all"> 
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist"> 
+    	
+    	<li class="ui-state-default ui-corner-top ui-tabs-active ui-state-active"><a href="#tabsd-1">Ecommerce</a></li> 
+        <li class="ui-state-default ui-corner-top"><a href="#tabsd-2">Konverze</a></li>    
+        <li class="ui-state-default ui-corner-top"><a href="#tabsd-3">Remarketing</a></li>             
+    </ul>
+    <div id="tabsd-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="display: block;">
+    	<table class="normal">	
+		<tr>
+			<td class="formcell tkey tkey_form">Google ecommerce</td>
+			<?$sel['checked'] = $this->conSettings['ecommerce'] > 0 ? true:false;?>
+			<td class="formcell"><?=$this->formCheckbox('ecommerce', null , $sel)?></td>
+		</tr>
+		</table>
+    </div>
+    <div id="tabsd-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="display: none;">
+    <table class="normal">	
+		<tr>
+			<td class="formcell tkey tkey_form">Google konverze</td>
+			<td class="formcell"><?=$this->formText('googleConversion',$this->conSettings['googleConversion'], array(), array())?></td>
+		</tr>
+		
+		<tr>
+			<td class="formcell tkey tkey_form">Heureka konverze</td>
+			<?$sel['checked'] = $this->conSettings['heurekaConversion'] > 0 ? true:false;?>
+			<td class="formcell"><?=$this->formCheckbox('heurekaConversion', null , $sel)?></td>
+		</tr>
+		<tr>
+			<td class="formcell tkey tkey_form">Sklik konverze</td>
+			<td class="formcell"><?=$this->formText('SklikConversion', $this->conSettings['SklikConversion'], array(), array())?></td>
+			
+		</tr>
+		<tr>
+			<td class="formcell tkey tkey_form">Zbozi konverze</td>
+			<td class="formcell"><?=$this->formText('zboziConversion', $this->conSettings['zboziConversion'], array(), array())?></td>
+			
+		</tr>
+		<tr>
+			<td class="formcell tkey tkey_form">Facebook konverze</td>
+			<td class="formcell"><?=$this->formText('facebookConversion', $this->conSettings['facebookConversion'], array(), array())?></td>
+			
+		</tr>
+		
+	</table>    	
+    </div>
+    <div id="tabsd-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="display: none;">  
+    	<table>
+    		<tr>
+			<td class="formcell tkey tkey_form">Google remarketing</td>
+			<td class="formcell"><?=$this->formText('googleRemarketing',$this->conSettings['googleRemarketing'], array(), array())?></td>
+			
+		</tr>
+		<tr>
+			<td class="formcell tkey tkey_form">Facebook remarketing</td>
+			<td class="formcell"><?=$this->formText('seznamRemarketing', $this->conSettings['seznamRemarketing'], array(), array())?></td>
+			
+		</tr>
+		<tr>
+			<td class="formcell tkey tkey_form">Seznam remarketing</td>
+			<td class="formcell"><?=$this->formText('facebookRemarketing', $this->conSettings['facebookRemarketing'], array(), array())?></td>
+			
+		</tr>
+    	</table>
+    </div>
+</div> 
+<?=$this->render('controls/admin/forms/_Save.phtml'); ?>  
+<script type="text/javascript">
+    $(function() {
+        $( "#tabsDetail" ).tabs();
+    }); 
+    </script>
+    
+</form>

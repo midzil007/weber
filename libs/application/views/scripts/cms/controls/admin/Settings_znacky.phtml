@@ -1,0 +1,32 @@
+<table class="normal">	
+		<? 
+		$i = 1;
+		foreach($this->znacky as $znacka){ ?>
+	<tr>
+		<td>Název značky</td>
+		<td><?=$this->formText('znacka_'. $i .'_nazev')?></td>
+	</tr>
+		<?
+		$i++;
+		}?>
+	<?
+	for($j=0; $j<11 ; $j++)
+	{?>
+		<tbody class="znacky" <?=$display;?>>
+		<tr>
+			<td>Název značky <?=$i?></td>
+			<td><?=$this->formText('znacka_'. $i .'_nazev')?></td>
+		</tr>
+		</tbody>
+		<?
+		$i++;
+	}
+	?>
+		<tr><td><a onclick="return ShowNextOption('znacky');" ><img src="/images/add.png">Přidat značku</a></td></tr>
+		<tr>	
+			<td class="formcell" colspan="2">		
+				<?php echo $this->formSubmit('saveSetB', 'Uložit vše', array('class'=>'fsubmit', "onclick" => "return submitFormAjax('settingsForm', '".$this->url(array('controller' => 'settings','action' => 'saveAll'))."', 'settingsHome', 'tab-submit', '', 1 );", 'iconClass' => "noteIcon")) ?>											
+			</td>
+		</tr> 
+		
+	</table>

@@ -1,0 +1,4 @@
+	
+<form action="<?= $this->url(array('controller' => 'users','action' => 'axahome')) ?>" method="get">		
+	<?php echo $this->formSubmit('nu', 'Nový obchodní partner', array('class'=>'fsubmit', "onclick" => "return showModal('Nový obchodní partner','". $this->url(array('controller' => 'users','action' => 'newAxa')) ."', 0, 650);")) ?>	
+</form> 

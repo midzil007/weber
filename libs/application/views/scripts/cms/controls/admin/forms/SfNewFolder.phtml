@@ -1,0 +1,19 @@
+<div id="err_newFolderForm"></div>
+<form action="<?= $this->url(array('controller' => 'sf','action' => 'makefolder','filenode' => $this->filenode->nodeId)) ?>" method="get" id="newFolderForm">
+	<table class="modalTable">			
+		<tr>
+			<td class="formcell tkey" width="100"><b>Podadresář</b></td>
+			<td class="formcell"><?php echo $this->formText('foldername','', array('class'=>'ftext')) ?></td>
+		</tr>
+		<tr>	
+			<td class="formcell">Popis</td>
+			<td class="formcell"><?php echo $this->formTextarea('folder_descr','', array('class'=>'ftext')) ?></td>
+		<tr>
+		<tr>
+			<td colspan="2" class="formcell">
+			<?php echo $this->formSubmit('saveFolderB', 'Vytvořit', array('class'=>'fsubmit', "onclick" => "return submitFormAjax('newFolderForm', '".$this->url(array('controller' => 'sf','action' => 'makefolder', 'filenode' => $this->filenode->nodeId))."', 'mainTreePane' );", 'iconClass' => "noteIcon")) ?>
+			</td>
+		</tr>
+	</table>
+</form>
+

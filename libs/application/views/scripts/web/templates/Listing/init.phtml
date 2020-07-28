@@ -1,0 +1,8 @@
+<?
+$this->listingPerPage = $this->listingPerPage?$this->listingPerPage:8;
+$this->listingCurentPage = $this->inputGet->page;
+$this->listingCurentPage = $this->listingCurentPage?$this->listingCurentPage:0;
+$this->listingNextPage = $this->listingCurentPage + 1;
+$this->ListingItemsCount = count($this->children);
+$this->ListingPagesCount = ceil($this->ListingItemsCount / $this->listingPerPage);
+?>

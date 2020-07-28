@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Náhled</title>
+<style type="text/css" media="all">		
+	body {
+		margin: 0px;
+		padding: 0px 0px;
+		background: #ffffff;
+		font-family: Arial, sans-serif;
+		font-size: 11px;
+		color: #708490;
+	}	
+	a {
+		color: #0f4096;
+	}
+	
+	h1, h2, h3, h4 h5, h6 {
+		color:#0f4096;
+		padding:0px;
+	}
+	
+	h1 {
+		font-size: 14px;
+		margin: 0 0 0.5em 0;
+		color:#0f4096;
+		font-weight:bold;
+	}
+	
+	h2 {
+		font-size: 12px;
+		margin: 0.1em 0 0.1em 0;
+	}	
+	
+	h3 {
+		font-size: 11px;
+		margin: 0 0 0.2em 0;
+	}	
+	* table { font-size: 11px; color: #708490; }
+	* table td { font-size: 11px; color: #708490; vertical-align:top; padding:4px;}
+	
+	#nav{
+		background:#dfeeff;
+		text-align:center;
+		padding:5px;		
+		border-bottom:1px solid #5ca9ff;	}
+	
+	#mail{
+		padding:5px;
+	}
+</style>
+</head>
+<body>
+	<form method="GET" name="filtr" id="filtr">
+		<div id="nav">
+			<a onclick="return prev();" href="#">&laquo; předchozí</a> &nbsp; 
+			<?=$this->formSelect('userEmail', $this->inputGet->userEmail, array('id' => 'userEmail', 'style' => 'width:180px;', 'onChange' => 'document.filtr.submit();'), $this->emails); ?>  &nbsp; 
+			<a onclick="return next();" href="#">další &raquo;</a> 
+		</div>
+	</form>
+	<div>&nbsp;</div>
+	<div id="mail">
+	<?=$this->mail  ?>
+	</div>
+</body>
+<script type="text/javascript">
+	<!--	
+	var si = document.getElementById('userEmail').selectedIndex;
+
+	function prev(){
+		if(si){
+			document.getElementById('userEmail').selectedIndex = si - 1;
+		}
+		document.getElementById('filtr').submit();
+		return false;
+	}
+	
+	function next(){		
+		if(si < (document.getElementById('userEmail').length - 1)){
+			document.getElementById('userEmail').selectedIndex = si + 1;
+		}
+		document.getElementById('filtr').submit();
+		return false;
+	}
+	-->
+</script>
+</html>

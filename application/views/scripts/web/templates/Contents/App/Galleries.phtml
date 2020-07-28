@@ -1,0 +1,29 @@
+<?
+$mGallery = new module_Gallery();
+$galleries = $mGallery->getGalleries();
+foreach($galleries as $item):
+?>
+<div class="pGaleries">
+<h2><?=$item['title']?></h2>
+<?
+$z=0;
+foreach ($item['photos'] as $photos): 
+
+$z++; 
+?>
+
+<div class="gimg ">  
+	<a target="_blank" href="<?=$photos['fullPath']?>" class="mbb" id="mb<?=$z?>" rel=""><img  alt=" " src="<?=$photos['path']?>"></a>
+	<div class="multiBoxDesc mbb<?=$z?>" style="display: none;"><?=$photos['name']?>?></div>	
+</div>   
+<?endforeach;?>
+</div>
+<?endforeach;?>   
+  
+<script type="text/javascript">  
+	var box = {};   
+	window.addEvent('domready', function(){
+		box = new multiBox('mbb', {descClassName: 'multiBoxDesc', useOverlay: true});  
+	});   
+</script>  
+

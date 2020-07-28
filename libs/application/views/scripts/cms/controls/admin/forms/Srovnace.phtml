@@ -1,0 +1,51 @@
+<?list($heureka,$zbozi,$merchant) = $this->content->showSrovnavace()?> 
+<table id="srovnace">
+	<tr>
+		<td>Kategorie na heureka.cz</td>
+		<td><select data-placeholder="Vyberte možnost" name="heureka[]" style="width:400px;" multiple class="chosen-select" >
+ 		<option value=""></option>
+ 		<?foreach($heureka as $item):?>
+ 			<?pr($item)?>
+            <option  <?=in_array($item['id'],$this->valheureka) ? 'selected' : ''?> value="<?=$item['id']?>" class="level<?=$item['level']?>"><?=$item['title']?></option>
+         <?endforeach;?>       
+		</select>
+		</td>
+	</tr>
+	<tr>
+		<td>Kategorie na zbozi.cz</td>
+		<td><select data-placeholder="Vyberte možnost" name="zbozicz[]" style="width:400px;" multiple class="chosen-select" tabindex="7">
+ 		<option value=""></option>
+ 		<?foreach($zbozi as $item):?>
+            <option <?=in_array($item['id'],$this->valzbozicz) ? 'selected' : ''?> value="<?=$item['id']?>" class="level<?=$item['level']?>"><?=$item['title']?></option>
+         <?endforeach;?>       
+		</select>
+		<td>
+	</tr>
+	<tr>
+		<td>Kategorie na google Merchant</td>
+		<td><select data-placeholder="Vyberte možnost" name="merchant[]" style="width:400px;" multiple class="chosen-select" >
+ 		<option value=""></option>
+ 		<?foreach($merchant as $item):?>
+            <option <?=in_array($item['id'],$this->valmerchant) ? 'selected' : ''?> value="<?=$item['id']?>" class="level<?=$item['level']?>"><?=$item['title']?></option>
+         <?endforeach;?>       
+		</select>
+		</td>
+    </tr>      
+</table>
+<link rel="stylesheet" href="/admin/css/chosen/chosen.css">	
+	<script src="/admin/js/chosen/chosen.jquery.js" type="text/javascript"></script>
+	<script src="/admin/js/chosen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
+
+
+ <script type="text/javascript">
+    var config = {
+      '.chosen-select'           : {},
+      '.chosen-select-deselect'  : {allow_single_deselect:true},
+      '.chosen-select-no-single' : {disable_search_threshold:10},
+      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+      '.chosen-select-width'     : {width:"95%"}
+    }
+    for (var selector in config) {
+      $(selector).chosen(config[selector]);
+    }
+  </script>

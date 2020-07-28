@@ -1,0 +1,109 @@
+<?
+function drawArticle($view, $articleNode,$counter){
+	
+	$article = $articleNode->getPublishedContent();
+	$url = helper_FrontEnd::getPath($view, $articleNode->path); 	
+	$date = Utils::formatDate($article->getPropertyValue('dateShow')); 
+	$count = 120;   
+	
+	$html = $article->getPropertyValue('html');
+    
+	$authorPhoto = helper_FrontEnd::getPhoto('photo', $article, $article->fotoThumbName , $article->fotoShowName, 1);  
+    if($view->counts == $counter){
+    	$class	=' lst';
+    }    
+    
+    $pretext = $article->getPropertyValue('pretext');
+    
+	$pretext = str_replace('<p>', '', $pretext); 
+	$pretext = str_replace('</p>', '', $pretext);
+	
+    $objem = $article->getPropertyValue('objem'); 
+    $hmotnost = $article->getPropertyValue('hmotnost');
+    $hrubost = $article->getPropertyValue('hrubost');
+    $teplota = $article->getPropertyValue('teplota');
+    $extrakce = $article->getPropertyValue('extrakce');
+     
+	?>   
+	    
+		 <div class="itemPripravy<?=$class?>"> 
+              <p><strong><?=$articleNode->title;?>:</strong> <?=$pretext;?></p>
+              
+              
+				<div class="img"><img src="<?=$authorPhoto['path']?>"  alt="<?=$authorPhoto['name']?>"/></div>	
+			
+              <table class="nice">    
+				  <tr><td>objem šálku:</td><td><?=$objem?></td></tr>
+				  <tr><td>hmotnost kávy:</td><td><?=$hmotnost?></td></tr>
+				  <tr><td>hrubost mletí:</td><td><?=$hrubost?></td></tr>
+				  <tr><td>teplota vody:</td><td><?=$teplota?></td></tr>
+				  <tr><td>doba extrakce:</td><td><?=$extrakce?></td></tr>
+			</table> 
+			   
+			
+			<?=$html;?>  
+		</div>   
+	<?
+} 
+$this->disableH1 = true; 
+?>   
+
+<div id="leftPage"> 
+	<h1 class="h1"><?=$this->pageTitleRaw?></h1> 
+	<?=$this->pageText?>
+	
+	<h2 class="h1">Postup přípravy pomocí jednotlivých přístrojů</h2>
+	<div class="articles"> 
+		<?     
+		$x = 0;
+		foreach ($this->children as $child):   
+			$x++; 
+			drawArticle($this, $child,$x); 
+		endforeach; 
+		?> 
+		    
+	</div> 
+</div> 
+
+<div id="rightPage">
+	<h3 class="h1">Kávové recepty</h3>
+	<? foreach ($this->recepty as $r):
+	$articleNode =$this->tree->getNodeById($r['id']);
+	$article = $articleNode->getPublishedContent(); 
+	$article->createFiles(); 
+	$url = helper_FrontEnd::getPath($view, $articleNode->path); 	
+	$html = helper_FrontEnd::reduceText(strip_tags($article->getPropertyValue('html')), 375, false, true);	 
+	$authorPhoto = helper_FrontEnd::getPhoto('photo', $article, $article->imageName , $article->imageNameC, 1);  
+	 
+	?> 
+	<div class="tipp"> 
+		<big class="head"><?=$articleNode->title?></big>
+		<a href="<?=$url?>"><img src="<?=$authorPhoto['path']?>"  alt="<?=$authorPhoto['name']?>"/></a> 
+		<p><?=$html;?></p>
+		<a href="<?=$url?>" class="btn2">více zde</a>  
+		<div class="clear"></div> 
+	</div>
+	<? endforeach;?>
+	<div class="spacer20"></div>
+	<div class="spacer10"></div>
+	<h3 class="h1">Kávové tipy</h3>  
+	<? foreach ($this->tipy as $r):
+		$articleNode =$this->tree->getNodeById($r['id']);
+		$article = $articleNode->getPublishedContent(); 
+		$article->createFiles(); 
+		$url = helper_FrontEnd::getPath($view, $articleNode->path); 	
+		$html = helper_FrontEnd::reduceText(strip_tags($article->getPropertyValue('html')), 375, false, true);	 
+		$authorPhoto = helper_FrontEnd::getPhoto('photo', $article, $article->imageName , $article->imageNameC, 1);  
+		 
+		?> 
+		<div class="tipp"> 
+			<big class="head"><?=$articleNode->title?></big>
+			<a href="<?=$url?>"><img src="<?=$authorPhoto['path']?>"  alt="<?=$authorPhoto['name']?>"/></a> 
+			<p><?=$html;?></p>
+			<a href="<?=$url?>" class="btn2">více zde</a>  
+		</div>
+		<div class="clear"></div>
+	<? endforeach;?>
+</div>
+
+<div class="spacer10"> </div>

@@ -1,0 +1,28 @@
+<table>	
+	<tr>
+		<td class="formcell tkey" style="width:160px;">Cesta</td>
+		<td class="formcell">
+			<?php echo $this->formText('nodePath',$this->node->path, array('class'=>'ftext')) ?>
+			 <a class="helpico" href="#" title="Cesta nesmí obsahovat žádné speciální znaky ani koncovku .html a podobně.">&nbsp;</a>
+		</td>
+	</tr>	
+	<tr>
+		<td class="formcell">Titulek stránky = H1</td>
+		<td class="formcell">
+			<?php echo $this->formText('pageSEOTitle',$this->node->getPropertyValue('pageTitle'), array('class'=>'ftext')) ?>
+			<a class="helpico" href="#" title="Text v H1 a v názvu stránky">&nbsp;</a>
+		</td>
+	</tr>
+	<tr>
+		<td class="formcell">Klíčová slova</td>
+		<td class="formcell">
+			<?php echo $this->formTextarea('pageKw',$this->node->getPropertyValue('pageKw'), array('class'=>'ftext')) ?>
+			<a class="helpico" href="#" title="Zadávejte oddělé čárkami">&nbsp;</a>	
+		</td>
+	</tr>
+	<tr>
+		<td class="formcell">
+		Popis stránky</td>
+		<td class="formcell"><?php echo $this->formTextarea('pageDescription',$this->node->getPropertyValue('pageDescription'), array('class'=>'ftext')) ?></td>
+	</tr>	
+</table>

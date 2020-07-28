@@ -1,0 +1,49 @@
+<? 
+
+if (isset($this->input->odeslat)){
+	if($this->input->email55){
+	$newsOnEmail = new module_NewsOnEmail();	
+	$state = $newsOnEmail->addReceiver("", "", $this->input->email55);
+	if ($state){
+		$mess = "Děkujeme, nyní Vám budeme pravidelně zasílat novinky na email.";
+	}
+	else
+	{
+		$mess = "Je nám líto, ale zadaný email je již registrován.";
+	}
+	}
+	else{
+		$state=0;
+		$mess="Nezadali jste žádnou emailovou adresu.";
+	}
+	Helpers::addMessage($state,$mess, $this);	 	 
+}
+?>
+
+<?php if(count($this->messages)): ?>
+<div class="spacer20">&nbsp;</div>
+ <?= $this->render('parts/messages.phtml'); ?>    
+<?php endif; ?>
+
+
+<?if (!isset($this->input->email55) || (!$state)){
+	?>
+<?if ($this->path=="/novinky-na-email"):?>
+<? $class =' class="news"'?>
+<?endif;?>
+
+<h2>Novinky a akce na email?</h2>
+          <p> Chte být mezi prvními kdo se dozví o našich akčních nabídkách a výprodejových akcích? </p>
+          <p>Váš email:</p>
+
+          
+   <div <?=$class?>>     
+<form method="post" > 
+	<fieldset>			
+			<input type="text" name="email" value="<?=$this->input->email5555?>"  />
+			<input type="submit" name="odeslat" class="" value="">
+	</fieldset>
+</form>
+</div>
+<?};?>
+

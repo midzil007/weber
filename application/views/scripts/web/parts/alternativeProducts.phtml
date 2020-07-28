@@ -1,0 +1,104 @@
+		<?if($_SERVER['REQUEST_URI'] == '/'){
+			$width = 'style="width:230px!important;"';
+		}?>
+		<? if(is_array($this->souvisejici)):?>
+              <div id="productInner">
+               <?
+				$x = 0;
+               foreach ($this->souvisejici as $alt): 
+               		if(is_object($alt))
+               		{
+               			$child = $alt;
+               		}
+               		else{ 
+               			$child = $this->tree->getNodeById($alt['id']);
+               		}
+	              	
+	              	if(!$child){ continue; }
+	              	
+	              	$x++;
+	              	// if($x > 3){ break; }   
+	              	 
+	              	$c = $child->getTheRightContent(); 
+	              	if(!$c){ continue; } 
+	              	
+					$akce = $c->getPropertyValue('akce');
+					$html = $c->getPropertyValue('html');  
+					$akce = (helper_MultiSelect::getMultiSelectValues($akce)); 
+					$isVyprodej = $isAkce = $isNovinka = false;
+            		$varianta = $this->mVarianta->getVariantsByIdProduct($c->id,true,true);
+            		if(in_array('1', $akce)){
+            			$isAkce = true;
+            		}
+            		if(in_array('2', $akce)){
+            			$isNovinka = true;
+            		}
+            		if(in_array('3', $akce)){ 
+            			$isTip = true;
+            		}
+					if(in_array('5', $akce)){ 
+            			$isVyprodej = true;
+            		}
+					$photos = $this->mVarianta->getResizedPhotos($varianta['obrazky']);
+					$p = helper_FrontEnd::getFirstPhoto($photos,'pShow2' , false);
+
+	            		if(count($p)){  
+	            			$img = $p['path'];  
+	            		} else { 
+	            			$img = '/images/icoFolderSmall.png';
+	            		} 
+	            		$price  = $varianta['price'];  
+	            		$price2  =$varianta['price2'];
+	            		$dif = $price2 - $price;
+         				$p = $price2/100;
+         				$dif= round($dif/$p, 1);
+         				$this->difp = '';  
+         				$this->difp =$this->difp = $dif ? '-'.$dif.' % ':'';
+						$skladem = $varianta['skladem'];
+						$disabled ='';
+						if($skladem == 3){
+							$disabled = 'disabled';
+						}   
+	            		$url = $c->getDetailUrl($this, $child);
+	            		  if($this->onHp){
+	            			 $home = "onClick=\"_gaq.push(['_trackEvent', 'Nejprodávanější', 'Homepage', '$n']);\"";
+	            		}  
+	              ?>
+              <div class="productInnerItem" <?=$width?>> 
+                <div class="img"><a href="<?=$url?>"><img src="<?=$img?>" alt=" " /></a></div>
+                  <div class="clear"></div>     
+                <div class="titleAlt"><h3 class="cufon"><a href="<?=$url?>"><?=helper_Frontend::reduceText($child->title,26, false, true);?></a></h3></div> 
+                  <div class="clear"></div>        
+                  <div class="price">  
+                  <? $price2 = $price2? $price2.' Kč' : ' ';?>     
+                  <?if($prsaasasice2>0):?>        
+                  <p class="tempPrice">  
+                  	<span class="overLine"><?=helper_FrontEnd::price($price2)?></span> <span class="green"><?=$this->difp?' Sleva':''?><?=$this->difp?></span></p>
+                  	<?endif?>
+                  <p><span><?=helper_FrontEnd::price($price)?> Kč</span> s DPH</p>
+                  </div>
+                  <? if($this->onHp):?>   
+                  	<div class="btn">  
+		               <a href="<?=$child->path?> " <?=$disabled?> class="btnDetail"></a>  
+                	</div>
+                	<? else:?>
+                	<div class=""> 
+                                	<?$confirm = $this->tree->getNodeById(6553);?>
+                                	
+									<form action="<?=$confirm->path?>" method="post">
+ 
+            						<input type="hidden" name="count" value="1"> 
+            						<input type="hidden" name="urlLsProduct" value="<?=$this->productPath?>">
+            						<input type="hidden" name="pid" value="<?=$child->nodeId?>" />
+            						<input type="hidden" name="action" value="buy" /> 
+            						<input type="hidden" name="variantId" id="sizeSend" value="<?=$varianta['id']?>">  
+            						<?if($c->state != 'ARCHIVED'):?>  
+                					<button type="submit" <?=$home?> rel="Vložit zboží do košíku" class="addItem3 botip">
+                						<span class="minit-buy"></span><span class="minit-buy-text">Koupit</span></button>  
+                					<?endif?> 
+							</form></div>
+                	<? endif;?>  
+              </div>   
+              <? endforeach;?> 
+              </div>
+              <? endif; ?>

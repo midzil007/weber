@@ -1,0 +1,288 @@
+<?
+	if($this->showButton->title){?>
+		<a id="nb" href="<?=$this->showButton->link?>" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ui-icon-plusthick"></span><span class="ui-button-text"><?=$this->showButton->title?></span></a>
+	<?}
+	if(!$view->flexiLoaded){
+		$view->flexiLoaded = true;  
+		?>
+		<link rel="stylesheet" type="text/css" href="/admin/css/flexigrid.css"> 
+		<script type="text/javascript" src="/admin/js/flexigrid.js"></script>
+		<?
+	} 
+	
+	if(!$this->filterIdAdd){
+		$this->filterIdAdd = '';
+	}
+	
+	if(!$this->disableForm):?>
+		<form id="fmFilter<?=$this->filterIdAdd?>">
+	<?endif;?>  
+		 
+	<input type="hidden" name="tableaction" id="tableaction" value="" />  
+	<table class="ft">
+	<tr><td>
+	<div class="flexigrid"> 
+	  <?=$this->render($this->renderFilter)?>
+	</div>
+	<table id="<?=$this->tableId?>" style="display:none"></table>    
+	</td></tr></table>
+
+	<script type="text/javascript">
+
+	$("#<?=$this->tableId?>").flexigrid({   
+		url: '<?=$this->rUrul?>',  
+		dataType: 'json',  
+		 onSubmit : function(){    
+			<?if(!$this->disableForm):?> 
+			$('#<?=$this->tableId?>').flexOptions({params: [{name:'callId', value:'<?=$this->tableId?>'}].concat($('#fmFilter<?=$this->filterIdAdd?>').serializeArray())});
+			<?else:?>
+			$('#<?=$this->tableId?>').flexOptions({params: [{name:'callId', value:'<?=$this->tableId?>'}].concat($('#PageForm').serializeArray())});
+	        <?endif;?>
+	        return true;   
+	    },   
+	    onSuccess: function(){ 
+
+	    	$('#<?=$this->tableId?> tr').click(function(event){ 
+		    	
+	    	});  
+			<? if($this->hasDD): ?>
+	    	$( "#<?=$this->tableId?>" ).sortable({
+	    		axis: 'y', 
+	    		items: "tr",
+	    		revert: 100,    
+	    		helper : 'clone',    
+	    		update: function(event, ui) { 
+	                var newOrder = $(this).sortable('toArray').toString();
+	                $.get('<?=$this->sortUrl?>', {sort:newOrder});
+	                <? if($this->refreshTree): ?>
+	                setTimeout(function() { 
+	                	$("#<?=$this->refreshTree?>").jstree("refresh"); 
+	                	}, 500);  
+	                <? endif; ?>   
+	            }  
+		    	});  
+	    	<? endif; ?>   
+	        return true;    
+	    },   
+		colModel : [
+		 	<?   
+		 	$i = 0;  
+		 	$hc = count($this->tableHeaders);
+		 	foreach ($this->tableHeaders as $header):
+		 	$i++; 
+		 	?> 
+			{display: '<?=$header[0]?>', name : '<?=$header[1]?>', width : setWidth(<?=$header[2]?>), sortable : <?=$header[3]?>, align: '<?=$header[4]?>'}<?=($hc>$i?',':'')?>
+			<? endforeach; ?>
+			],  
+		searchitems : [
+			<?
+		 	$i = 0;
+		 	$hc = count($this->tableSearchColls);
+		 	foreach ($this->tableSearchColls as $sc):
+		 	$i++;
+		 	?>
+			{display: '<?=$sc[0]?>', name : '<?=$sc[1]?>', isdefault : <?=$sc[2]?>}<?=($hc>$i?',':'')?>
+			<? endforeach; ?>  
+			], 
+		<? if(count($this->tableButtons)):?>  
+		buttons : [
+	   		<?
+		 	$i = 0;  
+		 	$hc = count($this->tableButtons);
+		 	foreach ($this->tableButtons as $btn):  
+		 	$i++;  
+		 	?>  
+			{name: '<?=$btn[0]?>', bclass : '<?=$btn[1]?>', <?=$btn[2]?> : <?=$btn[3]?>},
+			<? endforeach; ?>
+	   		{separator: true}
+	   		],  
+	   	<? endif;?>
+		sortname: "<?=$this->defaultSort ? $this->defaultSort: 'title' ?>",  
+		sortorder: "<?=$this->defaultSortType ? $this->defaultSortType: 'asc' ?>", 
+		usepager: true,
+		title: '<?=$this->tableTitle?>', 
+		useRp: true,
+		rp: <?=$this->itemsPerPage?>,
+		rpOptions: [<?=$this->itemsPerPageOptions?>],
+		pagestat: 'Zobrazeno {from} až {to} z {total} položek',
+		pagetext: 'Stránka',
+		outof: 'z', 
+		nomsg: 'Žádné záznamy',
+		findtext: 'Hledat',
+		procmsg: 'Nahrávání dat ...',
+		showTableToggleBtn: true,
+		width: '<?=$this->tableWidth?>', 
+		height: setHeight('<?=$this->tableHeight?>')
+	});  
+
+
+	
+	function setWidth(w){ 
+		<?    
+		$w = 0;
+		$padding = 0;
+	 	foreach ($this->tableHeaders as $header){
+	 		$w += ($header[2] + 10);
+	 		$padding += 10;
+	 	} 
+	 	?> 
+	 	var dgw = $(".ft td").width(); 
+	 	var ww = <?=$w;?>;   
+		return Math.round(w * (dgw/ww));  
+	}
+
+	function setHeight(h){
+		nh = $( window ).height() - 380; 
+		return nh; 
+	} 
+	
+	function deletep(com, grid) {    
+		if(confirm('Opravdu smazat?')){   
+			$('#tableaction').val('delete');
+			$('#<?=$this->tableId?>').flexReload();  
+			<? if($this->refreshTree): ?>
+	        setTimeout(function() { 
+	        	$("#<?=$this->refreshTree?>").jstree("refresh"); 
+	        	}, 500);  
+	        <? endif; ?>   
+	        $('#tableaction').val(''); 
+	    }
+	} 
+	
+	function itemDelete(com, grid) {    
+		if(confirm('Opravdu smazat?')){   
+			$('#tableaction').val('itemDelete');
+			$('#<?=$this->tableId?>').flexReload();  
+			<? if($this->refreshTree): ?>
+	        setTimeout(function() { 
+	        	$("#<?=$this->refreshTree?>").jstree("refresh"); 
+	        	}, 500);  
+	        <? endif; ?>   
+	        $('#tableaction').val(''); 
+	    }
+	} 
+
+	function published(com, grid) {      
+			$('#tableaction').val('published');
+			$('#<?=$this->tableId?>').flexReload();  
+			<? if($this->refreshTree): ?>
+	        setTimeout(function() { 
+	        	$("#<?=$this->refreshTree?>").jstree("refresh"); 
+	        	}, 500);  
+	        <? endif; ?>   
+	        $('#tableaction').val(''); 
+	} 
+	
+		function archivated(com, grid) {    
+			$('#tableaction').val('archivated');
+			$('#<?=$this->tableId?>').flexReload();  
+			<? if($this->refreshTree): ?>
+	        setTimeout(function() { 
+	        	$("#<?=$this->refreshTree?>").jstree("refresh"); 
+	        	}, 500);  
+	        <? endif; ?>   
+	        $('#tableaction').val(''); 
+	} 
+
+	function selectall(com, grid) {   
+		window.checked = !window.checked;
+		$("input:checkbox", $('#<?=$this->tableId?>')).attr("checked", window.checked); 
+	}  
+
+	function deletev(com, grid) {   
+		if(confirm('Opravdu smazat?')){
+			$('#tableaction').val('voucherDelete');
+			$('#<?=$this->tableId?>').flexReload();  
+			<? if($this->refreshTree): ?>
+	        setTimeout(function() { 
+	        	$("#<?=$this->refreshTree?>").jstree("refresh"); 
+	        	}, 500);  
+	        <? endif; ?>    
+	    }
+	}
+function rePrice(element,url){
+	str = element;
+	$('.removeIcon').addClass('nodisplay');
+	variantIdDb = str.replace("rePrice", "");
+	
+	priceValue = $('#'+element).val();
+	jQuery.ajax({
+    	url: url,
+    	type: "POST",
+    	data: {price:priceValue, variantId: variantIdDb},
+    	cache: false,  
+    	success: function(vracenaData) {
+    		$('#reP'+variantIdDb).removeClass('nodisplay');
+    }
+});
+}  
+
+function sendValue(element,variantId,url){
+	data =element.value;   
+	jQuery.ajax({
+    	url: url,  
+    	type: "POST",          
+    	data: {data:data,variantId: variantId},
+    	cache: false,  
+    	success: function(vracenaData) {
+    }  
+});
+}
+
+
+  
+function rePur(element,url){
+	str = element;
+	$('.removeIcon').addClass('nodisplay');
+	variantIdDb = str.replace("rePur", "");
+	priceValue = $('#'+element).val();    
+	jQuery.ajax({
+    	url: url,
+    	type: "POST",
+    	data: {price:priceValue, variantId: variantIdDb},
+    	cache: false,
+    	success: function(vracenaData) {
+    		$('#reP'+variantIdDb).removeClass('nodisplay');
+    }
+});
+}
+
+
+function reEAN(element,url){
+	str = element;
+	$('.removeIcon').addClass('nodisplay');
+	variantIdDb = str.replace("reEAN", "");
+	priceValue = $('#'+element).val();    
+	jQuery.ajax({       
+    	url: url,
+    	type: "POST",
+    	data: {price:priceValue, variantId: variantIdDb},
+    	cache: false,
+    	success: function(vracenaData) {
+    		$('#reP'+variantIdDb).removeClass('nodisplay');
+    }
+});
+}
+
+
+function reOrder(element,url){
+	str = element;
+	$('.removeIcon').addClass('nodisplay');
+	variantIdDb = str.replace("reOrder", "");
+	priceValue = $('#'+element).val();
+	jQuery.ajax({
+    	url: url,
+    	type: "POST",
+    	data: {poradi:priceValue, id: variantIdDb},
+    	cache: false,
+    	success: function(vracenaData) {
+    	$('#reOrderShow'+variantIdDb).removeClass('nodisplay');
+    }
+});
+
+}
+	</script> 
+	
+	<?if(!$this->disableForm):?>
+		</form> 
+	<?endif;?>

@@ -1,0 +1,23 @@
+<?
+$i = $this->kident; 
+$j = $this->vident; 
+?> 
+		 
+			<tr id="kBody_<?=$i?><?=$j?>" class="optionInner_<?=$i?>" prop="<?=$i?><?=$j?>">
+				<td><span class="f14">Název:</span></td>
+				<td><?=$this->formText('k_' . $i . '-n_' . $j, $this->kategorie[$i - 1]['options'][$j-1]['title'])?>
+				
+				<?=$this->formHidden('k_'. $i. '-id_' . $j, $this->kategorie[$i - 1]['options'][$j-1]['id']);?>     
+				</td> 
+				<td><a <?= $j>3 ? '':''?> href="#"   prop="<?=$i?><?=$j?>" 
+				id="nb" class="nice catOptionText" role="button" aria-disabled="false"><span class="ui-icon ui-icon-carat-2-n-s"></span><span class="ui-button-text">Další možnosti</span></a></td>
+			</tr> 
+			<tr style="display:none;" id="catOptionText_<?=$i?><?=$j?>">
+				<td>SEO</td>
+				<td colspan="2"><?=$this->formTextarea('k_' . $i . '-text_' . $j, $this->kategorie[$i - 1]['options'][$j-1]['text'])?></td>
+				
+			</tr>
+			<tr style="display:none;" id="catOptionText2_<?=$i?><?=$j?>">
+				<td>Obrázek</td>
+				<td colspan="2"><?=$this->formFileSelect('k_' . $i . '-img_' . $j, $this->kategorie[$i - 1]['options'][$j-1]['photo'], array('showSelectFile' => true, 'showUploadFile' => true, 'uploadFileDirectoryNodeId' => 51237 ))?></td>
+			</tr>  

@@ -1,0 +1,349 @@
+<?php 
+$this->disableH1 = true;    
+$product = $this->node;
+$c = $this->content;    
+ 
+            		$p = helper_FrontEnd::getPhoto('photos', $c, $c->fotoFullName);
+            		if(count($p)){ 
+            			$img = $p['path'];
+            		} else {
+            			$img = '/images/categoryImg.jpg';
+            		}
+            		
+            		$akce = $c->getPropertyValue('akce');
+            		$akce = (helper_MultiSelect::getMultiSelectValues($akce)); 
+            		 
+            		
+            		$isVyprodej = $isAkce = $isNovinka = false;
+            		
+            		if(in_array('1', $akce)){
+            			$isAkce = true;
+            		}
+            		if(in_array('2', $akce)){
+            			$isNovinka = true;
+            		}
+            		if(in_array('3', $akce)){ 
+            			$isTip = true;
+            		}
+					if(in_array('5', $akce)){ 
+            			$isVyprodej = true;
+            		}
+            		$skladem = $c->getPropertyValue('skladem');
+            		$price  = $c->getPropertyValue('price');   
+            		$price2  = $c->getPropertyValue('price2');  
+            		$kod  = $c->getPropertyValue('kod');  
+            		$znacka  = $c->getPropertyValue('znacka');  
+            		$text  = $c->getPropertyValue('html');  
+            		$parametry  = $c->getPropertyValue('parametry');    
+            		$alternativy  = $c->getPropertyValue('alternativy');    
+            		$souvisejici = $c->getPropertyValue('souvisejici');   
+            		$darky = $c->getPropertyValue('darek');   
+            		$prodejne = $c->getPropertyValue('prodejny');   
+            		$video = $c->getPropertyValue('video');    
+            		  
+            		if($alternativy){
+            			$alternativy = helper_MultiSelect::getMultiSelectValues($alternativy);
+            		}
+            		if($darky){
+            			$darky = helper_MultiSelect::getMultiSelectValues($darky);
+            		}
+            		if($souvisejici){
+            			$souvisejici = helper_MultiSelect::getMultiSelectValues($souvisejici);
+            			shuffle($souvisejici);  
+            		} 
+            		
+			$images = $this->photos = helper_FrontEnd::getResizedPhotos($this->photos, 'pMini3', 'pFull3'); 	      		   
+			$this->mainImg = $img;             		 
+			?>
+          <div class="flags">
+            <? if($isAkce):?>  
+                <div class="akce"></div>
+                <? endif;?> 
+                <? if($isNovinka):?> 
+                <div class="nove"></div>
+            <? endif;?>   
+             <? if($isTip):?> 
+                <div class="tip">&nbsp;</div>
+            <? endif;?>  
+			<? if($isVyprodej):?> 
+                <div class="vyprodej">&nbsp;</div>
+            <? endif;?>   
+            
+            
+          </div> 
+          <div id="popis"> 
+            <div id="shortDesc">
+              <h1><?=$this->pageTitleRaw?></h1>
+             <!--  <h2>+ 4 espresso šálky s podšálky zdarma!</h2> -->
+             
+			</div>
+          </div>
+          <div id="buyBlock">
+            <div id="buyBlockInner">
+              <p class="info1"> 
+              	<span class="label">Značka:</span><span><a href="<?=$this->znacky[$znacka][3]?>"><?=$this->znacky[$znacka][4]?></a></span> 
+              	<span class="label">Nákupní kód:</span><span><?=$kod?></span>
+              </p>   
+              <? if($prodejne < 2):?>
+              <p class="info2">   
+              	<span class="label action"><strong><?=($price2 > 0?'Akční cena':'Cena')?>:</strong></span>
+              	<span class="cena"><?=helper_FrontEnd::price($price)?> Kč</span> 
+              	<span class="inc">Cena včetně PHE a DPH</span> 
+              	<? if($price2 > 0):
+              		$dif = $price2 - $price;
+              		$p = $price2/100;
+              		$difp = round($dif/$p, 1);
+              	?>
+              	<span class="label">Běžná cena:</span>  
+              	<span><?=helper_FrontEnd::price($price2)?> Kč</span> 
+              	<span class="label">Ušetříte:</span><span><?=$difp?> % / <?=helper_FrontEnd::price($dif)?> Kč</span> 
+              	<? endif;?>
+              </p>
+              <? else: ?>
+               <p class="info2"><big>Samostatně neprodejné.</big></p>
+              <? endif;?>
+              <p class="info3"> <span class="label">Dostupnost:</span> 
+              	<?=$c->getSkladem(0, false)?>   
+              </p>
+              <? if($prodejne < 2):
+			  $disabled='';
+					//if($_SERVER['REMOTE_ADDR'] == '147.32.120.238'){
+						if($skladem == 3){
+							$disabled ='disabled';
+						}
+					//}
+			  ?>      
+              <form action="<?=$this->bp?>" method="post" name="orderForm" id="orderForm" class="orderForm">
+              	<?=$this->formHidden('pid', $product->nodeId)?>   
+              	<?=$this->formHidden('action', 'buy')?>  
+                <fieldset>
+                  <input <?=$disabled?> name="count" value="1" type="text">
+                  <input <?=$disabled?> name="kosik"  class="addToBasket" id="addToBasket<?=$disabled?>" type="submit" value="" />
+                </fieldset>   
+              </form> 
+              <? else: ?>
+               <p class="info2">   Samostatně neprodejné. </p>
+              <? endif;?>
+               
+	 
+              <div class="facebook">
+				<div id="fb-root"></div>
+				<script src="http://connect.facebook.net/cs_CZ/all.js#appId=175907572462977&amp;xfbml=1"></script>
+				<fb:like href="<?=('http://' . $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'])?>" send="false" layout="button_count"  show_faces="false" font="trebuchet ms"></fb:like>
+	 			 
+	 			
+				</div>   
+            </div> 
+          </div>
+          
+          <? if(count($this->photos)):?>
+			<div id="photoBlock"> 
+			<?=$this->render('parts/ImagesGallery.phtml'); ?>
+			</div>  
+			<? endif;?>  
+
+           <? if(is_array($darky)):?> 
+          	
+          	 <? foreach ($darky as $alt):
+	              	$child = $this->tree->getNodeById($alt);
+	              	if(!$child){ continue; }
+	              	$c = $child->getPublishedContent();
+	              	if(!$c){ continue; } 
+	              	
+	              	$p = helper_FrontEnd::getPhoto('photos', $c, $c->fotoThumbName);
+	            		if(count($p)){
+	            			$img = $p['path'];
+	            		} else {
+	            			$img = '/images/categoryImg.jpg';
+	            		}   
+	            		$price  = $c->getPropertyValue('price');   
+	            		$url = $c->getDetailUrl($this, $child);  
+	              ?>
+	             
+          <div class="giftBlock2">  
+	              <div class="gift">&nbsp;</div>
+	            <img src="<?=$img?>" alt="Darcek"   align="left" /> 
+	            <p><a href="<?=$url?>"><?=$child->title?></a><span>Dárek v hodnotě <?=helper_FrontEnd::price($price)?> Kč</span></p>
+	          
+          </div>    
+	              <? endforeach;?>
+	              
+            
+          <? endif;?>  
+          <div id="details">
+            <div id="tabs">
+              <ul>
+                <li><a id="lt4_t1"  onclick="return showTab('t4_t', 1)" href="#">Popis</a></li>
+                 <? if(strlen($parametry) > 5):?>
+                <li><a id="lt4_t2" onclick="return showTab('t4_t', 2)" href="#">Parametry</a></li>
+                <? endif;?> 
+                <? if(is_array($alternativy)):?>
+                <li><a id="lt4_t3" onclick="return showTab('t4_t', 3)" href="#">Alternativy</a></li> 
+                <? endif;?>
+              </ul> 
+              <div class="tabsContents" id="tabContentContainer">
+              <div class="tab-1" id="tt4_t1" <?=($video?'style="min-height:600px;"':'')?>> 
+                <?=$text?>      
+                 
+                <? if($video ):   
+               		$AE = new AutoEmbed();    
+					$AE->parseUrl($video);   
+					//$imageURL = $AE->getImageURL();
+					$AE->setParam('wmode','transparent');
+					$AE->setParam('autoplay','false'); 
+					$vcode = $AE->getEmbedCode();
+                ?>
+                <div class="spacer10"></div>
+                <?=$vcode?>
+                <div class="spacer10"></div> 
+                <? endif;?>
+              </div>
+              <? if(strlen($parametry) > 5):?>  
+              <div class="tab-1" id="tt4_t2"> 
+                <?=$parametry?>  
+              </div> 
+              <? endif;?>
+              
+              <? if(is_array($alternativy)):?>
+              <div class="tab-1" id="tt4_t3"> 
+              
+              <div class="list"> 
+	              <? foreach ($alternativy as $alt):
+	              	$child = $this->tree->getNodeById($alt);
+	              	if(!$child){ continue; }
+	              	$c = $child->getPublishedContent();
+	              	if(!$c){ continue; } 
+	              	  
+	              	$p = helper_FrontEnd::getPhoto('photos', $c, $c->fotoThumbName);
+	            		if(count($p)){
+	            			$img = $p['path'];
+	            		} else {
+	            			$img = '/images/categoryImg.jpg';
+	            		} 
+	            		$price  = $c->getPropertyValue('price');   
+	            		$url = $c->getDetailUrl($this, $child);  
+	              ?>
+	              <div>  
+		              <div class="img">
+		                <p><a href="<?=$url?>"><?=$child->title?></a></p>
+		                <a href="<?=$url?>"><img src="<?=$img?>" alt=" " /></a></div>
+		              <div class="podrobnosti">
+		                <p><?=helper_FrontEnd::price($price)?> Kč<a href="<?=$url?>">podrobnosti</a></p>
+		              </div>
+		            </div>  
+	              <? endforeach;?>
+              	</div>
+              </div>
+              <? endif;?>
+              </div> 
+            </div>
+            
+            
+            <script type="text/javascript" charset="utf-8">
+					window.addEvent('load', init4);
+					function init4() {    
+						showTab('t4_t', 1);         
+					} 
+				</script>  
+				 
+            	 
+            <div id="recommended">
+              <? if(is_array($souvisejici)):?>
+              <p>Doporučujeme dokoupit</p>
+               <?
+				$x = 0;
+               foreach ($souvisejici as $alt): 
+               		
+	              	$child = $this->tree->getNodeById($alt);
+	              	if(!$child){ continue; }
+	              	
+	              	$x++;
+	              	if($x > 3){ break; }   
+	              	 
+	              	$c = $child->getPublishedContent();
+	              	if(!$c){ continue; } 
+	              	$akce = $c->getPropertyValue('akce');
+					$isVyprodej = $isAkce = $isNovinka = false;
+            		
+            		if(in_array('1', $akce)){
+            			$isAkce = true;
+            		}
+            		if(in_array('2', $akce)){
+            			$isNovinka = true;
+            		}
+            		if(in_array('3', $akce)){ 
+            			$isTip = true;
+            		}
+					if(in_array('5', $akce)){ 
+            			$isVyprodej = true;
+            		}
+					
+	              	  $p = helper_FrontEnd::getPhoto('photos', $c, $c->fotoThumbName);
+	            		if(count($p)){  
+	            			$img = $p['path'];
+	            		} else {
+	            			$img = '/images/categoryImg.jpg';
+	            		} 
+	            		$price  = $c->getPropertyValue('price');  
+						$skladem = $c->getPropertyValue('skladem');
+						$disabled ='';
+						if($skladem == 3){
+							$disabled = 'disabled';
+						}
+	            		$url = $c->getDetailUrl($this, $child);  
+	              ?>
+              <div class="product">
+                <div class="flags">
+                  <? if($isAkce):?>  
+                <div class="akce"></div>
+                <? endif;?> 
+                <? if($isNovinka):?> 
+                <div class="nove"></div>
+            <? endif;?>   
+             <? if($isTip):?> 
+                <div class="tip">&nbsp;</div>
+            <? endif;?>  
+			<? if($isVyprodej):?> 
+                <div class="vyprodej">&nbsp;</div>
+            <? endif;?>   
+                </div>
+                <p><a href="<?=$url?>"><?=$child->title?></a></p>
+                <div class="img"><a href="<?=$url?>"><img src="<?=$img?>" alt=" " /></a></div>
+                <div class="info">
+                  <p><?=helper_FrontEnd::price($price)?> Kč</p>
+                  <form action="<?=$this->bp?>" method="post" name="orderForm"  class="orderForm">
+                  <?=$this->formHidden('pid', $child->nodeId)?>   
+              	  <?=$this->formHidden('action', 'buy')?>  
+              			
+                    <fieldset>  
+                      <input name="count" value="1" type="text" /> 
+		               <input <?=$disabled?> name="kosik"  class="toBasket addToBasket <?=$disabled?>"  type="submit" value="" />
+                    </fieldset>
+                  </form>  
+                </div>
+              </div>
+              <? endforeach;?> 
+              <? endif; ?>
+            </div>
+          </div>  
+	   
+    <?
+	if(count($this->documents)):
+		?>
+		 <div id="dl">
+			<h3>Ke stažení:</h3>
+			<?
+			foreach ($this->documents as $filepath => $name): 
+				$fullpath = content_SFSFile::getFileFullPath($filepath);
+				$ico = Utils::getFileIcoImage($fullpath);
+				?>	
+				<?= $ico ?> 
+				<a title="Otevřít '<?= $name ?>' do nového okna" target="_blank" href="<?=$filepath?>"> <?= $name ?> <i><?=Utils::getWebFileSize($fullpath)?></i></a> <br />														
+								
+				<? 
+			endforeach; 	
+			?>
+		</div>
+		<?			
+	endif;	
+	?>	  

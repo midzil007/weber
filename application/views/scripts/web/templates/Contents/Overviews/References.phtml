@@ -1,0 +1,57 @@
+<?
+function drawReference($view, $ref){
+	$content = $ref->getPublishedContent();
+	if(!$content){
+		return;
+	}
+	/*
+	$time = time();
+	$r2002 = $time - (6 * 365 * 24 * 60 * 60);
+		
+	$monthLeap = rand(1, 72);
+	$randomDate = date('Y-m-d', $r2002 + (2592000 * $monthLeap));	
+	
+	*/
+	
+	//e(Utils::formatDate($randomDate));
+	//$content->getPropertyByName('dateShow')->value = $randomDate;
+	//$content->update(true);
+	//$content->onUpdate();
+	
+	$foto = helper_FrontEnd::getFirstPhoto($content->getFilesNames('obrazky'), $content->fotoThumbName);
+	?>
+	<a class="reference"  href="<?=helper_FrontEnd::getPath($view, $ref->path)?>">		
+		<? if ($foto['path']): ?>
+		<img src="<?=$foto['path']?>" alt="" />
+		<? endif; ?>		
+		<h4><?=$ref->title?></h4>
+	</a>
+	<?	
+}
+?>
+
+<?=$this->pageText?>
+<div class="clear">&nbsp;</div>
+<? 
+$this->listingPerPage = 9;
+echo $this->render('templates/Listing/init.phtml');
+$x = 0;
+$z = 0;
+
+if(count($this->children)):
+	foreach ($this->children as $child){
+		if($content = $child->getPublishedContent()){
+			$x++;
+			if(($x <= ($this->listingCurentPage*$this->listingPerPage)) || ($x > ($this->listingNextPage*$this->listingPerPage))){
+				continue;
+			}
+			
+			drawReference($this, $child);			
+		}
+	}
+	?>
+	<div class="spacer10">&nbsp;</div>
+	<?
+	echo $this->render('templates/Listing/Floating.phtml');
+endif;	
+?>

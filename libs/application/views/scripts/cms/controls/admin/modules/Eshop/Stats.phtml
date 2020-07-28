@@ -1,0 +1,61 @@
+<?php 
+	$mProducts = new module_Products();
+	$productsAll = $mProducts->getProductsCout();
+	
+	
+	$tTomorrow = mktime(0, 0, 0, date("m")  , date("d")-10, date("Y"));
+		
+	 
+	$params = array(
+		'from' => date('Y-m-d H:i:s', $tTomorrow)
+	);
+	
+	$productsLast = $mProducts->getProductsCout('title', 'asc', 0, 1, $params);
+	
+	$params = array(
+		'month' => date('m'),
+		'year' => date('Y')
+	);
+	$ordersMonth = $this->mEshop->orders->getOrdersBackend(
+		'all',   
+		'all',    
+		'id',  
+		'desc', 0, 15, $params
+	); 
+
+	$params = array( 
+		'year' => date('Y')
+	);
+	$ordersYear = $this->mEshop->orders->getOrdersBackend(
+		'all',   
+		'all',   
+		'id',  
+		'desc', 0, 15, $params
+	); 
+		 
+	?>  
+	<h1>Přehledy</h1>   
+	<?php   
+		echo $this->table( 
+			$this->ordersTable, 
+			$this->ordersTableHead, 
+			$this->ordersTableActions, 
+			$this->tableSort, 
+			$this->tableSortType,  
+			$this->curentViewState,  
+			$this->tableParentTab, 
+			array('class' => 'list')
+		);    
+	?> 
+	<h3 style="margin:0px 0px 15px 0px;">Obrat: <strong><?=helper_FrontEnd::price($this->obrat)?> Kč</strong> + poštovné  &nbsp;&nbsp;&nbsp; Prodáno <strong><?=$this->prodano?></strong> produktů</h3>
+	
+	<h3 style="font-weight: bold;">Zboží</h3>   
+				Nové zboží (za posledních 30 dní): <strong class=""><?=$productsLast?></strong> <Br /> 
+				Celkem zboží:  <strong class=""><?=$productsAll?></strong>  <Br />
+				<h3 style="font-weight: bold;">Objednávky</h3>
+				Tento měsíc: <strong class=""><?=count($ordersMonth)?></strong> <Br /> 
+				Tento rok: <strong class=""><?=count($ordersYear)?></strong>
+				<Br />
+				<h3 style="font-weight: bold;">Obrat</h3>   
+				Tento měsíc: <strong class=""><?=($this->obratM)?></strong> Kč<Br /> 
+				Tento rok: <strong class=""><?=$this->obratAll?> Kč</strong> 

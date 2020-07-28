@@ -1,0 +1,36 @@
+  	
+					 
+	        	<?  
+	        	$this->leftContents = array(
+	        		array(
+	        			'title' => 'Nápověda' ,
+	        			'content' => $this->helpContent  
+	        		) 
+	        	);
+	        	if(count($this->leftContents)){
+	        		?>
+	        		<div id="accordionRight">
+	        		<h3>Adresářová struktura</h3> 
+	        		<div>  
+						<div id="demo2"></div>      
+			        	<div class="clear"></div>      
+					</div>   
+	        		<?
+	        		foreach ($this->leftContents as $i => $c):
+	        			?>
+	        			<h3><?=$c['title']?></h3>
+	        			<div>
+	        				<?=$c['content']?> 
+	        			</div>
+	        		<? endforeach;?>   
+	        		
+	        		</div> 
+	        		<script>
+				    $(function() {
+				        $( "#accordionRight" ).accordion({ 
+				            heightStyle: "content"
+				        });
+				    });
+				    </script>
+	        		<?
+	        	} 

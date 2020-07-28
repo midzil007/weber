@@ -1,0 +1,449 @@
+<?php  
+$this->disableH1 = true;    
+$product = $this->node;
+list($totalRev,$rev) = $this->mReviews->showSingleRev($this->node->nodeId);   
+$this->productPath = $this->node->path;  
+$c = $this->content;    
+            		$p = helper_FrontEnd::getPhoto('photos', $c, $c->fotoCropShowName);
+            		if(count($p)){ 
+            			$img = $p['path'];
+            		} else {
+            			$img = '/images/categoryImg.jpg';
+            		}
+            		
+            		/*
+            		$akce = $c->getPropertyValue('akce');
+            		$akce = (helper_MultiSelect::getMultiSelectValues($akce)); 
+            		 
+            		
+            		$isVyprodej = $isAkce = $isNovinka = false;
+            		if(in_array('1', $akce)){
+            			$isAkce = true;
+            		}
+            		if(in_array('2', $akce)){
+            			$isNovinka = true;
+            		}
+            		if(in_array('3', $akce)){  
+            			$isTip = true;
+            		}
+					if(in_array('5', $akce)){ 
+            			$isVyprodej = true;
+            		}*/
+            		
+            		//$akce = $c->getPriznaky();   
+            		$skladem = $this->selectedVariant['skladem'];
+            		$price  = $this->price = $this->selectedVariant['price'];   
+            		$price2  =  $this->price2 = $this->selectedVariant['price2'];  
+            		//$kod  = $c->getPropertyValue('kod');  
+            		//$znacka  = $c->getPropertyValue('znacka');  
+            		$text  =  $c->getPropertyValue('html');
+            		$preText  = str_replace('<p></p>', '',  $c->getPropertyValue('preText')); 
+            		$preText  = str_replace('<p> </p>', '', $preText);     
+            		$parametry  =  $c->getPropertyValue('parametry');      
+            		$akce = $c->getPriznaky();   
+					$akceTop = $c->getPriznaky(true);  
+            		$alternativy  = $this->selectedVariant['alternativy'];    
+            		$souvisejici = $this->souvisejici;
+            		$darky = $c->getPropertyValue('darek');   
+            		//$prodejne = $c->getPropertyValue('prodejny');   
+            	 
+            		$video = $c->getPropertyValue('video');    
+            		  $contVideo = count($video);
+            		if($alternativy){
+            			$alternativy = helper_MultiSelect::getMultiSelectValues($alternativy);
+            		}
+            		if($darky){
+            			$darky = helper_MultiSelect::getMultiSelectValues($darky); 
+            		}
+			 $photo = $this->mVarianta->getResizedPhotos($this->selectedVariant['obrazky']);		
+			$c->getPropertyByName('photos')->value = $this->selectedVariant['obrazky'];
+			$photos = $photo;//$view->content->getFilesNames('photos');  
+			$p = helper_FrontEnd::getPhoto('photos', $c, $c->fotoCropShowName);
+			$images = helper_FrontEnd::getResizedPhotos($photos, 'pShow', 'pFull');
+			$full = helper_FrontEnd::getResizedPhotos($photos, 'pMinic4', 'pShow');	  
+			$this->mainImg = $img;         
+			$descr = $this->node->title;
+			 if($this->schema): 
+                if($this->price2):
+                	$googleOffer = 'itemprop="offers" itemscope itemtype="http://schema.org/AggregateOffer"';
+                	$googleHighPrice = 'itemprop="highPrice"';
+                	$googlePrice = 'itemprop="lowPrice"';
+                else:
+                	$googleOffer = 'itemprop="offers" itemscope itemtype="http://schema.org/Offer"';
+                	$googleHighPrice = '';
+                	$googlePrice = 'itemprop="price"';
+                	
+                endif;
+                	//$googleLink = '<link itemprop="availability" href="http://schema.org/InStock" />In stock';
+                endif;     		 
+			?> 
+		
+<div class="detail" <?=$this->schema?'itemscope itemtype="http://schema.org/Product"':''?>>
+	<div class="img" >
+			<a class="zoom" href="#" onclick="document.getElementById('mb1').click();"></a> 
+<?if($this->isArchived):?>
+		 	<div id="img-archived">
+		 		<strong>VÝROBA<br />UKONČENÁ</strong>
+		 	</div>
+		 	<?endif?>
+				 <div id="productGallery" >
+				 <?
+                    	$counImages = count($images); 
+                    	$inc = 0; 
+						$countImgJs = $counImages -1 ;
+						$actulPos;?>            
+					<span id="navi-minus" class="arrow" onclick="setNavi(this,<?=$countImgJs?>)" rel="<?=($actulPos-1) < 0 ? $countImgJs : $actulPos-1?>" rel="0" class="navi"></span>
+                    	<?foreach($images as $im):?>
+                    		<a href="<?=$im['fullPath']?>" title="" class="mb img-responsive openGallery photo<?=$inc?>" <?=$inc == 0 ? 'id="mb1"' :''?> rel="[images]" data-counter="<?=$inc?>"><img <?=$this->schema?'itemprop="image"':''?> src="<?=$im['path']?>" alt="<?=$im['name']?>" /> <span id="zoom-icon"></span></a>
+                    	<?$inc++;endforeach?>
+                    	<span href="#" id="navi-plus" class="arrow navi" onclick="setNavi(this,<?=$countImgJs?>);"  rel="<?=($actulPos > $countImgJs ? 0 : $actulPos+1)?>"></span>
+                       <div class="clear"></div>
+       </div><!-- /productGallery -->    	      
+	<?
+	$counImages = count($images);
+	 ?>
+<div id="galleryStrip">
+		<?$incp =0;
+		if ($counImages>3 ):?>
+		<a href="#" id="allPhoto" onclick="return showBlock()">Zobrazit celou galerii</a>
+		  <div class="clear"></div> 
+	<?endif; 
+		foreach ($images as $key=>$value): ?>
+    		<a class="mini-photos" onclick="return false;" rel="<?=$i?>" href="<?=$full[$key]['fullPath'] ?>" target="_blank">
+				<img class="botip" rel="Zvětšit obrázek" alt="Zvětšit obrázek" src="<?=$full[$key]['path'] ?>" alt="<?=$value['name'] ?>" >
+			</a>   	
+		<?endforeach; ?>  
+</div> 
+	</div>
+	<div class="info">
+	<?$this->pageTitleRaw = $this->difp?$this->pageTitleRaw .= ', SLEVA '.$this->difp:$this->pageTitleRaw;?>
+	<div class="title">
+		 <h1 <?=$this->schema?'itemprop="name"':''?>><?=$this->pageTitleRaw?> </h1>
+		  
+		<?if($totalRev->total>0):?>
+			<div class="revText marTop17 marLeft10 marBottom10">
+				  
+				<div class="emptyStarsMini marRight3">       
+					<a class="tabik" href="#tabs-5" id="showReview">  <div style="width:<?=$totalRev->total*20.8?>px;" class="fullStarsMini"></div></a>
+				</div>
+			<span class="fs11 greyColor1 lineHeight20">(<?=$totalRev->count?>)</span> 
+		 
+		</div>  
+		 <?endif;?>  
+		 		<div class="top-r-p">
+		<?if($akceTop):?>
+			<?foreach ($akceTop as $key => $value):
+			if($skladem != 1 && $value['id'] == 13):
+				continue;        
+			endif?>        
+				<span class="priz-<?=$value['id']?>"><?=$value['nazev']?></span>
+			<?endforeach;?>  
+	   
+		<?endif;?>
+				</div>
+	</div>  
+		 <?=$preText?>  
+		<?if($this->isArchived):?>
+		 	<div id="archived">
+		 		<h6 class="rr"><strong>VÝROBA UKONČENÁ</strong></h6>
+			<p>Doporučujeme vám jiný produkt,<br> 
+tel.: <span class="rr tel"><strong><a class="rr" href="tel:777 569 386">777 569 386</a></strong></span><br>
+email: <span class="rr"><strong><a href="mailto:prodej@specshop.cz">prodej@specshop.cz</a></strong></span></p>
+</div>
+<?else:?>
+		 <? if(count($akce)):?>
+		 	<div class="pakce">
+
+		 		<? foreach ($akce as $a): 
+		 		if($a['id'] == 13 && $skladem==1):?>  
+										   <span class="tooltip">
+								 			<img class="botip" rel="<?=$a['nazev']?>" alt="<?=$a['nazev']?>" src="<?=$a['obrazek']?>" />
+								 		<span><?=$a['nazev']?>"</span>
+								 		</span>     
+								 	<?elseif($a['id'] != 13):?>
+									   <span class="tooltip">
+								 			<img class="botip" rel="<?=$a['nazev']?>" alt="<?=$a['nazev']?>" src="<?=$a['obrazek']?>" />
+								 		<span><?=$a['nazev']?>"</span>
+								 		</span> 
+									<?	endif;   
+		 		endforeach;?>       
+		 	</div>
+		<? endif;?> 
+		<?endif?>   
+		 <?if($this->difp){
+		 	$pep = '<strong>SLEVA '.$this->difp.'</strong>'; 
+		 }?>  
+		 <div class="bor-g"> 
+		 <p class="price"  itemprop="offers" itemscope itemtype="http://schema.org/Offer" itemprop="priceCurrency" content="CZK"> 
+		 <? if($this->price2 > 0):?>
+		 Bežná cena s DPH: <span class="strike"><?=(helper_FrontEnd::price($this->price2))?> Kč</span> <?=$pep?>
+		 <? endif; ?>	 
+			<span><span itemprop="price" content="<?=$this->price?>"><?=helper_FrontEnd::price($this->price)?> Kč</span> 
+			(<?=helper_FrontEnd::price(round(module_Eshop_PriceCalc::getBezDph($this->price,$c->getPropertyValue('dphQuote')),2))?> Kč bez DPH)</span>
+			 <link itemprop="availability" href="http://schema.org/InStock"/> 
+	</p>
+	<?if(!$this->isArchived && $this->selectedVariant['skladem'] == 1 ):?>      
+		<p class="ot-pr">
+			<span>Skladem</span> <!-- Objednejte do 12:00 hodin pro <span>odeslání ještě dnes <?=date("d.m.Y")?>. -->
+				    
+			</span>      
+		 </p> 
+			 
+	<?endif?>     
+	<?if($this->selectedVariant['skladem']== 2):?>
+	<p class="not-av">Dostupnost: Není skladem</p>
+	<?endif?>       
+</div>          
+		<?if(!$this->isArchived):?>    
+		<form action="<?=$this->confirmUrl?>" method="post"> 
+			<div>   
+            	<input type="text" name="count" value="1">
+            	<input type="hidden" name="urlProduckt" value="<?=$product->path?>" />
+            	<div id="count">ks</div> 
+            	<input type="hidden" name="variantId" value="<?=$this->selectedVariant['id']?>" />
+            	<input type="hidden" name="pid" value="<?=$product->nodeId?>" />
+            		<input type="hidden" name="action" value="buy" />  
+                	<button type="submit" id="buyBtn"><span class="icon-basket-detail"></span><span class="text-buy">Vložit do košíku</span></button>   
+			</div>      
+		</form>  
+		        
+		<div class="pull-left splatky-btn">     
+		<?if($this->selectedVariant['price']>4999 && !$this->isArchived):?>
+		<a class="curs simple-ajax-popup" rel="nofollow" href="/?calculator=1&price=<?=$this->selectedVariant['price']?>&nodeId=<?=$this->node->nodeId?>&variant=<?=$this->selectedVariant['id']?>&count=1"> 
+			<span class="money-kal"></span><span>Splátkový kalkulátor</span> např. <?=helper_Frontend::price(round($this->price / 10))?> Kč
+		</a> 
+		<?endif;?> 
+		   
+	</div> 
+	 <?endif?>        
+		<p>Kód: <strong><?=$product->nodeId?></strong> | Záruka: <strong><?if($this->isKavovary):?>25 měsíců (IČO 12) <?else:?>24 měsíců (IČ 12) <?endif?></strong></p>
+		<?if($this->virtualni == 1):?>    
+				<a href="Javascript://" id="lightboxBtn" ><img src="/images/360icon.png" alt="Prohlídka 360°" /></a>      
+		<?endif?>       
+	</div>
+	<?$tabsInc = 1;?>  
+	<div class="spacer10"></div> 	
+	 <div id="tabs" rel="<?=$this->url?>">  
+  <ul class="t-l-f" id="roller">    
+    <li class="fisr"><a href="#tabs-<?=$tabsInc?>" class="tabik">Popis produktu</a><a class="top-nav" href="#"><span></span>Nahoru</a></li>
+    <?$tabsInc++?>
+    <?if($parametry):?>  
+    	<li><a href="#tabs-<?=$tabsInc?>" class="tabik">Technické specifikace</a></li>
+    	   <?$tabsInc++?>  
+    <?endif?>  
+   
+     <?if($this->pece):?> 
+    	<li><a class="tabik" href="#tabs-<?=$tabsInc?>">Péče o výrobek</a></li>
+    	 <?$tabsInc++?>   
+    <?endif?>  
+    <?if($this->souvisejici):?> 
+    	<li><a class="tabik" href="#tabs-<?=$tabsInc?>">Příslušenství</a></li>
+    	 <?$tabsInc++?>  
+    <?endif?>     
+   	<?if($rev):?> 
+    <li><a class="tabik" href="#tabs-<?=$tabsInc?>">Hodnocení (<?=$totalRev->count?>)  
+    	<!-- <span class="emptyStarsMini marRight3 i-block vAlingMid ">  
+					<span class="i-block fullStarsMini" style="width:<?=$totalRev->total*20.8?>px;"></span>   -->
+					</a></li>
+					 <?$tabsInc++?> 
+    <?endif;?>
+     <?if($video):?> 
+    <li><a href="#tabs-<?=$tabsInc?>" class="tabik">Video podpora</a></li>
+     <?$tabsInc++?>
+    <?endif?>
+  </ul>
+  <div class="clear"></div> 
+  <?$tabsInc=1?>    
+   <div id="tabs-<?=$tabsInc?>" class="pull-left t-w">
+   			 <?$tabsInc++?> 
+   	<?=$text?>
+   	   <?if(count($this->files)):
+											?>
+											  <div class="clear"></div>
+											 <div id="dl">
+												<h4>Ke stažení:</h4>
+												<? 
+												foreach ($this->files as $filepath => $name): 
+													$fullpath = content_SFSFile::getFileFullPath($filepath);
+													$ico = Utils::getFileIcoImage($fullpath);
+													?>	
+													<?= $ico ?> 
+													<a title="Otevřít '<?= $name ?>' do nového okna" target="_blank" href="<?=$filepath?>"> <?= $name ?> <i><?=Utils::getWebFileSize($fullpath)?></i></a> <br />														
+																	
+													<? 
+												endforeach; 	
+												?>
+							 				</div>
+											<?endif;?>	
+  </div>
+  <?if($parametry):?>
+   
+  	<div id="tabs-<?=$tabsInc?>" class="pull-left t-w">
+  				 <?$tabsInc++?>
+  				 <h3 class="tab-t">Technické parametry - <?=$this->node->title?>:</h3>    
+    	<?=$parametry?>  
+  	</div>
+  <?endif?>
+  
+   <? 
+   $souv = $this->souvisejici;
+   if($this->pece):
+   $this->souvisejici = $this->pece?> 
+  <div id="tabs-<?=$tabsInc?>" class="pull-left t-w">
+  			 <?$tabsInc++?>    
+  			 <h3 class="tab-t">Péče o výrobek:</h3>
+     <?=$this->render('parts/alternativeProducts.phtml'); ?>
+  </div> 
+   <?endif?> 
+   <?if($souv):  
+   $this->souvisejici = $souv?> 
+  <div id="tabs-<?=$tabsInc?>" class="pull-left t-w">
+  			 <?$tabsInc++?>    
+  			 <h3 class="tab-t">Příslušenství:</h3>
+     <?=$this->render('parts/alternativeProducts.phtml'); ?>
+  </div>
+   <?endif?>    
+   <?if($rev):?> 
+  <div id="tabs-<?=$tabsInc?>" class="pull-left t-w">  
+  			 <?$tabsInc++?> 
+  	<?if($totalRev->total > 0):?>   
+                 							<h3 class="tab-t">Recenze <?=$this->node->title?>:</h3>
+<div class="spacer10"></div>	
+
+<div id="revSummary"> 
+	
+<div id="revResG" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+<strong>Celkové hodnocení </strong>(<span itemprop="ratingValue"><?=$totalRev->total?> známka</span>/<span itemprop="reviewCount"><?=$totalRev->count?></span> hlasů):</div>
+				<div class="emptyStars">
+					<div style="width:<?=$totalRev->total*31.4?>px;" class="fullStars"></div>
+				</div>
+				<div class="clear"></div>
+				 
+</div>
+<div class="spacer10"></div>	 
+<?endif?>	
+<? 
+$inc = 0;
+foreach ($rev as $item):
+			$inc++;
+			if($inc > 50){  
+				break;
+			} 
+			if(!$item['date'])
+				continue;
+			$name = '';?>
+	
+			<div class="revName icon-review fstRev tAlignCenter marTop5 marRight15 fLeft">
+			<span class="userIcon blockDisplay"></span>
+			<?$name = $item['name']?$item['name']:'Overený zákazník';?>
+			<span><?=$name?></span>			
+			<p></p>
+			</div>
+			<div class="rev-content">
+			<div class="revName fLeft">
+				<div class="emptyStars">
+					<div style="width:<?=$item['rating']*28?>px;" class="fullStars"></div>
+				</div>
+				<table>
+					<?if($item['pros']):?>
+					<tr>
+						<td><span class="plus">+</span></td>
+						<td><span class="plus"><?=$item['pros']?></span></td>
+					</tr>
+					<?endif?>
+					<?if($item['cons']):?>
+					<tr>
+						<td><span class="minus">-</span></td>
+						<td><span class="minus"><?=$item['cons']?></span></td>
+					</tr>
+					<?endif?>
+					<?if($item->reaction):?>
+					<tr>
+						<td>?</td>
+						<td><?=$item->reaction?></td>
+					</tr>
+					<?endif?> 
+					<?if($item['summary']):?> 
+					<tr>
+						<td></td>
+						<td colspan="1"><?=$item['summary']?></td>
+					</tr>
+					<?endif?>
+				</table>
+			</div>	 
+			<div class="revText fs11 fRight marLeft10">
+				<p>Hodnocení:</p> 
+				<div class="emptyStarsMini">
+					<div style="width:<?=$item['rating']*20.8?>px;" class="fullStarsMini"></div>
+				</div>
+			</div> 
+			</div>      
+			<div class="line"></div>	
+		<?endforeach;?> 
+  </div>
+  <?endif?>
+  <?if($video):?>
+   <div id="tabs-<?=$tabsInc?>" class="pull-left t-w">
+   			 <?$tabsInc++?>   
+   			 <h3 class="tab-t">Video podpora:</h3>
+           		<?=$video?>     
+  </div>
+  <?endif?>   	
+  </div>  
+   </div>
+<div id="photoGalleryPop" class="hidden">
+<div id="galleryTop"><span id="photoDescription">Test description</span><span id="closeGallery">zavřít ×</span>
+<div class="clear"></div>
+    </script>
+    <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 1200px;
+        height: 855px; background: #fff; overflow: hidden;"><!--h456 w800-->
+
+        <!-- Loading Screen -->
+        <div u="loading" style="position: absolute; top: 0px; left: 0px;background: #fff;">
+            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+                background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+            <div style="position: absolute; display: block; background: url(/img/loading.gif) no-repeat center center;
+                top: 0px; left: 0px;width: 100%;height:100%;">
+         </div> ´ 
+        </div>
+ 
+        <!-- Slides Container -->
+        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 1200px; height: 770px; overflow: hidden;"><!--h356 w800-->
+        	<?$inc = 0;
+        	foreach($images as $key=>$im):?>
+            <div>
+            	<img u="image" src="<?=$im['fullPath']?>" alt="gal" class="original<?=$inc?>" /> 
+            	<img u="thumb" src="<?=$full[$key]['path'] ?>" alt="gal" style="width: auto;" />                       
+				<div class="multiBoxDesc gal<?=$inc?> mbHidden"><?=$im['meta']['fileAlt']?></div>
+            </div>
+            <?$inc++;endforeach?>
+        	      
+        </div>
+               
+       
+        <!-- Arrow Left -->
+        <span u="arrowleft" class="jssora05l" style="width: 40px; height: 40px; top: 308px; left: 8px;"><!--top158-->
+        </span>
+        <!-- Arrow Right -->
+        <span u="arrowright" class="jssora05r" style="width: 40px; height: 40px; top: 308px; right: 8px"><!--top158-->
+        </span>
+        <!-- Arrow Navigator Skin End -->
+        
+        <!-- Thumbnail Navigator Skin Begin -->
+        <div u="thumbnavigator" class="jssort01" style="position: absolute; width: 1200px; height: 100px; left:0px; bottom: 0px;"><!--w800 h100-->
+               <div u="slides" style="cursor: move;">
+                <div u="prototype" class="p" style="position: absolute; width: 72px; height: 72px; top: 0; left: 0;">
+                    <div class=w><thumbnailtemplate style=" height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate></div>
+                    <div class=c>
+                    </div>
+                </div>
+            </div>
+            <!-- Thumbnail Item Skin End -->
+        </div>
+        <!-- Thumbnail Navigator Skin End -->  
+    </div>
+    <!-- Jssor Slider End -->
+</div> <!-- /photoGalleryPop -->
+
+</div> 

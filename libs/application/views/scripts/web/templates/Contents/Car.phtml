@@ -1,0 +1,157 @@
+	<?
+	$car = $this->content;
+	$vybavaSelected = helper_MultiSelect::getMultiSelectValues($car->getPropertyValue('vybava-seznam-kod'));
+	$vybava = array();
+	foreach ($vybavaSelected as $kod){
+		$vybava[] = $this->cars->ciselnik['vybava'][$kod];
+	}
+	
+	$price = $car->getPrice(false);
+	$dph = floor(0.19 * $price);
+	$priceFull = $price + $dph;
+	$curency = $car->getPriceCurency();
+	
+	$km = $car->getKilometres();
+	$power = $car->getPower();
+	$volume = $car->getEngineVolume();
+	?>
+
+	<h1><?=$this->curentNode->title?></h1>
+	
+	<div class="rightCol">
+		<table cellspacing="0" id="details">
+			<tr>
+				<td style="width:105px;">Rok výroby</td>
+				<td style="width:105px;" class="yellow"><?=$car->getMadeDate()?></td>
+				<td style="width:105px;">Barva</td>
+				<td class="yellow"><?=$car->getColor()?></td>
+			</tr>
+			<tr>
+				<td>Stav tachometru</td>
+				<td class="yellow"><?=($km=='0 km'?'-':$km)?></td>
+				<td>První majitel</td>
+				<td class="yellow"><?=$car->is1stOwner()?></td>
+			</tr>
+			<tr>
+				<td>Kategorie</td>
+				<td class="yellow"><?=$car->getBodyType()?></td>
+				<td>Nebourané</td>
+				<td class="yellow"><?=$car->isNotDemaged()?></td>
+			</tr>
+			<tr>
+				<td>Palivo</td>
+				<td class="yellow"><?=$car->getFuel()?></td>
+				<td></td>
+				<td class="yellow"></td>
+			</tr>
+			<tr>
+				<td>Výkon</td>
+				<td class="yellow"><?=($power=='0 kW'?'-':$power)?></td>
+				<td>Možnosti financ.</td>
+				<td class="yellow"><?=$car->getFinanceOtions()?></td>
+			</tr>
+			<tr>
+				<td>Objem motoru</td>
+				<td class="yellow"><?=($volume=='0 cm&sup3;'?'-':$volume)?></td>
+				<td></td>
+				<td class="yellow"></td>
+			</tr>
+		</table>
+		<? if(count($vybava)): ?>
+		<h2>Výbava</h2>
+		<p><?=implode(', ', $vybava);?></p>
+		<? endif; ?>
+		
+		<? if($car->getPropertyValue('poznamka')):?>
+		<h2>Poznámka</h2>
+		<p><?=$car->getPropertyValue('poznamka')?></p>
+		<? endif; ?>
+		
+		
+		
+		<div id="blueBox1">
+			<h2>Odeslat dotaz prodejci</h2>
+			<?=$this->render('templates/Contents/ContactForms/Question.phtml')?>			
+		</div>
+		<div id="blueBox2">
+			<h2>Odeslat e-mailem</h2>
+			<?=$this->render('templates/Contents/ContactForms/UrlToFriend.phtml')?>
+		</div>
+	</div>
+	<div class="leftCol">
+	
+		<? if(count($this->photos) > 0): ?>
+			<?= $this->render('parts/lightbox.phtml'); ?>
+			<?
+			$this->galleryPath = $this->curentPath . '?gallery=1';
+			if($this->inputGet->a){
+				$this->galleryPath .= '&a=' . $this->inputGet->a;
+			}
+			//e($this->galleryPath);
+			$photosGroup = 'mainPhotos';
+			$mainPhoto = false;
+			foreach ($this->photos as $path => $name){
+				if(!$path){ continue; }				
+				list($nodeId, $n) = content_SFSFile::parseSFSPath($path);
+			    $photoPathFullTemp = $this->config->sfFolder . '/' . $nodeId . '/' . $this->content->fotoFullName . '-' . content_SFSFile::getFileExtension($n) . '/' . $n;
+			    $photoPathShow = $this->config->sfFolder . '/' . $nodeId . '/' . $this->content->fotoShowName . '-' . content_SFSFile::getFileExtension($n) . '/' . $n;
+			    $photoPathThumb = $this->config->sfFolder . '/' . $nodeId . '/' . $this->content->fotoShowName . '-' . content_SFSFile::getFileExtension($n) . '/' . $n; 
+			    $photoTitle = $name;    
+			    
+				if($mainPhoto == false){	
+					$mainPhoto = true;
+					?>
+					
+					<div class="photo">
+						<a id="detailImgA" rel="lightbox[<?=$photosGroup?>]"  href="<?=$photoPathFullTemp?>"><img id="detailImg" src="<?=$photoPathShow?>" alt="<?=$photoName?>" /></a>
+					</div>
+					<div class="miniPhotos">
+					<?
+				} else {
+					?>
+					<a href="<?=$photoPathFullTemp?>" target="_blank" rel="lightbox[<?=$photosGroup?>]" class="imgBorder">
+						<img src="<?=$photoPathThumb?>" alt="<?=$name?>" />
+					</a>
+					<?
+				}		
+			}
+			if($mainPhoto){
+				?>
+				</div>
+				<?
+			}
+			?>
+			<div class="clear"></div>
+			<? if(count($this->photos) > 1): ?>
+				<div id="photoScroll">
+					<a href="#" onclick="return false;" class="leftScroll" onmouseout="scrollspeed=0" onmouseover="scrollspeed=-3">&nbsp;</a>				
+					<div id="photos">
+						<iframe id="gallery" src="<?=$this->galleryPath?>" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" hspace="0" vspace="0" allowtransparency="true"></iframe>					/
+					</div>				
+					<a href="#" onclick="return false;" class="rightScroll" onmouseout="scrollspeed=0" onmouseover="scrollspeed=3">&nbsp;</a>
+				</div>
+			<? endif; ?>		
+		<? endif; ?>		
+		<div id="priceTable">
+			<h2>Cena vozidla:</h2>
+			<table cellspacing="0">
+				<tr>
+					<td>Cena bez DPH:</td>
+					<td><?=helper_FrontEnd::price($price)?> <?=$curency?></td>
+				</tr>
+				<tr>
+					<td>DPH (19%)</td>
+					<td><?=helper_FrontEnd::price($dph)?> <?=$curency?></td>
+				</tr>
+				<tr class="white">
+					<td>Cena celkem s DPH:</td>
+					<td><?=helper_FrontEnd::price($priceFull)?> <?=$curency?></td>
+				</tr>
+			</table>
+		</div>
+	</div>
+	<div class="clear"></div>
+	<p class="id">
+		<span>ID: <?=$car->getId()?></span>
+		<a href="<?=Helpers::back($this->curentNode->parentId, $this->curentPath)?>" class="back">&laquo; ZPĚT NA NABÍDKU VOZŮ</a>
+	</p>

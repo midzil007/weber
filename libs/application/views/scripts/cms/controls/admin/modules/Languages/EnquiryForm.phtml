@@ -1,0 +1,58 @@
+<?
+//saveOptions(document.newEnquiryForm, 'enquiry_option', 'options'); 
+$edit = false;
+$visibleOptions = 2;	
+if($this->enquiryQuestionsCount){
+	$edit = true;
+	$visibleOptions = $this->enquiryQuestionsCount;	
+}
+
+
+?>
+
+<div id="err_newEnquiryForm"></div>
+<form action="" method="get" id="newEnquiryForm" name="newEnquiryForm">
+
+<?php echo $this->formHidden('oldOptionsMap', $this->oldOptionsMap) ?>
+<?php echo $this->formHidden('optionsCount', $visibleOptions) ?>
+<?php echo $this->formHidden('options', '') ?>
+<?php echo $this->formHidden('optionPrefix', 'enquiry_option') ?>
+
+<?
+$this->votedForced = true;
+echo $this->enquiry->getEnuiryResults($this, $this->request->getParam('id'), ' style="float:right; width:170px;" ');
+?>
+<table class="modalTable">		
+	<tr>
+		<td class="formcell tkey">Otázka ankety</td>
+		<td class="formcell"><?php echo $this->formText('enquiry_title',$this->input->enquiry_title, array('class'=>'ftext', 'trim'=>'true', 'required'=>'true')) ?></td>
+	</tr>
+	<tr>
+		<td class="formcell">Popis ankety</td>
+		<td class="formcell"><?php echo $this->formTextarea('enquiry_description',$this->input->enquiry_description, array('class'=>'ftext')) ?></td>
+	</tr>                
+	<tr>
+		<td class="formcell">Datum ukončení hlasování</td>
+		<td class="formcell"><?php echo $this->formTextDate('enquiry_end', $this->input->enquiry_end , array('required'=>'true', 'invalidMessage' => "Nesprávný formát", 'value'=>$this->input->enquiry_end)) ?></td>
+	</tr>	
+	<tr>
+		<td class="formcell">Možné odpovědi:</td>
+		<td>
+			<? for ($i = 1; $i < 30; $i++): ?> 	
+			<div style="display:<?=($visibleOptions>=$i?'block':'none')?>" id="option<?=$i?>">			
+					<?php echo $this->formText('enquiry_option' . $i, $this->input->{'enquiry_option' . $i}, array('class'=>'ftext', 'trim'=>'true')) ?>
+					<? if($i > 0): ?>
+						<a href="#" id="remove<?=$i?>" onclick="return removeOption('option', 'enquiry_option', this.id)">odebrat</a>	
+					<? endif; ?>
+			</div>
+			<? endfor; ?>
+			<?php echo $this->formSubmit('addOption', 'Přidat další možnou odpověď', array('class'=>'fsubmit', 'style' => ' font-size:0.8em; *font-size:80%;', "onclick" => "return showNextOption( 'option', 'enquiry_option', 'optionsCount' )")) ?>		
+		</td>
+	</tr>	
+</table>
+<? if($edit): ?>
+<?php echo $this->formSubmit('saveEnqB', 'Uložit', array('class'=>'fsubmit', "onclick" => "return submitFormAjax('newEnquiryForm', '".$this->url(array('controller' => 'enquiry','action' => 'update'))."', 'vypisDole', 'modal', '', true );", 'iconClass' => "noteIcon")) ?>		
+<? else: ?>
+<?php echo $this->formSubmit('saveEnqB', 'Uložit', array('class'=>'fsubmit', "onclick" => "return submitFormAjax('newEnquiryForm', '".$this->url(array('controller' => 'enquiry','action' => 'save'))."', 'vypisDole', 'modal', '', true );", 'iconClass' => "noteIcon")) ?>		
+<? endif; ?>
+</form>

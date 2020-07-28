@@ -1,0 +1,119 @@
+<?=$this->pageText?>
+<div class="clear">&nbsp;</div>
+
+<?php 
+$n = $this->tree->getNodeById(4111);
+$c = $n->getPublishedContent();
+$url = helper_FrontEnd::getPath($this, $n->path);
+
+$options = content_OverviewMesta::getRegionsSelect($this);  
+$options2 = $this->tree->getNodesAsSelect(4111, 'FOLDER');
+$this->inputGet->misto = $this->inputGet->misto?$this->inputGet->misto:($this->language=='cz'?4192:4193); 
+?>
+<div class="semTop"> 
+	<h2><a href="<?=$url?>"><?=$n->title?></a></h2>  
+	<form method="get" action="<?=$url?>">
+		<div>
+		<?=$this->formSelect('misto', $this->inputGet->misto, array(), $options)?> 
+		<?=$this->formSelect('seminar', $this->inputGet->seminar, array(), helper_Input::addNotDefinedOption($options2, '-- ' . $this->Translate('vse') . ' --'))?>  
+		
+		<button type="submit" name="search" class="nicesubmit smaller"><?=$this->Translate('ok')?></button>
+		</div>   
+	</form>
+</div> 
+<div class="spacer10"></div> 
+
+<? if(isset($this->inputGet->search)):?>
+	<? 
+		$seminare = array();
+		foreach ($this->children as $child){
+			$url = helper_FrontEnd::getPath($this, $child->path); 
+			$seminare[$child->nodeId] = '<a href="' . $url . '?t=XXX">' . $child->title . '</a>'; 
+		} 
+		$mesta = content_OverviewMesta::getCitiesSelect($this);
+		$mestaAll = array();
+		 
+		foreach ($mesta as $id => $title){
+			$mestaAll[$id] = $this->tree->getNodeById($id);
+		}
+		$this->mSeminare->seminar = $this->inputGet->seminar; 
+		$seminareAll = $this->mSeminare->getArticles('dateShow', 'asc', 0, 350, $this->inputGet->misto);  
+			  // 	 pr($seminare);
+    	 
+			?>	 
+		<table id="stable1" class="stable"> 
+			<tr>
+				<th><?=$this->Translate('datum')?></th>
+				<th><?=$this->Translate('nazev')?></th>
+				<th><?=$this->Translate('misto')?></th>
+				<th><?=$this->Translate('nazev-salonu')?></th>
+				<th><?=$this->Translate('adresa-salonu')?></th>
+			</tr>
+			 
+			<? 
+			$z = 0;
+						
+			foreach ($seminareAll as $seminar): //pr($seminar); die();
+				
+			//	e($seminar['mesto']); 
+				if(!$seminar['mesto']){
+					continue;
+				}
+				$z++;  
+				
+				if($z <= 3){
+					$hbh = false;
+				} else {
+					$hbh = true;
+				}   
+				
+				if($z == 6){
+					$z = 0; 
+				}
+				 
+				$nMesto = $mestaAll[$seminar['mesto']];
+				$cMesto = $nMesto->getPublishedContent(); 
+				$www = $cMesto->getPropertyValue('mwww');
+			?>
+			<tr <?=($hbh?'class="hbg"':'')?>>  
+				<td>
+					<?=Utils::formatDate($seminar['dateShow'])?>
+				</td>
+				<td> 
+					<?=str_replace('XXX', $seminar['id'], $seminare[$seminar['parent']])?> 				
+				</td>
+				<td>
+					<?=$nMesto->title?>
+				</td>				 
+				<td>
+					<?=$cMesto->getPropertyValue('mmisto')?>
+					<? if($www):?> 
+						<?=$this->Archon($www, '_blank')?>
+					<? endif;?>
+				</td>
+				<td>
+					<?=$cMesto->getPropertyValue('madresa')?>
+				</td>
+			</tr>
+			<? endforeach; ?>
+		
+		</table> 
+<? else:?>
+	<?
+	$x = 0; 
+	foreach ($this->children as $child):	
+			if($content = $child->getPublishedContent()):
+			$x++;			
+			?>	
+			<div class="seminar overview <?=($x%2==0?'last':'')?>">  
+				<h3><a href="<?=helper_FrontEnd::getPath($this, $child->path)?>"><?=$child->title?></a></h3>
+				<div class="sb">
+				<p><?=helper_FrontEnd::reduceText(strip_tags($content->getHtml()), 150, false)?></p>
+				<a href="<?=helper_FrontEnd::getPath($this, $child->path)?>" class="fRight"><?=$this->Translate('zobrazit-terminy')?></a>
+				</div>    
+			</div>   
+			 
+	<? 		endif;
+		endforeach; ?>
+	<Div class="clear"></Div> 
+<? endif;?>

@@ -1,0 +1,21 @@
+<form method="GET" id="searchFormDetail" action="<?= $this->url(array('controller' => 'search','action' => 'index' )) ?>">
+	<table class="normal">
+		<tr>
+			<td style="width:150px;">Hledaný výraz</td>
+			<td><?php echo $this->formText('searchStringDetail',$this->searchString, array('class'=>'ftext', 'style' => 'width:15em;')) ?> </td>
+		</tr>
+		<tr>
+			<td>Kde hledat</td>
+			<td><?php echo $this->formSelect('searchIn','', array('class'=>'ftext', 'style' => 'width:15em;'), $this->searchIn) ?> </td>
+		</tr>
+		<tr>
+			<td>Pouze od uživatele</td>
+			<td><?php echo $this->formSelect('searchBy','', array('class'=>'ftext', 'style' => 'width:15em;'), $this->searchBy) ?></td>
+		</tr>	 
+	</table> 
+	<?=$this->formSubmit('sendMail', 'HLEDAT', array('class' => 'fsBig')) ?>
+	<?=$this->render('/controls/admin/forms/SearchResults.phtml');?>  
+</form>
+
+
+				

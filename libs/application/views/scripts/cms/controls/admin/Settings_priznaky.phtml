@@ -1,0 +1,36 @@
+<script type="text/javascript" charset="utf-8">	
+function showIterator(div)
+{
+	set = false;
+	$('.bodyCat').each(function( index ) {
+		if($(this).css('display')=='none' && set==false){
+		set = true;
+		$('#kategorieBody_'+(index+1)).css({'display' : 'block'});
+		}
+	});
+	return false;
+	};
+</script>
+<table>
+	<?for($i=1; $i<=20; $i++):
+	if( ($this->priznaky[$i - 1]) OR ($i<4) )
+		$display = '';
+	else
+		$display = 'style="display:none"';
+	?>
+	<tbody id="priznakyBody_<?=$i?>" <?=$display;?>>
+		<tr>
+			<td><strong>#<?=$i?></strong> Název:</td>
+			<td><?=$this->formText('priznak_' . $i, $this->priznaky[$i - 1]['nazev'])?></td>
+			<?=$this->formHidden('pId_' . $i, $this->priznaky[$i - 1]['id'])?>
+			<td>obrázek</td><td><?=$this->formFileSelect('priznakImg_' . $i, $this->priznaky[$i - 1]['obrazek']);?></td>
+		</tr>
+		</tbody>
+	<?endfor;?>
+	<tr><td><a onclick="return showIterator('priznakyBody_');" ><img src="/images/add.png">Více příznaků</a></td></tr>
+	<tr>	
+		<td class="formcell" colspan="2">		
+			<?php echo $this->formSubmit('saveSetB', 'Uložit vše', array('class'=>'fsubmit', "onclick" => "return submitFormAjax('settingsForm', '".$this->url(array('controller' => 'settings','action' => 'saveAll'))."', 'settingsHome', 'tab-submit', '', 1 );", 'iconClass' => "noteIcon")) ?>											
+		</td>
+	</tr>
+</table>

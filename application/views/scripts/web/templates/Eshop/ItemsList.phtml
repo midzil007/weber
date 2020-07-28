@@ -1,0 +1,94 @@
+<div class="col-lg-9 col-md-12 no-padd">
+	<div class="row" id="listibor"> 
+				<span class="col-md-6 col-sm-6 col-xs-12">   
+			Produkty
+		</span> 
+		<span class="col-md-2 col-sm-3 txt-r show-bas hidden-xs" id="padks"> 
+               			Kusů   
+       </span> 
+        <span class="col-md-2 pricemob dismob hidden-sm hidden-xs">Cena / Kus</span>
+        <span class="col-md-2 col-sm-3 pricemob show-bas hidden-xs">Celkem s DPH</span>
+	</div> 
+<div class="row borders" id="listitems"> 
+
+       <?php  
+$items = $this->mEshop->basket->getItems();
+$itemsCount = count($items);
+
+              $x = 0;     
+			  $count = count($items);  
+              foreach ($items as $id => $data):
+              	$x++;  
+                	$child = $data['item'];
+                	$count = $data['count'];   
+	              	if(!$child){ continue; }  
+	              	$c = $child->getTheRightContent();  
+	              	$activeVariant = $this->mVarianta->getVariantById($data['variantId'],false); 
+	              //	pr($data);  e($activeVariant);
+	            		$price  =  $data['price'];    
+	            		$url = $c->getDetailUrl($this, $child);  
+	            		$skladem = $activeVariant['skladem'];
+	            		$barva = $activeVariant['title'] ? ', '.$activeVariant['title']:'';
+	            		$velikost= $activeVariant['titleOption'] ? ', '.$activeVariant['titleOption']: '';
+	            		$photos = $this->mVarianta->getResizedPhotos($activeVariant['obrazky']);
+            			$p = helper_FrontEnd::getFirstPhoto($photos,'pMinic2' , false);
+	                ?>   	 
+                	<span class="col-md-6 col-sm-6 col-xs-12">
+                			<a href="<?=$child->path?>">  
+                				<table>
+                					<tr>
+                					<td><img src="<?=$p['path']?>" alt=" " /></td>
+                					<td><?=$child->title?><?=$barva?><?=$velikost?></td>
+                					</tr>
+                				</table>
+                				</a>
+               		</span>
+                	<? if($this->listOverview):?>
+                	<?=$count?> 
+                	<? else:?>
+                	<span class="col-md-2 col-sm-3 col-xs-12 bas-h"> 
+                		<table class="pull-left"> 
+                			<tr> 
+                				<td>    
+	                    <input type="text" id="ks<?=$id?>" value="<?=$count?>" size="1" class="refresh items" name="count[<?=$id?>]" />
+	                    <input type="hidden" value="<?=$id?>" class="refresh" name="itemId" />
+	                    	</td>
+	                    			<td style="vertical-align: baseline;">
+						<span id="controls-bas">
+		                    <span prop="ks<?=$id?>" onclick="upOnChange('ks<?=$id?>')"  class="botip up" rel="O jeden kus více"></span>  
+		                    <span prop="ks<?=$id?>" onclick="downOnChange('ks<?=$id?>')" class="botip down" rel="O jeden kus méně"></span>
+	                		</span>
+	                		</td>
+	                	
+                	<? endif;?>
+                  
+                	<? if($this->listOverview):?>
+                	
+                	<? else:?>
+                	<td>   
+           			 <span class="green storage"><strong><?=$this->selectedVariant['skladem'] == 1 ? 'Skladem' : ''?></strong></span>
+           		 </td> 
+           		 </tr>
+	                </table> 
+	                	<div class="pull-right visible-xs"><a href="#" class="deleteItem botip " rel="Odebrat z košíku" onclick="return del('ks<?=$id?>')"></a></div>
+	                </span>     
+                <? endif;?>   
+             	<span class="col-md-2 hidden-sm hidden-xs mar-top-7"><?=helper_FrontEnd::price($price)?>,-</span> 
+                <span class="col-md-2 col-sm-3 col-xs-12 mar-top-7 bas-h">      
+                	<div class="pull-left"><strong><?=helper_FrontEnd::price($price*$count)?> Kč</strong></div>
+					<? if($this->inputGet->step!=3):?> 
+					<div class="pull-right hidden-xs"><a href="#" class="deleteItem botip " rel="Odebrat z košíku" onclick="return del('ks<?=$id?>')"></a></div> 
+					<? endif;?>   
+					 
+				</span>  
+				<div class="clearfix"></div> 
+			 
+				<?if($count > $x && $count == 1):?> 
+					<div class="line-spacer-10"></div> 
+				<?endif?>    
+              <? endforeach;?> 
+</div>
+        <div class="spacer10"></div>    
+   	<?=$this->render('templates/Eshop/deliveryBlock1.phtml'); ?>
+   
+    	</div>

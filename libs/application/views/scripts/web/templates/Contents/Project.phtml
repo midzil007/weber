@@ -1,0 +1,31 @@
+<?= $this->html ?> 
+
+<?
+$images = helper_FrontEnd::getResizedPhotos($this->photos, 'pThumb3', 'pFull3'); 	
+$keys = array_keys($this->photos);                                           
+shuffle($images);
+  
+foreach ($images as $img):  
+	$f = next($keys); 
+	$full = $img['path'];
+	$descr = $img['name'];        
+	$fullImg = $img['fullPath']; 		  
+	$z++; 
+	?>                           
+		<div class="gimg <?=($z%3==0?'last':'')?>">  
+			<a target="_blank" rel="[images]" id="mb<?=$z?>" class="mbb" href="<?=$fullImg?>" target="_blank"><img src="<?=$full?>" alt="<?=$descr?>" title="<?=$descr?>" /></a>
+			<div class="multiBoxDesc mbb<?=$z?>"><?=$descr?></div>	
+		</div>  
+<? endforeach; ?>    
+ 
+	<div class="spacer10"></div> 
+	
+	<script type="text/javascript"> 	
+				  
+		var box = {};   
+		window.addEvent('domready', function(){
+			box = new multiBox('mbb', {descClassName: 'multiBoxDesc', useOverlay: true});  
+		}); 
+			  
+	</script> 
+	

@@ -1,0 +1,21 @@
+<div id="page" class="hp fLeft posRelative marLeft10"> 
+	<?if(!$this->disableLeftColl):?>
+	<?=$this->render('parts/menu.phtml'); ?>
+	<div id="left-column" class="fLeft">
+		<?=$this->render('parts/leftColl.phtml'); ?>
+	</div>
+	<div id="right-column" class="fLeft posRelative pad0 <?=$this->showBorder ? 'borderTopRight':''?>"> 
+		<?if(!$this->disableH1):?>
+			<h1 class="h1"><?=$this->pageTitleRaw?></h1> 
+		<? endif;?>   
+		<?=$this->page;?> 
+		<?if($this->isHomepage):?>
+				<script type="text/javascript" src="/js/articles.js"></script>
+		<?endif?>	
+	</div>		
+	<?else:?>
+		<?=$this->render('parts/menu.phtml'); ?>
+	<?=$this->page;?> 
+	<?endif;?>
+	<div class="clear"></div>
+</div>   

@@ -1,0 +1,151 @@
+<?php 
+$this->obsahClass = $this->znacky[$this->node->nodeId][2];
+$logo = $this->znacky[$this->node->nodeId][1];  
+$this->disableH1 = true;      
+?> 
+          <div id="popis">
+            <div id="opis"> 
+              <h1><?=$this->pageTitleRaw?></h1>
+              <?=$this->pageText?>  
+              <div class="spacer10"> </div> 
+            </div> 
+            <div id="znackaLogo"><img src="<?=$logo?>" alt="<?=$this->pageTitleRaw?>"/><?=$this->Archon($this->purl, '_blank')?></div>
+          </div>  
+          <div id="contentSorting"> 
+            <h2>Výrobky značky <?=$this->pageTitleRaw?> naleznete v těchto kategoriích:</h2> 
+            <?php   
+            foreach ($this->kategorie as $kid => $data): 
+            	
+            	$params = array(     
+					'znacka' => array($this->node->nodeId), 
+					'category' => $kid
+				);
+				
+            	$productsAll = $this->mProducts->getProducts('sold', 'desc', 0, 3000, $params);
+            	$categories = array();
+            	foreach ($productsAll as $p){
+            		$parent = helper_MultiSelect::getMultiSelectValues($p['parent']); 
+            		foreach ($parent as $cat){
+            			$categories[$cat] = $cat;
+            		} 
+            	}   
+
+            	if(!count($categories) >= 1){ continue; } 
+				$cols = array_chunk($categories, 3, true);   
+            ?> 
+            <div>  
+            <p><?=$data[2]?></p>
+            	<? 
+            	$z = 0; 
+            	foreach ($cols as $col):
+            		$z++;
+            	?>
+              <ul <?=($z==1?'class="fst"':'')?>>
+                <? foreach ($col as $category):
+                	$nc = $this->tree->getNodeById($category); 
+                	//$np = $this->tree->getNodeById($nc->parentId); 
+                ?> 
+                <li><a href="<?=$nc->path?>?znacka[]=<?=$this->node->nodeId?>">   <?=helper_FrontEnd::reduceText($nc->title, 22)?></a></li>
+                <? endforeach;?>   
+              </ul> 
+              
+              <? if($z%4 == 0):?>
+              <div class="spacer10"></div> 
+              <? endif;?> 
+              <? endforeach;?> 
+            </div> 
+            <?   
+            endforeach;
+            ?>  
+          </div> 
+          <?php  
+	        $params = array(     
+				'znacka' => array($this->node->nodeId),
+	        	'nej' => true
+			); 
+			   
+			$products = $this->mProducts->getProducts('sold', 'desc', 0, 3, $params);
+			$productsNodes = $this->mProducts->getArticlesAsNodes($this->tree, $products); 
+		 	
+          ?>
+          <div class="spacer10"> </div> <div class="spacer10"> </div>  
+          <div id="products">
+            <h3>Nejprodávanější produkty značky <?=$this->pageTitleRaw?></h3>
+           <?
+				$x = 0;
+               foreach ($productsNodes as $child):   
+	              	if(!$child){ continue; }
+	              	
+	              	$x++; 
+	              	$class = '';
+	              	if($x == 1){
+	              		$class = 'fst';
+	              	} elseif($x == 3){
+	              		$class = 'lst';
+	              	}
+	              	 
+	              	$c = $child->getPublishedContent();
+	              	$p = helper_FrontEnd::getPhoto('photos', $c, $c->fotoThumbName);
+	            		if(count($p)){
+	            			$img = $p['path'];
+	            		} else {
+	            			$img = '/images/categoryImg.jpg';
+	            		} 
+	            		$price  = $c->getPropertyValue('price');   
+	            		$url = $c->getDetailUrl($this, $child);  
+	            		
+	            		
+            			$skladem = $c->getPropertyValue('skladem');
+            			
+            			$akce = $c->getPropertyValue('akce');
+	            		$akce = (helper_MultiSelect::getMultiSelectValues($akce)); 
+	            		 
+	            		$isAkce = $isNovinka = $isTip = false;
+	            		if(in_array('1', $akce)){
+	            			$isAkce = true;
+	            		}
+	            		if(in_array('2', $akce)){
+	            			$isNovinka = true;
+	            		}
+	            		
+	            		if(in_array('3', $akce)){ 
+	            			$isTip = true;
+	            		}
+	            		
+	              ?>
+	              
+            <div class="<?=$class?>">
+            <? if($x == 2):?> 
+            <div class="productBorder"></div>
+            <div class="productInner">
+            <? endif;?>    
+            
+            <div class="flags">
+		            <? if($isAkce):?>  
+		                <div class="akce"></div>
+		                <? endif;?> 
+		                <? if($isNovinka):?> 
+		                <div class="nove"></div>
+		            <? endif;?>   
+		             <? if($isTip):?> 
+		                <div class="tip">&nbsp;</div>
+		            <? endif;?>   
+		          </div> 
+		            
+              <p><a href="<?=$url?>"><?=$child->title?></a></p>
+              <div class="img"><a href="<?=$url?>"><img src="<?=$img?>" alt="<?=$child->title?>" /></a></div>
+              <div class="podrobnosti">
+               <?=$c->getSkladem(0, true)?>    
+                <div class="buy">
+                  <p><?=helper_FrontEnd::price($price)?> Kč</p>
+                  <a href="#">&nbsp;</a></div>
+              </div>
+               <? if($x == 2):?>
+           		</div>  
+              <div class="productBorder"></div>
+            	<? endif;?>        
+            </div>    
+            <? endforeach;?> 
+            <a class="dop" href="/nejprodavanejsi-produkty?znacka[]=<?=$this->node->nodeId?>">Další nejprodávanější</a> 
+           </div>
+         

@@ -1,0 +1,115 @@
+<?
+	if(!$view->flexiLoaded){
+		$view->flexiLoaded = true;  
+		?>
+		<link rel="stylesheet" type="text/css" href="/admin/css/flexigrid.css"> 
+		<script type="text/javascript" src="/admin/js/flexigrid.js"></script>
+		<?
+	} 
+	?>
+	 
+	<table class="ft">
+	<tr><td>
+	<table id="<?=$this->tableId?>" style="display:none"></table>    
+	</td></tr></table> 
+	<script type="text/javascript">
+	$("#<?=$this->tableId?>").flexigrid({  
+		url: '<?=$this->rUrul?>',  
+		dataType: 'json',
+		 
+		onSubmit : function(){
+	        $('#<?=$this->tableId?>').flexOptions({params: [{name:'callId', value:'<?=$this->tableId?>'}].concat($('#fmFilter').serializeArray())});
+	        return true;   
+	    },  
+	    onSuccess: function(){
+	    	$( "#<?=$this->tableId?>" ).sortable({
+	    		axis: 'y',
+	    		items: "tr",
+	    		revert: 100,    
+	    		update: function(event, ui) { 
+	                var newOrder = $(this).sortable('toArray').toString();
+	                $.get('<?=$this->sortUrl?>', {sort:newOrder});
+	            }  
+		    	});  
+	        return true;   
+	    },
+		colModel : [
+		 	<?   
+		 	$i = 0;  
+		 	$hc = count($this->tableHeaders);
+		 	foreach ($this->tableHeaders as $header):
+		 	$i++; 
+		 	?> 
+			{display: '<?=$header[0]?>', name : '<?=$header[1]?>', width :  setWidth(<?=$header[2]?>), sortable : <?=$header[3]?>, align: '<?=$header[4]?>'}<?=($hc>$i?',':'')?>
+			<? endforeach; ?>
+			], 
+		searchitems : [
+			<?
+		 	$i = 0;
+		 	$hc = count($this->tableSearchColls);
+		 	foreach ($this->tableSearchColls as $sc):
+		 	$i++;
+		 	?>
+			{display: '<?=$sc[0]?>', name : '<?=$sc[1]?>', isdefault : <?=$sc[2]?>}<?=($hc>$i?',':'')?>
+			<? endforeach; ?>  
+			], 
+		<? if(count($this->tableButtons)):?>  
+		buttons : [
+	   		<?
+		 	$i = 0;  
+		 	$hc = count($this->tableButtons);
+		 	foreach ($this->tableButtons as $btn):  
+		 	$i++;  
+		 	?>  
+			{name: '<?=$btn[0]?>', bclass : '<?=$btn[1]?>', <?=$btn[2]?> : <?=$btn[3]?>},
+			<? endforeach; ?>
+	   		{separator: true}
+	   		],  
+	   	<? endif;?>
+	   	sortname: "<?=$this->defaultSort ? $this->defaultSort: 'title' ?>", 
+		sortorder: "desc",
+		usepager: true,
+		title: '<?=$this->tableTitle?>', 
+		useRp: true,
+		rp: <?=$this->itemsPerPage?>,
+		rpOptions: [<?=$this->itemsPerPageOptions?>],
+		pagestat: 'Zobrazeno {from} až {to} z {total} položek',
+		pagetext: 'Stránka',
+		outof: 'z', 
+		nomsg: 'Žádné záznamy',
+		findtext: 'Hledat',
+		procmsg: 'Nahrávání dat ...',
+		showTableToggleBtn: true,
+		width: '<?=$this->tableWidth?>', 
+		height: setHeight('<?=$this->tableHeight?>')
+	}); 
+
+	function selectall(com, grid) {        
+		window.checked = !window.checked;
+		$("input:checkbox", $('#<?=$this->tableId?>')).attr("checked", window.checked);  
+	} 
+	 
+	$('#<?=$this->tableId?> tr').click(function(event, el){
+		
+		// $('a[rel="nofollow self"]')
+	});  
+
+	function setWidth(w){ 
+		<?    
+		$w = 0;
+		$padding = 0;
+	 	foreach ($this->tableHeaders as $header){
+	 		$w += ($header[2] + 10);
+	 		$padding += 10;
+	 	} 
+	 	?> 
+	 	var dgw = $(".ft td").width(); 
+	 	var ww = <?=$w;?>;   
+		return Math.round(w * (dgw/ww));  
+	}
+
+	function setHeight(h){
+		nh = $( window ).height() - 380; 
+		return nh; 
+	} 
+	</script>  

@@ -1,0 +1,35 @@
+/* KALENDAR */
+#calendar { width:100%; _height:100px;  }
+/*
+#c-prev, #c-next{ float:left; padding:2px 7px; background:#606f7d; color:#f2f6f8;  }
+#c-next{ float:right; }
+#c-prev:hover, #c-next:hover{ color:#d9e4e8; text-decoration:none; }
+*/
+#calendar div#c-body{ padding:2px 0px 2px 8px; _height:100px; min-height:100px; }
+
+#calendar div#c-body a, #calendar div#c-body  strong {
+	display:block;
+	width:28px;
+	height:16px;
+	line-height:14px;
+	color:#8e8d90; 
+	float:left; 
+	margin:0px 0px 0px 0px;
+	text-align:center;
+	font-size:11px;
+	font-weight:bold;
+	padding:0px;
+}
+#calendar div#c-body a:hover{ width:26px; height:14px; line-height:14px; border:1px solid #a6aeb6; font-size:11px; }
+#calendar div#c-body strong { color:#adb1b5; font-weight:normal; }
+#calendar div#c-body strong.sn { color:#e50000; }
+#calendar div#c-body a{ text-decoration:none; }
+/* day types */
+#calendar div#c-body a.bordered{   width:26px; height:14px; line-height:14px; border:1px solid #3e7e48; }
+#calendar div#c-body a.noaction{  }
+#calendar div#c-body a.action{ background:#b6ccd9; color:#6b6f75; }
+#calendar div#c-body a.special{ background:#d8dbdc; color:#3e7e48;  width:26px; height:14px; border:1px solid #3e7e48; }
+
+
+#content table#closeActions{ font-size:0.8em; border-collapse:collapse; width:100%; }
+#content table#closeActions td{ padding:3px 4px 3px 0px; }

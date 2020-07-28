@@ -1,0 +1,34 @@
+<?  
+if($this->bannerHPs):
+     ?>    
+             	<div id="banners" class="dis480">
+                		<div class="row" id="sizeBanner"> 
+    <div id="slider2_container" style="position: relative; width:886px;height: 375px; overflow: hidden;">
+        <style>
+            .slider1 div { position: relative; margin: 0px; padding: 0px; }
+        </style>
+        <div u="loading" style="position: absolute; top: 0px; left: 0px;"> 
+            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;background-color: #000; top: 0px; left: 0px;width: 100%; height:100%;"> 
+            </div> 
+            <div style="position: absolute; display: block; background: url(../img/loading.gif) no-repeat center center;top: 0px; left: 0px;width: 100%;height:100%;">
+            </div> 
+        </div> 
+        <div u="slides" class="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 886px; height: 375px;
+            overflow: hidden;"> 
+ 		<?foreach($this->bannerHPs as $key=>$ban):?>
+            	<div>
+                  <a href="<?=$ban?>"><img u="image" alt="<?=$key?>" src="<?=$key?>" /></a>
+            </div> 
+    <?endforeach?> 
+    </div> 
+       <div u="navigator" class="jssorb03" style="position: absolute; bottom: 20px; right: 16px;">  
+            <div u="prototype" style="POSITION: absolute; WIDTH: 21px; HEIGHT: 21px; text-align:center; line-height:21px; color:#585858; ; font-size:12px;"><NumberTemplate></NumberTemplate></div>
+        </div>
+        <span u="arrowleft" class="jssora20l" style="width: 55px; height: 55px; top: 123px; left: 8px;">
+        </span>
+        <span u="arrowright" class="jssora20r" style="width: 55px; height: 55px; top: 123px; right: 8px">
+        </span>
+    </div> 
+                	</div>	
+ </div>
+<?endif?>

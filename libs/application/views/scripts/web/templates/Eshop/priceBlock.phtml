@@ -1,0 +1,27 @@
+<?php  
+$items = $this->mEshop->basket->getItems();
+$voucher = $this->mEshop->basket->voucher;
+$itemsCount = count($items); 
+$sumAll = $discount = 0;
+$delivery = $this->mEshop->basket->getDeliveryPrice2();
+$payment = $this->mEshop->basket->getPaymentPrice();
+$mp = new module_Eshop_PriceCalc($voucher, $items, $delivery, $payment); 
+  
+                    		
+?>
+          <div id="right-column" class="pad0 fRight marLeft10">
+            <p class="head">Shrnutí objednávky</p>
+            <p>Cena zboží bez DPH<span class="fs14 fRight blockDisplay tAlignRight"><?=helper_FrontEnd::price($mp->sumBezDph)?> Kč</span></p>
+            <p>DPH  <span class="fs14 fRight blockDisplay tAlignRight"><?=helper_FrontEnd::price($mp->dph)?> Kč</span></p>
+            <? if($mp->delivery):?>
+            <p>Doprava s DPH <?=$this->dph?>%<span><?=helper_FrontEnd::price($mp->delivery)?> Kč</span></p>
+            <? endif;?>  
+			<? if($mp->payment):?>
+            <p>Platba s DPH <span><?=helper_FrontEnd::price($mp->payment)?> Kč</span></p>
+            <? endif;?> 
+			<? if($voucher):?>
+			<p>Mezisoučet<span><?=helper_FrontEnd::price($mp->subtotal)?> Kč</span></p>
+            <p>Kupón <?=Utils::getHelpIco(htmlspecialchars($mp->helpText))?><span class="fs14 fRight blockDisplay tAlignRight">- <?=$mp->voucher['value']?></span></p>
+            <? endif;?>
+            <p class="total">Celkem k úhradě<span id="shopPrice" class="fs14 fRight blockDisplay tAlignRight"><?=helper_FrontEnd::price($mp->sum)?> Kč</span></p>
+          </div>   

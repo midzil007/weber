@@ -1,0 +1,11 @@
+<?=$this->pageText?>
+<div class="clear">&nbsp;</div>
+<ul>
+<? foreach ($this->children as $child):
+		if($content = $child->getPublishedContent()):
+		?>	
+		<li><a href="<?=Utils::getPath($child->path)?>"><?=$child->title?></a> <div class="clear">&nbsp;</div></li>
+	
+<? 		endif;
+	endforeach; ?>
+</ul>

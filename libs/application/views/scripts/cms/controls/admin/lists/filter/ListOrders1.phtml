@@ -1,0 +1,73 @@
+	<script>
+	var activeUrl = '<?=$this->activeUrl?>/';
+		var filterPushState = [
+    "start",
+    "end",
+    "filter1",
+    "filter2",
+    "fmFilterSel"
+];
+	</script>
+		<?if(!$this->input->start):
+		$start = date('d.m.Y', strtotime("-7 days"));
+	else:   
+		$start = $this->input->start;
+	endif;  ?> 
+	<?if(!$this->input->end):
+		$end = date('d.m.Y', strtotime("+1 days"));
+	else:     
+		$end = $this->input->end;
+	endif;  ?>   
+	<div class="mDiv">
+			<div class="ftitle">Filtr:</div> 
+	</div>     
+		<div class="tDiv"> 	  
+			Objednáno od: <?=$this->formTextDate('start',$start, array('class' => 'dateInput', "onchange"=> "$('#".$this->tableId."').flexReload()"))?>
+		    Objednáno do:<?=$this->formTextDate('end',$end,array('class' => 'dateInput', "onchange"=> "$('#".$this->tableId."').flexReload()"))?>
+		    <?=$this->formSelect('filter1',$_SESSION['listorders']['filter1'],array("onchange"=> "setPushState(activeUrl,filterPushState);$('#".$this->tableId."').flexReload()"), $this->filter1)?>
+		    <?=$this->formSelect('filter2',$_SESSION['listorders']['filter2'], array("onchange"=> "setPushState(activeUrl,filterPushState);$('#".$this->tableId."').flexReload()"), $this->filter2)?>
+		    Hledat: <input id="fmFilterSel" name="fmFilterSel" type="text" />
+		    <input type="button" onclick="setPushState(activeUrl,filterPushState);$('#<?=$this->tableId?>').flexReload()" name="saveSetB" id="saveSetB" value="Filtrovat" class="fsubmit"> 
+ 		</div>
+ 		<div>
+ 			Označené: <?=$this->formSelect('tableActions',$this->input->tableActions,array(),$this->tableActions)?>
+ 			<input type="button" onclick="$('#<?=$this->tableId?>').flexReload()" name="changeStatus" id="saveSetB" value="OK" class="fsubmit">
+ 				<!-- <a href="#" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" onclick="openFileOption();return;"><span class="ui-button-text">Export Toptrans</span></a> -->
+ 		</div>  
+ 		
+<script>
+function openFileOption()
+{
+	 
+	ch = $('#pagesTable').find(':checkbox');
+	ids = new Array();
+	ch.each(function () {
+ 		sThisVal = (this.checked ? $(this).val() : "");
+ 		if(sThisVal == 'on'){
+ 			ids[ids.length] = $(this).attr('rel');
+ 		}
+	}
+	);
+	$.ajax({
+  type: "POST",
+  url: "/cms/eshop/exporttoptrans/",
+  data: {ids:ids},
+   success: function(response) {
+           $("#file1").attr('href',response);
+           var a = document.createElement('a');
+     		a.download = 'toptrans';
+     		a.href = response;
+     		var evt = document.createEvent('MouseEvents');
+			evt.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
+			a.dispatchEvent(evt)
+     		
+        }
+      
+})
+ch.each(function () {
+ 		 $(this).attr('checked', false);
+})
+	 
+}
+
+</script>

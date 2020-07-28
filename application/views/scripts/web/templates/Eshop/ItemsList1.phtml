@@ -1,0 +1,58 @@
+<div class="col-md-9" id="recalcArea"> 
+	<div class="row basket-n-head">
+		<span class="fst-step3"> 
+			Produkty     
+		</span> 
+		<span class="sec-step3">Cena / Kus</span>  
+		<span class="th-step3">Celkem s DPH</span>   
+	</div> 
+	<div class="row borders" id="listitems"> 
+ 
+       <?php  
+$items = $this->mEshop->basket->getItems();
+$itemsCount = count($items);
+
+              $x = 0;
+              foreach ($items as $id => $data):
+              	$x++;  
+                	$child = $data['item'];
+                	$count = $data['count'];
+	              	if(!$child){ continue; }   
+	              	$c = $child->getTheRightContent();  
+	              	$activeVariant = $this->mVarianta->getVariantById($data['variantId'],false); 
+	              //	pr($data);  e($activeVariant);
+	            		$price  =  $data['price'];   
+	            		if($c)
+	            			$url = $c->getDetailUrl($this, $child);  
+	            		$skladem = $activeVariant['skladem'];
+	            		$barva = $activeVariant['title'] ? ', '.$activeVariant['title']:'';
+	            		$velikost= $activeVariant['titleOption'] ? ', '.$activeVariant['titleOption']: '';
+	            		$photos = $this->mVarianta->getResizedPhotos($activeVariant['obrazky']);
+            			$p = helper_FrontEnd::getFirstPhoto($photos,'pMinic2' , false);
+	                ?>  
+	                
+      
+ 
+                	<span class="fst-step3 f-l">
+                		<strong><?=$count?> x <img class="dismob" src="<?=$p['path']?>" alt=" " /><?=$child->title?><?=$barva?><?=$velikost?>
+                		</strong>  
+               		</span> 
+                        
+             	<span class="sec-step3"><?=helper_FrontEnd::price($price)?>,-</span> 
+                <span class="sec-step3 pricemob">
+                	<strong><?=helper_FrontEnd::price($price*$count)?> Kč</strong>
+				
+				
+					<? if($this->inputGet->step!=3):?> 
+					<a href="#" class="deleteItem botip" rel="Odebrat z košíku" onclick="return del('ks<?=$id?>')"></a>
+					<? endif;?>   
+					
+	</span>    
+				<div class="spacer10"></div>
+              <? endforeach;?> 
+</div>           
+        
+    <?=$this->render('templates/Eshop/deliveryBlockStep3.phtml'); ?>
+    	</div>
+    	
+  

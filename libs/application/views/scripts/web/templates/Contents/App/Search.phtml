@@ -1,0 +1,63 @@
+<form action="<?=$_SERVER['REDIRECT_URL']?>" method="GET">
+<input type="hidden" name="searchIn" value="fulltext" />
+<?= $this->pageText ?>
+<?
+$this->searchIn = array(
+	'title' => 'Pouze v názvech stránky',	
+	'fulltext' => 'Všude (fulltext)'
+);
+ 
+?>
+<table class="formatTable">
+	<tr>
+		<td style="width:150px;">Hledaný výraz</td>
+		<td><?php echo $this->formText('vyhledat',$this->inputGet->vyhledat, array('class'=>'ftext', 'style' => 'width:15em;')) ?> </td>
+	</tr> 
+	<tr>
+		<td colspan="2"><?=$this->formSubmit('hledej', '', array('class' => 'search'))?></td>
+	</tr> 
+</table>  
+	
+</form> 
+<?
+if(strlen($this->inputGet->vyhledat) >= 3){
+	?>	
+	<h3>Výsledek vyhledávání:</h3>
+	<div class="spacer10">&nbsp;</div>
+	<?
+	$searchIn = $this->inputGet->searchIn?$this->inputGet->searchIn:'fulltext';
+	$searchBy = 'all';
+				
+	$search = new module_Search(false, array('searchIn' => $searchIn, 'searchBy' => $searchBy), array('help', 'helpFull', 'intranet', 'sysPages'));
+	
+	$this->searchResults = $search->performSearch($this->inputGet->vyhledat);
+		
+	if(count($this->searchResults)):
+		?>
+		<ol>
+		<?
+			foreach ($this->searchResults as $row):
+				$path = helper_FrontEnd::getPath($this, $row['path']) . '?vyhledat=' . $this->inputGet->vyhledat . '&searchIn=' . $searchIn;
+				
+			?>
+			<li>
+				<b><a href="<?=$path?>" title="<?=$path?>"><?=$row['title']?> &raquo;</a></b>
+			</li>
+			<?
+			endforeach;
+		?>
+		</ol>
+		<?
+	else:
+		?>
+		<p>Výraz <em><?=$this->inputGet->vyhledat?></em> nenalezen.</p>
+		<?
+	endif;	
+
+} elseif(isset($this->inputGet->hledej)) {
+	?>
+	<p>Výraz musí být alespoň 3 znaky dlouhý.</p>
+	<?
+}
+
+

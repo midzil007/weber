@@ -1,0 +1,85 @@
+<?php   
+$doprava = $this->mEshop->basket->deliveryOptions;  
+ 
+$delivery = $this->mEshop->basket->getDelivery();
+$platby = $this->mEshop->basket->getPaymentsById($delivery);
+//if($delivery){
+//	$platby = $doprava[$delivery]['payments'];
+//}
+
+$items = $this->mEshop->basket->getItems();
+$voucher = $this->mEshop->basket->voucher;
+$deliveryPrice = $this->mEshop->basket->getDeliveryPrice2();
+$payment = $this->mEshop->basket->getPaymentPrice();
+$mp = new module_Eshop_PriceCalc($voucher, $items, $deliveryPrice, $payment);
+
+?>         
+                <div id="doprava">
+                  <div class="payLeft fLeft">
+                  	<p>Zvolte druh dopravy</p>
+                  	<?$i=0;?>
+                  <? 
+                  
+                 
+                  foreach ($doprava as $ident => $data):
+                  $checked = false;
+									if($data['disabled'])
+									{
+										continue;
+									}
+                  $dopr[$data['id']] = $data['nazev'].' - ('.$data['price'].' Kč)';
+                  $doprPopis[$data['id']] = $data['popis'];
+                  	 if($delivery == $ident || count($doprava) == 1){
+                  	 	$checked = true;
+                  	 	 $this->input->dop = $ident;
+                  	 }
+                  	 if(!$this->input->dop && $i==0){
+											$this->input->dop = $data['id'];                  	 	
+                  	 }
+                  	 $i++;
+                  endforeach;?>                
+                  <?=$this->formSelect('dop', $this->input->dop, array('class' => 'pradio'), $dopr);?>
+                  <?if($doprPopis[$this->input->dop]):?>  
+                  <p class="note">Poznámka: <?=$doprPopis[$this->input->dop]?></p>
+                  <?endif;?>
+                <div class="spacer10"></div>
+                
+                 <p>Zvolte druh platby</p>
+                  <? foreach ($platby as $ident => $platba):
+                  	$checked = false;
+                  	 if($payment == $ident || count($platby) == 1){
+                  	 	$checked = true;
+                  	 	$this->input->platba = $ident;  
+                  	 }
+                  	 
+                  	 if($mp->sumBezDopravy >= 1700){
+                  	 	$platba['cena'] = 0; 
+                  	 }
+                  	 
+                  	 $plat[$platba['id']] = $platba['nazev'].' - '.$platba['cena'].' Kč';
+                  	 $platNote[$platba['id']] = $platba['popis'];
+                  ?> 
+                  <? endforeach;?>
+                  <?=$this->formSelect('platba', $this->input->platba, array('class' => 'platba'), $plat);?>
+                   <?/// 13 dobírka?>
+                   
+                   <?if($platNote[$this->input->platba]):?>
+                   <p class="note">Poznámka: <?=$platNote[$this->input->platba]?></p>
+                   <?endif;?>  
+            
+            <?php 
+            $this->input->note = $this->input->note?$this->input->note:$this->mEshop->basket->getNote();
+                 
+            ?> 
+            </div>
+            <div class="fRight marRight10">
+        	<p >Vaše poznámka</p>  
+        	<?=$this->formTextarea('note', $this->input->note, array('style' => 'width:329px; height:70px;'))?>
+        	</div>    
+            
+<!--              <p class="slevovyKod">-->
+<!--              	Slevový kód nebo Dárkovy šek</p>-->
+<!--              <div class="clear"></div>	-->
+<!--              <input type="text" name="kod" class="inputBasket" />   -->
+            </div>
+            

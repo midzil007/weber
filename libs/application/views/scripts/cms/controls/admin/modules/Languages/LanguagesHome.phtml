@@ -1,0 +1,47 @@
+&nbsp;
+	<div id="err_langsForm"></div>
+	
+	<form action="" method="post" id="langsForm">		
+	
+	<?php echo $this->ImageButton('Nové slovo/fráze ', '#', 'big/enquiry-new.gif', 'big/enquiry-new-o.gif', array("onclick" => "return newPhrase()")) ?>	
+	
+	<?php echo $this->formSubmit('saveSetB', 'Uložit', array('class'=>'fsubmit', 'iconClass' => "noteIcon")) ?>		
+	 
+	
+	<table class="formatTable" id="langsTable" style="width:100%; clear:both; margin:10px 0px 0px 0px;">
+		<tr>
+		<?
+		$x = 0;
+		$width = floor(100 / count($this->languages->availableLanguages));
+		foreach ($this->languages->availableLanguages as $prefix => $title): ?>
+			<th style="width:<?=$width?>%;"><?=$title?></th>
+		<? endforeach; ?>
+		</tr>
+		<?
+		
+		//e($width);
+		for ($i = 50; $i >= 0; $i--):		
+		?>
+		<tr class="<?=$this->tableTrCycle('licha','suda')?>" id="r<?=$i?>" style="display:none;">
+			<? 
+			foreach ($this->languages->availableLanguages as $prefix => $title):
+				$n = 'new_' . $prefix . '_' . $i; 
+			?>
+			<td><?=$this->formText($n, '', array('class' => 'ftext', 'style' => 'width:95% !important;')); ?></td>
+			<? endforeach; ?>
+		</tr>
+		<?
+		endfor;
+		
+		foreach ($this->phrases as $key => $phrase):?>
+		<tr  class="<?=$this->tableTrCycle('licha','suda')?>">
+			<? foreach ($phrase as $k => $v): ?>
+			<td><?=$this->formText($key . '_' . $k, $v, array('class' => 'ftext', 'style' => 'width:95% !important;')); ?></td>
+			<? endforeach; ?>
+		</tr>
+		<? 
+		endforeach;
+		?>
+	</table>
+	
+	</form>

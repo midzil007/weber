@@ -1,0 +1,44 @@
+<p>Kategorie jsou skupiny vlastností, kterými lze popsat zboží. Kategorií může být např. "barva", vlastnostmi pak "červená", "bílá", ... </p>
+<table>
+	<?for($i=1; $i<=10; $i++):
+	if( ($this->kategorie[$i - 1]) OR ($i<4) )
+		$display = '';
+	else
+		$display = 'style="display:none"';
+	?>
+	<tbody id="kategorieBody_<?=$i?>" <?=$display;?>>
+		<tr>
+			<td><strong>Název kategorie <?=$i?></strong></td>
+			<td><?=$this->formText('kategorie_' . $i, $this->kategorie[$i - 1]['nazevKategorie'])?></td>
+			<td>Smazat: <?=$this->formCheckbox('kDelete_' . $i)?></td>
+		</tr>
+		<?=$this->formHidden('kId_'. $i, $this->kategorie[$i - 1]['id'])?>
+		<tr>
+			<td>Každému produktu bude možno přidělit:</td>
+			<td><?=$this->formSelect('kSelect_' . $i, $this->kategorie[$i -1]['multiOption'], '', array( 0 => 'jednu vlastnost', 1 => 'více vlastností'))?></td>
+		</tr>
+		<tr><td>vlastnosti kategorie <?=$i?>:<td></tr>
+		<?for($j=1; $j<=10; $j++):?>
+			<tr id="kBody_<?=$i?>-n_<?=$j?>"  <?= $j>3 ? 'style="display:none"':''?> >
+				<td></td>
+				<td>Název vlastnosti:</td>
+				<td><?=$this->formText('k_' . $i . '-n_' . $j, $this->kategorie[$i - 1]['nazevVlastnost_'. $j])?></td>
+				<td>Obrázek</td>
+				<td><?=$this->formFileSelect('k_' . $i . '-img_' . $j, $this->kategorie[$i - 1]['obrazek_'. $j])?></td>
+			</tr>
+		<?endfor;?>
+		<tr>
+			<td></td>
+			<td><span style="padding: 2; cursor: pointer; width: 18px" onclick="return showIterator('kBody_<?=$i?>-n_');"><img alt="Přidat vlastnost" src="/images/add.png"> Přidat vlastnost</span></td>
+		</tr>
+		</tbody>
+		<tr><td> &nbsp;</td></tr>
+	<?endfor;?>
+	<tr><td><button onclick="return showIterator('kategorieBody_');">Další kategorie</button></td></tr>
+	<tr>	
+		<td class="formcell" colspan="2">		
+			<?php echo $this->formSubmit('saveSetB', 'Uložit vše', array('class'=>'fsubmit', "onclick" => "return submitFormAjax('settingsForm', '".$this->url(array('controller' => 'settings','action' => 'saveAll'))."', 'settingsHome', 'tab-submit', '', 1 );", 'iconClass' => "noteIcon")) ?>											
+		</td>
+	</tr>
+</table>
+

@@ -1,0 +1,45 @@
+<?
+function drawArticle($view, $articleNode){
+	$article = $articleNode->getPublishedContent();
+	$url = helper_FrontEnd::getPath($view, $articleNode->path); 	
+	$date = Utils::formatDate($article->getPropertyValue('dateShow')); 
+	$count = 220; 
+	$html = helper_FrontEnd::reduceText(strip_tags($article->getPropertyValue('html')), $count, false, true);	  
+	
+	//$authorPhoto = helper_FrontEnd::getPhoto('authorPhoto', $article, $article->fotoThumbName, $article->fotoFullName, 1);     
+	$photo = helper_FrontEnd::getFirstPhoto($article->getFilesNames('photos'), $article->fotoThumbName, $article->fotoFullName, 1);
+    	 	?>   
+	<div class="articlePretext">
+		<? if($photo['path']):?>     
+		<a href="<?=$url?>"><img class="aimg" alt="" src="<?=$photo['path']?>" /> </a> 
+		<? endif; ?>
+			<a class="title" href="<?=$url?>"><?=$articleNode->title?></a>
+		
+			<p><?=$html?> <a href="<?=$url?>">&raquo;</a></p>      
+			<?php 
+			$start = $article->getPropertyValue('dateShow');
+			$end = $article->getPropertyValue('dateEnd'); 
+			 
+			?>
+			 
+			<? if ($start && $end &&  $end != $start && $end != '0000-00-00'):?> 
+				<big><?=Utils::formatDate($start)?> - <?=Utils::formatDate($end)?></big>  
+			<? else:?> 
+				<big><?=Utils::formatDate($start)?></big>  
+			<? endif;?>
+	</div>   
+<?php 
+} 
+?>
+<div id="innerCollLeft">
+	<?
+	$x = 0;
+	foreach ($this->articlesNodes as $child):   
+		$x++;
+		drawArticle($this, $child); 
+	endforeach; 
+	?> 
+	 
+	<?=$this->render('templates/Listing/FloatingWithArrows.phtml'); ?> 
+	<div class="spacer20"></div>
+</div> 

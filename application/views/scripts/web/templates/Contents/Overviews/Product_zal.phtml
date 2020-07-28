@@ -1,0 +1,353 @@
+<?if($this->isAdminsLogin):?>
+<!-- pro inlineEditaci -->
+<link href="/bootstrap/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="/js/jquery-2.0.3.min.js"></script> 
+<script src="/bootstrap/bootstrap-3.2.0-dist/js/bootstrap.min.js"></script>  
+<link href="/bootstrap/inlineEdit/bootstrap-editable.css" rel="stylesheet"/>
+<script src="/bootstrap/inlineEdit/bootstrap-editable.js"></script>
+<?endif;?>
+<?
+$value = $this -> selectedVariant;
+$photo = $this -> mVarianta -> getResizedPhotos($value['obrazky']);
+$pathPhoto = helper_FrontEnd::getFirstPhoto($photo, 'pMinic4', false);
+$preText = $this -> content -> getPropertyValue('preText');
+$title2 = $this -> content -> getPropertyValue('title2');
+$c = new content_Product();
+$c -> getPropertyByName('photos') -> value = $value['obrazky'];
+
+$photos = $photo;
+//$view->content->getFilesNames('photos');
+
+$p = helper_FrontEnd::getPhoto('photos', $c, $c -> fotoCropShowName);
+if (count($p)) {
+	$img = $p['path'];
+} else {
+	$img = '/images/categoryImg.jpg';
+}
+$images = helper_FrontEnd::getResizedPhotos($photos, 'pShow', 'pFull');
+$full = helper_FrontEnd::getResizedPhotos($photos, 'pMinic4', 'pShow');
+$this -> mainImg = $img;?>
+<div <?=$this->schema?'itemscope itemtype="http://schema.org/Product"':'';?>>
+<?if($this->isAdminsLogin):?>
+		<h1><a href="#" id="pageTitle" rel="<?=$this->node->nodeId?>" data-type="text" data-pk="pageTitle" data-title="" class="editable editable-click"><?=$this -> pageTitleRaw ?></a></h1>
+	<?else:?>
+	<div id="page-h1" class="f-l full-width">
+		<h1 class="rounded" <?=$this->schema?'itemprop="name"':''?>><?=$this -> pageTitleRaw ?></h1>
+		<?if($title2):?>
+			<p><?=$title2?></p>
+		<?endif?>
+	</div>
+	<?endif?>
+	 	<div id="tempText">    
+ 		<p <?=$this -> schema ? 'itemprop="description"' : '' ?>><?$html ?></p>
+ 	</div>
+ <div id="detail">
+<div class="col-sm-8" id="detail-photo">
+		 <div id="productGallery" >
+                    	<?$inc = 0;
+                    	foreach($images as $im):?>
+                    		<a href="<?=$im['fullPath']?>" title="" class="mb img-responsive openGallery photo<?=$inc?>" <?=$inc == 0 ? 'id="mb1"' :''?> rel="[images]" data-counter="<?=$inc?>"><img <?=$this->schema?'itemprop="image"':''?> src="<?=$im['path']?>" alt="gal" /></a>
+                    	<?$inc++;endforeach?>
+                       <div class="clear"></div>
+         </div><!-- /productGallery -->   
+ 
+
+	<div id="galleryStrip">
+		<?foreach ($images as $key=>$value): ?>
+    		<a class="mini-photos" onclick="return false;" rel="<?=$i?>" href="<?=$full[$key]['fullPath'] ?>" target="_blank">
+				<img class="botip" rel="Zvětšit obrázek" alt="Zvětšit obrázek" src="<?=$full[$key]['path'] ?>" alt="<?=$value['name'] ?>" >
+			</a>   	
+		<?endforeach; ?>
+</div>
+
+</div> 
+<!-- pro normální použití -->
+<?
+
+$html = $this->html;
+	list($totalRev, $rev) = $this -> mReviews -> showSingleRev($this -> node -> nodeId);
+?>
+<div class="col-sm-4" >
+<?if($totalRev->total>0):?>
+	<div class="">
+		<div class="">
+			<a href="#imgId1" onclick="showTab('t4_t', 2)"><div style="width:<?=$totalRev -> total * 19 ?>px;" class="fullStarsMini"></div></a>
+		</div>
+		<span class="fs11 greyColor1 lineHeight20"><?$totalRev -> count ?></span>
+	</div>
+<?endif; ?> 
+<div class="clear"></div>
+
+<?if($this->priznakyyyyy):?>
+	<?foreach ($this->priznaky as $value):?>
+		<p id="priznaky">
+			<?if($value['obrazek']):?>
+				<img src="<?=$value['obrazek'] ?>" alt="<?=$value['nazev'] ?>" />
+			<?endif ?>
+		</p>
+		<p><?=$value['popis'] ?></p>		
+	<?endforeach;
+			endif;
+		?>
+<div class="fLeft marLeft20" id="prodRight">
+<p class="greyColor marBottom20"><?=$this->pretext ?></p>
+<div id="innerBorder" class="fLeft" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+<?if($this->selectedVariant['discount']):?>
+	<p class="textBlack marTop10">Běžná cena: <span class="tLineThrough"><?=helper_FrontEnd::price($this -> selectedVariant['price2']) ?> Kč
+		<?//$this->content->getEditableProperty($this,'video'); ?></span>
+		<span class="red fBold i-block marLeft5">SLEVA <?=$this -> selectedVariant['discount'] ?>%</span>
+	</p>
+<?endif; ?> 
+	<p class="blackText fs35" itemprop="priceCurrency" content="CZK"><strong itemprop="price" content="<?=$this -> selectedVariant['price']?>">
+		<?if($this->isAdminsLogin):?>
+			<?=$this -> mVarianta -> getEditableProperty($this, 'price', $this -> selectedVariant['id'], $this -> selectedVariant['price']); ?>
+		<?else:?>
+			<?=helper_FrontEnd::price($this -> selectedVariant['price']) ?>
+		<?endif;?>
+		 Kč </strong><span class="greyColor2 fs16">vč. DPH</span></p>
+	 <? if($this->selectedVariant['skladem'] == 1):
+	 	$classDostupnost = 'greenText';?>
+		<form action="<?=$this -> confirmUrl ?>" method="post"> 
+            	<input type="hidden" name="variantId" rel="<?=$this -> selectedVariant['sizeId'] ?>" id="sizeSend" value="<?=$this -> selectedVariant['id'] ?>"> 
+            	<input type="hidden" name="urlProduckt" value="<?=$this -> url ?>">
+            		<input type="hidden" name="pid" value="<?=$this -> node -> nodeId ?>_<?=$this -> selectedVariant['id'] ?>_<?=$this -> selectedVariant['sizeId'] ?>" />
+            		<input type="hidden" name="action" value="buy" />   
+               		<input type="hidden" name="count" value="1" class="ks"> 
+               	<button type="submit" id="buttBig" class="buttons-new">Koupit<span class="blockDisplay" id="prod-buy-icon"></span></button>
+     
+		</form>
+	<?else:
+		$classDostupnost = 'red';
+	endif;?>
+
+	<p id="dost">Dostupnost: 
+	<?if($this->isAdminsLogin):?>
+				// <?=$this -> mVarianta -> getEditableProperty($this, 'skladem', $this -> selectedVariant['id'], $this -> selectedVariant['skladem']); ?>
+	<?endif?>
+	<span class="green"><strong><?=$this -> mVarianta -> skladOptions[$this -> selectedVariant['skladem']] ?></strong></span>
+	</p>
+</div>
+
+
+		<script type="text/javascript" src="/js/tiny_mce/tinymce.min.js"></script>
+		<script type='text/javascript'>
+			tinymce.init({
+				selector: "div.editableEditor",
+				width:"350",
+				inline: true,
+				toolbar1: "insertfile undo redo | styleselect | bold italic",
+				toolbar2: "alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image"
+			});
+		</script>
+		<div class="clear"></div>
+			
+</div>
+</div>
+<div class="clear"></div>
+<div id="text">
+		<div id="rptext1" class="text-row">
+			<?=$this->html;?>
+		</div>
+		<?$params = $this->content->getPropertyValue('parametry');
+		$params = $params ? $params : $preText;
+		if($params):?>
+		<h3 rel="ptext2">Hlavní parametry</h3>
+		<div id="rptext2" class="text-row row f-l">
+				<?
+				$params = str_replace('</ul>', '', $params);
+			
+				$params = str_replace('<ul class="list techs">', '', $params);
+				$params = str_replace('<ul class="list techs">', '', $params);
+				$params = str_replace('<p>', '', $params);
+				$params = str_replace('</p>', '', $params);
+				$params = trim($params);
+				$lists = explode('<li>', $params);
+				$count = count($lists);
+				$pocet = ceil($count/2);
+				$pocettt = $pocet+$pocet; 
+				$inc = 0;
+				$text .= '<div class="col-sm-6"><ul>';
+				unset($lists[0]);
+				foreach ($lists as  $value):
+				?>
+					<?if($inc % $pocet == 0 && $inc !=0):
+						$text .= '</ul></div><div class="col-sm-6"><ul>';
+					endif;
+					if($value)
+						$text .= '<li>'.$value;
+
+					$inc++;
+				endforeach;
+				$text .= '<ul></div>';?>
+				<?=$text;?>
+		</div>
+		<?endif?>
+</div>
+<div class="clear"></div>
+<?list($totalRev,$rev) = $this->mReviews->showSingleRev($this->node->nodeId);
+if($totalRev->total > 0):?>
+	<h3>Hodnocení a recenze <?=$this->node->title?></h3>
+	<div id="revSummary" class="prod-rev-sum">
+		<?if($totalRev->total>0):?>
+			<div id="revResG" class="p-l col-sm-3" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+				<p>Celkové hodnocení </p>
+				<p><strong><span class="green-rev-m" itemprop="ratingValue"><?=$totalRev->total?></span></strong></p>
+				<div class="emptyStars fLeft marLeft10">
+					<div style="width:<?=$totalRev->total*27.6?>px;" class="fullStars"></div>
+				</div>
+				<p>Hodnotilo <span itemprop="reviewCount"><?=$totalRev->count?></span> zákazníků</p>
+			</div>
+		<?endif?>
+			<div class="col-sm-7">Recenze produktu Liebherr WKt 6451 jsou získávány od zákazníků, kteří si produkt zakoupili. Děkujeme za zpětnou vazbu a čas, který věnujete sepsání recenze!</div>
+				<div class="clear"></div>		
+</div>	
+<?
+$inc = 0;
+foreach ($rev as $item):
+			$inc++;
+			if($inc > 11){
+				break;
+			}
+			if(!$item['date'])
+				continue;
+			$name = '';?>
+			<div class="revName col-sm-3 fstRev tAlignCenter marTop5 marRight15 fLeft">
+			<span class="userIcon blockDisplay"></span>
+			<?$name = $item['name']?$item['name']:'Ověřený zákazník';?>
+			<span><?=$name?></span>			
+			<p></p>
+			</div>
+			<div class="revName col-sm-9 fLeft">
+				<div class="emptyStars">
+					<div style="width:<?=$item['rating']*28?>px;" class="fullStars"></div>
+				</div>
+					<div class="revText fs11 fRight marLeft10">
+					<p class="p-l"><strong class="green-rev-m"><?=($item['rating']/5) * 100?>%</strong> </p>
+					<div class="emptyStarsMini p-l">
+						<div style="width:<?=$item['rating']*19?>px;" class="fullStarsMini"></div>
+					</div>
+				</div>
+				<div class="spacer10"></div>
+					<?if($item['pros']):?>
+						<span class="plus">+</span><span class="plus"><?=$item['pros']?></span>
+						<div class="spacer10"></div>
+					<?endif?>
+						
+					<?if($item['cons']):?>
+					<span class="minus">-</span><?=$item['cons']?></span>
+					<div class="spacer10"></div>
+					<?endif?>
+					<?if($item->reaction):?>
+						<p><?=$item->reaction?></p>
+						<div class="spacer10"></div>
+					<?endif?>
+					<?if($item['summary']):?>
+						<p><?=$item['summary']?></p>
+						<div class="spacer10"></div>
+					<?endif?>
+				
+			</div>	
+		
+			<div class="lineGrad"></div>	
+			
+		<?endforeach;?>
+<?endif?>
+<?if($this->isAdminsLogin):?>
+<script src="/inline/main.js"></script>
+<?endif?>
+</div>
+
+<!-- <script>
+		$( document ).ready(function() {
+			$( ".text-row" ).each(function( index ) 
+			{
+				$(this).css('display', 'none');
+				 $(this).click( function() {
+				 })
+			});
+			$( "#text > h3" ).each(function( index ) 
+			{
+				
+				 $(this).click( function() {
+				show = '#r'+$(this).attr('rel');
+				$(show).toggle();
+				});
+			});
+			if (window.matchMedia && window.matchMedia("(min-width: 768px)").matches) {
+ 			}
+ 	
+ 		
+});
+	</script> -->
+	
+
+<div id="photoGalleryPop" class="hidden">
+<div id="galleryTop"><span id="photoDescription">Test description</span><span id="closeGallery" class="pull-right">zavřít ×</span>
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_native_toolbox pull-right mar10r mar2t"></div>
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fa237f86cbb7ec9"></script>
+<div class="clear"></div>
+    </script>
+    <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 1200px;
+        height: 855px; background: #fff; overflow: hidden;"><!--h456 w800-->
+
+        <!-- Loading Screen -->
+        <div u="loading" style="position: absolute; top: 0px; left: 0px;background: #fff;">
+            <div style="filter: alpha(opacity=70); opacity:0.7; position: absolute; display: block;
+                background-color: #000000; top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+            <div style="position: absolute; display: block; background: url(../img/loading.gif) no-repeat center center;
+                top: 0px; left: 0px;width: 100%;height:100%;">
+            </div>
+        </div>
+
+        <!-- Slides Container -->
+        <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 1200px; height: 770px; overflow: hidden;"><!--h356 w800-->
+        	<?$inc = 0;
+        	foreach($images as $key=>$im):?>
+            <div>
+            	<img u="image" src="<?=$im['fullPath']?>" alt="gal" class="original<?=$inc?>" /> 
+            	<img u="thumb" src="<?=$full[$key]['path'] ?>" alt="gal" style="width: auto;" />                       
+				<div class="multiBoxDesc gal<?=$inc?> mbHidden"><?=$im['meta']['fileAlt']?></div>
+            </div>
+            <?$inc++;endforeach?>
+        	      
+        </div>
+               
+       
+        <!-- Arrow Left -->
+        <span u="arrowleft" class="jssora05l" style="width: 40px; height: 40px; top: 308px; left: 8px;"><!--top158-->
+        </span>
+        <!-- Arrow Right -->
+        <span u="arrowright" class="jssora05r" style="width: 40px; height: 40px; top: 308px; right: 8px"><!--top158-->
+        </span>
+        <!-- Arrow Navigator Skin End -->
+        
+        <!-- Thumbnail Navigator Skin Begin -->
+        <div u="thumbnavigator" class="jssort01" style="position: absolute; width: 1200px; height: 100px; left:0px; bottom: 0px;"><!--w800 h100-->
+               <div u="slides" style="cursor: move;">
+                <div u="prototype" class="p" style="position: absolute; width: 72px; height: 72px; top: 0; left: 0;">
+                    <div class=w><thumbnailtemplate style=" height: 100%; border: none;position:absolute; top: 0; left: 0;"></thumbnailtemplate></div>
+                    <div class=c>
+                    </div>
+                </div>
+            </div>
+            <!-- Thumbnail Item Skin End -->
+        </div>
+        <!-- Thumbnail Navigator Skin End -->
+    </div>
+    <!-- Jssor Slider End -->
+</div> <!-- /photoGalleryPop -->
+<script>
+	$('.mini-photos').each( function(index) {
+    $(this).click( function() {
+    	$('.mb').each( function(indexx) {
+    			$(this).css('display', 'none');
+    		 })
+    	$('.photo'+index).css('display', 'inline-block');
+      })
+    
+    })
+</script>
+</div>

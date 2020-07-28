@@ -1,0 +1,165 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><?=$title?></title>
+</head> 
+<body>
+<h2>Příjmový pokladní doklad</h2> 
+<style>  
+.pad-r tr td{ 
+	padding-right: 10px;
+}
+</style>
+<table style="width:100%; font-size:14px; font-family:Arial, Helvetica, sans-serif;">
+	<tr>
+    	<td valign="top" style="text-align:left;width:50%;" align="left">
+        	<span style="font-size:17px; font-weight:bold;">
+            	Firma:
+           </span> 
+     	</td>   
+        <td valign="top" style="text-align:left;width:50%;" align="left">
+        	<span style="font-size:17px; font-weight:bold;">    
+            	Číslo dokladu: JUC<?=$this->order['id-doklad']?>
+          </span>  
+        </td>
+    </tr>
+    <tr>
+    	<td valign="top" style="text-align:left;width:50%;" align="left">
+    		Koncový zákazník   
+     </td>    
+        <td valign="top" style="text-align:left;width:50%;" align="left"> 
+        	  
+            	Datum vystavení: <?=date ("d.m.Y",strtotime($this->order['date-print']))?>
+        </td> 
+    </tr>  
+    <tr>
+    	<td valign="top" style="text-align:left;width:50%;" align="left">
+    		
+     </td>    
+        <td valign="top" style="text-align:left;width:50%;" align="left">   	
+        </td>
+    </tr>
+    <tr>
+    	<td valign="top" style="text-align:left;width:50%;" align="left">
+    
+     </td>    
+        <td valign="top" style="text-align:left;width:50%;" align="left">   	
+        </td>
+    </tr>
+    
+    <tr>
+    	<td valign="top" style="text-align:left;width:50%;" align="left">
+    
+     </td>    
+        <td valign="top" style="text-align:left;width:50%;" align="left">   	
+        </td>
+    </tr>
+    
+    <tr>  
+    	<td valign="top" style="text-align:left;width:50%;" align="left">
+    
+     </td>    
+        <td valign="top" style="text-align:left;width:50%;" align="left">   	
+        </td>
+    </tr>
+     
+     <tr>
+    	<td valign="top" style="text-align:left;width:50%;" align="left">
+    	
+     </td>    
+        <td valign="top" style="text-align:left;width:50%;" align="left">   	
+        </td>
+    </tr>
+    
+	<tr>
+    	<td valign="top" style="text-align:left" align="left" colspan="2">
+        	<span style="font-size:17px; font-weight:bold;">
+        	
+        
+			Objednávka  
+			</span>
+			
+        	<table border="1" class="pad-r" style="width:100%; border-collapse:collapse;">
+            	<tr>
+                	<td valign="top">
+                    	<strong>Zboží</strong>
+                    </td>
+                    <td valign="top" align="right">
+                    	<strong>Počet</strong>
+                    </td> 
+                     <td valign="top" align="right">
+                    	<strong>DPH</strong>
+                    </td>
+                    <td valign="top" align="right"> 
+                    	<strong>Kč / Jednotka</strong>
+                    </td> 
+                    <td valign="top" align="right"> 
+                    	<strong>Kč / Celkem</strong>
+                    </td> 
+                </tr>
+                
+           	<? foreach ($this->items as $item) :?> 
+				<tr>
+                	<td valign="top" > 
+                    	<?=$item['title']?>
+                    </td>
+                    <td valign="top" align="right">  
+                      	<?=$item['count']?>x
+                    </td>
+                       <td valign="top" align="right">
+                      	<?=$item['dph']?>%
+                    </td>
+                    <td valign="top" align="right">   
+                    	<?=helper_FrontEnd::price($item['price'])?> Kč
+                    </td> 
+                     <td valign="top" align="right"> 
+                     	<?$temp = $item['price'] * $item['count'];?>    
+                    	<?=helper_FrontEnd::price($temp)?> Kč
+                    </td> 
+                </tr>	
+				<?$sum += $temp;
+						$dph = round( ($temp / (1 + ($item['dph']/100)) * ($item['dph']/100)), 2);
+	            		if($item['dph'] == 21)   
+							$dph21 += round($dph);
+						if($item['dph'] == 15)      
+	            			$dph15 += round($dph);
+	            		$sumBezDPH += $temp-$dph;?>
+		 	<? endforeach;?>
+                 <?$sumBezDPH = round($sumBezDPH);?> 
+                <tr>   
+                	<td valign="top"colspan="4" style="text-align:right" align="right">Celkem bez DPH:  </td>
+                    <td valign="top" align="right" style="background:#F3F3F3;"><strong><?=$sumBezDPH?> Kč</strong></td>
+                </tr>
+                <?if($dph21):?>
+                	<tr>  
+                		<td valign="top"colspan="4" style="text-align:right" align="right">DPH (21%):</td>
+                   	 <td valign="top" align="right" style="background:#F3F3F3;"><?=$dph21?> Kč</td>
+                	</tr>
+   				<?endif?>  
+   				 <?if($dph15):?>
+                	<tr>
+                		<td valign="top"colspan="4" style="text-align:right" align="right">DPH (15%):</td>
+                   	 <td valign="top" align="right" style="background:#F3F3F3;"><?=$dph15?> Kč</td>
+                	</tr>
+   				<?endif?>   
+					<tr> 
+                	<td valign="top"colspan="4" style="text-align:right" align="right">Celkem k úhradě:</td>
+                    <td valign="top" align="right" style="background:#F3F3F3;"><strong><?=helper_FrontEnd::price($this->order['suma'])?> Kč</strong></td>
+                </tr>  
+
+			
+               
+            </table>
+        </td> 
+    </tr> 
+</table>        
+<p ><strong>Vystavil:</strong></p> 
+			<p><strong>specSHOP s.r.o.</strong><br>
+IČO: 28858506<br>
+DIČ: CZ28858506<br></p>     
+Lonkova 510<br>   
+	Pardubice<br>530 09 Pardubice 
+<p style="height:100px;"></p>  
+</body>  
+</html>

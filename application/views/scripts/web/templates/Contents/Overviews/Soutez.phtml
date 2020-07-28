@@ -1,0 +1,57 @@
+<?
+function drawArticle($view, $articleNode){
+	$article = $articleNode->getPublishedContent();
+	$votes = $articleNode->votes;
+	
+	// $article->createFiles(); 
+	$url = helper_FrontEnd::getPath($view, $articleNode->path); 	
+	$date = Utils::formatDate($article->getPropertyValue('dateShow')); 
+	$count = 220; 
+	$html = helper_FrontEnd::reduceText(strip_tags($article->getPropertyValue('html')), $count, false, true);	  
+	
+	//$authorPhoto = helper_FrontEnd::getPhoto('authorPhoto', $article, $article->fotoThumbName, $article->fotoFullName, 1);     
+	$photo = helper_FrontEnd::getFirstPhoto($article->getFilesNames('photos'), $article->fotoThumbName, $article->fotoFullName, 1);
+    	 	?>   
+		
+	<div class="gimg"> 
+		<a href="<?=$url?>">
+		<img src="<?=$photo['path']?>" alt="<?=$descr?>" title="<?=$descr?>" />
+					    
+		<p><?=$articleNode->title?> - <big><?=$votes?> hlas/ů</big></p> 
+    </a>        
+		<small><?=$article->getHtml()?></small>   
+		
+	</div>                             
+		                         
+<?php 
+} 
+?>
+<div id="innerCollLeft">
+	<?=$this->pageText?>
+	<div class="spacer20"></div>  
+	<?
+	$x = 0;
+	$mv = new module_Voting();
+	foreach ($this->articlesNodes as $i =>   $child){   
+	       
+		$child->votes = $mv->getVotes($child->nodeId);
+		$this->articlesNodes[$i] = $child; 
+	}                               
+	                                                     
+	helper_Sorting::$sortPropertyName = 'votes';           
+  usort($this->articlesNodes, array(helper_Sorting, "cmp_propertyDesc"));    
+    	
+	foreach ($this->articlesNodes as $child):                        
+		$x++;     	
+		drawArticle($this, $child); 
+		if($x %3 == 0){                   
+			?>  
+			<div class="spacer10"></div> 
+			<?
+		}
+	endforeach;  
+	?> 
+	 
+	<?=$this->render('templates/Listing/FloatingWithArrows.phtml'); ?>
+	<div class="spacer20"></div> 
+</div> 

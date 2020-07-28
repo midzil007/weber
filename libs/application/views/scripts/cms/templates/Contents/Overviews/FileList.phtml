@@ -1,0 +1,16 @@
+<?php echo $this->ImageButton('Přidat na tuto stránku soubor', '#', 'big/new-file.gif', 'big/new-file-o.gif', array('style'=> 'float:right; margin:0px 0px 10px 10px;', "onclick" => "return showModal('Nový soubor','". $this->url(array('controller' => 'sf','action' => 'newFile', 'filenode' => $this->node->nodeId, 'inRemoteModule' => '1', 'intranetnode' => $this->node->nodeId )) ."');")) ?>	
+<?=$this->pageText?>
+
+<?php	
+	echo $this->table( 
+			$this->filesTable, 
+			$this->filesTableHead, 
+			$this->filesTableActions, 
+			$this->tableSort, 
+			$this->tableSortType, 
+			$this->curentViewState, 
+			'vypisDole',
+			array('class' => 'list') 
+		); 	
+	?>
+	

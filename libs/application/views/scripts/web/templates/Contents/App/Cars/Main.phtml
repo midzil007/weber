@@ -1,0 +1,113 @@
+<?
+$this->sort = $this->inputGet->s?$this->inputGet->s:'title';
+$this->sortType = $this->inputGet->st?$this->inputGet->st:'';
+
+
+function sortArrow($view, $up, $sort, $sortType = ''){
+	$input = (array) $view->inputGet;
+	$isActive = false;
+	//e($view->sort . ' - ' . $sort);
+	if($view->sort == $sort && $view->sortType == $sortType){
+		$isActive = true;
+	}
+	$input['s'] = $sort;
+	$input['st'] = $sortType;
+	
+	$up = $sortType=='Desc'?false:true;
+	$class = $up?'up':'down';
+	?>
+	<a href="<?=Utils::addUrlParams($view->fullRequestUrl, $input)?>" class="<?=$class?> <?=($isActive?'active' . $class:'')?>"></a>
+	<?
+}
+
+$filter = new stdClass();
+//$filter->limit = 11;
+$filter->model = $this->inputGet->model;
+$filter->category = $this->inputGet->category;
+$filter->made_from = $this->inputGet->made_from;
+$filter->made_too = $this->inputGet->made_too;
+
+$this->children = $this->cars->filterCars('', $this->sort, $this->sortType, $filter);		
+
+//?model=-1&category=-1&made_from=NA&made_too=NA
+
+?>
+
+<?
+echo $this->render('templates/Listing/init.phtml');
+$this->listingPerPage = 20;
+$z = 0;
+?>
+<!-- <h1><?=$this->curentNode->title?></h1> -->
+<? if(count($this->children)): ?>
+	<table cellspacing="0">
+		<tr>
+			<th>&nbsp;</th>
+			<th style="width:85px;"><span>Značka</span>
+				<? sortArrow($this, true, 'modelTitle'); ?>
+				<? sortArrow($this, false, 'modelTitle', 'Desc'); ?>
+			</th>
+			<th><span>model / typ</span>
+				<? sortArrow($this, true, 'modelType'); ?>
+				<? sortArrow($this, false, 'modelType', 'Desc'); ?>
+			</th>
+			<th style="width:80px;"><span>Kategorie</span>
+				<? sortArrow($this, true, 'bodyType'); ?>
+				<? sortArrow($this, false, 'bodyType', 'Desc'); ?>
+			</th>
+			<th style="width:75px;"><span>r. výroby</span>
+				<? sortArrow($this, true, 'madeDate'); ?>
+				<? sortArrow($this, false, 'madeDate', 'Desc'); ?>
+			</th>
+			<th style="width:75px;"><span>km</span>
+				<? sortArrow($this, true, 'kilometres'); ?>
+				<? sortArrow($this, false, 'kilometres', 'Desc'); ?>
+			</th>
+			<th style="width:85px;"><span>cena</span>
+				<? sortArrow($this, true, 'price'); ?>
+				<? sortArrow($this, false, 'price', 'Desc'); ?>
+			</th>
+		</tr>
+	<?
+	$x = 0;
+	foreach ($this->children as $c):		
+	
+		$z++;
+		if(($z <= ($this->listingCurentPage*$this->listingPerPage)) || ($z > ($this->listingNextPage*$this->listingPerPage))){
+			continue;
+		}
+			
+		$class = $x%2==0?'dark':'';
+		$car = $c->getPublishedContent();
+		//$car->createFiles();
+		
+		$photo = helper_FrontEnd::getFirstPhoto($car->getFilesNames('fotky'), $car->fotoThumbName, $car->fotoShowName);
+	
+		$url = Utils::getWebPath($c->path);
+		?>
+		<tr class="<?=$class?>" onclick="window.location.href='<?=$url?>'">
+			<td>
+				<? if($photo['path']): ?>				
+					<a href="<?=$url?>"><img src="<?=$photo['path']?>" onmouseover="Tip('<img src=\'<?=$photo['fullPath']?>\'', FADEIN, 500, WIDTH, 268, BORDERCOLOR, '#ffff13')" onmouseout="UnTip()" alt="<?=$c->title?>" /></a>
+				<? endif; ?>
+			</td>
+			<td><strong><?=$car->getModelTitle()?></strong></td>
+			<td><?=$car->getModelType()?></td>
+			<td><?=$car->getBodyType()?></td>			
+			<td><?=$car->getMadeDate()?></td>
+			<td><?=$car->getKilometres()?></td>
+			<td class="yellow"><strong><?=$car->getPrice()?></strong></td>                                                              
+		</tr>	
+		<?
+		$x++;
+	endforeach;
+	?>
+	</table>
+	
+	<? echo $this->render('templates/Listing/Floating2.phtml'); ?>
+	<p><small>&nbsp; Celkem: <?=$this->ListingItemsCount?></small></p>
+<? else: ?>
+	<div class="NA">
+	<p>Litujeme, ale vyhledávaný vůz není momentálně v naší nabídce.</p>
+	</div>
+<? endif; ?>

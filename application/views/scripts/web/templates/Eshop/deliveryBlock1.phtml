@@ -1,0 +1,190 @@
+<?php   
+$doprava = $this->mEshop->basket->deliveryOptions;  
+
+//if($delivery){
+//	$platby = $doprava[$delivery]['payments'];
+//}
+$delivery = $this->mEshop->basket->getDelivery();  
+ 
+$items = $this->mEshop->basket->getItems();
+$voucher = $this->mEshop->basket->voucher;
+$deliveryPrice = $this->mEshop->basket->getDeliveryPrice2();
+$payment = $this->mEshop->basket->getPaymentPrice();
+$paymentDetail = $this->mEshop->basket->getPaymentDetail();    
+$mp = new module_Eshop_PriceCalc($voucher, $items, $deliveryPrice, $payment);  
+if(!$this->input->platby):
+	$this->input->platby = $paymentDetail['id'];
+endif;     
+$mp = new module_Eshop_PriceCalc($voucher, $items, 0, 0);  
+$mp->sum = $mp->sum - $sum->delivery?>         
+<div class="row">  
+                  <div class="col-md-6 doprava">
+                  	<p><strong>Zvolte druh dopravy</strong></p>
+                  	<?$i=0;?>
+                  <?$set = true;
+              	 foreach ($doprava as $ident => $data):
+					    
+					 if($data['cena_od'] <= $mp->sum &&  $data['cena_do'] >= $mp->sum)  
+									 {   
+									 	if($data['id'] == $this->input->dop )   
+										{        
+											$set = false;   
+											
+										}            
+									}     
+					 endforeach;   
+					       
+                  if($set) 
+                  { 
+                  	$this->input->dop = false;     
+                  } 
+                  foreach ($doprava as $ident => $data): 
+					
+                  $checked = false;
+									if($data['disabled'])
+									{
+										continue;  
+									}  
+									if($data['cena_od'] > $mp->sum ||  $data['cena_do'] <=$mp->sum)   
+									{     
+										continue;       
+									}
+									
+                  $dopr[$data['id']] = $data['nazev'].' - ('.$data['price'].' Kč)';
+                  $doprPopis[$data['id']] = $data['popis'];
+				  if(!$this->input->dop){
+				          
+				  	$this->input->dop = $delivery = $data['id'];   
+				  }    
+                  	 if($delivery == $ident || count($doprava) == 1){
+                  	 	$checked = true;
+                  	 	 $this->input->dop = $ident;
+                  	 }
+                  	 if(!$this->input->dop && $i==0){
+                  	 	  
+							$this->input->dop = $data['id'];                  	 	
+                  	 } 
+                  	 $i++;
+                  endforeach;
+				      
+                    ?>
+                 <?=$this->formRadio('dop', $this->input->dop, array('class' => 'pradio'), $dopr);?>  
+                  <?if($doprPopis[$this->input->dop]):?>  
+                  <p class="note">Poznámka: <?=strip_tags($doprPopis[$this->input->dop])?></p>
+                  <?endif;?>
+                <div class="spacer10"></div>
+             <div class="fRight marRight10">
+        	<p >Vaše poznámka</p>   
+        	<?=$this->formTextarea('note', $this->input->note, array('style' => 'width:329px; height:70px;'))?>
+        	</div>   
+                   </div>
+                    
+                   
+                  <div class="col-md-6 doprava">
+                        <p><strong>Zvolte druh platby</strong></p> 
+<?  
+$platby = $this->mEshop->basket->getPaymentsById($this->input->dop );?>
+                  <?foreach ($platby as $ident => $platba):
+					  if(!$this->input->platby)
+					  { 
+					  	$this->input->platby  = $ident;
+					  }
+                  	$checked = false;
+                  	 if($this->input->platby == $ident || count($platby) == 1){
+                  	 	$checked = true;
+                  	 	$this->input->platby = $ident;  
+                  	 }
+					       
+					// agmo platby  
+					if($ident > 16 && $ident <35 && $ident!=33){    
+						$platAgmo[$platba['id']] = $platba['nazev'].' - '.$platba['cena'].' Kč';
+                  	 	$platAgmoNote[$platba['id']] = $platba['popis'];
+					}
+					elseif($ident == 32)  
+					{
+						 
+						$platCard[$platba['id']] = $platba['nazev'].' - '.$platba['cena'].' Kč';
+                  	 	$platCardNote[$platba['id']] = $platba['popis'];
+					}
+					else{
+                  	 	$plat[$platba['id']] = $platba['nazev'].' - '.$platba['cena'].' Kč';
+                  	 	$platNote[$platba['id']] = $platba['popis'];
+					}
+                  ?> 
+                  <? endforeach;?>
+                 
+					<?
+					foreach ($plat as $kl => $pl):
+						$cheched = $im = '';
+						if($this->input->platby == $kl):
+							$cheched = 'checked="checked"';
+						endif;
+						if($kl == 16):
+							$im = '<table class="cofi">
+							<tr>
+							<td><input type="radio" name="platby" id="platby-'.$kl.'" '.$cheched.' value="'.$kl.'" class="platby"></td>
+							<td><img src="/images/logo-cofidis.jpg" title="'.$kl.'" alt="'.$kl.'"></td><td>'.$pl.'</td></tr></table>';
+						elseif($kl == 36): //qr- platba    
+								$im = '<table class="cofi">
+								<tr>
+								<td><input type="radio" name="platby" id="platby-'.$kl.'" '.$cheched.' value="'.$kl.'" class="platby"></td>
+								<td><img class="qr-mini" src="/images/QRcode.png" title="'.$kl.'" alt="'.$kl.'"></td><td>'.$pl.'</td></tr></table>';
+						else:        
+							$im = '<input type="radio" name="platby" id="platby-'.$kl.'" '.$cheched.' value="'.$kl.'" class="platby">'.$pl;
+						endif?>    
+						<label><?=$im?></label><br>
+					<?endforeach?>
+                   <?/// 13 dobírka?>
+                   
+                   <?if($platNote[$this->input->platby]):?>
+                   <p class="note">Poznámka: <?=$platNote[$this->input->platby]?></p>
+                   <?endif;?>  
+            <img src="/images/ComGate-180x46.jpg">      
+                    <p class="fBold fs15">Online platba kartou (okamžitá platba přes platební bránu)</p> 
+                    		<?foreach ($platCard as $kl => $pl):  
+						$cheched = $im = '';   
+						if($this->input->platby == $kl): 
+							$cheched = 'checked="checked"';
+						endif;
+							$im = '<table class="cofi">
+							<tr>
+							<td><input type="radio" name="platby" id="platby-'.$kl.'" '.$cheched.' value="'.$kl.'" class="platby"></td>
+							<td><img src="/images/MasterCard_03.png" title="'.$kl.'" alt="'.$kl.'"></td><td>'.$pl.'</td></tr></table>';?>
+						<label><?=$im?></label><br>  
+					<?endforeach?>				
+                   <br>
+                    <?$this->formRadio('platby', $paymentDetail['id'], array('class' => 'platby'), $platCard);?>  
+                  
+                   <?/// 13 dobírka?>
+                   <?if($platCardNote[$this->input->platby]):?>
+                   <p class="note">Poznámka: <?=$platNote[$this->input->platby]?></p>
+                    <?endif;?>  
+            
+                     
+                    <!-- <p class="fBold fs15">Bankovní převody</p> -->   
+                    <!-- <p><strong>Platba kartou </strong><img src="/images/ComGate-180x46.jpg"> </p>   -->  
+                    <?$iplatba = 1;
+                    foreach($platAgmo as $key=>$item):
+                    	if($key==17 ):?> 
+                    	        <div class="spacer10"></div>   
+                    	<p><strong>Bankovní převody</strong></p> 
+                    	<?endif;?>
+                    	<div class="platbyresp"><label class="radioLabel playIco"><input type="radio" <?=$key == $this->input->platby ? 'checked':''?> name="platby" value="<?=$key?>" class="platby">
+                    		<img src="/images/<?=$key?>payment.jpg" title="<?=$item?>" alt="<?=$item?>"/></label>
+                    	</div>
+                    <?					$iplatba++?>
+                    <?endforeach?>
+                   <?/// 13 dobírka?>
+                   <?if($platAgmoNote[$this->input->platby]):?>
+                   <p class="note">Poznámka: <?=$platNote[$this->input->platby]?></p>
+                   <?endif;?>  
+              
+            <?php 
+            $this->input->note = $this->input->note?$this->input->note:$this->mEshop->basket->getNote();
+                 
+            ?>  
+       
+            </div>
+   
+        	
+</div>

@@ -1,0 +1,142 @@
+<?php 
+$this->itemsListOverview = true; 
+$items = $this->mEshop->basket->getItems();
+
+$itemsCount = count($items); 
+?>
+<form method="post" id="basketForm" action="/nakupni-kosik">
+<div id="recalcArea">  
+	<?=$this->render('templates/Eshop/BasketStep1Inner.phtml'); ?>     
+</div>
+</form>		 
+ 
+<script type="text/javascript" charset="utf-8">
+
+		var f = $('basketForm');		
+		var recalcArea = $('recalcArea')
+		function upOnChange(){
+			ref = recalcArea.getElements('.up');
+			ref.each(function(el){			 
+				el.addEvents({  
+						'click': function(){
+							id = this.getProperty('prop');
+							count = parseInt($(id).get('value')) + 1;
+							$(id).set('value',count);
+							calculatePay();
+							} 
+				});		 
+			}); 
+		}
+
+		function downOnChange(){
+			ref = recalcArea.getElements('.down');
+			ref.each(function(el){			 
+				el.addEvents({  
+						'click': function(){
+							id = this.getProperty('prop');
+							count = parseInt($(id).get('value')) - 1;
+							$(id).set('value',count);
+							calculatePay();
+							} 
+				});		 
+			});
+		}
+ 
+		function initOnChange(){
+			ref = recalcArea.getElements('.refresh');
+			ref.each(function(el){   			 
+				el.addEvents({  
+					'change': calculatePay
+				});
+
+			});
+			voucher = $('vlozit');
+			if(voucher){
+				voucher.addEvents({   
+					'click': calculatePay 
+				});
+			}
+			
+		}
+		initOnChange();
+
+		function setTotalPrice(){
+			if($('shopPrice')){
+				$('showPrice').set('text', $('shopPrice').get('text'));
+				}
+			else{
+				$('showPrice').set('text', '0 Kč');
+				}
+			}
+
+		function del(ident){
+				$(ident).set('value', 0);
+				calculatePay();   
+			return false; 
+		}
+		
+		function calculate(){
+			var req = new Request({				
+                method: 'post',
+                url: f.get('action') + "?ajax=1&action=refreshBasket",  
+                data: f,    
+                onRequest: function() {   
+				recalcArea.fade(0.1); 
+				 },
+                onComplete: function(response) {  
+					(function(){
+						recalcArea.set('html', response); 
+						recalcArea.fade(1); 
+						initOnChange();
+						upOnChange();
+						downOnChange();
+						setTotalPrice();
+					}).delay(200);  			 
+					
+                }     
+       		}).send(); 
+		}
+
+		function initOnChangeDel(){  
+			ref = recalcArea.getElements('.pradio'); 	 
+			ref.addEvents({  
+					'change': calculatePay
+				});
+		};
+
+
+		function initOnChangePay(){  
+			ref = recalcArea.getElements('.platba'); 	 
+			ref.addEvents({  
+					'change': calculatePay
+				});
+		};
+		initOnChangeDel();
+		initOnChangePay();
+		upOnChange();
+		downOnChange(); 
+		function calculatePay(){
+			
+			var req = new Request({				
+                method: 'post',
+                url: f.get('action') + "?ajax=1&action=refreshBasket",  
+                data: f,    
+                onRequest: function() {   
+				recalcArea.fade(0.1); 
+				 },
+                onComplete: function(response) {  
+					(function(){
+						recalcArea.set('html', response); 
+						recalcArea.fade(1); 
+						initOnChangePay();
+						upOnChange();
+						downOnChange();
+						initOnChange();
+						initOnChangeDel();
+						setTotalPrice();
+					}).delay(200);  			 
+                }     
+       		}).send();
+		}
+	</script>   
+	

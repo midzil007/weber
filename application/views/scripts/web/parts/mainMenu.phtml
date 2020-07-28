@@ -1,0 +1,23 @@
+
+			<?php											
+			$home = $this->tree->getNodeByPath('/');			 
+			$this->firstLevel = helper_FrontEnd::checkChildren($home->getChildren('FOLDER'), 1);	
+			?>
+           
+            <ul id="menu">
+                   <?  
+					$i = 0;
+					foreach ($this->firstLevel  as $menuItem):						
+						$i++;
+						$visible = helper_FrontEnd::isActive($this->curentPath, $menuItem->path, true);						
+						$aClass = '';
+						if($visible){
+							$aClass = ' class="active"';
+						}
+						
+					?>
+					<li>
+						<a <?=$aClass?> id="m<?=$i?>" href="<?=Utils::getWebPath($menuItem->path)?>"><?=$menuItem->title?></a>
+					</li>
+					<? endforeach; ?>
+            </ul>

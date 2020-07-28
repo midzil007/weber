@@ -1,0 +1,28 @@
+<div class="shadow" id="nabidka">
+        <div id="promo">
+        <? $mArctiles = new module_Articles();
+		   $topOffer = $mArctiles->getTopArticles(1);
+		   foreach ($topOffer as $itemTop):
+		   
+        ?>
+        
+          <p><span class="f-14 gray1 tbold">Akční nabídky</span> (<a href="/akcni-nabidky">další</a> / <a href="/novinky-na-email">zasílání na email</a>):</p>
+          <a href="<?=$itemTop['path']?>" class="promo"><img height="102" width="131" alt="<?=$itemTop['photos']['name']?>" src="<?=$itemTop['photos']['path']?>"></a>
+          <p><span><?=$itemTop['title']?></span><br>
+            <a href="<?=$itemTop['path']?>" class="more">více zde</a></p>
+        <?endforeach;?>     
+        </div>
+        <div id="take">
+          <p>Co také umíme:</p>
+          
+          <?
+           $mGaleries = new module_Gallery();
+           $topGaleries = $mGaleries->getNewestPhotos();
+           foreach ($topGaleries  as $item):  
+          ?>
+          <div class="take-item"><a href="<?= $item['path']?>" class="item-img"><img height="79" width="102" alt="<?=$item['photos']['name']?>" src="<?=$item['photos']['path']?>"></a>
+            <p><a href="<?= $item['path']?>"><?= $item['title']?></a></p>
+          </div>
+          <?endforeach;?>
+        </div>
+      </div>

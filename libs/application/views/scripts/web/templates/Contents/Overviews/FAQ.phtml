@@ -1,0 +1,48 @@
+
+<script type="text/javascript"> 
+	 
+	function prepareFaq(id){
+		body = $('faqBody' + id);
+		 
+		triger = $('faqTrigger' + id);
+		triger.fid = id;
+		triger.bHeight = body.getStyle('height').toInt();
+		triger.onclick = function(){  
+			if(this.hasClass('plus')){
+				this.addClass('minus');
+				this.removeClass('plus');				
+				$('faqBody' + this.fid).tween('height', this.bHeight + 7);   
+			} else { 
+				this.addClass('plus');
+				this.removeClass('minus');
+				$('faqBody' + this.fid).tween('height', 0);  
+			}
+			return false; 
+		}
+	
+		body.setStyle('height', '0px');  
+	}
+		   
+</script>    
+
+<div class="faqBox"> 
+<?
+foreach ($this->children as $faq): 
+	$cFaq = $faq->getPublishedContent();
+	
+	$private = $cFaq->getPropertyValue('private');   
+?>
+
+<div class="faq <?=($private==1?'private':'')?>" > 
+	<a id="faqTrigger<?=$faq->nodeId?>" class="trigger plus <?=($private==1?'private':'')?>" href="#"><?=$faq->title?></a> 
+	<div class="faqBody" id="faqBody<?=$faq->nodeId?>">  
+		<?=$cFaq->getPropertyValue('answer')?>   
+	</div>
+	<script type="text/javascript">
+		prepareFaq(<?=$faq->nodeId?>); 
+	</script>
+</div> 
+<div class="faqFooter"></div> 
+<? endforeach; ?>
+</div> 
+<div class="clear"></div> 

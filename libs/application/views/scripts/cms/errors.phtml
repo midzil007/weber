@@ -1,0 +1,41 @@
+			
+			<?php foreach ($this->messages as $m):
+				switch($m{0}){
+					case 'e':
+						$class = $m{0};
+						$title = 'Upozornění';
+						$icon = 'ui-icon-info';
+						break;						
+					
+					case 'i':
+						$title = 'Informace';
+						$icon = 'ui-icon-alert'; 
+						$class = $m{0};
+						break;			
+						
+				}
+				$messages .= substr($m,2).'<br>';		 
+				$ident = rand(0,99999999);
+			?>				
+					
+			<?php endforeach; ?>			
+						   
+			<div  id="dialog-message" title="<?=$title?>">
+			  <p class="<?=$class?>">    
+			    <span class="ui-icon  <?=$icon?>" style="float: left; margin: 0 7px 50px 0;"></span>
+			    <?=$messages ?>
+			  </p>  
+			</div>
+			
+			<script>
+			  $(function() {
+			    $( "#dialog-message" ).dialog({
+			      modal: true,
+			      buttons: {
+			          Ok: function() {
+			            $( this ).dialog( "close" );
+			          }
+			        }
+			    }); 
+			  });
+			  </script>

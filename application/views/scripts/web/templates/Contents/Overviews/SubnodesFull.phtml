@@ -1,0 +1,19 @@
+<?=$this->pageText?>
+<?
+$subnodes =  $this->node->getChildren('FOLDER');
+foreach ($subnodes as $i => $subnode){
+	$overviewContent = $subnode->getPublishedContent();
+	
+	?>
+	<h2><?=$subnode->title?></h2>
+	<?
+	
+	$t = str_replace('<h2', '<h3', $overviewContent->show($this, $subnode));
+	//$t = str_replace('<h3', '<h4', $t);
+	//$t = str_replace('<h4', '<h5', $t);
+	echo $t;
+	?>	
+	<div class="spacer10">&nbsp;</div>
+	<?
+}     	
+?>

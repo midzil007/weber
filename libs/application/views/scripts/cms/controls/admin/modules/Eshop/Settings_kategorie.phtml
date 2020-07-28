@@ -1,0 +1,113 @@
+
+
+<p>Kategorie jsou skupiny vlastností, kterými lze popsat zboží. Kategorií může být např. "barva", vlastnostmi pak "červená", "bílá", ... </p>
+<div id="allcats">
+	<?  
+	for($i=1; $i<=100; $i++):
+
+	if( ($this->kategorie[$i - 1]) ){
+
+	} else {
+		break;
+	} 
+	$this->kident = $i;  
+	 
+	echo $this->render('controls/admin/modules/Eshop/Settings_kategorie_item.phtml');  
+	?> 
+	
+<?endfor;
+
+
+	if(!$this->kategorie){
+		$i = 0; 
+	} 
+?>  	
+</div> 
+ 
+
+<a href="#" onclick="loadKat();return false;"  id="nextCat nb" class="nice" role="button" aria-disabled="false">
+<span class="ui-icon ui-icon-circle-plus"></span><span class="ui-button-text">Další kategorie</span></a>
+
+<script type="text/javascript" charset="utf-8">	
+var recalcArea = $('table');
+function showCatSeo(){ 
+	recalcArea.on('click', '.catText', function(el){			 
+		id = $(this).attr('prop');
+		if($('#catSeo_'+id).css('display') == 'block')
+			{
+			//$(this).text('Přidat popis kategorie');
+			}
+		else
+			{
+		//	$(this).text('Skýt popis kategorie');			
+			}; 
+		$('#catSeo_'+id).toggle("slow");
+		
+		return false;
+	}); 
+}
+var nextIdKat = <?=$i?>; 
+
+function showNextCategory()
+{	
+	
+	set = false;
+	$('.bodyCat').each(function( index ) {
+		if($(this).css('display')=='none' && set==false){
+		set = true;
+		$('#kategorieBody_'+(index+1)).css({'display' : 'block'});
+		}
+	});
+	return false;
+	};
+
+function showOptionSeo(){ 
+	recalcArea.on('click', '.catOptionText', function(el){
+		id = $(this).attr('prop');
+		$('#catOptionText_'+id).toggle("slow");
+		$('#catOptionText2_'+id).toggle("slow");
+		  return false; 
+	}); 
+}
+
+function showNextOption(index){
+		set = false;
+		$('.optionInner_'+index).each(function( index ) {
+			id = $(this).attr('prop');
+			
+			if($('#kBody_'+id).css('display')=='none' && set==false){
+				$('#kBody_'+id).css({'display' : ''});
+				set =true;
+			}
+		});
+		return false;
+	}; 
+
+ function delKat(dclass){
+	 //if(confirm('Opravdu smazat?')){
+	 	$( "." + dclass ).remove();  
+	 //  }  
+	 return false  
+ }  
+ 
+
+	function loadKat(){   
+		 nextIdKat++;  
+		 $.get('/cms/eshop/loadkategoriehtml/nextid/' + nextIdKat, function(data) {  
+	        $('#allcats').append(data);  
+	     });      
+	     return false;
+	}   
+
+	function loadKatVlastnost(kid, next){    
+		 $.get('/cms/eshop/loadkategorievlastnosthtml/nextid/' + next  + '/kid/' + kid, function(data) {   
+	        $('#kv_' + kid).append(data);    
+	     });      
+	     return false;
+	}
+
+
+showCatSeo();
+showOptionSeo();
+</script>  
+

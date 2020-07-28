@@ -1,0 +1,132 @@
+<?
+$this->input->dop = $this->mEshop->basket->getDeliveryBasket();
+$this->disableLeft = true;
+if($this->inputGet->done):
+$this->isWide = false; 
+$this->txtPage = true ; 
+
+$id = $fid = base64_decode($this->inputGet->z);
+$price = base64_decode($this->inputGet->price);
+$price2 = base64_decode($this->inputGet->price);
+
+$payment = $this->inputGet->p;
+$delivery = $this->inputGet->d;
+$id = '&uniqueId='.$id;
+$price = '&price='.$price;
+//  $faktura = $this->mFakturace->getFaktura($this, $fid);
+if($_SERVER["REMOTE_ADDR"] != '94.138.107.65'):
+?> 
+	
+<script type="text/javascript">
+<?$_SESSION['ecommerce'];?> 
+</script>
+<?$_SESSION['googleOrder'];?> 
+<?endif;?>
+<div id="orderSend">
+<div class="fLeft">   
+<h2>Objednávka úspěšně odeslána </h2>  
+<? if($this->inputGet->paied):?><h3 style="text-align:left;">Platba za zboží <strong>zaplacena</strong>, děkujeme.</h3><? endif; ?>
+<p>Detaily o objednávce jsme Vám odeslali na email.</p>  
+</div> 
+<div style="float:left;margin: 7px 0 0 50px;">  
+<div class="fullBasket"></div> 
+</div>
+</div>
+<div class="spacer10"></div> 
+  
+   	     
+<? if( 0 && $faktura->isProforma == 1):?>        		  
+<div class="spacer10"> </div>     
+<a href="/?getFaktura=<?=$fid?>" target="_blank"><span>Zobrazit výzvu k platbě</span></a>
+<div class="spacer10"> </div>  
+<? endif;?>            		  
+<? return; endif;?> 
+
+<div id="orderSteps"> 
+    <h1 class="marLeft20"><?=$this->pageTitleRaw?></h1> 
+    <? if($this->step != 6 ):?>
+    <div class="content">
+    <ul> 
+            <li class="fst fBold fs14 fLeft <?=($this->step==1?'selected':'')?> <?=$this->show1?>">
+            <?if($this->step == 1):?>
+            	<span></span>Obsah Košíku</li>
+            <?else:?>
+            	<a href="?step=0"><span></span>Obsah Košíku</a></li>
+            <?endif;?>
+            <li class="snd fBold fs14 fLeft <?=($this->step==2?'selected':'')?> <?=$this->show2?>">
+             <?if($this->step != 2 && $this->maxStep >=2):?>
+             <a href="?step=2"><span></span>Dodací údaje</a></li>
+            <?else:?>
+            	<span></span>Dodací údaje</li>
+            <?endif;?>
+            <li class="trd  fBold fs14 fLeft <?=($this->step==3?'selected':'')?> <?=$this->show3?>"><span></span>
+            
+            <?if(($this->step != 3) && ($this->maxStep >=3)):?>
+            	<a href="?step=3">Souhrn</a></li>
+            <?else:?>
+            	
+            	Souhrn</li>
+            <?endif;?>
+          </ul> 
+    <? endif;?>
+   	<? 
+   	 
+$this->formCheck = true;
+
+
+$basket = $this->basket = $this->mEshop->basket;   
+$sum = $basket->getSum($this);
+$shopper = $basket->getShopper();  
+ 
+if($this->inputGet->done){
+	$this->step = 3; 
+}	 
+
+if($this->inputGet->m){ 
+	Helpers::addMessage(0, base64_decode($this->inputGet->m), $this); 
+}
+
+if($this->inputGet->vm){ 
+	Helpers::addMessage(0, urldecode($this->inputGet->vm), $this); 
+}	 	 
+
+?>
+<? if(count($this->messages)): ?>
+	<?= $this->render('parts/messages.phtml'); ?>				
+<? endif; ?>
+  
+
+	<? if($this->basketItemsCount ||  $this->inputGet->done): ?>	
+	  
+	<?
+	switch ($this->step){
+		default:
+			$this->step = 1;
+		case 1:	
+		case 2:	
+		case 3:	
+		case 4:	
+			echo $this->formHidden('step', $this->step);
+			echo $this->render($this->templatesPrefix . 'templates/Eshop/BasketStep' . $this->step . '.phtml');
+			break;
+		case 6:	 
+			echo $this->formHidden('step', $this->step);   
+			echo $this->render($this->templatesPrefix . 'templates/Contents/App/PaySec.phtml');    
+			break;  
+	}
+	
+	?>  
+	<div class="spacer10"> </div>   
+	<? else: ?>  
+	<div class="spacer10"> </div>  
+	<div class="spacer10"> </div>  
+	<div class="spacer10"> </div>   
+	<div class="tcenter">
+	<p>Nemáte v košíku žádné zboží.</p>
+	</div>  
+	<? endif; ?>
+	 
+ 	<? if($this->step != 6 ):?>
+	</div>
+	<? endif;?>
+</div>

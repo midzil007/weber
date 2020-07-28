@@ -1,0 +1,150 @@
+<?// předkošík add to basket
+if($this->input->action):?>
+	<?	$this->mEshop->basket->addItem($this->input->pid,$this->input->count,$this->input->urlProduckt,$this,$this->input->variantId,$this->input->optionId);
+	helper_Frontend::redirect($this->confirmUrl, 302);?>
+<?endif;?>	
+<?if(!$this->input->pid):
+		if($_SESSION['WEB07']['alternativeProd']){
+			$this->input->pid = $_SESSION['WEB07']['alternativeProd'];
+			$_SESSION['WEB07']['alternativeProd'] = null;
+			$lastUrl = $this->confirmUrl;
+		}
+		else{
+
+			$this->input->node = $this->tree->getNodeById($_SESSION['WEB07']['lastProdId']);
+			$lastUrl = $_SESSION['WEB07']['urlLsProduct'];
+		}
+	endif;
+	if(!$this->input->node ):
+		helper_FrontEnd::redirect($_SERVER['SERVER_NAME'], 302, true);
+	endif;
+	$node = $this->input->node;
+		$cNode = $node->getTheRightContent(); 
+		$alternativy  = $cNode->getPropertyValue('alternativy');    
+         $souvisejici = $cNode->getPropertyValue('souvisejici');
+		 $varianta = $this->mVarianta->getVariantsByIdProduct($cNode->id,true);
+		 $photos = $this->mVarianta->getResizedPhotos($varianta['obrazky']);
+		 $p = helper_FrontEnd::getFirstPhoto($photos,'pMinic3' , false);
+	            		if($p){
+	            			$img = $p['path']; 
+	            		} else {
+	            			$img = '/images/categoryImg.jpg';
+	            		} 
+	?>
+<div id="preHeader">
+	<div id="preHeaderLeft">
+		<div id="innerLeft">
+		<a href="<?=$node->path?>" title="<?=$node->title?>"><img src="<?=$img?>" alt=" " /></a></div>
+		<div id="innerRight"></div>
+			<h3><a href="<?=$this->basketUrl?>" title="Nákupní košík">Zboží bylo přidáno do košíku</a></h3>
+			<p><a class="noUnderLine" href="<?=$node->path?>" title="<?=$node->title?>"><?=$node->title?></a></p>
+	</div>
+	<div id="preHeaderRight">
+		<a href="<?=$this->basketUrl?>" title="Nákupní košík"><div class="fullBasket"></div></a>
+	</div>
+</div>  
+	<div class="clear"></div>
+	<div class="pull-left">        
+		<a class="buttBack preb fLeft" href="javascript: history.go(-1)"><span class="fBold backw butt i-block bgrNoRep"></span>Zpět</a>
+	</div>  
+	<div class="pull-right">    
+		<a href="/jura/nakupni-kosik" class="goBasket addItem"><span class="icon-basket-detail"></span><span>Přejít do košíku</span></a>
+	</div>   
+    <div class="spacer10"></div>
+    <div class="spacer10"></div> 
+    <div class="spacer10"></div>  
+    <div class="spacer10"></div>
+    <div class="spacer10"></div> 
+    <div class="spacer10"></div> 
+<div class="clear"></div>
+	<?if($souvisejici):?>
+		<span id="title">Zákazníci kupující tento produkt zakoupili také</span>
+		<div class="clear"></div>
+		<div class="listing">
+		<?$souvisejici = helper_MultiSelect::getMultiSelectValues($souvisejici);
+            			shuffle($souvisejici);
+		foreach($souvisejici as $alt):?>
+		<?$child = $this->tree->getNodeById($alt);
+	              	if(!$child){ continue; }
+	              	
+	              	$x++;
+	              	if($x > 3){ break; }   
+	              	 
+	              	$c = $child->getTheRightContent();
+			
+	              	if(!$c){ continue; }
+							 $varianta = $this->mVarianta->getVariantsByIdProduct($c->id,true);
+							 $photos = $this->mVarianta->getResizedPhotos($varianta['obrazky']);
+							  $p = helper_FrontEnd::getFirstPhoto($photos,'pShow4' , false);
+	            		if(count($p)){  
+	            			$img = $p['path'];
+	            		} else {
+	            			$img = '/images/categoryImg.jpg';
+	            		} 
+
+	            		   
+	            		$preText  = $c->getPropertyValue('html');
+						$disabled ='';
+						if($varianta['skladem'] != 1 && $c->state !='PUBLISHED'){
+							continue;
+						}	   
+					$price2  = $varianta['price2'] > 0 ? $varianta['price2'] : '';
+            		$price  = $varianta['price']; 
+        			$this->price2 = $price2? '<s>'.helper_FrontEnd::price($price2).' Kč</s>':'';  
+        			$dif = $price2 - $price;
+         			$p = $price2/100;
+         			$dif= round($dif/$p); 
+         			$this->difp = '';  
+         			$this->difp =$this->difp = $dif ? '-'.$dif.' % ':'';
+	            		$url = $c->getDetailUrl($this, $child);  
+	              ?> 
+             
+                <!--<div class="flags">
+                   <? if($isAkce):?>   
+                <div class="akce"></div>
+                <? endif;?>  
+                <? if($isNovinka):?> 
+                <div class="nove"></div>
+            <? endif;?>   
+             <? if($isTip):?> 
+                <div class="tip">&nbsp;</div>
+            <? endif;?>  
+			<? if($isVyprodej):?> 
+                <div class="vyprodej">&nbsp;</div>
+            <? endif;?>   
+                </div>
+                --><p>
+                <div class="item">
+                <div class="img"><a href="<?=$url?>"><img src="<?=$img?>" alt=" "  height="189"/></a></div>
+                <div class="item-body"> 
+                <h3 class="cufon"><a href="<?=$url?>"><?=$child->title?></a></h3>
+				 <p><?=helper_FrontEnd::reduceText(strip_tags($preText),400, false)?></p>
+                                	<div class="right">
+                                	<?$confirm = $this->tree->getNodeById(6553);?>
+                                	
+									<form action="<?=$confirm->path?>" method="post">
+   
+            						<input type="hidden" name="count" value="1">
+            						<input type="hidden" name="urlLsProduct" value="<?=$child->path?>">
+            					<input type="hidden" name="pid" value="<?=$child->nodeId?>" />
+									<input type="hidden" name="variantId" id="sizeSend" value="<?=$varianta['id'] ?>"> 
+            						<input type="hidden" name="action" value="buy" />
+                					<button type="submit" <?=$home?> rel="Vložit zboží do košíku" class="addItem botip">
+                						<span class="icon-basket-detail"></span><span class="text-buy">Koupit</span></button>    
+							</form></div>   
+                                <div class="right">
+                                <p class="price w-f">       
+                                <?if($price2):?>
+                                	<?=$this->price2?> <span class="green"><?=$this->difp?></span>
+                                <?endif?> 
+                                <span><?=helper_FrontEnd::price($price)?> Kč</span> s DPH</p>
+               					</div> 
+               				
+
+              </div>
+              </div>
+              <div class="clear"></div>
+	              			
+		<?endforeach;?>
+		</div>
+	<?endif;?>

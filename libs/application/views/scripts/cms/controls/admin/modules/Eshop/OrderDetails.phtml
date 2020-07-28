@@ -1,0 +1,98 @@
+<div class="dijitTabContainer dijitContainer dijitLayoutContainer" style="width:100%; height:450px; overflow:auto;">
+<div id="err_PageForm"></div>
+<form method="post" id="PageForm" name="PageForm">
+	<div id="order">	
+		<h2>Objednávka</h2>
+		<table class="niceTable">   
+			<tr> 
+				<th>číslo objednávky</th>
+				<th>objednáno</th> 
+				<th>celkem (kč)</th>
+				<th>forma úhrady</th>
+			</tr>
+			<?
+			$order = $this->order;
+			$details = $this->mEshop->orders->getOrderDetails($order['id']);
+			pr($details);
+			die
+			;
+			?> 
+			<tr class="pointer" onclick="showDetails(<?=$order['id']?>)"> 
+				<td><?=$order['id']?></d> 
+				<td><?=Utils::formatDate($order['created'])?></td>
+				<td><?=$order['suma']?></td>
+				<td><?=$order['fu']?></td> 
+			</tr> 
+			<tr> 
+				<td colspan="4">  
+					<table style="width:100%;" class="niceTable">   
+						<? foreach ($details as $detail):?>  
+						<tr>
+							<td><?=$detail['title']?></td>
+							<td><?=$detail['count']?> ks</td>
+							<td><?=$detail['price']?> Kč</td>
+						</tr>
+						<? endforeach; ?> 
+					</table> 
+				</td>
+			</tr>
+		</table>
+		
+		<? if($order['note']):?>
+			<h2>Poznámka zákazníka</h2> 
+			<?=nl2br($order['note']); ?>
+		<? endif; ?>
+		
+		
+		<?
+		$data = ($this->faktura->getRawData()); 
+		// pr($data); 
+		unset($data['items']);   
+		//   e($this->faktura->isProforma); 
+		//Helpers::initFormValuesFromObject($data)
+		?>
+		<?=$this->formHidden('orderId', $order['id']);?> 
+		  
+		 
+		<? if(0):?> 
+		<h2 style="margin-bottom:0px; padding-bottom:0px;">Faktura <?=$this->faktura->vs?></h2>   
+			<? if($this->faktura->isProforma === 1):?>
+			VÝZVA K PLATBĚ <a style="color:red;" href="<?=$this->faktura->getDownloadUrl()?>" target="_blank">PDF</a> / <a style="color:red;" href="<?=$this->faktura->getDownloadUrl(true)?>" target="_blank">HTML verze</a> 
+			&nbsp;&nbsp; | &nbsp;&nbsp; 
+			<? endif;?>  
+			  
+			FAKTURA <a style="color:red;" href="<?=$this->faktura->getFakturaDownloadUrl()?>" target="_blank">PDF</a> / <a style="color:red;" href="<?=$this->faktura->getFakturaDownloadUrl(true)?>" target="_blank">HTML verze</a> 
+			<br />
+			<a style="color:red;" href="<?=$this->faktura->getFakturaDownloadUrl(true, $order['id'])?>" target="_blank">TISK objednávky</a> 
+		
+		<? endif;?>   
+		
+		<br />   
+		<?=$this->faktura->printOrder($this, $this->basket, $order)?>    
+		
+	 	<?php    
+	 	$history = $this->mEshop->orders->getOrderHistory($order );
+	 	 
+	 	?>
+	 	
+	 	<Br />   
+		<h2>Poznámky k objednávce</h2>
+		<?=$this->formTextarea('adminNote', $order['adminNote'], array('style' => 'width:350px; height:90px;'));?> 
+		<br /> 
+		<?=$this->formSubmit('saveContentB', 'Uložit', array('class'=>'fsubmit', "onclick" => "return submitFormAjax('PageForm', '".$this->url(array('action' => 'saveOrder'))."', 'vypisDole', 'tab-refresh', '', true );", 'iconClass' => "noteIcon")) ?>
+		 
+	 	<h2 style="margin-bottom:0px; padding-bottom:0px;">Historie objednávky</h2>    
+	 	<table class="ohist">
+	 	<tr><th>Akce</th><th>Dne</th><th>Zpracoval</th></tr>
+	 	<? foreach ($history as $h):?>
+	 	<tr> 
+	 		<td><?=$h['message']?></td>
+	 		<td><?=$h['added']?></td>
+	 		<td><?=$this->systemUsers[$h['user']]?></td> 
+	 	</tr>
+	 	<? endforeach;?>
+	 	</table>
+		 
+	</div> 
+</form>
+</div>  

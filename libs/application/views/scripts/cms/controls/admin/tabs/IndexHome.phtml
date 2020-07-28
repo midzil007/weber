@@ -1,0 +1,136 @@
+	<!--<h1>Vítejte</h1>
+
+	<p>Toto je úvodní strana administračního rozhraní. Máte zde k dispozici několik panelů pro urychlení Vaši práce.</p>
+	-->
+	<table id="dashboard">
+		<tr>
+			<td style="width:50%;">
+				<div class="dPanel">									
+					<div class="dHead">
+						<span class="ico2 dLastEdit">&nbsp;</span><b>Naposledy editované stránky</b>
+					</div>
+					<div class="dBody">
+					<table>
+
+					<?php foreach ($this->nodesLastModifPages as $node): 
+						$url = Utils::getAdminUrl($node, $this); 
+						?>
+						<tr class="<?=$this->tableTrCycle('licha','suda')?>">
+							<td>&nbsp;<?=Utils::getStateIcon($node);?>&nbsp;<a href="<?=$url?>" title="<?=$node->title?>"><?=Utils::getReducedText($node->title, 45)?></a></td>
+							<td><?=Utils::formatTime($node->dateModif)?></td> 
+							<td><?=Utils::getFrontEndLink($node->path, false, '', false, 0, $this)?></td>   
+						</tr>						   
+					<? endforeach;  ?> 
+					</table>
+					</div>
+					<div class="dFoot">
+						<div class="dbBL">&nbsp;</div>
+						<div class="dbBR">&nbsp;</div>
+					</div>
+					<div class="dbTL">&nbsp;</div> 
+					<div class="dbTR">&nbsp;</div>	
+				</div>
+			</td>
+			<td>
+				<div class="dPanel">
+					<div class="dHead">
+						<span class="ico2 dNewest">&nbsp;</span><b>Nové nepublikované</b>
+					</div> 
+					<div class="dBody">
+					<table>
+							<?php foreach ($this->nodesLastModifNotPublished as $node):
+							$url = Utils::getAdminUrl($node, $this);
+							?>
+							<tr class="<?=$this->tableTrCycle('licha','suda')?>">
+								<td>&nbsp;<?=Utils::getStateIcon($node);?>&nbsp;<a href="<?=$url?>" title="<?=$node->title?>"><?=Utils::getReducedText($node->title, 45)?></a></td>
+								<td><?=Utils::formatTime($node->dateCreate)?></td>
+								<td><?=Utils::getFrontEndLink($node->path, false, '', false, 0, $this)?></td> 
+							</tr>						
+							<? endforeach;  ?>
+					</table>
+					</div>
+					<div class="dFoot">
+						<div class="dbBL">&nbsp;</div>
+						<div class="dbBR">&nbsp;</div>
+					</div>
+					<div class="dbTL">&nbsp;</div>
+					<div class="dbTR">&nbsp;</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td style="width:50%;">
+				<div class="dPanel">									
+					<div class="dHead">
+						<span class="ico2 dLastEdit">&nbsp;</span><b>Naposledy editováno</b>
+					</div>
+					<div class="dBody">
+					<table>
+
+					<?php foreach ($this->nodesLastModif as $node): 
+						$url = Utils::getAdminUrl($node, $this);
+						?>
+						<tr class="<?=$this->tableTrCycle('licha','suda')?>">
+							<td>&nbsp;<?=Utils::getStateIcon($node);?>&nbsp;<a href="<?=$url?>" title="<?=$node->title?>"><?=Utils::getReducedText($node->title, 45)?></a></td>
+							<td><?=Utils::formatTime($node->dateModif)?></td>
+							<td><?=Utils::getFrontEndLink($node->path, false, '', false, 0, $this)?></td> 
+						</tr>						
+					<? endforeach;  ?>
+					</table>
+					</div>
+					<div class="dFoot">
+						<div class="dbBL">&nbsp;</div>
+						<div class="dbBR">&nbsp;</div>
+					</div>
+					<div class="dbTL">&nbsp;</div>
+					<div class="dbTR">&nbsp;</div>	
+				</div>
+			</td>
+			<td>
+				<div class="dPanel">
+					<div class="dHead">
+						<span class="ico2 dNewest">&nbsp;</span><b>Nejnovější</b>
+					</div>
+					<div class="dBody">
+					<table>
+							<?php foreach ($this->nodesLastCreated as $node):
+							$url = Utils::getAdminUrl($node, $this);
+							?>
+							<tr class="<?=$this->tableTrCycle('licha','suda')?>">
+								<td>&nbsp;<?=Utils::getStateIcon($node);?>&nbsp;<a href="<?=$url?>" title="<?=$node->title?>"><?=Utils::getReducedText($node->title, 45)?></a></td>
+								<td><?=Utils::formatTime($node->dateCreate)?></td>
+								<td><?=Utils::getFrontEndLink($node->path, false, '', false, 0, $this)?></td> 
+							</tr>						
+							<? endforeach;  ?> 
+					</table>
+					</div>
+					<div class="dFoot">
+						<div class="dbBL">&nbsp;</div>
+						<div class="dbBR">&nbsp;</div>
+					</div>
+					<div class="dbTL">&nbsp;</div>
+					<div class="dbTR">&nbsp;</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<? if ($this->acl->isAllowed($this->user->group, 'stats') && 0): ?>
+			<td colspan="2"> 
+				<div class="dPanel">
+					<div class="dHead">
+						<span class="ico2 dStats">&nbsp;</span><b>Statistiky</b>
+					</div>
+					<div class="dBody">
+					<img  src="<?=$this->url(array('controller' => 'stats', 'action' => 'contentsGraph'))?>/random/<?=rand(0,9999)?>"	 alt="" />
+					</div>
+					<div class="dFoot">
+						<div class="dbBL">&nbsp;</div>
+						<div class="dbBR">&nbsp;</div>
+					</div>
+					<div class="dbTL">&nbsp;</div>
+					<div class="dbTR">&nbsp;</div>
+				</div>
+			</td> 
+			<? endif;?>
+		</tr>		
+	</table> 

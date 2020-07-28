@@ -1,0 +1,122 @@
+<?$this->disableH1 = true;?>
+<div class="detail">
+	<div class="img">
+		<a href="#">
+			<img alt="" src="">
+		</a>
+	</div>
+	<div class="info">
+		 <h1><?=$this->node->title?></h1>
+	</div>
+</div>
+
+<div id="productLeft">
+	<h1><?=$this->node->title?></h1>
+	<?= $this->html ?>        
+	
+	<?
+	// http://www.mlr.cz/scripts/zbozi.php?KID=1
+	$esh = $this->content->getPropertyValue('eshopUrl');
+	if(!$esh){
+		$esh = 'http://www.mlr.cz/scripts/zbozi.php?KID=1';
+	}	
+	?>
+	
+	
+	<a target="_blank" href="<?=$esh?>" id="eshoBut"><span>Toto zboží v e-shopu</a>
+	
+	<?
+	if(count($this->documents)):
+		list($video, $videoName) = helper_FrontEnd::getFirstFile($this->documents);
+		if($video):
+		?>
+		<object id="wmp" width="400" height="300" classid="clsid:6BF52A52-394A-11D3-B153-00C04F79FAA6" type="application/x-oleobject">
+			<param name="url" value="<?=$video?>" />
+			<param name="autostart" value="0" />
+			<param name="showcontrols" value="1" />
+			<param name="showstatusbar" value="0" />
+			<embed type="application/x-mplayer2" pluginspage="http://www.microsoft.com/windows/mediaplayer/" src="<?=$video?>" height="300" width="400" autostart=0 showcontrols=1 showstatusbar=0 showpositioncontrols=0>
+			</embed>
+		</object>
+
+		<? endif;
+	endif;	
+	?>
+	
+</div>
+<div id="productRight">
+	<? if(count($this->photos) > 0): ?>
+	<div id="images">
+    	<?= $this->render('parts/lightbox.phtml'); ?>
+		<?
+		$this->galleryPath = $this->curentPath . '?gallery=1';
+		if($this->inputGet->a){
+			$this->galleryPath .= '&a=' . $this->inputGet->a;
+		}
+		//e($this->galleryPath);
+		$photosGroup = 'mainPhotos';
+		$mainPhoto = false;
+		
+		   	
+		foreach ($this->photos as $path => $name){
+			if(!$path){ continue; }	
+			list($nodeId, $n) = content_SFSFile::parseSFSPath($path);
+		    $photoPathFullTemp = $this->config->sfFolder . '/' . $nodeId . '/' . $this->content->fotoFullName . '-' . content_SFSFile::getFileExtension($n) . '/' . $n;
+		    $photoPathShow = $this->config->sfFolder . '/' . $nodeId . '/' . $this->content->fotoShowName . '-' . content_SFSFile::getFileExtension($n) . '/' . $n;
+		    $photoPathThumb = $this->config->sfFolder . '/' . $nodeId . '/' . $this->content->fotoThumbName . '-' . content_SFSFile::getFileExtension($n) . '/' . $n; 
+		 				
+			$photoTitle = $name;    
+			if($mainPhoto == false){	
+				$mainPhoto = true;
+				?>
+				<a id="detailImgA" rel="lightbox[<?=$photosGroup?>]" class="photo" href="<?=$photoPathFullTemp?>"><img id="detailImg" src="<?=$photoPathShow?>" alt="<?=$photoName?>" /></a>
+				
+				<div class="miniPhotos" style="display:none;">
+				<?
+			} else {
+				?>
+				<a href="<?=$photoPathFullTemp?>" target="_blank" rel="lightbox[<?=$photosGroup?>]" class="imgBorder">
+					<img src="<?=$photoPathThumb?>" alt="<?=$name?>" />
+				</a>
+				<?
+			}		
+		}
+		if($mainPhoto){
+			?>
+			</div>
+			<?
+		}
+		?>
+		<? if(count($this->photos) > 1): ?>
+		 <div id="photoScroll">
+			<a href="#" onclick="return false;" class="leftScroll" onmouseout="scrollspeed=0" onmouseover="scrollspeed=-3">&nbsp;</a>				
+			<div id="photos">
+				<iframe id="gallery" src="<?=$this->galleryPath?>" marginwidth="0" marginheight="0" scrolling="no" frameborder="0" hspace="0" vspace="0" allowtransparency="true"></iframe>					/
+			</div>				
+			<a href="#" onclick="return false;" class="rightScroll" onmouseout="scrollspeed=0" onmouseover="scrollspeed=3">&nbsp;</a>
+		</div>
+		<? endif; ?>	
+    </div>            	
+    <? endif; ?>
+    
+    <?
+	if(count($this->documents)):
+		?>
+		 <div id="dl">
+			<h3>Ke stažení:</h3>
+			<?
+			foreach ($this->documents as $filepath => $name): 
+				$fullpath = content_SFSFile::getFileFullPath($filepath);
+				$ico = Utils::getFileIcoImage($fullpath);
+				?>	
+				<?= $ico ?> 
+				<a title="Otevřít '<?= $name ?>' do nového okna" target="_blank" href="<?=$filepath?>"> <?= $name ?> <i><?=Utils::getWebFileSize($fullpath)?></i></a> <br />														
+								
+				<? 
+			endforeach; 	
+			?>
+		</div>
+		<?			
+	endif;	
+	?>	
+</div>

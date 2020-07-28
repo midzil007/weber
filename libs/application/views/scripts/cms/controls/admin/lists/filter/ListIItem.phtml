@@ -1,0 +1,35 @@
+	<script>
+	var activeUrl = '<?=$this->activeUrl?>/';
+		var filterPushState = [
+    "vyrobci",
+    "cats",
+    "skladem",
+    "fmFilterSel"
+];
+	</script>
+ 
+	<div class="mDiv">
+			<div class="ftitle">Filtr:</div> 
+		</div>   
+		<div class="tDiv"> 	
+			filtr: <?=$this->formSelect('cats',$this->input->cats,array("onchange"=> "setPushState(activeUrl,filterPushState,'#".$this->tableId."')"), $this->cats)?>
+		    <?if($this->vyrobci):?>
+		    	<?=$this->formSelect('vyrobci',$this->input->vyrobci, array("onchange"=> "setPushState(activeUrl,filterPushState,'#".$this->tableId."')"), $this->vyrobci)?>
+		    <?endif;?>
+		    <?=$this->formSelect('skladem',$this->input->skladem, array("onchange"=> "setPushState(activeUrl,filterPushState,'#".$this->tableId."')"), $this->skladem)?>
+		    <?//$this->formSelect('state',$_SESSION['listItems']['state'], array("onchange"=> "$('#".$this->tableId."').flexReload()"), $this->state)?>
+		    Hledat: <input id="fmFilterSel" name="fmFilterSel" type="text" value="<?=$_SESSION['listItems']['fmFilterSel']?>" />  
+		    <input type="button" onclick="setPushState(activeUrl,filterPushState,'#<?=$this->tableId?>')" name="saveSetB" id="saveSetB" value="Filtrovat" class="fsubmit">
+ 		</div>   
+ 		<div> 
+			<a id="nb" href="<?=$this->url(array('controller' => 'eshop','amodule' => 'items','action' => 'addItem'));?>">Nový produkt</a>  
+ 		</div>
+ 		<script> 
+				  $(function() {  
+				    $("#nb" ).button({ 
+				      icons: { 
+				        primary: "ui-icon-plusthick"
+				      }
+				    }); 
+				  });
+				  </script>	 	

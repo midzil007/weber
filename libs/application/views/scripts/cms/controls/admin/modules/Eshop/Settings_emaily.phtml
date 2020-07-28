@@ -1,0 +1,20 @@
+<?
+
+?>
+<table class="normal">	
+	<?
+	$i = 1;
+	foreach($this->emailNodes as $email):?>
+		<tr> 
+			<td><?=$this->formText('title_' . $email->nodeId,$email->title, array('style' => 'width:600px; border:none; font-size:18px; font-weight:19px;'))?></td>
+		</tr>
+		<tr>  
+			<td><?=$this->formWysiwyg('text_' . $email->nodeId,$email->getHtml(), 500)?></td>
+		</tr>     
+		<tr> 
+			<td><br /><br /><br /></td> 
+		</tr>   
+	<?  
+	$i++;
+	endforeach;?> 
+	</table> 

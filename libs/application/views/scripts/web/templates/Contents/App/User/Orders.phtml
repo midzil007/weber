@@ -1,0 +1,86 @@
+<div class="dataPadding" id="orders">   		
+	<?
+	 
+	$this->txtPage = true;  
+ 
+	$section = $this->inputGet->section;
+	$section = $section?$section:'onall';  
+	?> 
+	<div class="spacer3"></div> 
+	<div class="line"></div>   
+	<div class="spacer10"></div>   
+	<script type="text/javascript">
+		function showDetails(id){
+			d = document.getElementById('o' + id);
+			d.style.display = (d.style.display == 'none') ? '' : 'none';  
+		}
+	</script>
+	<?
+	$orders = $this->mEshop->orders->getOrders('all');  
+	$mFakturace = new module_Fakturace();  
+	
+	?>
+	<table class="niceTable">  
+		<tr>
+			<th>číslo objednávky</th>
+			<th>objednáno</th>
+			<th>celkem (kč)</th> 
+			<th>forma úhrady</th>
+			<th> </th>  
+		</tr>
+		<? foreach ($orders as $order): 
+			  //  pr($order);
+			$showProforma = $showFaktura =  false;
+			/*
+			if($section == 'onall'){
+				if(($order['delivery'] == 'GP' || $order['delivery'] == 'CP') && $order['payment'] == 2){
+					$showProforma = true;
+				}
+			}
+			
+			$showFaktura = false;
+			if($section == 'ov'){
+				$showFaktura = true;
+			}   
+			*/
+			$details = $this->mEshop->orders->getOrderDetails($order['id']);
+			
+			// pr($details);
+		?>  
+		<tr  class="pointer hov" onclick="showDetails(<?=$order['id']?>)"> 
+			<td><?=$order['id']?></td>  
+			<td><?=Utils::formatDate($order['created'])?></td>
+			<td><?=$order['suma']?></td> 
+			<td><?=$order['fu']?></td>  
+			<td> 
+				<small>
+				<?if($showProforma):
+					$f = $mFakturace->getFakturaByOid($order['id']);
+					?>
+					<a href="<?=$f->getDownloadUrl()?>">Výzva k platbě</a>
+				<? endif;?>
+				 
+				<?if($showFaktura):  
+					$f = $mFakturace->getFakturaByOid($order['id']);
+					?>
+					<a href="<?=$f->getFakturaDownloadUrl()?>">Faktura</a>
+				<? endif;?> 
+				</small> 
+			</td> 
+		</tr>
+		<tr id="o<?=$order['id']?>" style="display:none;">
+			<td colspan="4"> 
+				<table class="niceTable">   
+					<? foreach ($details as $detail): ?>  
+					<tr>
+						<td><?=$detail['title']?></td>
+						<td><?=$detail['count']?> ks</td>
+						<td><?=$detail['price']?> Kč</td> 
+					</tr>
+					<? endforeach; ?> 
+				</table>
+			</td>
+		</tr>
+		<? endforeach; ?>
+	</table>
+</div>   

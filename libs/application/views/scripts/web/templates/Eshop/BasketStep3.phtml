@@ -1,0 +1,153 @@
+<?php 
+$this->listOverview = true;  
+    $shopper = $this->mEshop->basket->getShopper();
+    
+    $platba = $delivery = $this->mEshop->basket->getPayment(); 
+    
+   
+?>  
+          
+            <form method="post" id="basketForm" action="/nakupni-kosik"> 
+              <div id="step4">
+              <?
+	           	$dodaciUdaje = false;
+	           	if($shopper->ffirma || $shopper->ffullname){
+	           		$dodaciUdaje = true;
+	           	}
+				/* Jsou vyplneny dodaci udaje
+				 * "vase udaje" se zobrazi jako fakturacni udaje
+				 * "dorucit na jinou adresu" jako dodaci adresa (pole zacinajici f*)
+				 * */
+	           	if($dodaciUdaje):?>
+              <div class="adressFirst">
+                  <p class="head">Dodací adresa</p>
+                   <table>
+                   	<?if($shopper->ffullname):?>
+                   	<tr>
+                   		<td>Jméno:</td>
+                   		<td><?=$shopper->ffullname;?></td>
+                   	</tr>
+                   	<?endif;?>
+                   	<?if($shopper->ffirma):?>
+                   		<tr>
+                   			<td>Firma:</td>
+                   			<td>
+                   				<?=$shopper->ffirma;?>
+                   			</td>
+                   		</tr>
+                   	<?endif?>
+                   	<tr>
+                   		<td>Ulice:</td>
+                   		<td><?=$shopper->fulice?></td>
+                   	</tr>
+                   	<tr>
+                   			<td>Město:</td>
+                   			<td><?=$shopper->fMesto?></td>
+                   	</tr>
+                   	<tr>
+                   		<td>PSČ:</td> 
+                   		<td><?=$shopper->fpsc?></td>
+                   	</tr>
+                  </table>
+                 </div>
+     
+                <div class="adressMiddle">
+                  <p class="head">Fakturačí údaje</p>
+                   <table> 
+                   	<tr>
+                 		<td>Jméno:</td><td><?=$shopper->fullname?><td>
+                 	</tr>
+                   	<?if($shopper->firma){?>
+                   	<tr>
+                 		<td>Firma:</td><td><?=$shopper->firma?><td>
+                 	</tr>
+                 	<?}?>
+                 	<tr>
+                      <td>Ulice:</td><td><?=$shopper->ulice?></td>
+                      </tr>
+                     <tr>
+                      <td>Město:</td> <td><?=$shopper->mesto?></td>
+                      </tr>
+                     <tr>
+                      <td>PSČ:</td><td><?=$shopper->psc?></td>
+                     </tr>
+                     </table>
+                </div>
+                <?/*
+				 * Neni vyplnene "dorucit na jinou adresu"
+				 * "vase udaje" se zobrazi jako dodaci adresa
+				 * */
+                else:?>
+                <div class="adressFirst">
+                  <p class="head">Dodací adresa</p>
+                   <table>
+                   	<tr>
+                   		<td>Jméno:</td>
+                   		<td><?=$shopper->fullname;?></td>
+                   	</tr>
+                   	<?if($shopper->firma):?>
+                   		<tr>
+                   			<td>Firma:</td>
+                   			<td>
+                   				<?=$shopper->firma;?>
+                   			</td>
+                   		</tr>
+                   	<?endif?>
+                   	<tr>
+                   		<td>Ulice:</td>
+                   		<td><?=$shopper->ulice?></td>
+                   	</tr>
+                   	<tr>
+                   			<td>Město:</td>
+                   			<td><?=$shopper->mesto?></td>
+                   	</tr>
+                   	<tr>
+                   		<td>PSČ:</td> 
+                   		<td><?=$shopper->psc?></td>
+                   	</tr>
+                  </table>
+                 </div>
+                <?endif;?>
+                 <div class="adressLast">
+                 	<p class="head">Další</p>
+                 	<table>
+                      	<tr>
+                      		<td>E-mail:</td><td><?=$shopper->email?></td>
+                      	</tr>
+                      	<tr>
+                      	<td>Telefon:</td><td><?=$shopper->telefon?></td>
+                      	</tr>
+                      	<?if($shopper->ico){?>
+                      	<tr>
+                      	<td>IČO:</td><td><?=$shopper->ico?></td>
+                      	</tr>	
+                      	<?}?>
+                      	<?if($shopper->dic){?>
+                      	<tr>
+                      	<td>DIČ:</td><td><?=$shopper->dic?></td>
+                      	</tr>	
+                      	<?}?>
+                      </table>
+                  </div>  
+                </div>  
+		 		<div class="clear"></div>
+		 		<div id="left-column" class="fLeft">
+          		<?=$this->render('templates/Eshop/ItemsList.phtml'); ?> 
+          		 <?=$this->render('templates/Eshop/deliveryBlockStep3.phtml'); ?>
+              <div class="clear"></div>
+    
+          </div>
+          <?=$this->render('templates/Eshop/priceBlock.phtml'); ?>
+          <div class="spacer20"></div> 
+        <div class="fRight ">   
+          	<div class="fLeft marRight10">
+          		<a class="butt fLeft" href="javascript:history.back()"><span class="red fBold butt i-block fs16 bgrNoRep">Zpět</span></a>  
+     		</div>
+     		<div class="fLeft">
+           	<button type="submit" class="butt fRight" name="step[4]"><span class="red fBold butt i-block fs16 bgrNoRep">Dokončit objednávku</span></button>
+           	 </div>
+			
+
+           	 
+          </div>
+          </form> 

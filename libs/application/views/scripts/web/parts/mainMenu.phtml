@@ -1,0 +1,35 @@
+
+			<?php											
+			$home = $this->tree->getNodeByPath('/');			 
+			$this->firstLevel = helper_FrontEnd::checkChildren($home->getChildren('FOLDER'), 1);
+
+			
+			
+			$mNews = new module_NewsWeb(); 
+	    	$articles = $mNews->getNews('dateShow', 'Desc', 0, 1, 0);          
+			$articles = $mArticles->getArticlesAsNodes($this->tree, $articles);	  	 
+			$n1 = current($articles);  
+			e($n1->path );
+			?>
+            
+            <ul id="menu">
+                   <?  
+					$i = 0;
+					foreach ($this->firstLevel  as $menuItem):						
+						$i++;
+						$visible = helper_FrontEnd::isActive($this->curentPath, $menuItem->path, true);						
+						$aClass = '';
+						if($visible){
+							$aClass = ' class="active"';
+						}
+						
+						if($menuItem->nodeId == 52830){
+							$menuItem->path = $n1->path; 
+						}
+						
+					?>
+					<li>
+						<a <?=$aClass?> id="m<?=$i?>" href="<?=Utils::getWebPath($menuItem->path)?>"><?=$menuItem->title?></a>
+					</li>
+					<? endforeach; ?>
+            </ul>

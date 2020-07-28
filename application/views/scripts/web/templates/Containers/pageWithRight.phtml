@@ -1,0 +1,26 @@
+<div id="page" class="hp">  
+	<div class="spacer10"> </div>   
+		<div id="leftPage">
+
+			<?if(!$this->disableLeft):?> 
+                        <? if(!$this->disableH1):?>
+							<h1><?=$this->pageTitleRaw?></h1> 
+						<? endif;?> 
+                	<?=$this->page;?>  
+                   	 <div class="clear"></div>
+	               <?else:?>  
+	              <?=$this->page;?>	 
+                   	 <div class="clear"></div>
+			<?endif;?>
+          </div>  
+          
+          <div id="rightPageBasket">  
+          		 <?= $this->render('parts/basketQuick.phtml'); ?>
+                				
+               		
+                	</div> 
+				
+                	<div class="clear"></div>   
+
+                 
+            </div>      

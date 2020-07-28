@@ -1,0 +1,1 @@
+{"test":false,"price":227,"curr":"CZK","status":"CANCELLED"}

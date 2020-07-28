@@ -1,0 +1,17 @@
+
+	<? 
+	$this->txtPage = true;   
+	
+	if(count($this->messages)): ?>
+		<?= $this->render('parts/messages.phtml'); ?>				
+	<? endif; ?>  
+	
+	<? if($this->webUserLogged): ?>
+		<h2><?=$this->webUser->getName()?> </h2>
+		<ul style="padding:5px 0px 5px 15px;">
+			<li><a href="/vas-profil/zmena-osobnich-udaju">Upravit</a> mé údaje</li>
+			<li><a href="/vas-profil/me-objednavky">Zobrazit</a> mé objednávky</li>
+		</ul>  
+	<? else:?>
+		<?= $this->render('templates/Contents/App/User/Profile.phtml'); ?>	      
+	<? endif; ?>

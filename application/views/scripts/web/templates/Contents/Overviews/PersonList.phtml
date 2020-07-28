@@ -1,0 +1,43 @@
+<?=$this->pageText?>
+
+<? foreach ($this->children as $child):
+		if($content = $child->getPublishedContent()):
+			$foto = content_SFSFile::getFileFromProperty($content->getPropertyValue('foto'));
+			if(!$content->getPropertyValue('tel') && !$content->getPropertyValue('mobil') && !$content->getPropertyValue('email')){
+				?>
+				<div class="personDivision">
+					<h3><?=$child->title?></h3>
+				</div>
+				<?
+				continue;
+			}
+			//pr($foto);
+		?>	
+		<div class="person">
+			
+			<div class="porsonFoto">
+				<? if(strlen($foto['path']) > 10): ?>
+				<img src="<?=$foto['path']?>" alt="<?=$child->title?>" />				
+				<? endif; ?>
+			</div>
+			<div class="porsonData">				
+				<h4><?=$child->title?></h4>
+				<em><?=$content->getPropertyValue('function')?></em>				
+			</div>
+			<address>
+				<a title="<?=$child->title?> - odeslat email" class="ico2 email" href="mailto:<?=$content->getPropertyValue('email')?>"><?=$content->getPropertyValue('email')?></a><br />
+				<? if(strlen($content->getPropertyValue('tel'))): ?>
+					<span class="ico2 tel"><?=$content->getPropertyValue('tel')?></span> <br />
+				<? endif; ?>	
+				<? if(strlen($content->getPropertyValue('mobil'))): ?>
+					<span class="ico2 gsm"><?=$content->getPropertyValue('mobil')?></span>  <br />
+				<? endif; ?>	
+				<? if(strlen($content->getPropertyValue('info')) && 0): ?>
+					<br /> <a class="fsxs" href="<?=Utils::getPath($child->path)?>">Více informací &raquo;</a>
+				<? endif; ?>				
+			</address>
+			<div class="clear">&nbsp;</div>
+		</div>
+	
+<? 		endif;
+	endforeach; ?>

@@ -1,0 +1,69 @@
+<div id="header"> 
+			<div id="headerMenu">
+			<?
+			if($_SESSION['WEB07']['idTempoBasket']>0){
+				$tempBasketUrl = "?basket=".$_SESSION['WEB07']['idTempoBasket'];
+			}?>
+                    	<a id="moda40" title="Výprodej módy" href="http://www.vyprodej-mody.cz/<?=$tempBasketUrl?>"><strong>VÝPRODEJ MÓDY</strong></a>                    	
+                    	<a id="topSlevy" <?=$clss?>  title="TOP SLEVY" href="http://www.vyprodej-mody.cz/e-shop/top-slevy-80/<?=$tempBasketUrl?>"><strong>TOP SLEVY</strong> 70-80% na vše!</a>
+<!--                    	<a id="actionOffer" href=""><strong>AKČNÍ NABÍDKY</strong></a>-->
+			</div> 
+			<div id="logo">
+                <a href="/" title="Zpět na hlavní stránku">&nbsp;</a>
+            </div>
+                <div id="nav">
+                    <ul id="login">
+                    <?$nArticleRoot = $this->tree->getNodeById(7219);?>
+                        <li><a class="fst" href="<?=$nArticleRoot->path?>">Články testy</a></li>
+                        <li><a href="/obchodni-podminky">Obchodní podmínky</a></li>
+                        <li><a href="/kontakty">Kontakty</a></li>
+                        <? if(!$this->webUserLogged):?>
+                        <li><a href="/vas-profil/registrace">Registrace</a></li>
+                        <?endif;?>  
+                        <? if($this->webUserLogged):?>
+                        	<li><a class="logged" href="<?=$this->profileUrl?>"><?=$this->webUser->getName()?></a></li>
+                        	<li><a href="<?=$this->profileLogout?>">Ohlášení</a></li>
+                        <?else:?>
+                        	<li><a href="<?=$this->profileUrl?>">Přihlašení</a>
+                        	</li>  
+	<?endif;?> 
+                    </ul> 
+                </div>
+                                <?
+                        $bCount = $this->mEshop->basket->getSum($this);
+                $class= $this->mEshop->basket->getSum($this)>0 ? 'cart full':'cart empty'?>              		
+                <form method="get" action="/vyhledano" id="searchTopForm">
+                    <div id="search">
+                    <div class="<?=$class?>">
+                       <p>
+                    	 <a href="<?=$bCount>0?$this->basketUrl:'/'?>" title="Nákupní košík">
+                    	 <?$count =$this->mEshop->basket->getItemsCount();
+                    	 $piece = $this->mProducts->getWordPieces($count);
+                    	 if($bCount):?>
+                    		<span id="basketGray">Nákupní košík</span> <span id="all"><strong><span class="showPrice" id="showPiece"><?=$count;?></span> <span class="showPrice"><?=$piece?> </span><span id="black">za</span> <span class="showPrice" id="showPrice"><?=helper_FrontEnd::price($bCount);?>  Kč</span></strong></span>
+                    	<?else:?>
+                    		<span id="basketGray">Nákupní košík</span> <strong><span class="showPrice" id="showPiece">0 Kč</span></strong>
+                    	<?endif;?>
+                    	</a>
+                    	</p>             
+                	</div>
+                        <p>Vyhledávání</p>
+                        <?$searchText = $this->inputGet->search ? $this->inputGet->search:'Sem napíšte co hledáte...';?>
+                        <input type="text" id="searchInput" name="search" value="<?=$searchText?>" onfocus="remove_txt('<?=$searchText?>',this);" onblur="set_txt('<?=$searchText?>', this);"/>
+                        <input type="submit" id="searchButton" value="&nbsp;"/> 
+                    </div>
+                </form>
+               
+                <div class="breadcrumbs">
+                <?php    
+                if($this->prod): // detail 
+                	$parent = $this->curentNode;   
+                	$prod = $this->node;
+                ?> 
+                <a href="/">Úvod</a> / <a href="<?=$parent->path?>"><?=$parent->title?></a> / <?=$prod->title?>
+                <? else: ?>
+                	<?=helper_FrontEnd::generateBreadCrumbs($this, array('/e-shop'))?> 
+                <? endif;?>	
+                </div> 
+            </div>
+

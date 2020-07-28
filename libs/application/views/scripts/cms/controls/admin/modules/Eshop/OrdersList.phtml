@@ -1,0 +1,14 @@
+	<h1>Objednávky </h1>    
+	
+	<?php
+		echo $this->table( 
+				$this->ordersTable, 
+				$this->ordersTableHead, 
+				$this->ordersTableActions, 
+				$this->tableSort, 
+				$this->tableSortType, 
+				$this->curentViewState, 
+				$this->tableParentTab,
+				array('class' => 'list')
+			);  
+	?> 

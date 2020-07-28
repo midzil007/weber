@@ -1,0 +1,220 @@
+<?
+
+$mm = new module_Mailing();  
+$type = 'txt'; 
+$t = 'EMAIL';  
+   
+?> 
+ 
+	<h3>PŘÍJEMCI</h3> 
+	<?
+	$groupsAll = $mm->getGroupsSelect(); 
+	$groups = array();
+	foreach ($groupsAll as $ident => $title){ 
+		$groups[$ident] = $title . ' (' . $mm->getUsersCountByGroup($ident) . ')';
+	}  
+	?> 
+	<?=$this->formCheckboxGroup('group', $this->input->group, array(), $groups)?> 
+	
+	<div class="spacer10"> </div>
+	
+	<h4>ODESLAT TAKÉ NA TYTO EMAILY</h4>
+	<p>E-maily oddělte čárkami nebo středníkem. Pokud nejsou v žádné skupině kontaktů, odhlašovací odkaz nebude fungovat.</p>  
+	<?=$this->formTextarea('additionalRecievers', $this->input->additionalRecievers)?>  
+	<? if($type):  ?> 
+	<div class="spacer10"> </div> 
+	<h3><?=$t?></h3>   
+	<table class="modalTable" style="width:820px;">  
+		<tr>
+			<td style="width:180px;" class="tkey"> 
+				Odesílatel - email: 
+			</td>
+			<td>
+				<?=$this->formText('mailSender',$this->input->mailSender, array('style' => 'width:200px;')) ?>			  
+			</td>			
+		</tr> 
+		<tr>
+			<td style="width:180px;" class="tkey"> 
+				Odesílatel - jméno: 
+			</td>
+			<td> 
+				<?=$this->formText('mailSenderName',$this->input->mailSenderName, array('style' => 'width:200px;')) ?>			  
+			</td>			
+		</tr>  
+		<tr>
+			<td>
+				Předmět mailu: 
+			</td> 
+			<td>
+				<?=$this->formText('mailHead',$this->input->mailHead, array('style' => 'width:200px;')) ?>			
+			</td>			
+		</tr>
+		<tr>
+			<td>
+				utm_source (mailing): 
+			</td>
+			<td>
+				<?=$this->formText('utm_source',$this->input->utm_source, array('style' => 'width:200px;')) ?>			
+			</td>			
+		</tr>
+		<tr>
+			<td>
+				utm_medium (email): 
+			</td>
+			<td>
+				<?=$this->formText('utm_medium',$this->input->utm_medium, array('style' => 'width:200px;')) ?>			
+			</td>			
+		</tr>
+		<tr>
+			<td>
+				utm_campaign (emailPovleceni): 
+			</td> 
+			<td>
+				<?=$this->formText('utm_campaign',$this->input->utm_campaign, array('style' => 'width:200px;')) ?>			
+			</td>			
+		</tr>
+		<tr>
+			<td colspan="2">
+			<?=$this->formSubmit('sendMail', 'Odeslat', array('class' => 'fsBig')) ?>
+			<a onclick="window.history.back(); return false;" id="cancelLink" title="Změny nebudou uloženy">Zrušit</a>		 
+			</td>
+		</tr>  
+		<?  
+			switch ($type):
+			case 'img':
+				?>
+				<tr>
+					<td>
+						Vyberte obrázek k odeslání: 
+					</td> 
+					<td>
+						<input type="file" name="photo" accept="image/*" />  
+					</td>			 
+				</tr>
+				<tr>
+					<td> 
+						Hlavička emailu: 
+					</td> 
+					<td>
+						<textarea name="header" style="width:100%; height:100px;"><?=$this->input->header?></textarea>		
+					</td>			
+				</tr>
+				<tr>
+					<td>
+						Patička emailu: 
+					</td> 
+					<td>
+						<textarea name="footer" style="width:100%; height:100px;"><?=$this->input->footer?></textarea>		
+					</td>			
+				</tr>	
+				<?
+				break;
+			case 'txt':
+			default:
+			?>
+			<tr> 
+				<td colspan="2">  
+				<textarea id="mailcontent" name="content" style="width:100%; height:700px;"><?=$this->input->content?></textarea>
+				</td>   
+			</tr> 
+			<?
+		endswitch; 
+		?>
+		
+		<tr>
+			<td colspan="2">
+			<?=$this->formSubmit('sendMail', 'Odeslat', array('class' => 'fsBig')) ?>		 
+			<a onclick="window.history.back(); return false;" id="cancelLink" title="Změny nebudou uloženy">Zrušit</a>
+			</td>
+		</tr>
+		
+	</table> 
+	
+	<?php  
+		endif;
+		?>
+	
+	<div class="spacer10"> </div> 
+
+			<script type="text/javascript"> 
+	//tinymce.execCommand('mceRemoveControl',false,<?=$atribs['idecko']?>);
+	//tinyMCE.execCommand("mceAddControl", true, <?=$atribs['idecko']?>);
+	try
+	{  
+			 
+tinymce.init({
+    content_css : "/styles/general.css",
+    document_base_url : '/',    
+    theme: "modern",
+    language_url : '/admin/js/tiny_mce/langs/cs.js',
+    language : 'cs',
+	relative_urls: false,
+	remove_script_host: true, 
+	browser_spellcheck : true,  
+	language : 'cs',   
+	entity_encoding: "raw", 
+	mode: "exact",     
+	elements : "mailcontent",    
+	theme_advanced_toolbar_location : "top", 
+	theme_advanced_resizing : true,   
+    plugins: [
+         "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+        "searchreplace wordcount visualblocks visualchars code fullscreen",
+        "insertdatetime nonbreaking save table contextmenu directionality",
+        "emoticons template paste textcolor colorpicker textpattern colorpicker"
+    ],
+     toolbar1: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
+    toolbar2: "print preview media | forecolor backcolor emoticons",
+    templates: [
+        {title: 'Test template 1', content: 'Test 1'},
+        {title: 'Test template 2', content: 'Test 2'}
+    ],
+   file_browser_callback : cmsFileBrowser,
+    height:"600px", 
+	width:"100%" 
+});
+}
+	catch(err)
+	{
+  		//alert(err); 
+	}   
+ <?
+	
+	 //   $this->tinyLoaded = true;
+		 
+	 if(!$this->tinyLoaded):?>	
+		function cmsFileBrowser (field_name, url, type, win) {
+		  	
+		   //alert("Field_Name: " + field_name + "nURL: " + url + "nType: " + type + "nWin: " + win); // debug/testing
+
+		    /* If you work with sessions in PHP and your client doesn't accept cookies you might need to carry
+		       the session name and session ID in the request string (can look like this: "?PHPSESSID=88p0n70s9dsknra96qhuk6etm5").
+		       These lines of code extract the necessary parameters and add them back to the filebrowser URL again. */
+		    //  alert(type);alert(type == 'file');
+		   	if(type == 'image'){ 
+		   		cmsURL = '/cms/sf/index/isPopup/1/nowysiwyg/1/callBackInput/src' + field_name; 
+		   	} else {
+		   		cmsURL = '/cms/pages/index/isPopup/1/nowysiwyg/1/callBackInput/' + field_name; // isPageSelectPopup/1/
+		   		cmsURL = '/cms/sf/index/isPopup/1/nowysiwyg/1/callBackInput/' + field_name;    
+		   	} 
+ 
+		    tinyMCE.activeEditor.windowManager.open({
+		        file : cmsURL, 
+		        title : 'Nahrajte soubor', 
+		        width : 400,  // Your dimensions may differ - toy around with them!
+		        height : 200, 
+		        resizable : "no", 
+		        inline : "yes",  // This parameter only has an effect if you use the inlinepopups plugin!
+		        close_previous : "no"
+		    }, {
+   			 setUrl: function (url) {
+    		  win.document.getElementById(field_name).value = url;
+    		}
+ 		 });
+ 		 return false;
+		}
+	<? endif; ?>  
+	</script> 
+	<?php 
+	$this->tinyLoaded = true;
+	?>

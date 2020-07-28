@@ -1,0 +1,71 @@
+<?php											
+
+$mArticle = new module_Articles();
+$articles = $mArticle->getTopArticles(5);
+$imagesCount = 0;
+$zIndex = 9;
+$x = 0; 
+
+
+?>
+ <div id="akc-nab"> 
+<p>Naše akční nabídky STAVIS!</p>
+   <?foreach ($articles  as $item):
+   		$zIndex--;   
+		$imagesCount++;
+		$x++;   
+   		?>
+          <div id="tip<?=$x?>" style="z-index:<?=$zIndex?>" class="banner">
+          	<a href="<?= $item['path']?>"><img src="<?=$item['photos']['path']?>" alt="<?=$item['photos']['name']?>" /></a>
+          
+            <div class="banner-popis">
+            	
+         
+              <p><span><?=$item['title'] ?></span>
+                <br />
+                <p><?= helper_FrontEnd::reduceText(strip_tags($item['html']),100)?></p> <br>
+                <br />
+                <div class="moreRight">
+                <a class="more fRight" href="<?= $item['path']?>">více zde</a></p>
+               </div>
+            </div>
+          </div>
+          <? endforeach; ?>
+          <div class="clear">&nbsp;</div>
+          <div id="nav-panel">
+            <ul>
+            	<?   
+            	for ($i = 1; $i <= $imagesCount; $i++):
+            		$active = $i==1?1:0; 
+            		?>
+            	<li><a href="#" id="tipTrigger<?=$i?>" <?=($active?'class="selected"':'')?> onclick="return showTip(<?=$i?>)"><?=$i?></a><li> 
+            	<? endfor; ?>   
+            </ul>
+          </div>
+
+          <div class="clear">&nbsp;</div>
+          <p><span>Chcete naše novinky a akční nabídky <a href="/novinky-na-email">dostávat na email</a>?</span></p>
+        </div> 
+        
+        <script type="text/javascript">var maxx = <?=$imagesCount?>; </script>
+            
+            <script type="text/javascript">
+		       	window.addEvents({
+					'domready': function(){
+
+						periodical = slideTips.periodical(5000);  
+						      
+						$('akc-nab').addEvent('mouseleave', function() { 
+							$clear(periodical); 
+							periodical = slideTips.periodical(5000);
+						}); 
+						  
+						$('akc-nab').addEvent('mouseenter', function() { 			
+							$clear(periodical);
+						});  
+					}
+				}); 
+				</script>
+				 
+				<div class="clear"> </div>
+				

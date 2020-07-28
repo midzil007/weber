@@ -1,0 +1,86 @@
+<div id="header">
+  <div class="corona">
+  <div class="container">	  
+  <span class="green_c"></span>FUNGUJEME! Všechny objednávky okamžitě expedujeme!
+  </div>        
+  </div>       
+	 <div id="nav">
+	 	<div class="container">	  
+	 		<div class="navbar-submenu"> 
+            <button type="button" class="navbar-toggle-sub" data-toggle="collapse">
+                <table>
+                    <tbody><tr> 
+                        <td>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>    
+                <span class="icon-bar"></span>
+                </td>
+                <td> 
+                <span class="">Menu</span>
+                </td>     
+            </tr> 
+                </tbody></table>
+            </button>
+       </div> 
+                    <ul class="toggle-submenu"> 
+                    <?$nArticleRoot = $this->tree->getNodeById(7219);
+                    $this->dopravaNode = $this->tree->getNodeSimple(75076)?>  
+                  	  <li><a class="fst" href="<?= $this->dopravaNode ->path?>"><?= $this->dopravaNode ->title?></a></li>
+                        <li><a href="/jura/recenze">Ověřený e-shop</a></li>  
+                        <li><a rel="nofollow" href="/jura/bezpecny-nakup">Bezpečný nákup</a></li>
+                        <li><a href="<?=$nArticleRoot->path?>">Články a testy</a></li>
+                        <li><a href="/jura/obchodni-podminky">Obchodní podmínky</a></li>
+                          <li><a href="/jura/e-shop/o-znacce-jura">O značce JURA</a></li> 
+                        <li><a href="/jura/kontakty">Kontakty</a></li>   
+                        <li><a href="/jura/showroom">Showroom</a></li>       
+                         <?if($this->showPrice && $_SESSION['CMS7']['logged'] == 1):?>      
+                    <li><a href="/quickshop">Quickshop</a></li>    
+                  <?endif;?>                   
+                    </ul>     
+                    <!-- <p>specSHOP s.r.o. je autorizovaný prodejce JURA</p>  --> 
+              </div> 
+   </div> 
+   <div class="flags bcg-grey">   
+   <div class="container">	
+   		<div class="bs-l">    
+		<a id="logo" href="/jura" title="Zpět na hlavní stránku"><span>Švýcarské</span> Kávovary.cz</a>
+		  <div class="arrow-right"><div class="arrow-right-shadow"></div>  </div>    
+		<img src="/images/jura-authorised.png" alt="Autorizovaný prodejce Jura"/>
+		</div>
+		<div class="bs-m">    
+                <div id="hotline">        
+                	<p class="fs18"><span class="ic-t"></span><strong>Poradenství:</strong> <a href="tel:773-752-924"> 
+                		<span id="telfont">777 569 386</span><span class="fs13 i-block marLeft5 colorGrey3">(Po - Pá: 8-18 hod)</span></a></p> 
+           	 </div>   
+               <form method="get" action="<?=$this->searchUrl?>" id="searchTopForm">
+                    <div id="search"> 
+                         <?$searchText = $this->inputGet->search ? $this->inputGet->search:'Sem napište, co hledáte...';?>
+                        <input type="text" id="autocomplete"  name="search" placeholder="<?=$searchText?>" autocomplete="off"/>
+                       <button id="searchButton"><span id="search-icon"></span>Hledej </button> 
+                    </div> 
+               </form>
+                
+        </div> 
+         <div class="bs-r">
+         	<ul>     
+                	<li><span id="del-f">Doprava zdarma</span></li>
+                	<li><span id="aut-a">Autorizovaný prodejce</span></li>
+                	<li><span id="confr">Ověřeno zákazníky</span></li>
+               </ul> 
+              <?$sum = $this->mEshop->basket->getSum($this);
+              $count =$this->mEshop->basket->getItemsCount();?>    
+   
+                   <a class="basket" href="<?=$this->basketUrl?>" title="Nákupní košík" class="noUnderLine">
+                   	<img src="/images/basket.png" alt="Nákupní košík"/>      
+                     <p> <strong><span id="showPrice"><?=helper_FrontEnd::price($this->mEshop->basket->getSum($this));?> Kč</span></strong>
+                     	<?if($count>0):?>
+                     		<span id="showPiece"><?=$count?></span>
+                     	<?endif?>    
+                     </p>  
+					</a>  
+              <img src="/images/logo-spec.png" id="spec-l" alt="logo - specshop.cz" /> 
+         	
+         </div> 
+            </div>
+</div> 
+</div>  

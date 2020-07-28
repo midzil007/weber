@@ -1,0 +1,24 @@
+<?$produts = $this->mProducts->getAlternativeProduct(10);
+shuffle($produts);?>
+<div id="altProducts"> 
+	<h4>ZKUSTE SI VYBRAT Z NAŠÍ DALŠÍ NABÍDKY E-SHOPŮ:</h4>
+	<?foreach ($produts  as $value):
+	$dif = 0;
+	if($value['price2']>0){
+	$dif = $value['price2'] - $value['price'];
+     $p = $value['price2']/100; 
+     $dif= round($dif/$p);
+     }?>
+	<div class="altProducts">
+		<?if($dif>0):?>
+			<div class="dctt"><?=$dif?>%</div>
+	  	<?endif;?>
+			<p><a href="<?=$value['url']?>"><span itemprop="name"><?=$value['title']?></span></a></p>
+			<div class="altProductsImg">
+				<a itemprop="url" href="<?=$value['url']?>" title=""><img itemprop="image" src="<?=$value['imgUrl']?>" class="i detailImg" id="imgId1" alt="<?=$value['title']?>"></a>
+			</div>
+			<div itemprop="offers" itemscope="" itemtype="http://schema.org/Offer" class="lastVisitedPrice"><span class="altPrice" itemprop="price"><?=helper_FrontEnd::price($value['price'])?> Kč</span></div>
+		</div>
+		
+		<?endforeach;?>
+	</div>

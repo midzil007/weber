@@ -1,0 +1,50 @@
+<?
+if($this->inputGet->send){
+	$messages = 'Email úspěšně odeslán, budeme Vás kontaktovat.';
+	Helpers::addMessage(1, $messages, $this);	
+}
+if(count($this->messages)): ?>
+	<?= $this->render('parts/messages.phtml'); ?>				
+<?php endif; ?>
+
+<?php if(!$this->currentState):
+
+	 
+	$this->input->email = $this->input->email?$this->input->email:'@'; 
+	?>	
+	 
+	<form action="<?=$_SERVER['REDIRECT_URL']?>" method="POST">
+	<?=$this->formHidden('subject', $this->formSubject)?>
+	
+	
+	
+	<table class="formatTable">  
+		<tr>    
+			<td style="width:97px;"><?=$this->translate('vase-jmeno');?>: <span class="cred">*</span></td>
+			<td style="width:170px;"><?=$this->formText('fullname', $this->input->fullname, array('class' => 'nice s150'))?></td>
+			
+			<td style="padding-left:43px" ><?=$this->translate('telefon');?>: <span class="cred">*</span></td>
+			<td><?=$this->formText('phone', $this->input->phone, array('class' => 'nice s150'))?> </td>
+					
+		</tr> 	 
+		<tr> 
+			<td><?=$this->translate('e-mail');?>: <span class="cred">*</span></td>
+			<td><?=$this->formText('email', $this->input->email, array('class' => 'nice s150'))?></td>		 
+						
+		</tr> 
+		<tr>  
+			<td><?=$this->translate('zprava-pro-nas');?>: <span class="cred">*</span></td>     
+			<td colspan="3"><?=$this->formTextarea('message', $this->input->message, array('class' => 'niceTa', 'style' => 'width:467px;', 'rows' => 6))?> </td>		
+		</tr> 
+		<tr>
+			<td></td>     
+			<td colspan="3"><div class="fRight" style="padding:5px 0px 0 0">
+		<button type="submit" name="send" class="butt"><span class="red fBold butt i-block fs16 bgrNoRep">Odeslat</span></button> 
+		</div></td>		
+		</tr>
+	</table>
+	<?= $this->render('parts/SecurityCode.phtml'); ?>		 
+	<div class="space">&nbsp;</div> 
+	
+	</form>
+<?php endif; ?>

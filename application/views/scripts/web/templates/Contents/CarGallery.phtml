@@ -1,0 +1,56 @@
+<style>
+body, html{
+	background:#FFFFFF;
+}
+</style>
+<script type="text/javascript">
+
+var speed, currentpos=curpos1=0,alt=1,curpos2=-1;
+
+function initialize(){
+	if (window.parent.scrollspeed!=0){
+		speed=window.parent.scrollspeed
+		scrollwindow()
+	}
+}
+
+function scrollwindow(){
+	temp=(document.all)? document.body.scrollLeft : window.pageXOffset
+	alt=(alt==0)? 1 : 0
+	if (alt==0)
+		curpos1=temp
+	else
+		curpos2=temp
+	
+	
+	window.scrollBy(speed, 0)
+}
+
+setInterval("initialize()",10)
+
+</script>
+<div id="galleryStrip">
+<table>
+	<tr>	    	
+    <?			
+	foreach ($this->photos as $path => $name){
+		if(!$path){ continue; }				
+		list($nodeId, $n) = content_SFSFile::parseSFSPath($path);
+	    $photoPathFullTemp = $this->config->sfFolder . '/' . $nodeId . '/' . $this->content->fotoShowName . '-' . content_SFSFile::getFileExtension($n) . '/' . $n;
+	    $photoPathFull = $this->config->sfFolder . '/' . $nodeId . '/' . $this->content->fotoFullName . '-' . content_SFSFile::getFileExtension($n) . '/' . $n;
+	    $photoPathTemp = $this->config->sfFolder . '/' . $nodeId . '/' . $this->content->fotoMiniName . '-' . content_SFSFile::getFileExtension($n) . '/' . $n; 
+	    $photoTitle = $name;    
+
+		?>
+		<td>
+		<a onclick="return showImage('<?=$photoPathFullTemp?>', '<?=$name?>', '<?=$photoPathFull?>');" href="<?=$photoPathFullTemp?>" target="_blank">
+			<img src="<?=$photoPathTemp?>" alt="<?=$name?>" />
+		</a>
+		</td>
+		<?
+	}
+	?>
+	</tr>
+</table>
+</div>
+	

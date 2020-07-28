@@ -1,0 +1,216 @@
+<?
+function email($komu, $komu_jm,  $od, $od_jmeno, $subjekt, $text, $soubory='',  $text_bez='', $charset = 'utf-8' ){
+	require_once("../inc/phpmailer/class.phpmailer.php");
+	$mail = new PHPMailer();
+		
+	$mail->From     = $od_jmeno . ' ';
+	$mail->FromName = $od . ' ';
+	
+	$mail->CharSet = $charset;
+	$mail->Subject  = $subjekt . '';
+	
+	$body =  str_replace('\"', '"', $text);
+	$mail->Body  = $body;
+	
+	$text_body  = $text_bez?text_bez:'You need a HTML mail to read this message.';			
+	$mail->AltBody = $text_body;			
+	$mail->AddAddress($komu, $komu_jm);	
+	//$mail->AddAddress('webmaster@up-promotion.com', '');		
+	
+	if(!$mail->Send())
+		echo "There has been a mail error sending to " . $ema . "<br>";	
+			
+	$mail->ClearAddresses();
+	$mail = '';	
+}   
+
+
+//pr($_POST);
+/*
+Array
+(
+    [jmeno] => fsdf
+    [prijemni] => sfdsd
+    [firma] => sdfs
+    [adresa] => sfs
+    [ico] => dfsdf
+    [dic] => dffs
+    [tel] => fdssdf
+    [email] => fdsdf
+    [prvni] => fgdsfd
+    [druhy] => fdsfd
+    [treti] => fsdf
+    [rohozi] => 12
+    [krabic] => 21
+    [poznamka] => poznamka
+    [odeslat] => 
+    [kopie] => on
+)*/
+
+if($_POST['odeslat']){	
+	if($_POST['email'] && $_POST['firma'] && $_POST['tel'] && $_POST['prijemni'] ) {
+		
+		$text = '			
+			<table id="poptavka" style="font-size:11px; font-family:Arial, Helvetica, sans-serif;">
+				<tr>
+					<td style="width:80px; "><strong>Jméno</strong></td>
+					<td style="width:140px; ">'.$_POST['jmeno'].'</td>
+					<td style="width:80px; "><strong>Příjmení</strong></td>
+					<td>'.$_POST['prijemni'].'</td>
+				</tr>
+				<tr>
+					<td><strong>Firma</strong></td>
+					<td>'.$_POST['firma'].'</td>
+					<td><strong>Adresa</strong></td>
+					<td>'.$_POST['adresa'].'</td>
+				</tr>
+				
+				<tr>
+					<td><strong>Telefon</strong></td>
+					<td>'.$_POST['tel'].'</td>
+					<td><strong>e-mail </strong></td>
+					<td>'.$_POST['email'].'</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" style="line-height:16px; ">						
+						<strong>O jaký rozměr máte zájem?</strong> <br />
+						'.($_POST['ctvrty']?'90 cm x 45 cm <br />':'').'	
+						'.($_POST['prvni']?'115 cm x 45 cm <br />':'').'
+						'.($_POST['druhy']?'115 cm x 60 cm <br />':'').'
+						'.($_POST['treti']?'115 cm x 90 cm <br />':'').'	
+						'.($_POST['paty']?'152 cm x 91 cm <br />':'').'						
+					</td>					
+					<td colspan="2">
+						<br />
+						'.($_POST['ctvrty']?$_POST['ctvrty'].' ks <br />':'').'
+						'.($_POST['prvni']?$_POST['prvni'].' ks <br />':'').'
+						'.($_POST['druhy']?$_POST['druhy'].' ks <br />':'').'
+						'.($_POST['treti']?$_POST['treti'].' ks <br />':'').'		
+						'.($_POST['paty']?$_POST['paty'].' ks <br />':'').'				
+					</td>
+				</tr>						
+				<tr>
+					<td>
+						Poznámka
+					</td>
+					<td colspan="3">
+						'.$_POST['poznamka'].'
+					</td>
+				</tr>				
+			</table>		
+		';
+		$ema = 'info@avmc.cz';
+		//$ema = 'morlik@seznam.cz';
+		$ema_jm = 'AVMC';
+		
+		email($ema, $ema_jm, 'poptavka@avmc.cz', '', 'Nezávazná poptávka - EN - IP: ' . $_SERVER['REMOTE_ADDR'] , $text );			
+		if($_POST['kopie']){	
+		
+			$text2 = '<p style="font-size:11px; font-family:Arial, Helvetica, sans-serif;">Děkujeme za Váš zájem. Vaši poptávku zpracujeme a ozveme se Vám do 2 pracovních dnů. </p>';
+			$text2 .= $text;
+			email($_POST['email'], '', 'poptavka@avmc.cz', '', 'Nezávazná poptávka', $text2 );		
+			
+		}
+		$xx =   '
+			<script type="text/javascript">
+				<!--
+					alert("We will contanc you in two days. Thank you.");
+					window.close();
+					
+				-->
+			</script>
+		';
+		
+	} else {
+		$err = '<p class="cred">Please eneter all the inputs market with *.</p>';
+	}
+}
+
+?> 	
+ 
+<?=$xx ?>
+
+	<div style="font-size:14px; font-size:14px; padding:5px; text-align:left;" ><img src="/images/en/popt.gif" /></div>  
+	<div style="padding:10px; padding-top:0px; "> 
+	<?=$err ?>
+	<form method="post"> 
+	<table id="poptavka">
+		<tr>
+			<td style="width:80px; "><strong>Name</strong></td>
+			<td style="width:140px; "><input type="text" name="jmeno" value="<?=$_POST['jmeno']?>" /></td>
+			<td style="width:80px; "><strong>Surname <span class="cred">*</span></strong></td>
+			<td><input type="text" name="prijemni"  value="<?=$_POST['prijemni']?>" /></td>
+		</tr>
+		<tr>
+			<td><strong>Copany <span class="cred">*</span></strong></td>
+			<td><input type="text" name="firma" value="<?=$_POST['firma']?>"  /></td>
+			<td><strong>Address</strong></td>
+			<td><input type="text" name="adresa" value="<?=$_POST['adresa']?>"  /></td>
+		</tr>		
+		<tr>
+			<td><strong>Telephone <span class="cred">*</span></strong></td>
+			<td><input type="text" name="tel" value="<?=$_POST['tel']?>"  /></td>
+			<td><strong>E-mail <span class="cred">*</span></strong></td>
+			<td><input type="text" name="email" value="<?=$_POST['email']?>"  /></td>
+		</tr>
+		
+		<tr>
+			<td colspan="2" style="line-height:16px; ">
+				<strong>What dimension would you like?</strong> <br />
+				<span>
+				<input id="ch4" type="checkbox" onclick="inA('4', this)" style="border:none; _margin-bottom:8px; " />  90 cm x 45 cm <br />
+				<input id="ch1" type="checkbox" onclick="inA('1', this)" style="border:none; _margin-bottom:8px; " />  115 cm x 45 cm <br />
+				<input id="ch2" type="checkbox" onclick="inA('2', this)" style="border:none; _margin-bottom:8px; " />   115 cm x 60 cm <br />
+				<input id="ch3" type="checkbox" onclick="inA('3', this)" style="border:none; _margin-top:2px; " /> 115 cm x 90 cm <br />
+				<input id="ch5" type="checkbox" onclick="inA('5', this)" style="border:none; _margin-top:2px; " /> 152 cm x 91 cm <br />
+				</span>
+			</td>
+			
+			<td colspan="2">
+				Monthly planned mat output<br />
+				<input type="text" id="i4" name="ctvrty" style="width:40px; background-color:#E5E5E5; " disabled="disabled" /> &nbsp; pcs <br />
+				<input type="text" id="i1" name="prvni" style="width:40px; background-color:#E5E5E5; " disabled="disabled" /> &nbsp; pcs <br />
+				<input type="text" id="i2" name="druhy" style="width:40px; background-color:#E5E5E5; "  disabled="disabled" /> &nbsp; pcs  <br />
+				<input type="text" id="i3" name="treti" style="width:40px; background-color:#E5E5E5; " disabled="disabled" /> &nbsp; pcs  <br />
+				<input type="text" id="i5" name="paty" style="width:40px; background-color:#E5E5E5; " disabled="disabled" /> &nbsp; pcs  <br />
+			</td>
+		</tr>		
+		<tr>
+			<td colspan="4">
+				<br />
+				In case you would prefer different dimension or different layer quantity (1 mat = 60 layers), please add your comments to the box. Thank you.
+			</td>
+		</tr>		
+		<!--
+		<tr>
+			<td>
+				rohože:<br />
+				krabice:
+			</td>
+			<td colspan="3">				
+				 <input type="text" name="rohozi" style="width:40px;" value="<?=$_POST['rohozi']?>"  /> &nbsp; ks <br />
+				 <input type="text" name="krabic" style="width:40px;" value="<?=$_POST['krabic']?>"  /> &nbsp; ks 
+			</td>
+		</tr>		
+		-->
+		<tr>
+			<td>
+				Comments
+			</td>
+			<td colspan="3">
+				<textarea name="poznamka" style="width:100%; "><?=$_POST['poznamka']?></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<button type="submit" name="odeslat" value="1">Send</button>
+			</td>
+			<td colspan="3">
+						
+			</td>
+		</tr>		
+	</table>
+	</form>	
+	</div>
+ 

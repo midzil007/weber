@@ -1,0 +1,13 @@
+	<h1><?=($this->onlySent?'Odeslaná pošta':'Koncepty')?></h1>
+	<?php
+		echo $this->table( 
+				$this->mailingTable, 
+				$this->mailingTableHead, 
+				$this->mailingTableActions, 
+				$this->tableSort, 
+				$this->tableSortType, 
+				$this->curentViewState, 
+				$this->parentTab,
+				array('class' => 'list')
+			); 
+	?>

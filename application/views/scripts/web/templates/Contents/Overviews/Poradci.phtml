@@ -1,0 +1,82 @@
+<?
+function drawArticle($view, $articleNode, $x){
+	$article = $articleNode->getPublishedContent();
+	$url = helper_FrontEnd::getPath($view, $articleNode->path); 	
+	$date = Utils::formatDate($article->getPropertyValue('dateShow')); 	
+	//$authorPhoto = helper_FrontEnd::getPhoto('authorPhoto', $article, $article->fotoThumbName, $article->fotoFullName, 1);     
+	$photo = helper_FrontEnd::getFirstPhoto($article->getFilesNames('portrait'), $article->pfotoShowName, $article->pfotoFullName, 1);
+    	 	
+	// $article->createFiles();
+	 
+	$tel = $article->getPropertyValue('ptel');
+	$www = $article->getPropertyValue('pwww'); 
+	
+	$lok1 = $article->getPropertyValue('lokalita');
+	$lok2 = $article->getPropertyValue('lokalita2');
+	$lok3 = $article->getPropertyValue('lokalita3');
+	
+	$locs = array();
+	if($lok1){
+		$locs[] = '<a href="' . $view->path . '?region=' . $lok1 . '">' . trim(str_replace('-', '', $view->regiony[$lok1])) . '</a>';
+	}
+	if($lok2){
+		$locs[] = '<a href="' . $view->path . '?region=' . $lok2 . '">' . trim(str_replace('-', '', $view->regiony[$lok2])) . '</a>';
+	} 
+	if($lok3){
+		$locs[] = '<a href="' . $view->path . '?region=' . $lok3 . '">' . trim(str_replace('-', '', $view->regiony[$lok3])) . '</a>';
+	} 
+	
+	?>   
+	<div class="poradce <?=($x%3==0?'last':'')?>"> 
+		<? if($photo['path']):?>     
+		<a href="<?=$url?>"><img class="aimg" alt="" src="<?=$photo['path']?>" /> </a>  
+		<? else:?>
+		<img src="/images/nophoto.jpg" alt="" /> 
+		<? endif; ?>
+		<big><a class="title" href="<?=$url?>"><?=$articleNode->title?></a></big><br /> 
+		email: <?=$view->Email($article->getPropertyValue('pemail'))?> <br />
+		<? if($tel):?>
+		tel.: <?=$tel?> <br />
+		<? endif;?>
+		<? if($www):?>
+		www.: <?=$view->Archon($www, '_blank')?> <br /> 
+		<? endif;?>	   
+		<p><?=$view->Translate('regiony')?>: <?=implode(', ', $locs)?></p>  
+	</div>   
+<?php 
+} 
+
+
+$this->regiony = content_OverviewMesta::getRegionsSelect($this); 
+?>
+
+<?php 
+$n = $this->tree->getNodeById(4115);
+$c = $n->getPublishedContent();
+$url = helper_FrontEnd::getPath($this, $n->path);
+
+$this->inputGet->region = $this->inputGet->region?$this->inputGet->region:($this->language=='cz'?4192:4193); 
+?>
+<div class="semTop poradci"> 
+	<h2><a href="<?=$url?>"><?=$n->title?></a></h2>  
+	<form method="get" action="<?=$url?>"> 
+		<div>
+		<?=$this->formSelect('region', $this->inputGet->region, array(), $this->regiony)?> 
+		<button type="submit" name="search" class="nicesubmit smaller"><?=$this->Translate('ok')?></button>
+		</div>   
+	</form>
+</div> 
+<div class="spacer10"></div> 
+
+<div id="innerCollLeft">
+	<?
+	$x = 0;
+	foreach ($this->poradci as $child):    
+		$x++;
+		drawArticle($this, $child, $x); 
+	endforeach;  
+	?> 
+	 
+	<?=$this->render('templates/Listing/FloatingWithArrows.phtml'); ?>
+	<div class="spacer20"></div> 
+</div>  

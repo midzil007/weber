@@ -1,0 +1,153 @@
+﻿
+<h1>Generování voucherů</h1>
+<script type="text/javascript">
+	function myHide(){
+		var input = document.getElementById('type');
+		if((input.value == 'Procentní') || (input.value == 'Peněžní')){
+			document.getElementById('kodProduktuTr').display = 'none';
+			document.getElementById('povoleneZnackyTr').display = '';
+		}
+		else{
+			document.getElementById('kodProduktuTr').display = '';
+			document.getElementById('povoleneZnackyTr').display = 'none';
+		}
+
+	};
+	
+	function setAllZnacky()
+	{
+		if($('#allZnack').is(':checked')){
+			$('.znacky').attr('checked',true);	
+			$('#allZnack').attr('value','1');
+		}
+		else{
+			$('#allZnack').attr('value','0');
+		}
+		
+
+	}
+	
+	function unSetAll()
+	{
+		$('#allZnack').attr('checked',false);	
+		$('#allZnack').attr('value','0');
+	}
+	
+</script>
+<div id="err_Vouchers"></div>
+	<form id="Vouchers" action="" method="post" >
+	<?php// echo $this->formHidden('id',$this->input->id) ?>
+<table>
+	<tr>
+		<td class="formcell tkey">Název</td>
+		<td class="formcell"><?php echo $this->formText('title',$this->input->title, array('class'=>'ftext')) ?></td>
+	</tr>
+	<tr>
+		<td class="formcell tkey">Typ</td>
+		<? /*	if($_GET['v2'])
+			{*/
+				$enum = array(1 => 'Procentní', 2 => 'Peněžní', 3 => 'Produktový (%)', 4 => 'Produktový (Kč)');
+		/*	}
+			else
+			{
+				$enum = array(1 => 'Procentní', 2 => 'Peněžní');
+			}*/
+		?>
+		<td class="formcell"><?=$this->formSelect('type', $this->input->type, array('onChange' => "input = document.getElementById('type');  
+		if((input.value == 1) || (input.value == 2)){
+			document.getElementById('kodProduktuTr').style.display = 'none';
+			document.getElementById('povoleneZnackyTr').style.display = '';
+		}
+		else{
+			document.getElementById('kodProduktuTr').style.display = '';
+			document.getElementById('povoleneZnackyTr').style.display = 'none';
+		}"), $enum)?></td>
+	</tr>
+	<tr>
+		<td class="formcell tkey">Počítat z</td>
+		<?  
+				$enum = array(1 => 'Plné ceny', 2 => 'Akční ceny');
+		  
+		?>
+		<td class="formcell">
+			<?=$this->formSelect('countFrom', $this->input->countFrom, array(), $enum)?>
+			<p>Má-li výrobek zadanou cenu běžnou i akční, je možné na něj uplatnit pouze voucher akční.</p>
+		</td>
+	</tr>
+	<tr>
+		<td class="formcell tkey">Platí na celé kategorie</td>  
+		<?   
+				$enum = array(1 => 'Akční ceny', 2 => 'Plné ceny');
+		    	
+		?>
+		<td class="formcell"><?=$this->formMultiPageSelect('category', $this->input->category, array(), array('root' => 3801, 'display' => 'FOLDER'))?></td>
+	</tr> 
+	<tr>
+		<td>Hodnota <?=Utils::getHelpIco('Zadejte celé číslo. Pro procentní vouchery hodnoty 1-100. Pro peněžní vouchery požadovanou částku.')?></td>
+		<td><?=$this->formText('value', $this->input->value, array('class' => 'ftext'))?></td>
+	</tr>
+	<tr>
+		<td>Platí do</td>   
+		<td><?=$this->formTextDate('date', date('j.n.Y', time() + 60*60*24 ), array('class' => 'ftext'))?></td>
+	</tr>
+	<tr>
+		<td>Počet vygenerovaných voucherů</td>
+		<td><?=$this->formText('quantity', $this->input->quantity, array('class' => 'ftext'))?></td>
+	</tr>
+	<?
+
+		?>
+		<tr>
+			<td>Počet použití <?=Utils::getHelpIco('Kolikrát lze voucher se stejným kódem použít.')?></td>
+			<td><?=$this->formText('numberOfUses', '1' , array('class' => 'ftext'))?><td>
+		</tr>
+		<tr id="povoleneZnackyTr">
+			<td>Povolené značky: </td>
+		<td> <?
+		$products = new module_Products();
+		$znacky = $products->getZnacky(false,true);   
+		$i = 1?>
+		<input type="checkbox" name="allZnack" onchange="setAllZnacky();" id="allZnack" value="1" checked="checked"/>Všechny značky
+		<?foreach($znacky as $ident => $znacka)
+		{
+			?> 
+			<input type="checkbox" name="znacky[]" id="znacky" onchange="unSetAll()" class="znacky" value="<?=$ident?>" checked="checked"/> <?=$znacka?>
+			<?
+			if( ($i%4) == 0 )
+			{
+				echo '<br>';
+			}
+			$i++;
+		}
+		?> </td></tr>
+		<tr id="kodProduktuTr" style="display:none">
+			<td valign="top" >Url produktů</td>
+			<td> 
+				<? for($i = 1; $i <= 50; $i++):
+					$pn = 'productUrl_' . $i;
+					$pnnd = 'productUrl_d_' . ($i);
+					$pnn = 'productUrl_d_' . ($i + 1); 
+					if($i > 5 && !$this->input->$pn){
+						$d = 'none';  
+					}
+				?>  
+				 
+				<div id="<?=$pnnd?>" style="display:<?=$d?>; margin:0px 0px 5px 0px;">
+				<?=$this->formText($pn, $this->input->$pn, array('class' => 'ftext', 'style' => 'width:250px;', 'onclick' => "document.getElementById('".$pnn."').style.display = '';"))?>  
+				</div>
+				<? endfor;?> 
+			</td>
+		</td></tr>
+		<?
+ 		
+	?>
+	<tr> 
+		<td class="formcell" colspan="2">
+			<?php echo $this->formSubmit('save', 'Uložit', array('class'=>'fsubmit')) ?>
+		</td>
+	<tr>
+</table>
+</form>
+
+
+

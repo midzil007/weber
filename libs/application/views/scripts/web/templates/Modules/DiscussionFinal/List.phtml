@@ -1,0 +1,44 @@
+		<?
+		function drawPost($view, $post, $level){
+			if($level){
+				$s = 'style="padding-left:' . ($level * 10) . 'px;"';
+			}
+			 
+			?>			
+			<div class="post" <?=$s?>>
+				<div class="pHeader">
+					<div class="pFrom">
+						<b><?=$post['author']?></b> | 				
+						<small><?=helper_FrontEnd::getNiceDateTime($post['added'], 'd.m.Y H:i', 'dnes')?></small>				
+					</div> 
+					<h4><?=$post['title']?></h4>
+					<div class="clear">&nbsp;</div> 
+				</div>				
+				<?
+				$view->inputGet->reply = $post['id'];
+				?> 
+				<div class="pBody">
+					<p><?=$post['text']?></p>   
+					<a  rel="nofollow"  class="pReply" href="<?=Utils::addUrlParams($view->discussionPath, $view->inputGet);?>#discussion">Reagovat</a> 
+					<div class="clear"></div> 
+				</div>  
+			</div>
+			<?
+			if($view->posts['r'][$post['id']]){
+				$level += 1;
+				foreach ($view->posts['r'][$post['id']] as $post){
+					drawPost($view, $post, $level);
+				}
+			} 
+		}
+		?>
+		<? if(count($this->posts['p'])):?>
+		<div class="dList">
+			<?
+			foreach ($this->posts['p'] as $post){
+				drawPost($this, $post, 0);
+			}
+			?>
+			
+		</div>
+		<? endif; ?> 

@@ -1,0 +1,47 @@
+	<form method="GET" action="<?= $this->url(array('controller' => 'search','action' => 'index' )) ?>">
+		<div id="loggedUser">  
+			<a title="odhlásit se" id="logout" href="/cms/login/logout"><span>&nbsp;</span>odhlásit se</a>	 <br />					
+			<b class="cwhite"><?=$this->user?></b> 
+			<span class="fs_xxs cwhite">(<?=$this->groups[$this->user->group];?>)</span>
+			<br />  
+			<?  
+			if(count($this->languages->availableLanguages) > 1): ?>
+			<table>
+				<tr>
+					<td class="cwhite">Jazyk:</td>
+					<td>
+			<? 
+			$langSel = array();
+			$selected = '';
+			foreach ($this->languages->availableLanguages as $ident => $name){
+				$url = $this->url(array('language' => $ident));
+					
+				if($ident == $this->language){
+					$selected = $url;
+				}		
+				
+				$langSel[$url] = $name;
+			}
+			
+			echo $this->formSelect('language', $selected , array(
+					'autocomplete'=>'true',
+					'value'=>$selected,  
+					'style' => ' font-size:10px; padding:0px; height:18px; line-height:18px;',   
+					'onChange' => "window.location.href=$(this).val();",	        			
+					), $langSel  
+				)  
+			?>
+					</td> 
+				</tr>
+			</table>
+			<? endif; ?>
+			
+			
+			<? if ($this->acl->isAllowed($this->user->group, 'search') && $this->config->allowSearch): ?>
+			<input type="text" name="searchString" class="dojoLike" style="font-size:11px; width:90px; height:14px" />
+			<button type="submit" class="ui-button-icon-primary " style="font-size:11px; width:50px;">hledat</button>
+			<?php ///echo $this->formText('searchString',$this->input->searchString, array('style' => ' font-size:1em; *font-size:90%; width:120px;')) ?> 
+			<?php //echo $this->formSubmit('doSearch','hledat', array('style' => ' font-size:0.7em; *font-size:70%;')) ?>
+			<? endif; ?>
+		</div>
+	</form>

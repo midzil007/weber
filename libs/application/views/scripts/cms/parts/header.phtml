@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="cs" xml:lang="cs">
+<head>
+	<title><?php echo $this->escape($this->title); ?></title> 
+	<meta http-equiv="content-language" content="cs" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+	<link media="screen" href="/admin/css/cms2.css" type="text/css" rel="stylesheet" /> 
+	<link media="screen" href="/admin/css/mailing.css" type="text/css" rel="stylesheet" />
+	<link media="screen" href="/admin/css/cms-instance.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="/admin/js/cmsFunctions07.js"></script>
+		<link rel="stylesheet" href="/admin/css/validationEngine.jquery.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+    
+		<link rel="stylesheet" href="/admin/css/template.css" type="text/css" media="screen" title="no title" charset="utf-8" />
+			   
+	<link href="/admin/css/smoothness/jquery-ui-1.9.1.custom.css" rel="stylesheet" />
+	<script type="text/javascript" src="/admin/js/jquery-1.8.2.js"></script> 
+	<script type="text/javascript" src="/admin/js/jquery-ui-1.9.1.custom.js"></script> 
+	<script type="text/javascript" src="/admin/js/jquery.ui.touch-punch.min.js"></script>
+	<script type="text/javascript" src="/admin/js/tiny_mce/tinymce.min.js"></script>    
+	<? // $this->render('parts/treeJs.phtml'); ?> 	  
+	   	 
+	<script type="text/javascript" src="/admin/js/init.js"></script>	  
+	  
+	
+	<script type="text/javascript" src="/admin/js/multiFiles.js"></script>	   
+	<!--  <script type="text/javascript" src="/admin/js/menu.js"></script>	 
+	
+	<script type="text/javascript" src="/admin/js/FileInput.js"></script>	
+	<script type="text/javascript" src="/admin/js/FileInputAuto.js"></script>  -->  
+	<? if($this->isPopup): ?>
+	
+	<? endif; ?>  
+	
+	<? if($this->hasUpload): ?>
+	<!-- Bootstrap CSS Toolkit styles -->
+	<link rel="stylesheet" href="/admin/css/bootstrap.min.css">  
+	<!-- Generic page styles -->
+	<link rel="stylesheet" href="/admin/css/style.css">
+	<!-- Bootstrap styles for responsive website layout, supporting different screen sizes -->
+	<link rel="stylesheet" href="/admin/css/bootstrap-responsive.min.css">
+	<!-- Bootstrap CSS fixes for IE6 -->
+	<!--[if lt IE 7]><link rel="stylesheet" href="/admin/css/bootstrap-ie6.min.css"><![endif]--> 
+	<link rel="stylesheet" href="/admin/css/jquery.fileupload-ui.css">
+	<!-- CSS adjustments for browsers with JavaScript disabled --> 
+	<noscript><link rel="stylesheet" href="/admin/css/jquery.fileupload-ui-noscript.css"></noscript>
+	<!-- Shim to make HTML5 elements usable in older Internet Explorer versions -->
+	<!--[if lt IE 9]><script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]--> 
+	<? endif; ?>  
+	
+</head>
+<body id="container">

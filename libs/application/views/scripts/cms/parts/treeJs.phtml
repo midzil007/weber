@@ -1,0 +1,150 @@
+	<?php
+    $params  = $this->requestParams;
+    $params['action'] = 'index';
+    $params['tree'] = '1';
+  	unset($params['sysnode']); 
+    unset($params['error_handler']);
+  
+	switch ($this->curentController){
+		case 'structure':
+			unset($params['node']);       		
+			?>
+			<script type="text/javascript">
+				function getNodeUrl(n){
+					var u = '<?=$this->url($params, null, true)?>/node/'+n;	
+					getUrl(u);
+					
+				}
+				var treeItemIdentifier = "nodeId"
+			</script>
+			<?
+			break;
+		case 'sf':
+			unset($params['filenode']);  
+			
+			?>
+			<script type="text/javascript">
+				function getNodeUrl(n){
+					var u = '<?=$this->url($params, null, true)?>/filenode/'+n;				
+					getUrl(u);
+				}
+				var treeItemIdentifier = "nodeId"
+			</script>
+			<?
+			break;		
+		default:
+			unset($params['node']);  
+			$params['controller'] = 'pages';
+			?>
+			<script  type="text/javascript">
+				function getNodeUrl(n){
+					var u = '<?=$this->url($params, null, true)?>/node/' + n;			
+					getUrl(u);
+				}
+				var treeItemIdentifier = "nodeId"
+			</script>
+			<?
+			break;
+		
+		}
+		
+		/* DALSI STROMY */
+		
+		if($this->showHelpTree){
+			$params['controller'] = 'help';
+			unset($params['helpnode']); 			
+			?>
+			
+			<script type="text/javascript">
+				dojo.addOnLoad(function(){	
+					dojo.subscribe("helptree", null, function(message){
+						if(message.event=="execute"){	
+							getHelpNodeUrl(helpStructure.getValue(message.item, treeItemIdentifier));
+						}
+					});					
+				});
+
+
+				function getHelpNodeUrl(n){
+					var u = '<?=$this->url($params, null, true)?>/helpnode/'+n;				
+					getUrl(u);
+				}
+				var treeItemIdentifier = "nodeId"
+			</script>
+			<?
+		}
+		
+		if($this->showFullHelpTree){
+			$params['controller'] = 'help';
+			$params['action'] = 'fullHelpDetail';
+			unset($params['helpnode']); 			
+			?>
+			
+			<script type="text/javascript">
+				dojo.addOnLoad(function(){	
+					dojo.subscribe("helpFulltree", null, function(message){
+						if(message.event=="execute"){	
+							getHelp(helpFullStructure.getValue(message.item, treeItemIdentifier));
+						}
+					});					
+				});
+
+
+				function getHelp(n){
+					var u = '<?=$this->url($params, null, true)?>/helpDetail/'+n;				
+					refreshTab('helpDetailPane', u);
+				}
+				var treeItemIdentifier = "nodeId"
+			</script>
+			<?
+		}
+		
+		if($this->showSysTree){
+			//$params['controller'] = 'structure';
+			
+			unset($params['node']); 
+			$params['sysnode'] = 1;			
+			?>
+			<script type="text/javascript">
+				dojo.addOnLoad(function(){	
+					dojo.subscribe("systree", null, function(message){
+						if(message.event=="execute"){	
+							getSysNodeUrl(sysPages.getValue(message.item, treeItemIdentifier));
+						}
+					});					
+				});
+
+
+				function getSysNodeUrl(n){
+					var u = '<?=$this->url($params, null, true)?>/node/'+n;				
+					getUrl(u);
+				}
+				var treeItemIdentifier = "nodeId"
+			</script>
+			<?
+		}
+		
+		if($this->showIntranetTree){
+			$params['controller'] = 'intranet';
+			unset($params['intranetnode']);			
+			?>
+			<script type="text/javascript">
+				dojo.addOnLoad(function(){	
+					dojo.subscribe("intranetTree", null, function(message){
+						if(message.event=="execute"){	
+							getIntranetNodeUrl(intranetStructure.getValue(message.item, treeItemIdentifier));
+						}
+					});					
+				});
+				function getIntranetNodeUrl(n){
+					var u = '<?=$this->url($params, null, true)?>/intranetnode/'+n;				
+					getUrl(u);
+				}
+				var treeItemIdentifier = "nodeId"
+			</script>
+			<?
+		}
+		
+	
+			
+	?>			

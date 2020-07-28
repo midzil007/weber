@@ -1,0 +1,76 @@
+<?php  
+$items = $this->mEshop->basket->getItems();
+$itemsCount = count($items);
+?> 
+
+			<table class="fs12"> 
+              <tbody><tr>
+                <th scope="col">Zboží</th>
+                <th>Kusů</th>
+                <? if($this->listOverview):?>
+                
+                <? else:?>
+                <th>Skladem</th>
+                <? endif;?>
+                <th>Cena / Kus</th>
+                <th>Celkem s DPH</th>
+                <th></th>
+              </tr>  
+              <? 
+              $x = 0;
+              foreach ($items as $id => $data):
+              	$x++;  
+                	$child = $data['item'];
+                	$count = $data['count'];
+	              	if(!$child){ continue; } 
+	              	$c = $child->getPublishedContent();  
+	              	$activeVariant = $this->mVarianta->getVariantById($data['variantId'],false); 
+	              //	pr($data);  e($activeVariant);
+	            		$price  =  $data['price'];   
+	            		$url = $c->getDetailUrl($this, $child);  
+	            		$skladem = $activeVariant['skladem'];
+	            		$barva = $activeVariant['title'] ? ', '.$activeVariant['title']:'';
+	            		$velikost= $activeVariant['titleOption'] ? ', '.$activeVariant['titleOption']: '';
+	            		$photos = $this->mVarianta->getResizedPhotos($activeVariant['obrazky']);
+            			$p = helper_FrontEnd::getFirstPhoto($photos,'pMinic2' , false);
+	                ?>  
+	                
+              <tr <?=($itemsCount==$x?'class="last"':'')?>>
+                <td class="pnm" valign="middle" scope="row"><a href="<?=$url?>">
+                	<img src="<?=$p['path']?>" alt=" " /><span class="fs14"><?=$child->title?><?=$barva?><?=$velikost?></span></a></td>
+                <td>
+                	<? if($this->listOverview):?>
+                	<?=$count?>
+                	<? else:?>
+                	  
+                	<div class="fLeft">
+	                    <input type="text" id="ks<?=$id?>" value="<?=$count?>" size="1" class="refresh" name="count[<?=$id?>]" />
+	                    <input type="hidden" value="<?=$id?>" class="refresh" name="itemId" />
+					</div>   
+					<div class="fLeft">
+		                    <div prop="ks<?=$id?>" class="botip up" rel="O jeden kus více"></div>  
+		                    <div prop="ks<?=$id?>"  class="botip down" rel="O jeden kus méně"></div>
+	                
+                    </div>
+                     
+                	<? endif;?>
+                	</td>   
+                	<? if($this->listOverview):?>
+                	
+                	<? else:?>
+                <td>
+	                <span class="skladem fs12 fBold">Skladem</span>       
+                </td> 
+                <? endif;?>   
+                <td><?=helper_FrontEnd::price($price)?>,-</td>
+                <td>
+                	<span class="cena fs14 fBold"><?=helper_FrontEnd::price($price*$count)?> Kč</span> 
+				</td>
+				<td>
+					<? if($this->inputGet->step!=3):?> 
+						<a href="#" class="deleteItem botip" rel="Odebrat z košíku" onclick="return del('ks<?=$id?>')"></a> 
+					<? endif;?>   
+				</td>
+              </tr>  
+              <? endforeach;?> 
+              </tbody></table> 

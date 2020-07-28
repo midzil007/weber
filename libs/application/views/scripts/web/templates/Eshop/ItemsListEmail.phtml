@@ -1,0 +1,111 @@
+			<h2>Objednané zboží</h2>			
+			<?php  
+			$items = $this->mEshop->basket->getItems(); 
+			$itemsCount = count($items);
+			?> 
+
+			<table> 
+              <tbody><tr>
+                <th scope="col">Zboží</th>
+                <th> </th>
+                <th>Kusů</th> 
+                <th>Skladem</th> 
+                <th>Cena / Kus</th>
+                <th>Celkem</th>
+              </tr>  
+              <? 
+              $x = 0;
+              foreach ($items as $id => $data): 
+              	$x++;
+                	$child = $data['item'];
+                	$count = $data['count'];
+	              	if(!$child){ continue; } 
+	              	$c = $child->getPublishedContent();
+	              	$p = helper_FrontEnd::getPhoto('photos', $c, $c->fotoMiniName);
+	            		if(count($p)){
+	            			$img = Utils::getWebUrl() . $p['path']; 
+	            		} else {
+	            			$img = Utils::getWebUrl() . '/images/categoryImg.jpg';
+	            		} 
+	            		$price  = $data['price'];   
+	            		$url = Utils::getWebUrl() . $c->getDetailUrl($this, $child);  
+	            		$skladem = $c->getPropertyValue('skladem');
+	            		 
+	                ?>
+              <tr <?=($itemsCount==$x?'class="last"':'')?>>
+                <td valign="top" scope="row"> 
+                	<img src="<?=$img?>" alt=" " />    
+                </td>
+                <td> 
+                	<a href="<?=$url?>">
+                	<span><?=$child->title?></span></a></td>
+                <td> 
+                	<?=$count?> 
+                	</td>    
+                <td>
+	                 <?=$c->getSkladem(0, false, false)?>   
+                </td>  
+                <td><span><?=helper_FrontEnd::price($price)?>,-</span></td>
+                <td>
+                	<span class="cena"><?=helper_FrontEnd::price($price*$count)?> Kč</span> 
+				</td>
+              </tr>  
+              <? endforeach;?> 
+              </tbody></table> 
+              
+			<h2>Shrnutí objednávky</h2>                
+              <?php    
+			$items = $this->mEshop->basket->getItems();
+			
+			$itemsCount = count($items); 
+			$sumAll = $discount = 0;
+			foreach ($items as $id => $data){ 
+				$child = $data['item'];    
+				$count = $data['count'];
+				if(!$child){ continue; } 
+				$c = $child->getPublishedContent(); 
+				$price  = $items['price'];     
+				$sum = $price * $count;   
+				$sumAll += $sum;
+			}          
+			  
+			$dph = $sum / 1.2 * 0.2;   
+			$dph = round($dph, 2);     
+			$sumBezdph = $sum - $dph;  
+			if($sumBezdph >= 1700	){ 
+				$deliverySum = 0; 
+			} else {
+				$delivery = $this->mEshop->basket->getDeliveryPrice();  
+			}    
+			
+			$delivery = $delivery?$delivery:0;	                        	                       	
+			$sum = $sumAll - $discount + $delivery;
+			$dph = $sum / 1.2 * 0.2;     
+			$dph = round($dph, 2);    
+			$sumBezdph = $sum - $dph; 
+			$price = $sum;      		
+			 
+			?>
+   			
+          <div>
+            <p class="head">Shrnutí objednávky</p>
+            <p>Cena zboží bez DPH: &nbsp;&nbsp;<span><?=helper_FrontEnd::price($sumBezdph)?> Kč</span></p>
+            <p>DPH <?=$this->dphNo?>%: &nbsp;&nbsp;<span><?=helper_FrontEnd::price($dph)?> Kč</span></p>
+            <? if($delivery):?>
+            <p>Doprava s DPH <?=$this->dphNo?>%: &nbsp;&nbsp;<span><?=helper_FrontEnd::price($delivery)?> Kč</span></p>
+            <? endif;?>
+            <p class="total"><strong>Celkem k úhradě: &nbsp;&nbsp;<span><?=helper_FrontEnd::price($price)?> Kč</span></strong> </p>
+          </div>   
+          
+          <?php 
+          
+          $delivery = $this->mEshop->basket->getDelivery(true); 
+          $payment = $this->mEshop->basket->getPayment(true); 
+          
+          ?>
+          <h2>Doprava a platba</h2>    
+          <?=$delivery?> / <?=$payment?>  
+          
+          
+          
+          

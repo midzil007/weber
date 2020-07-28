@@ -1,0 +1,95 @@
+<div id="err_userForm"></div>
+<!-- <h1><?php if($this->edit): ?>Editace uživatele<?php else: ?>Nový uživatel<?php endif; ?></h1>	-->
+<?
+if($this->edit){
+	?>
+	<div style="float:right;">
+	<?= helper_FrontEnd::showPhoto($this->input->photo, $this->users->fotoName); ?>
+	</div>
+	<?
+} else {
+	
+	if(!is_object($this->input)){
+		$this->input = new StdClass(); 
+	}
+	$g = ( current(array_keys($this->groups)) );
+	$this->input->group = $g;    
+} 
+?>
+
+<?php if($this->edit): ?>
+	<form id="userForm" class="validate" action="<?= $this->url(array('controller' => 'users','action' => 'new')) ?>" method="post">
+	<?php echo $this->formHidden('id',$this->input->id) ?>
+	<?php echo $this->formHidden('password',$this->password) ?>
+	<?php echo $this->formHidden('password2',$this->password2) ?>  
+<?php else: ?>
+	<form id="userForm" action="<?= $this->url(array('controller' => 'users','action' => 'new')) ?>" method="post">
+<?php endif; ?>
+<table>		
+	<tr>
+		<td class="formcell tkey">Jméno <span class="redValid">*</span></td>
+		<td class="formcell"><?php echo $this->formText('fullname',$this->input->fullname, array('class'=>'ftext validate[required,length[0,20]] text-input')) ?></td>
+	</tr>
+	<?php if( 1 ||  $this->edit): ?>
+	<tr>
+		<td class="formcell">Login <span class="redValid">*</span></td>
+		<td class="formcell"><?php echo $this->formText('username',$this->input->username, array('class'=>'ftext validate[required,length[0,20]] text-input')) ?></td>
+	</tr>
+	<?php endif; ?>
+	<?php if($this->edit): ?>
+		<tr>
+			<td class="formcell">Heslo</td>  
+			<td class="formcell"><?php echo $this->formPassword('password_new','', array('class'=>'ftext validate[required,length[0,20]] text-input')) ?> <?php if($this->edit): ?><a class="helpico" href="#" title="Vyplňte pouze pokud chcete heslo změnit">&nbsp;</a><?php endif; ?> </td>
+		</tr>
+		<tr>
+			<td class="formcell">Heslo znovu</td>
+			<td class="formcell"><?php echo $this->formPassword('password2_new','', array('class'=>'ftext')) ?></td>
+		</tr>
+	<?php else: ?>
+		<tr>
+			<td class="formcell">Heslo <span class="redValid">*</span></td>  
+			<td class="formcell"><?php echo $this->formPassword('password','', array('class'=>'ftext validate[required,length[0,20]] text-input')) ?> <?php if($this->edit): ?><a class="helpico" href="#" title="Vyplňte pouze pokud chcete heslo změnit">&nbsp;</a><?php endif; ?> </td>
+		</tr>
+		<tr>
+			<td class="formcell">Heslo znovu <span class="redValid">*</span></td>
+			<td class="formcell"><?php echo $this->formPassword('password2','', array('class'=>'ftext validate[required,length[0,20]] text-input')) ?></td>
+		</tr>			
+	<?php endif; ?>
+	<tr>
+		<td class="formcell">Skupina</td>
+		<td class="formcell"><?php echo $this->formSelect('group', $this->input->group , array('autocomplete'=>'true','value'=>$this->input->group), $this->groups) ?></td>
+	</tr>
+	<tr>
+
+		<td class="formcell">Email <span class="redValid">*</span></td>
+		<td class="formcell"><?php echo $this->formText('email',$this->input->email, array('class'=>'ftext validate[required,custom[email]] text-input')) ?></td>
+	</tr>
+	<tr>
+		<td class="formcell">Telefon 1</td>
+		<td class="formcell"><?php echo $this->formText('tel1',$this->input->tel1, array('class'=>'ftext')) ?></td>
+	</tr>
+	<tr>
+		<td class="formcell">Telefon 2</td>
+		<td class="formcell"><?php echo $this->formText('tel2',$this->input->tel2, array('class'=>'ftext')) ?></td>
+	</tr>
+	<tr>
+		<td class="formcell">Fotografie</td>
+		<td class="formcell"><?php echo $this->formFileSelect('photo' . '_fileSelect', $this->input->photo, array(), array(), array('showSelectFile' => true, 'showUploadFile' => true, 'uploadFileDirectoryNodeId' => $this->config->instance->userPhotosNodeId, 'inputWidth' => 150, 'inputVisible' => 'none' ) ) ?></td>
+	</tr>	
+	<tr>
+		<td class="formcell">Účet uzamčen <?=Utils::getHelpIco('Na zamčený účet se nelze přihlásit, ale uživatel zůstává v systému.')?></td>
+		<td class="formcell"><?php echo $this->formCheckbox('locked',$this->input->locked, array('class'=>'ftext')) ?></td>
+	</tr>			
+	<tr>
+		<td class="formcell" colspan="2"> 			
+			<?php if($this->edit): ?> 
+				<?php echo $this->formSubmit('update', 'Uložit', array('class'=>'fsubmit fsBig')) ?>
+				<a onclick="window.history.back(); return false;" id="cancelLink" title="Změny nebudou uloženy">Zrušit</a>
+			<?php else: ?>
+				<?php echo $this->formSubmit('save', 'Uložit', array('class'=>'fsubmit fsBig')) ?>	
+				<a onclick="window.history.back(); return false;" id="cancelLink" title="Změny nebudou uloženy">Zrušit</a>			
+			<?php endif; ?>
+		</td>
+	<tr>
+</table>
+</form>

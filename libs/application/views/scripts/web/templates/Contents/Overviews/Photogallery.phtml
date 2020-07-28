@@ -1,0 +1,28 @@
+<?=$this->pageText?>
+ 
+
+<?
+$photosGroup = 'mainPhotos';
+$mainPhoto = false;
+
+$x = 0;
+foreach ($this->photos as $path => $name){
+	$x++;
+	if(!$path){ continue; }	
+	list($nodeId, $n) = content_SFSFile::parseSFSPath($path);
+	 
+    $photoPathFullTemp = $this->config->sfFolder . '/' . $nodeId . '/' . $this->content->fotoFullName . '-' . content_SFSFile::getFileExtension($n) . '/' . $n;
+    $photoPathShow = $this->config->sfFolder . '/' . $nodeId . '/' . $this->content->fotoShowName . '-' . content_SFSFile::getFileExtension($n) . '/' . $n;
+    $photoPathThumb = $this->config->sfFolder . '/' . $nodeId . '/' . $this->content->fotoThumbName . '-' . content_SFSFile::getFileExtension($n) . '/' . $n; 
+ 	
+    $photoPathShow = content_SFSFile::getFileFullPath($photoPathShow);
+	$photoPathFullTemp = content_SFSFile::getFileFullPath($photoPathFullTemp); 
+			
+	$photoTitle = $name;      
+	?>
+		<a href="<?=$photoPathFullTemp?>" rel="milkbox[g]" title="<?=$name?>">      
+			<img src="<?=$photoPathThumb?>" alt="<?=$name?>" />   
+		</a>    
+	<? 
+}  
+?> 

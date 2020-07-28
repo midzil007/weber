@@ -1,0 +1,46 @@
+<?
+$siteMap = new module_SiteMap();
+$nodes = $siteMap->generate();
+
+function generateLevel($nodes, $view, $showLastSearch = true){
+	?>
+	<ul>
+	<?
+	foreach ($nodes as $node){
+		if((is_numeric($node->showInSitemap) && $node->showInSitemap==0) ){
+			continue;
+		}
+		?>
+		<li>
+		<?
+		if($node->type == 'FOLDER' && count($node->children)){
+			if($node->nodeId == 3801)
+			{?>
+				<?=$node->title?>
+			<?}
+			else{?>
+				<a href="<?=helper_FrontEnd::getPath($view, $node->path)?>"><?=$node->title?></a>
+			<?}?>
+			
+			<?
+			generateLevel($node->children, $view, false);
+		} else {
+			?>
+			<a href="<?=helper_FrontEnd::getPath($view, $node->path)?>"><?=$node->title?></a>
+			<?
+		}
+		?>
+		</li>
+		<?
+	}
+	if($showLastSearch){?>
+	<?=$view->mProducts->getLastSearchWords($view);?>
+	<?}?>
+	</ul>
+	<?	
+}   
+?>
+<b><a href="/"><?=$this->config->instance->title?></a></b>
+<?
+generateLevel($nodes, $this);
+?>

@@ -1,0 +1,31 @@
+<table class="modalTable">	
+	<? if($this->node->nodeId > 1 && $this->isEdit): ?>
+	<tr>
+		<td class="formcell">Umístěno v</td>
+		<td class="formcell"><?php echo $this->formSelect('parentId', $this->node->parentId , array('autocomplete'=>'true','value'=>$this->node->parentId), $this->parentSelect, '', true) ?></td>	
+	</tr>
+	<? endif; ?>
+	<tr>
+		<?
+		if(!is_numeric($this->node->showInSitemap)){ // nebyl ulozen
+			$this->node->showInSitemap = 1;
+		}
+		?> 
+		<td class="formcell" style="width">Zobrazit v mapě stránek</td>
+		<td class="formcell"><?php echo $this->formSelect('showInSitemap', $this->node->showInSitemap , array('autocomplete'=>'true','value'=>$this->node->showInSitemap), array('1' => 'Ano', '0' => 'Ne')) ?></td>		
+	</tr>	
+	<tr>
+		<?
+		if(!is_numeric($this->node->showH1)){ // nebyl ulozen
+			$this->node->showH1 = 1;
+		}
+		?>
+		<td class="formcell" style="width">Zobrazit hlavní nadpis H1</td>
+		<td class="formcell"><?php echo $this->formSelect('showH1', $this->node->showH1 , array('autocomplete'=>'true','value'=>$this->node->showH1), array('1' => 'Ano', '0' => 'Ne')) ?></td>		
+	</tr>
+	 
+	<tr>
+		<td class="formcell">Šablona</td>
+		<td class="formcell"><?php echo $this->formSelect('template', $this->node->template , array('autocomplete'=>'true','value'=>$this->node->template), $this->templates) ?></td>
+	</tr>	
+</table>

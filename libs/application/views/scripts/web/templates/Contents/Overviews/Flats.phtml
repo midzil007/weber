@@ -1,0 +1,33 @@
+<?=$this->pageText?>
+<div class="clear">&nbsp;</div>
+<table class="flats"  cellspacing="0">
+<? 
+
+foreach ($this->children as $child):	
+	$flat = $child->getPublishedContent();	
+	$class = 'free';
+	$extra = array();
+	$terace = strlen($flat->getPropertyValue('terasa'));
+	if($terace){
+		$extra[] = 'terasa';
+	}
+	$sklep = strlen($flat->getPropertyValue('sklep'));
+	if($sklep){
+		$extra[] = 'sklep';
+	}
+	
+	
+	$state = $flat->getPropertyValue('fstate');  
+	?>	
+	<tr class="<?=($state==0?'':'not')?>free">
+    	<td>
+        	<a href="<?=helper_FrontEnd::getPath($this, $child->path)?>"><?=$child->title?></a>
+        </td>
+        <td><?=helper_FrontEnd::m2($flat->getPropertyValue('size'))?></td>
+        <td><?=implode(', ', $extra)?></td>  
+        <td><?=$flat->getPrice($this);?></td> 
+        <td><a href="<?=helper_FrontEnd::getPath($this, $child->path)?>"><?=$this->translate('detail-bytu');?></a></td>   
+    </tr>
+<? 	
+endforeach; ?>
+</table> 

@@ -1,0 +1,44 @@
+	<?
+	if(!$this->dojoResources->Tooltip):
+		$this->dojoResources->Tooltip = true;
+		?>
+		<script type="text/javascript">
+			dojo.require("dijit.Tooltip");	
+	    </script>
+	    <?
+	endif;
+	
+	
+	$filesCount = $this->multiFileOptions['maxFiles']?$this->multiFileOptions['maxFiles']:20;
+	
+	$this->fileInputs = array();
+	
+	?>
+	<?php echo $this->formHidden($this->MultiFileSelectName, $this->visibleOptions) ?>
+	<?php echo $this->formHidden($this->MultiFileSelectName . '_filesCount', $this->visibleOptions) ?>
+	<?php echo $this->formHidden($this->MultiFileSelectName . '_optionPrefix', $this->MultiFileSelectName . '_fileSelect') ?>
+	
+	<? for ($i = 1; $i < $filesCount; $i++): 
+		$filename = $this->fileInputs[] = $this->MultiFileSelectName . '_fileSelect' . $i;
+		$this->fileNumber = $i;
+		$this->isMultiFile = true;
+	?> 	
+	<div style="display:<?=($this->visibleOptions>=$i?'block':'none')?>" id="<?=$this->MultiFileSelectName?>_filerow<?=$i?>">	
+			<div class="order-div-multi">
+				<a href="#" id="moveup<?=$i?>" no="<?=$i?>" onclick="moveFile(this, '<?=$this->MultiFileSelectName?>_fileSelect', 'up'); return false;" class="order-up-a" title="posunout výše">&nbsp;</a>
+				<a href="#" id="movedo<?=$i?>" no="<?=$i?>" onclick="moveFile(this, '<?=$this->MultiFileSelectName?>_fileSelect', 'down'); return false;" class="order-down-a" title="posunout níže">&nbsp;</a>
+			</div>			
+			<?php echo $this->formFileSelect($filename, $this->prevFiles[$i], $this->param3, array(), $this->multiFileOptions, true ) ?>					
+			<? if($i > 0): ?>
+				<a href="#" id="remove<?=$i?>" onclick="return removeOption('<?=$this->MultiFileSelectName?>_filerow', '<?=$this->MultiFileSelectName?>_fileSelect', this.id)">odebrat</a>	
+				<? if($this->prevFiles[$i]['name']): ?>
+					<?=$this->prevFilesPreview[$i]?>
+					<? if($this->prevFiles[$i]['previewImage']): ?>
+					<img src="<?=$this->prevFiles[$i]['previewImage']?>" alt="" /> 
+					<? endif; ?>			
+				<? endif; ?>  			
+			<? endif; ?>			
+			
+	</div>
+	<? endfor; ?>	
+	<?php echo $this->formSubmit('addOption' . $this->MultiFileSelectName, 'Přidat další soubor', array('class'=>'fsubmit', 'style' => ' font-size:0.8em; *font-size:80%;', "onclick" => "return showNextOption( '" . $this->MultiFileSelectName . "_filerow', '" . $this->MultiFileSelectName . "_fileSelect', '" . $this->MultiFileSelectName . "_filesCount' )")) ?>

@@ -1,0 +1,17 @@
+    <h2><?=$this->leftPartNode->title?></h2>    
+    <ul id="submenu">
+	<? 
+	foreach ($this->leftPartNode->getChildren() as $product):
+		$content = $product->getPublishedContent();
+		if(!$content){ continue; }		
+		$url = helper_FrontEnd::getPath($this, $product->path);
+		$class = '';
+		if($this->curentPath == $url){
+			$class = 'class="active"';
+		}
+	?>
+        <li><a <?=$class?> href="<?=$url?>"><?=$product->title?></a></li>
+    <?
+	endforeach;
+	?>
+    </ul>

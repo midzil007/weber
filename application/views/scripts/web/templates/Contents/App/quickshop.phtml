@@ -1,0 +1,192 @@
+<?if($this->showPrice && $_SESSION['CMS7']['logged'] == 1):?> 
+    <style>
+    #leftPage{
+    	   width: 60%;
+    }
+    #rightPageBasket{
+       width: 40%; 
+     } 
+    #leftPage,#rightPageBasket{
+        float: left;
+  
+    } 
+    #rightPageBasket{
+    margin-top: 40px;
+     padding-left: 40Px; 
+    }
+    ul.tabs{
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+        }
+        ul.tabs li{
+            background: none;
+            color: #222;
+            display: inline-block;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
+
+        ul.tabs li.current{
+            background: #ededed;
+            color: #222;
+        }
+
+        .tab-content{
+            display: none;
+            background: #ededed;
+            padding: 15px;
+        }
+
+        .tab-content.current{
+            display: inherit;
+        }
+        table.quick-t td{
+            padding: 0 5px;   
+        } 
+</style> 
+<div> 
+    Hledej: <input type="text" id="autoquick" style="width: 320px;margin:30px 0" name="autoquick">
+    (vyhledávání funguje od 3 znaku) 
+</div>        
+<div id="auto-q-s"></div> 
+<ul class="tabs">
+        <li class="tab-link current" data-tab="tab-1">Kávovary</li>
+        <li class="tab-link" data-tab="tab-2">Přislušentsví</li>
+        <li class="tab-link" data-tab="tab-3">Káva</li>
+        <li class="tab-link" data-tab="tab-4">Šálky</li>
+    </ul>
+
+    <div id="tab-1" class="tab-content current">
+        <?
+$params['onWeb']            = 1;
+$params['onlykavovars'] = 1;
+$mProducts = $this->mProducts->getProducts("priceasc", "asc" , 0, 1000000, $params);?>
+<table style="width: 100%">
+    <tr>
+        <td>Product</td> 
+        <td>Cena</td>
+        <td style="width: 50px">Kůsy</td>
+        <td>Nová cena</td>
+        <td>Procentní sleva</td>
+        <td></td>      
+         <td></td>
+<?foreach ($mProducts as $key => $value):?>      
+    <tr> 
+        <td><a href="<?=$value['path']?>"><?=$value["title"]?></a></td>
+        <td><?=$value['price']?> Kč<input type="hidden"  id="idoldprice<?=$value['id']?>" value="<?=$value['price']?>" name="idoldprice<?=$value['id']?>"/></td>   
+        <td style="width: 50px"><input style="width: 40px" type="text" value="1" id="ks<?=$value['id']?>" name="ks<?=$value['id']?>"></td> 
+        <input type="hidden" name="variantId" id="variantId<?=$value['id']?>" value="<?=$value['variantId']?>">
+        <td><input style="width: 100px" type="text" value="<?=$value['price']?>" id="price<?=$value['id']?>" name="<?=$value['id']?>"></td>
+        <td><input  style="width: 50px" type="text" value="0" id="percent<?=$value['id']?>" name="per<?=$value['id']?>"></td>
+        <td><a onclick="math('percent<?=$value['id']?>','price<?=$value['id']?>','idoldprice<?=$value['id']?>')" href="#">Přepočítat</td>
+        <td><a onclick="buy(<?=$value['id']?>)" href="#">Koupit</td>
+    </tr>      
+<?endforeach?>              
+</table>   
+    </div> 
+    <div id="tab-2" class="tab-content">
+        <?
+$params = array(); 
+$params['onWeb']            = 1; 
+$params['category'] = "7237";      
+$mProducts = $this->mProducts->getProducts("priceasc", "asc" , 0, 1000000, $params);?>
+<table>
+    <tr>  
+        <td>Product</td>
+        <td>Cena</td>
+        <td>Počet kůsu</td>
+        <td>Nová cena</td>
+        <td></td> 
+<?foreach ($mProducts as $key => $value):?>     
+    <tr>
+         <td><a href="<?=$value['path']?>"><?=$value["title"]?></a></td>
+        <td><?=$value['price']?> Kč<input type="hidden"  id="idoldprice<?=$value['id']?>" value="<?=$value['price']?>" name="idoldprice<?=$value['id']?>"/></td>   
+        <td style="width: 50px"><input style="width: 40px" type="text" value="1" id="ks<?=$value['id']?>" name="ks<?=$value['id']?>"></td> 
+        <input type="hidden" name="variantId" id="variantId<?=$value['id']?>" value="<?=$value['variantId']?>">
+        <td><input style="width: 100px" type="text" value="<?=$value['price']?>" id="price<?=$value['id']?>" name="<?=$value['id']?>"></td>
+        <td><input  style="width: 50px" type="text" value="0" id="percent<?=$value['id']?>" name="per<?=$value['id']?>"></td>
+        <td><a onclick="math('percent<?=$value['id']?>','price<?=$value['id']?>','idoldprice<?=$value['id']?>')" href="#">Přepočítat</td>
+        <td><a onclick="buy(<?=$value['id']?>)" href="#">Koupit</td>
+    </tr>     
+<?endforeach?>     
+</table>    
+    </div>
+    <div id="tab-3" class="tab-content">
+        <?
+$params = array(); 
+$params['onWeb']            = 1;
+$params['category'] = "7768";      
+$mProducts = $this->mProducts->getProducts("priceasc", "asc", 0, 1000000, $params);?>
+<table>
+    <tr>
+        <td>Product</td> 
+        <td>Cena</td>
+        <td>Počet kůsu</td>
+        <td>Nová cena</td>
+        <td></td> 
+<?foreach ($mProducts as $key => $value):?>     
+    <tr>
+       <td><a href="<?=$value['path']?>"><?=$value["title"]?></a></td>
+        <td><?=$value['price']?> Kč<input type="hidden"  id="idoldprice<?=$value['id']?>" value="<?=$value['price']?>" name="idoldprice<?=$value['id']?>"/></td>   
+        <td style="width: 50px"><input style="width: 40px" type="text" value="1" id="ks<?=$value['id']?>" name="ks<?=$value['id']?>"></td> 
+        <input type="hidden" name="variantId" id="variantId<?=$value['id']?>" value="<?=$value['variantId']?>">
+        <td><input style="width: 100px" type="text" value="<?=$value['price']?>" id="price<?=$value['id']?>" name="<?=$value['id']?>"></td>
+        <td><input  style="width: 50px" type="text" value="0" id="percent<?=$value['id']?>" name="per<?=$value['id']?>"></td>
+        <td><a onclick="math('percent<?=$value['id']?>','price<?=$value['id']?>','idoldprice<?=$value['id']?>')" href="#">Přepočítat</td>
+        <td><a onclick="buy(<?=$value['id']?>)" href="#">Koupit</td>
+    </tr>     
+<?endforeach?>     
+</table>  
+    </div>
+    <div id="tab-4" class="tab-content">
+        <? 
+$params = array(); 
+$params['onWeb']            = 1;
+$params['category'] = "7763";      
+$mProducts = $this->mProducts->getProducts("priceasc", "asc" , 0, 1000000, $params);?>
+<table>
+    <tr>
+        <td>Product</td> 
+        <td>Cena</td>
+        <td>Počet kůsu</td>
+        <td>Nová cena</td>
+        <td></td> 
+<?foreach ($mProducts as $key => $value):?>        
+    <tr>
+        <td><a href="<?=$value['path']?>"><?=$value["title"]?></a></td>
+        <td><?=$value['price']?> Kč<input type="hidden"  id="idoldprice<?=$value['id']?>" value="<?=$value['price']?>" name="idoldprice<?=$value['id']?>"/></td>   
+        <td style="width: 50px"><input style="width: 40px" type="text" value="1" id="ks<?=$value['id']?>" name="ks<?=$value['id']?>"></td> 
+        <input type="hidden" name="variantId" id="variantId<?=$value['id']?>" value="<?=$value['variantId']?>">
+        <td><input style="width: 100px" type="text" value="<?=$value['price']?>" id="price<?=$value['id']?>" name="<?=$value['id']?>"></td>
+        <td><input  style="width: 50px" type="text" value="0" id="percent<?=$value['id']?>" name="per<?=$value['id']?>"></td>
+        <td><a onclick="math('percent<?=$value['id']?>','price<?=$value['id']?>','idoldprice<?=$value['id']?>')" href="#">Přepočítat</td>
+        <td><a onclick="buy(<?=$value['id']?>)" href="#">Koupit</td>
+    </tr>     
+<?endforeach?>     
+</table>   
+    </div>   
+<script type="text/javascript">
+function math(idper,idprice,idoldprice)
+      {  
+      	oldprice = $("#"+idoldprice).val();
+      	percent = $("#"+idper).val();
+      	newprice = oldprice - (oldprice * (percent / 100));
+      	$("#"+idprice).val(Math.round(newprice));   
+      }          
+    function buy(nodeId)     
+    {    
+           $.ajax({       
+          url: "/quickshop?quickAddItem=1",
+         type: "post",       
+        data: {nodeId:nodeId,count:$("#ks"+nodeId).val(),variantId:$("#variantId"+nodeId).val(),price:$("#price"+nodeId).val()} ,   
+        success: function (response) {
+                $("#rightPageBasket").html(response);    
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+    });     
+    }          
+</script>     
+<?endif?>

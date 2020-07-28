@@ -1,0 +1,12 @@
+	<h1>Články - PR</h1>  
+	<h2>Zobrazit články firmy</h2>
+	<form id="companiesSelectorForm" method="get" action="/cms/advertising/index/amodule/articles/company/">   
+	<?=$this->formSelect('company', $this->inputGet->company, array(), helper_Input::addNotDefinedOption($this->companiesSelect)) ?>
+	<?=$this->formSubmit(   
+		'OK',   
+		'OK',
+		array(
+			'onclick' => "window.location.href = dojo.byId('companiesSelectorForm').action + dijit.byId('company').getValue(); return false;"  
+		)  
+	)?> 	   
+	</form>

@@ -1,0 +1,46 @@
+.tbold { font-weight: bold; }
+.tnormal { font-weight: normal; }
+.taleft { text-align: left; }
+.taright { text-align: right; }
+.tcenter { text-align: center; }
+
+.fl_left { float: left; }
+.fl_right { float: right; }
+
+.cblack { color: black; }
+.cwhite { color:#FFFFFF; }
+.cred { color: #dd2715; }
+.cgreen { color: green; }
+.cyel{ color:#fffc00; }
+.cblue{ color:#6994DC; }
+.cwhite{ color:#FFFFFF; }
+
+.tupperacase {	text-transform: uppercase; }
+
+.nod{ display:none; }
+.cb{ clear:both; line-height:1px; margin-bottom:-1px; }
+.cbn{ clear:both; }
+
+.fs_xx, .fs_xxs{ font-size:xx-small; }
+
+.spacer2{ line-height:5px; height:5px; clear:both; }
+
+/* INPUTY */
+.s20{	width:20px;}
+.s30{	width:30px;}
+.s40{	width:40px;}
+.s50{	width:50px;}
+.s60{	width:60px;}
+.s70{	width:70px;}
+.s80{	width:80px;}
+.s90{	width:90px;}
+.s100{	width:100px;}
+.s110{	width:110px;}
+.s130{	width:130px;}
+.s140{	width:140px;}
+.s160{	width:160px;}
+.s180{	width:180px;}
+.s200{	width:200px;}
+.s220{	width:220px;}
+.s300{	width:300px;}
+.s350{	width:350px;}

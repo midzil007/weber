@@ -1,0 +1,65 @@
+<?
+
+$this->disableH1 = true; 
+
+
+function drawArticle($view, $articleNode,$counter){
+	
+	$article = $articleNode->getPublishedContent();
+	$url = helper_FrontEnd::getPath($view, $articleNode->path); 	
+	$date = Utils::formatDate($article->getPropertyValue('dateShow')); 
+	$count = 120;  
+	// $html = helper_FrontEnd::reduceText(strip_tags($article->getPropertyValue('html')), 375, false, true);	  
+	$html = $article->getPropertyValue('html');
+	$html = str_replace('<p>', '', $html); 
+	$html = str_replace('</p>', '', $html);
+	$authorPhoto = helper_FrontEnd::getPhoto('photos', $article, $article->fotoCropMini3Name , $article->fotoShowName, 1);  
+    if($view->counts == $counter){
+    	$class	=' lst';
+    }    
+	?>   
+	    
+		 <div class="itemSlovnik<?=$class?>" id="slovo_<?=$articleNode->title;?>">
+		 	<p><strong><?=$articleNode->title;?></strong> - <?=$html;?></p>      
+		</div>   
+	<?
+}
+
+?>   
+
+<div id="leftPage"> 
+	<h1 class="h1"><?=$this->pageTitleRaw?></h1> 
+	<?=$this->pageText?>
+	<div class="articles"> 
+		<?     
+		$x = 0;
+		foreach ($this->list as $leter => $children):  
+	
+		?>
+		<div class="letter">
+		<h3><?=mb_strtoupper($leter, 'utf-8')?></h3>
+		<?
+		foreach ($children as $child):    
+			$x++; 
+			drawArticle($this, $child,$x); 
+		endforeach; 
+		?>
+		</div>
+		<?
+		endforeach; 
+		?> 
+		<div class="spacer20"></div>  
+	</div> 
+</div> 
+
+<div id="rightPage" class="rimgs">
+	<?     
+	
+	foreach ($this->rimgs as $pah => $title):    
+		?>
+	<h3 class="h1"><?=$title?></h3>
+	<img src="<?=$pah?>" title="<?=$title?>" alt="<?=$title?>" />
+	<? endforeach;?>
+	
+	
+</div> 

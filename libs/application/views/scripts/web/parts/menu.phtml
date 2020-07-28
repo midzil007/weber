@@ -1,0 +1,33 @@
+<div id="menuTop" class="posRelative">
+	<ul class="posRelative">	
+		<?$nodeRecenze = $this->tree->getNodeSimple(53111);
+		$nodeZajimavosti = $this->tree->getNodeSimple(53110);
+		$nodeTechnologie = $this->tree->getNodeSimple(53112);
+		$nodeAction = $this->tree->getNodeSimple(53117);
+		?>
+		<li ><a href="<?=$nodeZajimavosti->path?>" class="fBold upperCase blockDisplay fs16 c"><?=$nodeZajimavosti->title?></a></li>
+		<li ><a href="<?=$nodeTechnologie->path?>" class="fBold upperCase blockDisplay fs16 c"><?=$nodeTechnologie->title?></a></li>
+		<li ><a href="<?=$nodeRecenze->path?>" class="fBold upperCase blockDisplay fs16 c"><?=$nodeRecenze->title?></a></li>
+		<li ><a href="<?=$nodeAction->path?>" class="fBold upperCase blockDisplay fs16 c"><?=$nodeAction->title?></a></li>
+		<li ><a href="" class="fBold blockDisplay fs16 upperCase c">faq</a></li>
+		<li ><a href="" class="fBold blockDisplay fs16 upperCase c">Porovnání produktů</a></li>
+	</ul>	
+</div>
+<div id="altMenu">
+	<ul class="posRelative">	
+		<?$doprava = $this->tree->getNodeSimple(53113);
+		$distribuce = $this->tree->getNodeSimple(53114);
+		$vyplati = $this->tree->getNodeSimple(53115);
+		$eco = $this->tree->getNodeSimple(53116);
+		?>
+		<li ><a href="<?=$doprava->path?>" class="fBold  fs13 c"><?=$doprava->title?><span class="i-block marLeft5 bgrNoRep" id="transportFree"></span></a></li>
+		<li ><a href="<?=$distribuce->path?>" class="fBold  fs13 c"><?=$distribuce->title?><span class="i-block marLeft5 bgrNoRep" id="czechDist"></span></a></li>
+		<li ><a href="<?=$vyplati->path?>" class="fBold  fs13 c">Vyplatí se vám<span class="i-block marLeft5 bgrNoRep" id="tridaA"></span>?</a></li>
+		<li ><a href="<?=$eco->path?>" class="fBold fs13 c"><?=$eco->title?><span class="i-block marLeft5 bgrNoRep" id="beEco"></span></a></li>
+	</ul>	
+	<form method="get" action="<?=$this->searchUrl?>" id="searchTopForm" class="fRight posRelative">
+		<?$searchText = $this->inputGet->search ? $this->inputGet->search:'Vyhledávání...';?>
+		<input type="text" id="searchInput" name="search" value="<?=$searchText?>" onfocus="remove_txt('<?=$searchText?>',this);" onblur="set_txt('<?=$searchText?>', this);"/>
+		<input type="submit" id="searchButton" value="" />
+	</form>
+</div>

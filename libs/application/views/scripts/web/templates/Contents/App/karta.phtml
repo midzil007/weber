@@ -1,0 +1,87 @@
+<?php 
+
+$basket = $this->basket = $this->mEshop->basket;   
+$sum = $basket->getSum($this); 
+$shopper = $basket->getShopper();   
+$this->clientEmail = $shopper->email;
+$this->client = $shopper->fullname; 
+$this->merchantref = substr(uniqid(), -10);     
+$zbozi = array();
+foreach ($basket->getItems() as $id => $odata){ 
+	$zbozi[] = $odata['item']->title . ' (' . $odata['count'] . 'x)';
+}
+ 
+$koupil = implode(', ', $zbozi);  
+?>   
+<div style="padding:25px;   ">  
+	<img src="/images/pay.png" alt="" style="float:right; margin:0px 490px 0px 0px;" />   
+	<h2>Platba kartou</h2>  
+	<p>Prosím zvolte typ Vaší karty a dejte zaplatit. </p> <br />  
+	<form name="MERCHANTFORM" method="POST"	action="https://3dsecure.csas.cz/transaction" onsubmit="return checkpay();">
+		<select name="brand" id="brand">
+			<option value="0">-- Vyberte kartu --</option> 
+			<option value="VISA">VISA</option> 
+			<option value="VisaElectron">VisaElectron</option>   
+			<option value="MasterCard">MasterCard</option> 
+			<option value="Maestro">Maestro</option>   
+		</select>		 
+		<input type="hidden" name="merchantid" value="<?=$this->config->instance->merchantid?>">
+		<input type="hidden" name="amount" value="<?=($sum * 100)?>">          
+		<input type="hidden" name="currency" value="<?=$this->config->instance->curency?>">  
+		<input type="hidden" name="transactiontype" value="sale" > 
+		<input type="hidden" name="merchantref" value="<?=$this->merchantref?>" >
+		<input type="hidden" name="merchantdesc" value="Vaše objednávka na eshopu Homeandcook.cz">
+		<input type="hidden" name="language" value="CZ">  
+		<input type="hidden" name="emailcustomer" value="<?=$this->clientEmail?>">
+		<input type="hidden" name="merchantvar1" value="<?=$this->client?>">  
+		<input type="hidden" name="merchantvar2" value="<?=$koupil?>">
+		<input type="hidden" name="merchantvar3" value="tel: <?=$shopper->telefon?>">  
+		<input type="hidden" name="merchantvar4" value="ulice: <?=$shopper->fulice?>">     
+		<input type="hidden" name="merchantvar4" value="ulice: <?=$this->clientEmail?>">   
+		<input type="hidden" name="var9" value="http://www.homeandcook.cz">
+		<input type="hidden" name="var1" value="<?=$this->client?>">  
+		<input type="hidden" name="var2" value="<?=$koupil?>">
+		<input type="hidden" name="var3" value="tel: <?=$shopper->telefon?>">  
+		<input type="hidden" name="var4" value="ulice: <?=$shopper->fulice?>">       
+		<input type="hidden" name="var4" value="ulice: <?=$this->clientEmail?>">  
+		
+		<input type="hidden" name="SSL" value="1">
+		<input type="submit" name="PAY" value="ZAPLATIT" style="cursor:pointer; font-soze:11px;  border:1px solid #0c2439; background:#8593a3; color:#ffffff" />     
+	</form>
+	 
+	<script type="text/javascript">
+		function checkpay(){
+			selected = document.getElementById('brand').value;
+			if(selected == 0){
+				return false; 
+			} else {
+				return true;
+			}
+		} 
+	</script>  
+	<div class="spacer10"> </div>  <div class="spacer10"> </div>   
+	 
+<h3>Platba kartou se vyplatí</h3> 
+<ol>
+	<li>na rozdíl od dobírky je platba kartou bez poplatku</li>
+<li>bezpečný a pohodlný způsob nakupování</li>
+<li>v okamžiku přebírání zboží u sebe nemusíte mít hotovost.</li>
+</ol>
+<h3>Platba kartou je bezpečná</h3>
+<ol>
+	<li>při akceptaci platebních karet využíváme 3D-Secure řešení – nejmodernější aplikace  
+kartových Asociací MasterCard a Visa umožňující bezpečné platby kartou na internetu</li>
+<li>údaje ze své platební karty zadáváte přímo bance</li>
+<li>nikdo z našich zaměstnanců nemá přístup k údajům o Vaší platební kartě</li>
+<li>přenos dat se uskutečňuje prostřednictvím zabezpečeného protokolu HTTPS, který<br />
+tyto informace šifruje</li>
+</ol>
+<h3>Jaké karty přijímáme?</h3>
+<ol>  
+    <li>VISA Electron</li>  
+    <li>VISA</li>
+    <li>Maestro (v případě, že Vaše vydavatelská banka jej zařadila do systému 3D-Secure)</li>
+    <li>MasterCard</li>
+</ol>
+	 
+</div>

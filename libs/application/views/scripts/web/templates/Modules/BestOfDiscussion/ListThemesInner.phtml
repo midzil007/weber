@@ -1,0 +1,38 @@
+		<?				 
+		
+		function drawTheme($view, $theme){
+			//$url = Utils::addUrlParams($view->discussionPath, $view->inputGet);
+			$url = $view->discussionPath . '?themeId=' . $theme->id; 
+			$user = new module_WebUser($theme->author); 
+						
+			?> 
+			<tr> 
+				<td><a href="<?=$url?>"><?=$theme->title?></a></td>		 		 
+				<td></td>
+				<td class="bodAutor"><?=$user->getUserInfo($this)?></td> 
+			</tr>
+			<?   
+		}  
+		
+		$themes = $this->mBODiscussion->getThemes($this->node->nodeId);    
+		?>  
+		<? if(count($themes)):?> 
+			
+				<table class="BOforumOverviewTable">	
+					<tr>
+						<th>Název</th>
+						<th></th>
+						<th>Autor</th>
+					</tr>
+					<?
+					foreach ($themes as $theme){   
+						drawTheme($this, $theme);
+					}
+					?>	   		
+				</table>
+		<? else:?>
+			<div class="spacer10"></div>  
+			<p>Zatím žádné diskuze</p> 
+			<div class="spacer10"></div>
+		<? endif; ?> 
+		  

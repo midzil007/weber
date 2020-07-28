@@ -1,0 +1,9 @@
+	<h1>PPC kampaně</h1> 
+	<?=$this->formSubmit(
+		'Nový klient', 
+		'Nový klient', 
+		array( 
+			"onclick" => "return showModal('Nový klient','". $this->url(array('action' => 'newPPCClient')) . "')"
+		)  
+	)?>	  
+	      

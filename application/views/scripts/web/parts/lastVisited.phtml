@@ -1,0 +1,93 @@
+<div class="spacer10"></div>
+<div class="line"></div>
+<div class="full-width pull-left">
+<?
+$text = '';
+$lastVisited  = $this->mBasket->getLastVisitedFromCookie($this->node->nodeId,$this);
+if($this->disableCookiesProduct)
+{
+	$this->souvisejici2= $lastVisited =null; 
+	
+}
+if(!$this->souvisejici2 && !$lastVisited){
+	$params['showFirstVariant'] = 1;
+	$this->souvisejici2 =  $this->mProducts->getProducts('soldPrice',false,0, 4,$params);
+	$text = $this->element?'Nejprodávanější Produkty:':'Nejprodávanější Produkty';
+}?>
+<p><strong><?=$text?></strong></p>
+<div class="lineProd"></div>
+<?if($this->souvisejici2):
+	$inc = 1;
+		foreach ($this->souvisejici2 as $alt):
+			$node = $this->tree->getNodeById($alt);
+			if(!is_object($node)){
+				$node = $this->tree->getNodeById($alt['id']);
+			}
+ 			$souCont = $node->getPublishedContent();
+ 			$souviProdukt = $this->mVarianta->getVariantsByIdProduct($souCont->id,true);
+ 			$photo = $this->mVarianta->getResizedPhotos($alt['obrazky']);
+           	$pathPhoto = helper_FrontEnd::getFirstPhoto($photo,'pMinic3' , false);     ?>
+           	
+ 			<div class="pull-left col-sm-3 <?=($inc%5 == 0) ? 'lastL' : ''?> tAlignCenter lastVis">
+ 				<h4 <?=$this->schema?'itemprop="name"':'';?>><a class="blueText fs14" href="<?=$node->path?>"><?=$node->title?></a></h4>
+ 				<div class="lastH tAlignCenter ">
+ 					<a <?=$this->schema?'itemprop="url"':'';?> href="<?=$node->path?>"><img <?=$this->schema?'itemprop="image"':''?> alt="<?=$node->title?>" src="<?=$pathPhoto['path']?>"/></a>
+ 				</div>
+ 			
+ 				<p>
+ 					<?if($product['price2']>0):?>
+ 						<span class="tLineThrough fs12 colorGrey"><?=helper_FrontEnd::price(round($product['price2']))?> Kč</span>&nbsp;&nbsp;
+ 					<?endif;?>
+ 					<span class="red fs14"><strong><span <?=$this->schema?'itemprop="price"':''?>><?=helper_FrontEnd::price(round($alt['price']))?> Kč</span></strong></span></p>
+ 			</div>
+			 <?if($inc == 10):
+				break;
+			endif;
+			$inc++;
+		endforeach;?>
+	<?//$this->disableCookiesProducts = true;
+else:
+$lastVisited  = $this->mBasket->getLastVisitedFromCookie($this->node->nodeId,$this);
+if($lastVisited):?>
+<div class="clear"></div>
+<?$this->schema = true;?>
+<div class="clear"></div>     
+		<p class="lineHeight30">Naposledy navštívené produkty:</p>
+	<div class="lineProd"></div>
+<?
+$inc = 1;
+foreach ($lastVisited as $key=>$value):
+	$product = $this->mVarianta->getVariantById($value);
+	$node = $this->tree->getNodeById($key);
+	$c = $node->getPublishedContent();
+	$_SESSION['WEB07']['noProductIds'][] = $key;
+	$class = $inc == 4?'lst1':'';
+	if($product['cena2']){ 
+    	$dif= $product['discount'].'%';  
+	}
+
+
+	 	$photo = $this->mVarianta->getResizedPhotos($product['obrazky']);
+           	$pathPhoto = helper_FrontEnd::getFirstPhoto($photo,'pMinic3' , false);  ?>
+ 			<div class="pull-left col-sm-3  <?=($inc%5 == 0) ? 'lastL' : ''?> tAlignCenter lastVis">
+ 					<h4 <?=$this->schema?'itemprop="name"':'';?>><a class="blueText fs14" href="<?=$node->path?>"><?=$node->title?></a></h4>
+				<div class="lastH tAlignCenter ">
+					
+ 					<a <?=$this->schema?'itemprop="url"':'';?> href="<?=$node->path?>"><img <?=$this->schema?'itemprop="image"':''?> alt="<?=$node->title?>" src="<?=$pathPhoto['path']?>"/></a>
+ 				</div>
+ 			
+ 				<p>
+ 					<?if($product['price2']>0):?>
+ 					<span class="tLineThrough fs12 colorGrey"><?=helper_FrontEnd::price(round($product['price2']))?> Kč</span>&nbsp;&nbsp;
+ 					<?endif?>
+ 					<span <?=$this->schema?'itemprop="offers" itemscope itemtype="http://schema.org/Offer" ':'';?> class="red fs14"><strong><span <?=$this->schema?'itemprop="price"':''?>><?=helper_FrontEnd::price(round($product['price']))?> Kč</span></strong><span></span></p>
+ 			</div>
+	<?if($inc == 4):
+		break;
+	endif;
+	$inc++;?>	
+<?endforeach;?>
+	<?endif;
+	endif;?>
+	</div>
+<div class="spacer20"></div>

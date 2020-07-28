@@ -1,0 +1,47 @@
+<table class="modalTable">	
+	<tr>
+		<td class="formcell" style="width">Zobrazit v </td>
+		<td class="formcell"><?php echo $this->formSelect('showInNavigation', $this->showInValReverse[$this->node->showInNavigation] , array('autocomplete'=>'true','value'=>$this->showInValReverse[$this->node->showInNavigation]), $this->showIn) ?></td>		
+	</tr>
+	<tr>
+		<?
+		if(!is_numeric($this->node->showInSitemap)){ // nebyl ulozen
+			$this->node->showInSitemap = 1;
+		}
+		?> 
+		<td class="formcell" style="width">Zobrazit v mapě stránek</td>
+		<td class="formcell"><?php echo $this->formSelect('showInSitemap', $this->node->showInSitemap , array('autocomplete'=>'true','value'=>$this->node->showInSitemap), array('1' => 'Ano', '0' => 'Ne')) ?></td>		
+	</tr> 
+	<tr>
+		<?
+		if(!is_numeric($this->node->showInPages)){ // nebyl ulozen
+			$this->node->showInPages = 0;   
+		}
+		?> 
+		<td class="formcell" style="width">Zobrazit sekci adminstrátorům a redaktorům</td> 
+		<td class="formcell"><?php echo $this->formSelect('showInPages', $this->node->showInPages , array('autocomplete'=>'true','value'=>$this->node->showInPages), array('1' => 'Ano', '0' => 'Ne')) ?></td>		
+	</tr>
+	<tr> 
+		<?  
+		if(!is_numeric($this->node->showH1)){ // nebyl ulozen
+			$this->node->showH1 = 1;
+		}
+		?>
+		<td class="formcell" style="width">Zobrazit hlavní nadpis H1</td>
+		<td class="formcell"><?php echo $this->formSelect('showH1', $this->node->showH1 , array('autocomplete'=>'true','value'=>$this->node->showH1), array('1' => 'Ano', '0' => 'Ne')) ?></td>		
+	</tr> 
+	<? if($this->node->nodeId > 1 && $this->isEdit): ?>
+	<tr>
+		<td class="formcell">Umístěno v</td>
+		<td class="formcell"><?php echo $this->formSelect('parentId', $this->node->parentId , array('autocomplete'=>'true','value'=>$this->node->parentId), $this->parentSelect, '', true) ?></td>	
+	</tr>
+	<? endif; ?>	
+	<tr>
+		<td class="formcell">Šablona</td>
+		<td class="formcell"><?php echo $this->formSelect('template', $this->node->template , array('autocomplete'=>'true','value'=>$this->node->template), $this->templates) ?></td>
+	</tr>	
+	<tr>
+		<td class="formcell">Řadit obsah sekce podle</td>
+		<td class="formcell"><?php echo $this->formSelect('sortType', $this->node->sort , array('autocomplete'=>'true','value'=>$this->node->sort), $this->sortTypes) ?></td>
+	</tr>	
+</table>

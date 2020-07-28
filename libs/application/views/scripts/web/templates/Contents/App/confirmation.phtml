@@ -1,0 +1,8 @@
+<?
+// předkošík add to basket
+// 	$products = $this->mProducts->getProducts('sold', 'desc', 0, 3, $params);
+// 	$productsNodes = $this->mProducts->getArticlesAsNodes($this->tree, $products);
+if($this->input->action): 
+	$this->mEshop->basket->addItem($this->input->pid,$this->input->count,$this->input->urlProduckt,$this,$this->input->variantId,$this->input->optionId);
+	helper_Frontend::redirect($this->bp, 302);
+endif;?>

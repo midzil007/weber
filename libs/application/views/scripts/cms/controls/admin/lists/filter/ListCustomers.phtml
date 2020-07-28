@@ -1,0 +1,18 @@
+	<script>
+	var activeUrl = '<?=$this->activeUrl?>/';
+		var filterPushState = [
+    "start",
+    "end",
+    "filter1",
+    "filter2",
+    "fmFilterSel"
+];
+	</script>
+	<div class="mDiv">
+			<div class="ftitle">Filtr:</div> 
+		</div>   
+		<div class="tDiv"> 	
+			
+		    Zadejte příjmení, jméno nebo email: <input id="fmFilterSel" name="fmFilterSel" type="text" />  
+		    <input type="button" onclick="setPushState(activeUrl,filterPushState);$('#<?=$this->tableId?>').flexReload()" name="saveSetB" id="saveSetB" value="Filtrovat" class="fsubmit">
+ 		</div>   

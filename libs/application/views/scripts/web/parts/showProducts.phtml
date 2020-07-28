@@ -1,0 +1,134 @@
+<div id="listing" <?=$this->inputGet->filter>0?'style="margin-top:200px"':''?>>
+	<div class="sort fLeft">
+  		<form method="get" name="pfilter" id="pfilter">
+			<?=$this->formHidden('sort', $this->inputGet->sort)?>
+			<a class="i-block textNoDec fs17 fLeft posRelative" <?=$cl?> onclick="return submitFilter('sort', 'soldPrice')" href="#"><span>Nejprodávanější</span></a>	
+  			<a class="i-block textNoDec fs17 fLeft posRelative" <?=($sort=='priceasc'?'class="selected"':'')?> onclick="return submitFilter('sort', 'priceasc')" href="#"><span>Od nejlevnejšího</span></a>
+  			<a class="i-block textNoDec fs17 fLeft posRelative" <?=($sort=='pricedesc'?'class="selected"':'')?> onclick="return submitFilter('sort', 'pricedesc')" href="#"><span>Od nejdražšího</span></a>
+  			<a class="i-block textNoDec fs17 fLeft posRelative" <?=($sort=='dateCreate'?'class="selected"':'')?> onclick="return submitFilter('sort', 'dateCreate')" href="#"><span>Od nejnovějšího</span></a>
+		</form>
+	</div>
+	<div class="fRight"> 
+		<span class="count"><?=$count?> <?=$this->mProducts->getWordProdukt($count)?></span>
+			<?=$this->render('templates/Listing/Floating.phtml');?>
+	</div>
+	<div class="clear"></div>
+	<div class="listing">
+		<div class="listing-inner" id="infinity" <?=$this->schema?'itemscope itemtype="http://schema.org/Product"':''?>>
+			<?
+          		$deleno = 1;
+          		$x = 0;
+          		$al = 1;
+            	            	foreach ($this->products as $product):
+            	//if pr($product['id_option']);
+            		$x++;
+            		$class1="";
+            		if($x % 3==0 ){
+            			$class1="";
+            		}
+            		$url = $product['path'];
+            		$difp = '';
+            		$difArray[] = $product['discount'];
+            		$priceArray[] = $product['price'];
+            		list($totalRev,$rev) = $this->mReviews->showSingleRev($product['id']);
+            		$photos = $this->mVarianta->getResizedPhotos($product['obrazky']);
+            		//$selectedVariant = $this->mVarianta->getVariantById($product['variantId']);
+            		
+            		$p = helper_FrontEnd::getFirstPhoto($photos,'pShow2' , false);
+            		$urlVar = $this->showVariantId ? '?variantId='.$product['variantId'] : '';
+            		//$p = helper_FrontEnd::getPhoto('varianta_'.$activeVariant['variantId'].'_obrazky', $c, $c->fotoCropShow2Name);
+            		$difp = $product['discount'] ? '-' . $product['discount'] . '% ' : '';
+            		$kotva = $al == 15?'id="all"':'';?>
+            		<div class="item fLeft posRelative <?=$class1?>" id="<?=$product['id']?>">
+       					<div class="posAbsolute prodPriznaky">
+ 							<?if($product['discount']>0):?>
+ 								<span class="blockDisplay discount">
+ 								<span class="fBold white fs16 marLeft10 i-block marTop5">-30%</span></span>
+ 							<?endif;?>
+ 							<?if($product['novinka']):?>
+ 								<span class="blockDisplay  novinka"></span>
+ 							<?endif;?>
+ 							<?if($product['akce']):?>
+ 								<span class="blockDisplay  akce"></span>
+ 							<?endif;?>
+ 							<?if($product['enerClass'] > 2 ):?>
+ 								<span class="blockDisplay  ECO" ></span>
+ 							<?endif;?>
+ 							<?if($product['enerClass'] > 0 ):?>
+ 								<span class="blockDisplay fRight  enerClass">
+ 									<span class="fBold fs16 marLeft10 greenColor1 i-block"><?=$this->mVarianta->variantProperty['enerClass']['selection'][$product['enerClass']]?></span>
+ 								</span>
+ 							<?endif;?>
+ 						</div>
+            				<h3>
+								<a <?=$this->schema?'itemprop="url"':''?> <?=$kotva?> href="<?=$url?><?=$urlVar?><?=$kotva?>">
+								<?$sTitle = $product['seoTitle']?', '.$product['seoTitle']: '';?>
+									<span class="fs17 fBold" <?=$this->schema?'itemprop="name"':''?>><?=$product['title']?><?=$sTitle?></span>
+								</a>
+		   					</h3>	        
+		   					<p class="fs13 preText"><?=helper_FrontEnd::reduceText($product['preText'],170);?></p>
+                            <div class="img posRelative tAlignCenter">
+								<div>
+     	                         	<a href="<?=$url?><?=$urlVar?>"><img <?=$this->schema?'itemprop="image"':''?> src="<?=$p['path']?>" title="<?=$altTitle?>" alt="<?=$altTitle?>"></a>
+                                </div>
+                                <?if($totalRev->total>0):?>
+									<div class="posAbsolute fLeft producstStars">
+											<span class="emptyStarsMini marRight3 i-block vAlingMid">
+											<span class="i-block fullStarsMini" style="width:<?=$totalRev->total*19?>px;" class="fullStarsMini"></span>
+										</span>
+									</div>
+								<?endif;?> 
+                            </div>
+							<div class="fLeft Pd">	
+ 								<p <?=$this->schema?'itemprop="offers" itemscope itemtype="http://schema.org/'.$googleOffer.'"':''?> class="price fLeft" <?=$s?>>
+ 					 			<strong><span class="fs21 red" <?=$googlePrice?>><?=helper_FrontEnd::price(round($product['price']))?> </span><span class="fs16 red">Kč</span></strong>
+                                <?if($product['discount']):?>
+                                	<span class="redBgr white fBold fs12">-<?=$product['discount']?>%</span><span class="tLineThrough fs12 colorGrey<?=$s?>"><?=helper_FrontEnd::price(round($product['price2']))?> Kč</span>
+                                <?endif;?>
+                               
+             					</p>
+             					<p class="fRight marTop5">
+             						<?if($this->showPrice):?>
+             							<?=helper_FrontEnd::price(round($product['priceNakup']))?> Kč
+             						<?else:?>
+             							<a href="<?=$product['path']?>"  class="smallBuy blockDisplay"></a>
+             						<?endif?>
+             					</p>
+ 				           </div>
+                            <div class="clear"></div>
+                            <p class=".i-table">
+           						 <span class="fs13 greySk i-block marRight10">SKLADEM ANO</span>
+           						 <span class="fs13 colorGrey i-block marRight10">ZÁRUKA 2+3 ROKY</span>
+           					 	<span class="vahaIco i-block vAlingMid"></span>
+             				</p>
+                        </div>		             
+              <? $al++; 
+              if($class1 ==' lst'):?>
+                            <div class="clear"></div>  
+                            <?endif; 
+              endforeach;?>
+              </div> 
+				<div class="clear"></div>                 
+          </div>
+         <?$this->pagginatorClass = 'fRight';?>
+         <?if($nextProdCount>0 && !$this->inputGet->all):
+         $path = $this->url;
+         $a['all']=1;
+         $path =  Utils::addUrlParams($path, $a);?>
+          
+          <?endif;?> 
+                       <?=$this->render('templates/Listing/Floating.phtml'); ?>
+    </div>
+           <div class="clear"></div>
+          <script type="text/javascript">
+          	function submitFilter(v, val){   
+              	if(v){ 
+              		$(v).set('value', val);
+              	}
+				document.getElementById('pfilter').submit();
+				return false; 
+          	}
+
+        //	showVarinat(false,false,false);
+      
+          </script>

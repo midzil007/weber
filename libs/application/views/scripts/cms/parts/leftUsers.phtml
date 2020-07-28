@@ -1,0 +1,67 @@
+ 
+	        	 <div id="tabsleft">
+				    <ul>
+				        <li><a href="#tabs-1">Menu</a></li> 
+				    </ul> 
+				    <div id="tabs-1">  
+						<div> 
+						<?php  
+						$menu = array();
+						$menu[] = array(
+							'title' => 'Administrátoři', 
+							'icon' => 'calculator',
+							'onclick' => $this->url(array('action' => 'index', 'ajax' => '0', 'getItems' => '0')),
+							'isSelected' => $this->curentAction=='index',  
+							'params' => ' id="xyy" ',
+							'children' => array(  
+								array(
+									'title' => 'Nový', 
+									'icon' => 'plus',  
+									'onclick' => $this->url(array('controller' => 'users', 'action' => 'new', 'ajax' => '0', 'getItems' => '0')),
+									'isSelected' => false, 
+									'params' => ''
+								)
+							)
+						); 
+						$menu[] = array(
+							'title' => 'Reg. uživatelé z webu',
+							'icon' => 'person', 
+							'onclick' => $this->url(array('action' => 'webusers', 'ajax' => '0', 'getItems' => '0')),
+							'isSelected' => $this->curentAction=='webusers',  
+							'params' => '   ',
+							'children' => array(   
+							)
+						); 
+						?> 
+						
+						<ul id="leftmenu">   
+							<? 
+							foreach ($menu as $ii => $item):
+								$hasChildren = count($item['children']) && is_array($item['children']); 
+								?>
+							    <li>
+							    	<a <?=($item['isSelected']?'class="clicked"':'')?> href="<?=$item["onclick"]?>"><span <?=(!$item["icon"]?'':'class="ui-icon  ui-icon-' . $item["icon"] . '"')?>></span><?=$item["title"]?></a>
+							    	<?if($hasChildren):?>
+							    	<ul style="display: none;"> 
+							    	<? foreach ($item['children'] as $iii => $item2):?>
+							    	<a <?=($item2['isSelected']?'class="clicked"':'')?> href="<?=$item2["onclick"]?>"><span <?=(!$item2["icon"]?'':'class="ui-icon  ui-icon-' . $item2["icon"] . '"')?>></span><?=$item2["title"]?></a>
+							    	<? endforeach;?> 
+							    	</ul>
+							    	<? endif;?>
+							    </li>
+						    <? endforeach;?> 
+						</ul> 
+						
+						 <script>
+						    $(function() { 
+						        $( "#leftmenu" ).menu();
+						    }); 
+						    </script>  
+						</div>
+					</div> 
+				</div> 
+                <script type="text/javascript">
+			    $(function() {
+			        $( "#tabsleft" ).tabs();
+			    }); 
+			    </script> 

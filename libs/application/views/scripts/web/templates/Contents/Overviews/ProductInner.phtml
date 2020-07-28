@@ -1,0 +1,189 @@
+<div id="containerInner" rel="<?=$this->node->path?>">
+<?
+$num = 100;
+$c = $this->content;
+$akce = $c->getPriznaky();    
+            		// pr($akce);
+            		$isVyprodej = $isAkce = $isNovinka = false;
+            		
+            		foreach ($akce as $a){
+            			if($a['id'] == 6){
+            				$isNovinka = $a; 
+            			}
+            		}
+            		
+            		
+            		
+            		
+$p = $this->photos;
+
+$textColor = $this->prod['color']?' + '.$this->prod['color']:'';
+$fullTitle = $this->prod['nazev'].''.$textColor ;
+$this->images = helper_FrontEnd::getResizedPhotos($p, 'pShowc', 'pFull');
+			$this->full = helper_FrontEnd::getResizedPhotos($p, 'pThumbc', 'pShowc'); 	   
+			$this->mainImg = $img;?>
+	<div class="img">
+	<? if($isNovinka['obrazek']):?>
+	<span style="background-image: url(<?=$isNovinka['obrazek']?>);" class="ico_novinka" title="<?=$isNovinka['nazev']?>"></span> 
+	<? endif;?>
+	<?
+	$co = $this->prod['color']?', '.$this->prod['color']:'';
+	$altText = $this->node->title.', '.$this->prod['nazev'].''.$co ;
+	
+	?>
+	<?if($this->prod['cena2']){
+			 	$dif = $this->prod['cena2'] - $this->prod['cena'];
+         		$p = $this->prod['cena2']/100;
+        		$dif= round($dif/$p, 0);
+			 }?>
+		<?$z = 1;?>
+		
+<?foreach ($this->images as $value):?>
+<div class="gimg">   
+			<?if($dif && $z==1):?>
+                	<p class="dct">-<?=$dif?>%</p>
+                <?endif?>
+			<div class="gimgItem">     
+				<a target="_blank" rel="[images]" title="<?=$altText?>" id="mb<?=$z?>" class="mbb <?=($z>1?'disable':'')?> <?=($z==1?'detailImgA':'')?>" href="<?=$value['fullPath']?>"><img src="<?=$value['path']?>" class="i <?=($z==1?'detailImg':'')?>" id="imgId<?=$z?>" alt="<?=$altText?>" title="<?=$altText?>"/></a>			
+			<div class="multiBoxDesc mb<?=$z?> mbHidden"> </div>				
+				</div>	 
+			</div> 
+			<?$z++;?>
+<?endforeach;?>
+
+	<script type="text/javascript"> 	 
+	window.addEvent('load', function(){  
+		box = new multiBox({ 
+			mbClass: '.mbb',//class you need to add links that you want to trigger multiBox with (remember and update CSS files)
+			container: $(document.body),
+			descClassName: 'multiBoxDesc',//the class name of the description divs
+			useOverlay: true,//use a semi-transparent background. default: false;
+			addDownload: false,//do you want the files to be downloadable?
+			addRollover: false,//add rollover fade to each multibox link
+			addOverlayIcon: false,//adds overlay icons to images within multibox links
+			addChain: false,//cycle through all images fading them out then in
+			recalcTop: false,//subtract the height of controls panel from top position
+			addTips: false,//adds MooTools built in 'Tips' class to each element (see: http://mootools.net/docs/Plugins/Tips)
+			autoOpen: 0//to auto open a multiBox element on page load change to (1, 2, or 3 etc)
+		});
+	});
+	</script>
+	<?$inc = 1;
+	 if(count($this->images) > 1):?>
+	<div id="galleryStrip" class="thumbs">
+	<?$i = 0;
+		?>
+		<?foreach ($this->images as $key=>$value):?>
+		<?$last = $inc%3==0? 'class="lst"':'';?>
+			<div <?=$last?>>
+    		<a onclick="return showImage('<?=$value['fullPath']?>', '<?=$value['name']?>', '<?=$this->full[$key]['fullPath']?>', <?=$i+1?>);" href="<?=$this->full[$key]['fullPath']?>" target="_blank">
+			<img src="<?=$this->full[$key]['path']?>" alt="<?=$value['name']?>" ></a>
+			<a class="zoom <?=($inc>1?'disable':'')?>" id="mmm<?=$inc?>" href="#" onclick="document.getElementById('mb<?=$inc?>').click();"></a>
+			</div>
+    		<?$i++;
+    		$inc++;
+    		$iii++;?>
+		<?endforeach;?>
+	</div>
+<?else:?>
+<div id="galleryStrip" class="onePhoto">
+	<a class="zoom <?=($inc>1?'disable':'')?>" style="bottom:10px;" id="mmm<?=$inc?>" href="#" onclick="document.getElementById('mb<?=$inc?>').click();"></a>
+</div>
+<? endif;?>
+<?
+		if(!$this->prod['isAvailablePhoto']):?>
+		<div id="notAvailablePhoto"></div>
+		<?endif;?>
+	</div>
+	<div class="info">
+	<div id="bottomHead">
+	</div>
+		 <?if($num>0):?>
+		 <?$cSizes = count($this->allSizes)>1?'Vyberte variantu povlečení':'Varianta povlečení';?>
+		 <div class="options" id="optionos"> 
+		 	<p class="title"><?=$cSizes?>:</p>
+		 	<p>Velikost<br />		 	
+		 	<?$class = '';?>
+		 						<?foreach ($this->allSizes as $item):?>
+		 							<?if($this->selectedVariant['sizeId'] == $item['id']):
+		 									$class = 'class="selected"';
+		 							elseif(in_array($color['id'], $this->selectedColors) && !$class):
+		 										$class='';
+		 							else:
+		 									$class='class="disable"';
+		 							endif;		 								
+		 							if($item['title']):?>
+		 							 <a href="#" class="variant" onclick="return false;" rel="<?=$item['id']?>"><span <?=$class?>><?=$item['title']?></span></a>
+		 							<?endif;?>
+		 							<?$class='';?>		
+		 						<?endforeach;?>
+		 						
+                                </p>
+                                <?if($this->selectedColors):
+                                $cl = '';?>
+                               	 <p><span class="r">B</span><span class="b">a</span><span class="g">r</span><span class="l">v</span><span class="v">a</span><br />
+                                	<?foreach ($this->allColors as $color):?>
+                                	<?if($this->selectedVariant['title'] == $color['title']):?>
+		 								<?$cl='class="selected"';
+		 									?>
+		 							<?elseif(in_array($color['id'], $this->selectedColors)):
+		 								$cl='';
+		 								else:
+		 								$cl='class="disable"';
+		 							endif;?>
+                                	<a href="#" class="color" onclick="return false;" rel="<?=$color['id']?>"><span <?=$cl?>><?=$color['title']?></span></a>
+                                	<?endforeach;?>
+                               <?endif?>
+				</p>
+		 </div>
+		 <?else:?>
+		 	<p>Toto zboží je momentálně vyprodané, omlouváme se.</p>
+		 <?endif?>
+			 
+			 <p class="price">
+			 <?if($this->prod['cena2']):?>
+			 	<span id="green">SLEVA -<?=$dif?>% </span><?='<s>'.$this->selectedVariant['price2'].' Kč</s></br>'?>
+			 	 <?=$pep?>
+			<?endif;?>
+				<span>Cena: <span id=""><?=$this->selectedVariant['price']?> Kč</span>(vč. DPH)</span>
+		</p>
+		<?$style = $num>0?'':'style="display:none"';?>
+		<form action="<?=$this->confirmUrl?>" method="post" <?=$style?>>
+			<div>
+			<?if($this->selectedVariant['skladem'] == 1):?>
+            	<input type="text" name="count" value="1">
+            <?endif;?>
+            	<input type="hidden" name="variantId" rel="<?=$this->selectedVariant['sizeId']?>" id="sizeSend" value="<?=$this->selectedVariant['id']?>">
+            	<input type="hidden" name="optionId" id="urlVariant"  value="<?=$this->selectedVariant['sizeId']?>">
+            	<input type="hidden" name="urlProduckt" value="<?=$this->url?>">
+            	<input type="hidden" name="price" value="<?=$this->selectedVariant['price']?>">
+            	<?if($this->selectedVariant['skladem'] == 1):?>
+            		<div id="count">KS</div>
+            	<?endif;?>
+            	<input type="hidden" name="pid" value="<?=$this->node->nodeId?>_<?=$this->selectedVariant['id']?>_<?=$this->selectedVariant['sizeId']?>" />
+            		<input type="hidden" name="action" value="buy" />
+            		<?if($this->selectedVariant['skladem']  == 1):?>
+                	 <button type="submit" class="botip"  rel="<?=r?>"><span></span></button>
+                	<?endif;?>
+			</div>
+		</form>
+		<div class="clear"></div>
+		 <table>
+		 						 <tr>
+                                    <td scope="col">Dostupnost:</td>
+                                    <?$sklad = $num>0? 'Skladem':'Není skladem'?>
+                                    <td><?=$sklad?> <?=$num>5?'( více než 5 kůsů )':'';?><span class="white"><?=$num?></span></td>
+                                </tr>
+                                <tr>
+                                    <td scope="col">Záruka:</td>
+                                    <td>24 měsíců (IČ 12)</td>
+                                </tr>
+                               <tr>
+                                    <td scope="col">Kód:</td>
+                                    <td><?=$this->prod['logisticNumber'];?></td>
+                                </tr>
+			</table>
+	</div>
+	
+	<div class="clear"></div>
+	</div>

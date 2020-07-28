@@ -1,0 +1,29 @@
+<?
+ 
+$this->disableH1 = true; 
+?>   
+
+<div id="leftPage"> 
+	<h1 class="h1"><?=$this->pageTitleRaw?></h1> 
+	<?=$this->pageText?>
+	  
+	<? foreach ($this->recepty as $r):
+	$articleNode = $this->tree->getNodeById($r['id']);
+	$article = $articleNode->getPublishedContent(); 
+	$article->createFiles(); 
+	$url = helper_FrontEnd::getPath($view, $articleNode->path); 	
+	$html = helper_FrontEnd::reduceText(strip_tags($article->getPropertyValue('html')), 375, false, true);	 
+	$authorPhoto = helper_FrontEnd::getPhoto('photo', $article, $article->imageName , $article->imageNameC, 1);  
+	 
+	?> 
+	<div class="tipp">  
+		<big class="head"><?=$articleNode->title?></big>
+		<a href="<?=$url?>"><img src="<?=$authorPhoto['path']?>"  alt="<?=$authorPhoto['name']?>"/></a> 
+		<p><?=$html;?></p>
+		<a href="<?=$url?>" class="btn2">více zde</a>  
+		<div class="clear"></div> 
+	</div>
+	<? endforeach;?>
+</div> 
+ 
+<div class="spacer10"> </div>

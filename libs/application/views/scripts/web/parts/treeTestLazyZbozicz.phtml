@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/jstree/jquery.jstree.js"></script>
+
+</head>
+
+<body>
+<form method="POST">
+<div id="treeWrapper">
+</div>
+<input type="button" id="clickme" value="load Tree">
+<input type="submit">
+</form>
+<script type="text/javascript">
+var loadTree = function(){
+	var tree = jQuery("#treeWrapper").jstree({
+        "plugins" : [ "themes", "xml_data", "checkbox", "themes", "types", "ui" ],
+		"xml_data": {
+				"ajax" :{
+					"url" : "/?zboziczTree=1"
+				},
+				"xsl" : "nest"
+			},
+        "checkbox": {	"override_ui" : "false",
+            			"two_state" : "true",
+            			"real_checkboxes" : "true"},
+		"ui" : { "initially_select" : [ "971" ]}
+    });
+
+	tree.bind("loaded.jstree", function (event, data) {
+        tree.jstree("open_all");
+    });
+};
+
+$( $("#clickme").click(loadTree));
+
+</script>
+
+</body>
+</html>

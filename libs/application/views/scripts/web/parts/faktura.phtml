@@ -1,0 +1,239 @@
+<?php 
+
+if($this->faktura->isProforma === 1){
+	$t = 'O';   
+} else {  
+	$t = 'FAKTURA';
+} 
+
+$title = $t . ' ' . $this->faktura->vs; 
+
+
+
+	$t = $title =  'Objednávka ' . $this->order['id'] ;    
+ 
+	/*
+$add = ''; 
+if($this->faktura->isProforma === 1){ 
+	$title .= '_Z';
+	$add = 'Z';
+}   */   
+?>
+
+<? if($this->addBody):?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><?=$title?></title>
+</head> 
+<body>
+<? endif;?> 
+
+<? if(0):?>
+
+<table style="width:100%; font-size:14px; font-family:Arial, Helvetica, sans-serif;">
+	<tr> 
+    	<td valign="top" style="text-align:left; width:50%" align="left">
+       	  <img height="50" src="http://demo.eportaly.cz/images/logo.png" />
+        </td>
+        <td valign="middle" style="text-align:right" align="right">
+        	<strong style="font-size:19px;">
+            	<?=$t?> č. <?=$this->faktura->vs?>
+            </strong>
+        </td>
+    </tr>
+    <tr>
+    	<td valign="top"colspan="2">
+       		<hr /> 
+       	</td>
+    </tr>
+	<tr>
+    	<td valign="top" style="text-align:left" align="left">
+        	<span style="font-size:17px; font-weight:bold;">
+            	Dodavatel:
+            </span>
+            <br />
+            <strong style="font-size:16px;"><?=$this->faktura->jName?></strong> <br /> 
+            <?=$this->faktura->jAdress?><br />
+            <?=$this->faktura->jPSC?> <?=$this->faktura->jMesto?> <br />
+             
+            IČO: <?=$this->faktura->jICO?> <br />
+            <?=$this->faktura->jDIC?> <br />
+            
+            <br />
+            Mobil: <b><?=$this->faktura->jMobil?></b><br />
+            E-mail: <b><?=$this->faktura->jEmail?></b><br />
+            <br /><br />
+            <?=$this->faktura->jZapsan?> 
+            
+            <p><?=$this->faktura->jDPH?></p> 
+        </td>
+        <td valign="top" style="text-align:left" align="left">
+        	<span style="font-size:17px; font-weight:bold;">
+            	Odběratel:
+            </span>
+            <br />
+            
+            IČO: <?=$this->faktura->oICO?> <br />
+            DIČ: <?=$this->faktura->oDIC?> <br />
+            <strong style="font-size:16px;"><?=$this->faktura->oName?></strong> <br />
+            <?=$this->faktura->oAdress?><br />
+			<?=$this->faktura->oPSC?>, <?=$this->faktura->oMesto?><br />
+            
+            
+            <? if($this->faktura->dJmeno && $this->faktura->dAdress): ?> 
+            <br />
+            <h3>Dodací údaje</h3>
+             <strong style="font-size:16px;"><?=$this->faktura->dJmeno?></strong> <br />
+            <?=$this->faktura->dAdress?><br />
+			<?=$this->faktura->dPSC?>, <?=$this->faktura->dMesto?><br /> 
+			<? endif; ?> 
+            <br />
+            
+            <table style="width:100%; font-size:15px;">
+            	<tr>
+                	<td valign="top">Datum vystavení faktury:</td>
+                    <td valign="top"><strong><?=$this->faktura->dzp?></strong></td>
+                </tr>
+                <tr>
+                	<td valign="top">Datum splatnosti:</td>
+                    <td valign="top"><strong><?=$this->faktura->splatnost?></strong></td>
+                </tr>
+                <? if(!$this->faktura->disasbleDPH): ?> 
+                <tr>
+                	<td valign="top">Datum zdanitelného plnění:</td>
+                    <td valign="top"><strong><?=$this->faktura->dzp?></strong></td>
+                </tr>
+                <? endif; ?> 
+                
+            </table>
+           	<br /><br />  
+            Bankovní spojení: <strong><?=$this->faktura->jBanka?></strong>
+            <table border="1" style="width:100%; font-size:15px; border-collapse:collapse;">
+            	<tr>
+                	<td valign="top">Č. účtu: <strong><?=$this->faktura->jCU?></strong></td> 
+                </tr>
+                <tr>
+                	<td valign="top">Variabilní symbol: <strong><?=$this->faktura->vs?></strong></td> 
+                </tr>
+                <tr>
+                	<td valign="top">Forma úhrady:<strong><?=$this->faktura->jFU?></strong></td> 
+                </tr> 
+            </table>
+            
+        </td>
+    </tr>
+	<tr>
+    	<td valign="top" style="text-align:left" align="left" colspan="2">
+        	<span style="font-size:17px; font-weight:bold;">
+        	
+        	<? if($this->faktura->isProforma === 1): ?>
+			Výzva k platbě (faktura Vám bude vystavena po zaplacení)
+			<? elseif($this->faktura->isProforma === 0): ?>
+		 	Fakturace zakoupeného zboží <Br>  <b>Záloha zaplacena - NEPLAŤTE</b>  (zaplaceno na základě výzvy k platbě č. Z<?=$this->faktura->vs?>). 				 
+			<? else:?>
+			Fakturace zakoupeného zboží
+		   	<? endif;?>
+			</span>
+			
+        	<table border="1" style="width:100%; border-collapse:collapse;">
+            	<tr>
+                	<td valign="top">
+                    	<strong>Zboží</strong>
+                    </td>
+                    <td valign="top">
+                    	<strong>Počet</strong>
+                    </td>
+                    <td valign="top">
+                    	<strong>Cena</strong>
+                    </td> 
+                </tr>
+                
+           	<? foreach ($this->faktura->items as $item) :
+				if($this->faktura->isProforma === 1 || $this->faktura->isProforma === 5){
+					$price = $item->getPrice();
+					$sum = $this->faktura->sum; 
+				} else {
+					$price = $item->getPrice(); 
+					$sum = $this->faktura->sum;  
+				}    
+			?> 
+				<tr>
+                	<td valign="top">
+                    	<?=$item->title?>
+                    </td>
+                    <td valign="top">
+                    	<?=$item->count?>
+                    </td>
+                    <td valign="top">
+                    	<?=helper_FrontEnd::price($price)?> Kč
+                    </td> 
+                </tr>	
+				
+		 	<? endforeach; 
+		 	 
+		 	$sum += $this->faktura->deliveryPrice; 
+		 	
+			$dph = $sum / 1.2 * 0.2;   
+			$dph = round($dph, 2);    
+			$sumBezdph = $sum - $dph;   
+ 			
+			$celkem = round($sum);    
+			?>
+                
+                <tr>
+                	<td valign="top"colspan="2" style="text-align:right" align="right">Celkem bez DPH:</td>
+                    <td valign="top" style="background:#F3F3F3;"><strong><?=$sumBezdph?> Kč</strong></td>
+                </tr>
+                <tr>
+                	<td valign="top"colspan="2" style="text-align:right" align="right">DPH (20%):</td>
+                    <td valign="top" style="background:#F3F3F3;"><?=$dph?> Kč</td>
+                </tr>
+                <? if($this->faktura->deliveryPrice): ?>   
+				<tr>
+                	<td valign="top"colspan="2" style="text-align:right" align="right">Doručení:</td>
+                    <td valign="top" style="background:#F3F3F3;"><?=helper_FrontEnd::price($this->faktura->deliveryPrice)?> Kč</td>
+                </tr>
+                <? endif;?>
+                
+                <? if($this->faktura->isProforma === 1):?>  
+				<tr>
+                	<td valign="top"colspan="2" style="text-align:right" align="right">Celkem k úhradě:</td>
+                    <td valign="top" style="background:#F3F3F3;"><strong><?=helper_FrontEnd::price($celkem)?> Kč</strong></td>
+                </tr>
+				<? elseif($this->faktura->isProforma === 5): ?>
+					<tr>
+                	<td valign="top"colspan="2" style="text-align:right" align="right">Celkem k úhradě:</td>
+                    <td valign="top" style="background:#F3F3F3;"><strong><?=helper_FrontEnd::price($celkem)?> Kč</strong></td>
+                </tr>  
+				<? else: ?>
+				<tr>
+                	<td valign="top"colspan="2" style="text-align:right" align="right">Celkem k úhradě:</td>
+                    <td valign="top" style="background:#F3F3F3;"><strong>0 Kč</strong></td>
+                </tr> 
+				<? endif;?>  
+			
+               
+            </table>
+        </td> 
+    </tr>
+    <tr>  
+    	<td valign="top"colspan="2">
+       	  <p>&nbsp;</p>
+       	  <p>&nbsp;</p>
+        	<p><strong style="font-size:17px;">Velmi Vám děkujeme za využití našich služeb.</strong> <br />
+   	    </p></td>
+    </tr>
+</table>
+
+<? endif;?>   
+ 
+<? if($this->orderPage):?> 
+	<?=$this->orderPage?> 
+<? endif;?>
+
+<? if($this->addBody):?>
+</body> 
+</html>
+<? endif;?>

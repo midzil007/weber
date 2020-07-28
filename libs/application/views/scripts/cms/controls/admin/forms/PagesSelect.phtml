@@ -1,0 +1,37 @@
+<?
+
+function generateLevel($view, $nodes){?>
+	<ul class="pagelselector">
+	<?
+	foreach ($nodes as $node){
+		//e($view->selectedNodes[$ident]);
+		$isFolder = $node->type == 'FOLDER'; 
+		$ident = 'row_' . $node->nodeId;
+		$checked = $view->selectedNodes[$ident] ?  true : false;
+		$node->children = $node->getChildren($view->display);
+		?>
+		<li>
+		<?  
+		if($isFolder && count($node->children)){
+			?>
+			<?=$view->formCheckbox($ident, $view->selectedNodes[$ident], array('checked'=> $checked, 'title'=> $node->title))?><label <?=($isFolder?'class="tbold"':'')?> for="<?=$ident?>"><?=$node->title?></a></label>
+			<?
+			generateLevel($view, $node->children);
+		} else {
+			
+			?>
+			<?=$view->formCheckbox($ident, $view->selectedNodes[$ident],array('checked'=> $checked, 'title' => $node->title))?><label <?=($isFolder?'class="tbold"':'')?> for="<?=$ident?>"><?=$node->title?></a></label>
+			<?
+		}
+		?>
+		</li>
+		<?
+	}
+	?> 
+	</ul>
+	<?	
+}    
+?>
+<?
+generateLevel($this, $this->nodes);
+?>

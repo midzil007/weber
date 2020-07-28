@@ -1,0 +1,33 @@
+<div class="dijitTabContainer dijitContainer dijitLayoutContainer" style="width:100%; height:350px; overflow:auto;">
+<div id="err_PageForm"></div> 
+<form method="post" id="PageForm" name="PageForm">
+<? if($this->input->id):// editace ?>
+	<?=$this->formHidden('id',$this->input->id) ?>  
+<? endif; ?>  
+ 
+<?=$this->formHidden('domain',$this->input->domain) ?>  
+<?=$this->formHidden('kraj',$this->input->kraj) ?>  
+<?=$this->formHidden('section',$this->input->section) ?>  
+
+<table class="modalTable">		
+	<tr>
+		<td class="formcell tkey">Klient - firma</td>
+		<td class="formcell"><?=$this->formSelect('cid',$this->input->cid, array('class'=>'ftext'), helper_Input::addNotDefinedOption($this->companiesSelect)) ?></td>
+	</tr> 
+	<tr> 
+		<td class="formcell">Datum <b>začátku</b> zápisu</td>
+		<td class="formcell"><?=$this->formTextDate('from', $this->input->from , array('required'=>'false', 'invalidMessage' => "Nesprávný formát", 'value'=>'')) ?></td>
+	</tr>
+	<tr>
+		<td class="formcell">Datum <b>konce</b> zápisu</td>
+		<td class="formcell"><?=$this->formTextDate('too', $this->input->too , array('required'=>'false', 'invalidMessage' => "Nesprávný formát", 'value'=>'')) ?></td>
+	</tr>  
+</table>
+<? if($this->input->id): ?>
+<?php echo $this->formSubmit('saveContentB', 'Uložit', array('class'=>'fsubmit', "onclick" => "return submitFormAjax('PageForm', '".$this->url(array('action' => 'saveAdresarRecord'))."', 'vypisDole', 'modal', '', true );", 'iconClass' => "noteIcon")) ?>		
+<? else: ?>
+<?php echo $this->formSubmit('saveContentB', 'Uložit', array('class'=>'fsubmit', "onclick" => "return submitFormAjax('PageForm', '".$this->url(array('action' => 'saveAdresarRecord'))."', 'vypisDole', 'modal', '', true );", 'iconClass' => "noteIcon")) ?>		
+<? endif; ?>
+ 
+</form> 
+</div>  

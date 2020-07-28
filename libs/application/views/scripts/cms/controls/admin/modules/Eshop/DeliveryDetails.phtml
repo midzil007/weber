@@ -1,0 +1,82 @@
+<div class="dijitTabContainer dijitContainer dijitLayoutContainer" style="width:100%; height:450px; overflow:auto;">
+<div id="err_PageForm"></div>
+<form method="post" id="PageForm" class="validate" name="PageForm">
+	<div id="order">	
+		<h2>Doprava - <?= $this->delivery['nazev'];?></h2>
+		<?//=$a = print_r($this->delivery, true)
+		//TO DO: doplnit helpicons
+		?>
+		<table>   
+			<tr> 
+				<td>Název </td>
+				<td><input name="nazev" type="text" class="validate[required,length[0,100]] text-input" value="<?=$this->delivery['nazev']?>"></td>
+			</tr>
+			<tr>
+				<td>Popis </td>
+				<td><textarea name="popis" rows="5" cols="50"><?=$this->delivery['popis']?></textarea></td>
+			</tr>
+			<tr> 
+				<td>Hmotnost od: </td>
+				<td><input name="hmotnost_od" type="text" value="<?=$this->delivery['hmotnost_od']?>">kg</td>
+
+				<td>Hmotnost do: </td>
+				<td><input name="hmotnost_do" type="text" value="<?=$this->delivery['hmotnost_do']?>">kg</td>
+			</tr>
+			<tr>
+				<td>Zdarma nad</td>
+				<td><input name="zdarma_nad" type="text" value="<?=$this->delivery['zdarma_nad']?>">Kč</td>
+			</tr>
+			<tr> 
+				<td>Cena </td>
+				<td><input name="price" type="text" value="<?=$this->delivery['price']?>">Kč</td>
+			</tr>
+			<tr>
+				<td>Povoleno <input name="valid" type="checkbox" value="1" 
+					<? if( $this->delivery['valid'] OR !$this->delivery['nazev'])
+							echo 'checked' ;?>>
+				</td>
+			</tr>
+			<tr>
+				<td>Vyberte povolené platby: </td>
+				<td>
+					<? $m_p = new module_Payment();
+						$payments = $m_p->getValidPayments();
+						foreach($this->delivery['payments'] as $payment)
+							$delPaymentsIds[] = $payment['id'];
+						
+						foreach ($payments as $payment)
+						{
+							$checked='';
+							if(!$this->delivery['nazev'])
+								$checked = 'checked';
+							if( in_array($payment['id'], $delPaymentsIds ) )
+								$checked = 'checked';
+
+						?>
+							<input type="checkbox" name="payments[]" value="<?=$payment['id'] ?>" <?=$checked?> > <?=$payment['nazev']?>
+							<?
+							if( ($i%4) == 0 )
+							{
+								echo '<br>';
+							}
+							$i++;
+						}
+						
+					?>
+				</td>
+			</tr>
+
+					
+
+		</table>
+			<br/>
+		
+		<?=$this->formSubmit('saveContentB', 'Uložit', array('class'=>'fsubmit', "onclick" => "return submitFormAjax('PageForm', '".$this->url(array('action' => 'saveDelivery'))."', 'vypisDole', 'tab-refresh', '', true );", 'iconClass' => "noteIcon")) ?>
+		<?=$this->formHidden('id',$this->delivery['id']);?> 
+		  
+		 
+		
+		 
+	</div> 
+</form>
+</div>  

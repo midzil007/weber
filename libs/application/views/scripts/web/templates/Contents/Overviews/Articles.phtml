@@ -1,0 +1,37 @@
+<?
+function drawArticle($view, $articleNode,$counter){
+	$article = $articleNode->getPublishedContent();
+	$url = helper_FrontEnd::getPath($view, $articleNode->path); 	
+	$date = Utils::formatDate($article->getPropertyValue('dateShow')); 
+	$count = 120;  
+	$html = helper_FrontEnd::reduceText(strip_tags($article->getPropertyValue('html')), 375, false, true);	  
+	$html = 'Výparník je ovinut okolo vnitřní nádoby mrazící části. To vede k rovnoměrnému rozdělení teploty, menší tvorbě námrazy a působí pozitivně na spotřebu energie. Vnitřní stěny jsou obzvlášť hladké a tak snadno čistitelné. Vyjímatelné skleněné mezipodlážky a průhledné šuplíky umožňují variabilní uspořádání vnitřního prostoru. Tak lze celý vnitřní prostor použít jako VarioSpace i pro extra velké mražené produkty.';
+	$authorPhoto = helper_FrontEnd::getPhoto('photos', $article, $article->fotoCropMini3Name , $article->fotoShowName, 1);  
+	$authorPhoto['path'] = 'http://www.shop-liebherr.cz/fotky19418/MEnu/62.jpg';
+    if($view->counts == $counter){
+    	$class	=' lst';
+    }    
+	?>   
+	    
+		 <div class="item<?=$class?>">
+		 <div>
+              <h3><a href="<?=$url?>"><?=$articleNode->title;?></a></h3>
+               <p><?=$html;?>  <a class="more" href="<?=$url?>">>>></a></p>
+                  </div>
+		 <div class="img"><a href="<?=$url?>"><img src="<?=$authorPhoto['path']?>"  alt="<?=$authorPhoto['name']?>"/></a></div>
+		</div>  
+	<?
+}
+
+?>  
+<div class="articles"> 
+	<? 
+	$x = 0;
+	foreach ($this->articlesNodes as $child):   
+		$x++;
+		drawArticle($this, $child,$x); 
+	endforeach; 
+	?> 
+	 
+	<?=$this->render('templates/Listing/FloatingWithArrows.phtml'); ?> 
+</div> 

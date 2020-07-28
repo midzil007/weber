@@ -1,0 +1,31 @@
+<?$this->txtPage = true;
+$this->eshop = true;   
+ $basket = $this->basket = $this->mEshop->basket;   
+			$shopper = $basket->getShopper();  
+
+          if($this->webUser->id){
+          	$this->input = Helpers::setValuesToObject($this->input, $this->webUser);
+          	$this->input->fullname = $this->input->jmeno . ' ' . $this->input->prijmeni;
+          } else if($shopper){
+          	$this->input = Helpers::setValuesToObject($this->input, $shopper);  
+          } 
+?>
+<?php if(!$this->webUserLogged): ?>
+<div class="blockTitle">	
+<a href="#" onclick="return showLog('showLog', 100,'showReg',430)">Jste stavající zákazník? Přihlášení</a><span class="downArr1">▼</span><span class="upArr1">▲</span></h3>
+</div>
+<div id="showLog">
+<?=$this->render('parts/loginForm.phtml'); ?>
+</div>
+<div class="clear"></div>
+<?endif?>
+<div class="spacer10"></div>               
+<?$this->userFormEdit = true; ?>	
+<form method="post" action="/nakupni-kosik?step=2" id="myfos" name="myfos">
+<div id="showReg">
+<?= $this->render('parts/userForm.phtml'); ?>
+
+           
+</div>         
+</form>
+

@@ -1,0 +1,31 @@
+<?
+$this->inputGet->year = $this->inputGet->year?$this->inputGet->year:date('Y');
+?>
+<?=$this->pageText?>
+<? foreach ($this->children as $child):
+		if($content = $child->getPublishedContent()):
+			$dateShow = $content->getPropertyValue('dateShow');
+			$year = substr($dateShow, 0, 4);
+			if($this->inputGet->year != $year){
+				continue;
+			}
+							
+							
+		?>	
+		<div class="aktualita">			
+			<div class="date"><?=Utils::formatDate($dateShow)?></div>
+			<a class="fsl tbold" href="<?=Utils::getWebPath($child->path)?>"><?=$child->title?></a>
+			<div class="aktualitaText">			
+			<?=Utils::getReducedText($content->getPropertyValue('html'))?>
+			</div>
+			<a class="fl_right" href="<?=Utils::getWebPath($child->path)?>">více zde</a>
+			<div class="clear">&nbsp;</div>
+		</div>
+	
+<? 		endif;
+	endforeach; ?>
+	
+<?php
+$this->listingExtra = '';
+echo $this->render('templates/Listing/ByYear.phtml'); 
+?>	

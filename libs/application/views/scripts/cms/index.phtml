@@ -1,0 +1,34 @@
+	
+<?=$this->render('parts/header.phtml'); ?>
+	<? if(!$this->logged): ?>
+		<div id="main">		
+		<?=$this->render('controls/admin/login.phtml'); ?>	
+		</div>  
+	<? else: ?>
+		
+		<div id="main">		
+	    <?=$this->render('controls/admin/Menu.phtml'); ?>	
+	    <table id="pageTable">
+	    	<tr> 
+		        <td id="leftPart"> 
+		        	 <?=$this->leftColl?>  
+		        </td>  
+	            <td id="rightPart">
+	            	<? if(!$this->disableBack):?>  
+	            	<a  id="back" onclick="window.history.back(); return false;" id="nb" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false"><span class="ui-button-icon-primary ui-icon ui-icon-arrowthick-1-w"></span><span class="ui-button-text">Zpět</span></a>
+	            	<? endif; ?> 
+	            	<?=$this->render($this->content); ?>   
+	            </td>  
+            </tr>
+	    </table>  
+	    </div>   
+	    
+	<? endif; ?>
+	<?=$this->render('parts/bottom.phtml'); ?>
+	<? if(count($this->messages)): ?>
+			<?=$this->render('errors.phtml');?>				  
+		<? endif; ?>  
+		 
+	 
+<?=$this->render('parts/footer.phtml'); ?>
+

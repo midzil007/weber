@@ -1,0 +1,19 @@
+<?
+$this->disableLeft = true;
+$this->disableH1 = true;
+$this->txtPage = true;  
+$state = false; 	
+if(isset($this->input->register)){ 
+	list($state, $messages) = $this->mCustomers->registerUser($this, $this->input);
+	Helpers::addMessage($state, $messages, $this); 
+}  
+?>
+<?php if(count($this->messages)): ?>
+	<?= $this->render('parts/messages.phtml'); ?>				
+<?php endif; ?>
+
+<?php if(!$state): ?>		 
+		<?= $this->render('parts/userForm.phtml'); ?>
+<? else: ?>
+	<!--<p>Děkujeme za Vaší registraci.</p>-->
+<? endif; ?>

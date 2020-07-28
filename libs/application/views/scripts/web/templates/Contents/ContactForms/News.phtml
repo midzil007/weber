@@ -1,0 +1,17 @@
+  <div id="newsss"> 
+  		<div class="newsletter">
+  		      <div class="spacer10"></div>
+            <form method="post" action="<?=$_SERVER['REDIRECT_URL']?>">
+              <fieldset>
+                <label>Váš e-mail:</label> 
+              </fieldset>  
+
+              <fieldset>
+                <?=$this->formText('email', $this->input->email, array('class' => 'news'))?>
+                <button name="send" id="sendBtn" value="1"></button>
+              </fieldset> 
+				<?= $this->render('parts/SecurityCode.phtml'); ?>	  
+	
+            </form> 
+          </div>  
+         </div> 

@@ -1,0 +1,1891 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bookcodes>
+ <categories>
+  <category id="1">Administrativa</category>
+  <category id="46">Automobilový průmysl</category>
+  <category id="29">Bankovnictví</category>
+  <category id="48">Bezpečnost a ochrana</category>
+  <category id="27">Cestovní ruch, gastronomie, hotelnictví</category>
+  <category id="33">Doprava, spedice, logistika</category>
+  <category id="36">Dřevozpracující průmysl</category>
+  <category id="2">Ekonomika, finance, účetnictví</category>
+  <category id="18">Elektrotechnika a energetika</category>
+  <category id="50">Hornictví, hutnictví</category>
+  <category id="39">Chemický průmysl</category>
+  <category id="5">Informační technologie</category>
+  <category id="51">Leasing</category>
+  <category id="23">Lidské zdroje a personalistika</category>
+  <category id="52">Management kvality</category>
+  <category id="6">Marketing, reklama, PR</category>
+  <category id="10">Obchod</category>
+  <category id="34">Pojišťovnictví</category>
+  <category id="15">Pomocné práce</category>
+  <category id="7">Právo a legislativa</category>
+  <category id="19">Překladatelství a tlumočnictví</category>
+  <category id="11">Služby</category>
+  <category id="13">Státní správa, samospráva</category>
+  <category id="20">Stavebnictví a reality</category>
+  <category id="22">Strojírenství</category>
+  <category id="21">Školství, vzdělávání, věda, výzkum</category>
+  <category id="55">Technika, rozvoj</category>
+  <category id="8">Telekomunikace</category>
+  <category id="56">Textilní, kožedělný a oděvní průmysl</category>
+  <category id="35">Umění a kultura</category>
+  <category id="49">Vodohospod., lesnictví, životní prostředí</category>
+  <category id="30">Vrcholový management</category>
+  <category id="12">Výroba</category>
+  <category id="54">Zákaznická podpora</category>
+  <category id="9">Zdravotnictví, farmacie, sociální oblast</category>
+  <category id="28">Zemědělství a potravinářství</category>
+  <category id="47">Žurnalistika, polygrafie, média</category>
+ </categories>
+ <positions>
+  <position id="442">Account executive</position>
+  <position id="1">Account manager</position>
+  <position id="2">Administrativní pracovník, referent</position>
+  <position id="269">Advokátní koncipient</position>
+  <position id="212">Animátor volného času</position>
+  <position id="263">Anketář</position>
+  <position id="170">Aranžér, dekoratér</position>
+  <position id="4">Architekt</position>
+  <position id="285">Archivář, správce rejstříku</position>
+  <position id="419">Art director</position>
+  <position id="5">Asistent</position>
+  <position id="310">Asistent (zdravotnictví)</position>
+  <position id="399">Asistent auditora</position>
+  <position id="422">Asistent daňového poradce</position>
+  <position id="448">Asistent učitele</position>
+  <position id="6">Au-pair</position>
+  <position id="138">Auditor</position>
+  <position id="354">Autoelektrikář</position>
+  <position id="195">Autoklempíř</position>
+  <position id="7">Automechanik</position>
+  <position id="336">Balič</position>
+  <position id="119">Barman</position>
+  <position id="451">Bezpečnostní ředitel</position>
+  <position id="8">Brand manager</position>
+  <position id="169">Brusič</position>
+  <position id="429">Bytový architekt</position>
+  <position id="14">Celní deklarant</position>
+  <position id="286">Celník</position>
+  <position id="321">Copywriter</position>
+  <position id="302">Country director, manager</position>
+  <position id="147">Cukrář</position>
+  <position id="222">Čalouník</position>
+  <position id="10">Číšník</position>
+  <position id="136">Daňový poradce</position>
+  <position id="437">Databázový administrátor</position>
+  <position id="153">Databázový analytik</position>
+  <position id="79">Dělník</position>
+  <position id="449">Dentální hygienik</position>
+  <position id="171">Dispečer</position>
+  <position id="163">Disponent</position>
+  <position id="120">Dizajnér</position>
+  <position id="247">Doplňovač zboží, merchandiser</position>
+  <position id="215">Dopravní inženýr</position>
+  <position id="172">Dřevařský inženýr</position>
+  <position id="173">Dřevařský technik</position>
+  <position id="375">Dřevorubec</position>
+  <position id="417">DTP operátor</position>
+  <position id="199">Důlní technik</position>
+  <position id="373">Editor</position>
+  <position id="115">Ekolog, environmentalista</position>
+  <position id="15">Ekonom</position>
+  <position id="16">Ekonomický/finanční ředitel</position>
+  <position id="17">Elektrikář</position>
+  <position id="19">Elektromechanik</position>
+  <position id="229">Elektronik</position>
+  <position id="20">Elektrotechnický inženýr</position>
+  <position id="21">Elektrotechnik</position>
+  <position id="143">Energetik</position>
+  <position id="340">Event manager</position>
+  <position id="270">Exekutor</position>
+  <position id="434">Facility manager</position>
+  <position id="22">Fakturant</position>
+  <position id="23">Farmaceut</position>
+  <position id="304">Farmaceutický laborant</position>
+  <position id="24">Finanční analytik</position>
+  <position id="161">Finanční kontrolor</position>
+  <position id="25">Finanční manažer</position>
+  <position id="26">Finanční poradce</position>
+  <position id="28">Fotograf</position>
+  <position id="110">Frézař, soustružník</position>
+  <position id="445">Fyzioterapeut</position>
+  <position id="454">Garderobiér</position>
+  <position id="295">Generální ředitel</position>
+  <position id="418">Grafický dizajnér</position>
+  <position id="30">Grafik</position>
+  <position id="175">Hasič, záchranář</position>
+  <position id="306">Hlavní sestra</position>
+  <position id="31">Hlavní účetní</position>
+  <position id="198">Horník</position>
+  <position id="111">Hosteska</position>
+  <position id="201">Hutní inženýr</position>
+  <position id="200">Hutník</position>
+  <position id="427">Hygienik</position>
+  <position id="205">Hypoteční poradce</position>
+  <position id="12">Chemický inženýr</position>
+  <position id="11">Chemický laborant</position>
+  <position id="232">Chemik</position>
+  <position id="457">Inspektor</position>
+  <position id="108">Instalatér</position>
+  <position id="432">Instruktor autoškoly</position>
+  <position id="439">Interní auditor</position>
+  <position id="33">Investiční poradce</position>
+  <position id="152">Inženýr kvality</position>
+  <position id="234">IT analytik</position>
+  <position id="328">IT architekt</position>
+  <position id="132">IT konzultant</position>
+  <position id="34">IT manager</position>
+  <position id="235">IT projektový manažer</position>
+  <position id="236">IT tester</position>
+  <position id="280">Jeřábník</position>
+  <position id="35">Kadeřník</position>
+  <position id="346">Kameraman, střihač</position>
+  <position id="257">Key account manager</position>
+  <position id="351">Klempíř, pokrývač</position>
+  <position id="204">Klientský poradce</position>
+  <position id="447">Klinický psycholog</position>
+  <position id="314">Knihař</position>
+  <position id="374">Knihovník</position>
+  <position id="36">Konstruktér</position>
+  <position id="148">Kontrolor</position>
+  <position id="216">Kontrolor dopravy</position>
+  <position id="217">Kontrolor logistiky a zásobování</position>
+  <position id="37">Konzultant</position>
+  <position id="154">Koordinátor</position>
+  <position id="178">Korektor</position>
+  <position id="38">Kosmetička</position>
+  <position id="413">Kouč</position>
+  <position id="168">Kovoobráběč</position>
+  <position id="39">Krejčí, šička</position>
+  <position id="296">Krupiér</position>
+  <position id="40">Kuchař</position>
+  <position id="145">Kulturní referent</position>
+  <position id="165">Kurýr, doručovatel</position>
+  <position id="368">Květinář</position>
+  <position id="41">Laborant</position>
+  <position id="166">Lakýrník</position>
+  <position id="240">Leasingový poradce</position>
+  <position id="42">Lékař</position>
+  <position id="376">Lékařský poradce (Medical advisor)</position>
+  <position id="116">Lektor, školitel</position>
+  <position id="179">Lesní inženýr</position>
+  <position id="180">Lesní technik</position>
+  <position id="121">Lesník</position>
+  <position id="425">Letecký mechanik</position>
+  <position id="261">Likvidátor škod</position>
+  <position id="43">Logistik</position>
+  <position id="182">Malíř, natěrač</position>
+  <position id="211">Manažer bezpečnosti</position>
+  <position id="315">Manažer inzerce</position>
+  <position id="45">Manažer kvality</position>
+  <position id="218">Manažer logistiky</position>
+  <position id="455">Manažer reklamačního oddělení</position>
+  <position id="219">Manažer vozového parku</position>
+  <position id="46">Marketingový manažer</position>
+  <position id="47">Marketingový pracovník</position>
+  <position id="248">Marketingový ředitel</position>
+  <position id="391">Marketingový specialista</position>
+  <position id="48">Masér</position>
+  <position id="403">Maskér, parukář</position>
+  <position id="142">Medicínský/farmaceutický reprezentant</position>
+  <position id="167">Mechanik</position>
+  <position id="435">Metrolog</position>
+  <position id="276">Mistr ve výrobě</position>
+  <position id="331">Monitor klinických studií</position>
+  <position id="183">Montážník, montér</position>
+  <position id="50">Mzdový účetní</position>
+  <position id="223">Nábytkář</position>
+  <position id="51">Nákupčí</position>
+  <position id="137">Nástrojař</position>
+  <position id="387">Normovač práce</position>
+  <position id="456">Notářský koncipient</position>
+  <position id="140">Novinář</position>
+  <position id="438">Obchodní analytik</position>
+  <position id="53">Obchodní manažer</position>
+  <position id="55">Obchodní ředitel</position>
+  <position id="54">Obchodní referent</position>
+  <position id="56">Obchodní zástupce, obchodník</position>
+  <position id="395">Obsluha čerpací stanice</position>
+  <position id="231">Obsluha energetických zařízení</position>
+  <position id="273">Obuvník</position>
+  <position id="184">Oční optik</position>
+  <position id="382">Odborný rada</position>
+  <position id="384">Odborný referent</position>
+  <position id="293">Oděvní návrhář, konstruktér střihů</position>
+  <position id="57">Office manager</position>
+  <position id="390">Operátor stavebních strojů</position>
+  <position id="196">Operátor strojů a zařízení</position>
+  <position id="139">Opravář</position>
+  <position id="459">Optometrista</position>
+  <position id="489">Ortopedický technik</position>
+  <position id="424">Osvětlovač</position>
+  <position id="214">Palubní průvodčí, steward, letuška</position>
+  <position id="58">Pečovatel, osobní asistent</position>
+  <position id="339">Pedikérka, manikérka</position>
+  <position id="112">Pekař</position>
+  <position id="60">Personalista</position>
+  <position id="160">Personální konzultant</position>
+  <position id="61">Personální manažer</position>
+  <position id="243">Personální ředitel</position>
+  <position id="254">Plánovač kvality</position>
+  <position id="303">Plánovač výroby</position>
+  <position id="406">Plavčík</position>
+  <position id="275">Podlahář, dlaždič</position>
+  <position id="62">Pojistný matematik</position>
+  <position id="458">Pojistný technik</position>
+  <position id="63">Pojišťovací poradce</position>
+  <position id="117">Pokladník</position>
+  <position id="213">Pokojská</position>
+  <position id="151">Policista</position>
+  <position id="64">Pomocný pracovník</position>
+  <position id="307">Porodní asistentka</position>
+  <position id="405">Poštovní doručovatel</position>
+  <position id="266">Potravinářský inženýr</position>
+  <position id="267">Potravinářský technik</position>
+  <position id="268">Potravinářský technolog</position>
+  <position id="144">Požární technik</position>
+  <position id="249">PR manažer</position>
+  <position id="420">Pracovní psycholog</position>
+  <position id="237">Pracovník help desku</position>
+  <position id="207">Pracovník platebního styku</position>
+  <position id="359">Pracovník reklamačního oddělení</position>
+  <position id="123">Pracovník strážní služby</position>
+  <position id="360">Pracovník systému platebních karet</position>
+  <position id="428">Pracovník treasury</position>
+  <position id="278">Pracovník vzduchotech. a klimatizace</position>
+  <position id="65">Právník</position>
+  <position id="68">Překladatel</position>
+  <position id="206">Přepážkový pracovník</position>
+  <position id="122">Přepravce, speditér</position>
+  <position id="341">Přijímací technik</position>
+  <position id="279">Přípravář staveb</position>
+  <position id="441">Privátní bankéř</position>
+  <position id="197">Procesní inženýr</position>
+  <position id="67">Prodavač, prodejce</position>
+  <position id="342">Prodejce letenek, zájezdů</position>
+  <position id="316">Produkční</position>
+  <position id="69">Produktový manažer</position>
+  <position id="70">Programátor</position>
+  <position id="370">Programátor CNC</position>
+  <position id="446">Programátor PLC</position>
+  <position id="72">Projektant</position>
+  <position id="71">Projektový manažer</position>
+  <position id="251">Promotér</position>
+  <position id="369">Provozář</position>
+  <position id="389">Provozní manažer</position>
+  <position id="118">Průvodce v cestovním ruchu</position>
+  <position id="73">Psycholog</position>
+  <position id="193">Rada</position>
+  <position id="371">Radiologický asistent</position>
+  <position id="74">Realitní makléř</position>
+  <position id="75">Recepční</position>
+  <position id="322">Recruiter, specialista pro nábor</position>
+  <position id="76">Redaktor</position>
+  <position id="238">Ředitel IT</position>
+  <position id="255">Ředitel kvality a ISO</position>
+  <position id="220">Ředitel logistiky</position>
+  <position id="362">Ředitel odboru</position>
+  <position id="326">Ředitel pobočky</position>
+  <position id="386">Ředitel školy</position>
+  <position id="317">Ředitel vydavatelství</position>
+  <position id="452">Ředitel zdravotnického zařízení</position>
+  <position id="77">Referent</position>
+  <position id="385">Referent - specialista, vyšší referent</position>
+  <position id="411">Referent odbytu</position>
+  <position id="241">Referent správy pohledávek</position>
+  <position id="338">Regulatory affairs manager</position>
+  <position id="444">Regulatory affairs specialist</position>
+  <position id="361">Revizní technik</position>
+  <position id="134">Řezník</position>
+  <position id="101">Řidič</position>
+  <position id="414">Řidič autobusu</position>
+  <position id="436">Řidič kamionu</position>
+  <position id="349">Řidič vysokozdvižného vozíku</position>
+  <position id="226">Risk manager</position>
+  <position id="156">Rozpočtář, kalkulant</position>
+  <position id="421">Rozpočtář, kalkulant staveb</position>
+  <position id="337">Sádrokartonář</position>
+  <position id="460">Sanitář</position>
+  <position id="80">Sekretářka</position>
+  <position id="412">Seřizovač CNC strojů</position>
+  <position id="81">Servisní inženýr</position>
+  <position id="82">Servisní technik</position>
+  <position id="83">Skladník</position>
+  <position id="355">Skladník léčiv</position>
+  <position id="408">Sklář</position>
+  <position id="332">Slévač</position>
+  <position id="155">Sociální pracovník</position>
+  <position id="426">Softwarový inženýr</position>
+  <position id="325">Sommelier</position>
+  <position id="343">Specialista back office</position>
+  <position id="490">Specialista fakturace a plateb</position>
+  <position id="430">Specialista finančních trhů</position>
+  <position id="407">Specialista interní komunikace</position>
+  <position id="256">Specialista ISO</position>
+  <position id="327">Specialista IT bezpečnosti</position>
+  <position id="252">Specialista marketingových analýz</position>
+  <position id="244">Specialista odměňování a benefitů</position>
+  <position id="227">Specialista pohledávek</position>
+  <position id="287">Specialista pro rozvoj mobilní sítě</position>
+  <position id="245">Specialista pro vzdělávání</position>
+  <position id="228">Specialista reportingu</position>
+  <position id="440">Specialista rizik</position>
+  <position id="288">Specialista spojovacích systémů</position>
+  <position id="365">Specialista technické podpory/IT</position>
+  <position id="298">Sportovní trenér</position>
+  <position id="187">Správce budov</position>
+  <position id="84">Správce informačního systému</position>
+  <position id="85">Správce počítačové sítě</position>
+  <position id="415">Statik</position>
+  <position id="157">Statistik</position>
+  <position id="381">Státní rada</position>
+  <position id="86">Stavbyvedoucí</position>
+  <position id="431">Stavební dozor</position>
+  <position id="87">Stavební inženýr</position>
+  <position id="392">Stavební mistr</position>
+  <position id="188">Stavební technik</position>
+  <position id="400">Stavební zámečník</position>
+  <position id="453">Stavěč scénických dekorací</position>
+  <position id="294">Střihač</position>
+  <position id="104">Strojní inženýr</position>
+  <position id="401">Strojní zámečník</position>
+  <position id="189">Strojník</position>
+  <position id="394">Strojvedoucí</position>
+  <position id="404">Stylista, vizážista</position>
+  <position id="114">Svářeč</position>
+  <position id="89">Systémový administrátor</position>
+  <position id="357">Šéfkuchař</position>
+  <position id="191">Šéfredaktor</position>
+  <position id="396">Školník</position>
+  <position id="150">Tanečník, choreograf</position>
+  <position id="289">Technický manažer</position>
+  <position id="124">Technický pracovník</position>
+  <position id="290">Technický ředitel</position>
+  <position id="90">Technik</position>
+  <position id="135">Technik BOZP</position>
+  <position id="344">Technik údržby</position>
+  <position id="91">Technolog</position>
+  <position id="126">Telefonní operátor</position>
+  <position id="253">Telemarketingový pracovník</position>
+  <position id="109">Tesař</position>
+  <position id="131">Tiskař</position>
+  <position id="92">Tlumočník</position>
+  <position id="164">Topič</position>
+  <position id="88">Truhlář</position>
+  <position id="94">Účetní</position>
+  <position id="93">Učitel</position>
+  <position id="409">Učitelka mateřské školy</position>
+  <position id="107">Údržbář</position>
+  <position id="95">Uklízečka</position>
+  <position id="416">Underwriter, upisovatel</position>
+  <position id="208">Úvěrový pracovník</position>
+  <position id="221">Vedoucí dopravy</position>
+  <position id="162">Vedoucí nákupu</position>
+  <position id="97">Vedoucí obchodní skupiny</position>
+  <position id="98">Vedoucí odbytu</position>
+  <position id="209">Vedoucí oddělení</position>
+  <position id="242">Vedoucí oddělení leasingu</position>
+  <position id="450">Vedoucí pošty</position>
+  <position id="271">Vedoucí právního oddělení</position>
+  <position id="99">Vedoucí prodejny, provozu</position>
+  <position id="259">Vedoucí provozu</position>
+  <position id="478">Vedoucí servisu</position>
+  <position id="127">Vedoucí skladu</position>
+  <position id="291">Vedoucí technického oddělení</position>
+  <position id="158">Vedoucí údržby</position>
+  <position id="388">Vedoucí úseku prodejny</position>
+  <position id="100">Vedoucí výroby</position>
+  <position id="274">Vedoucí zákaznického servisu</position>
+  <position id="311">Veterinární lékař</position>
+  <position id="433">Vězeňský dozorce</position>
+  <position id="300">Vodohospodářský inženýr</position>
+  <position id="301">Vodohospodářský technik</position>
+  <position id="194">Voják</position>
+  <position id="264">Vrátný, informátor</position>
+  <position id="378">Vrchní rada</position>
+  <position id="383">Vrchní referent</position>
+  <position id="379">Vrchní státní rada</position>
+  <position id="103">Všeobecná sestra</position>
+  <position id="128">Vychovatel</position>
+  <position id="230">Výkonný ředitel</position>
+  <position id="398">Výpravčí</position>
+  <position id="324">Výrobní ředitel</position>
+  <position id="377">Vyšší referent - specialista</position>
+  <position id="380">Vyšší státní rada</position>
+  <position id="192">Výzkumný a vědecký pracovník</position>
+  <position id="472">Vztahový manažer</position>
+  <position id="102">Web dizajnér</position>
+  <position id="410">Webmaster</position>
+  <position id="372">Zahradní architekt</position>
+  <position id="106">Zahradník</position>
+  <position id="130">Zásobovač</position>
+  <position id="308">Zdravotnický asistent</position>
+  <position id="402">Zdravotnický laborant</position>
+  <position id="49">Zedník</position>
+  <position id="185">Zemědělský inženýr, agronom</position>
+  <position id="186">Zemědělský technik</position>
+  <position id="262">Zemědělský technolog</position>
+  <position id="29">Zeměměřič, geodet</position>
+  <position id="133">Zlatník, klenotník</position>
+  <position id="146">Zootechnik</position>
+  <position id="312">Zubní lékař</position>
+  <position id="313">Zubní technik</position>
+  <position id="423">Zvukař</position>
+ </positions>
+ <offercategorypositions>
+  <catpos category="1" position="2">Administrativa - Administrativní pracovník, referent</catpos>
+  <catpos category="1" position="5">Administrativa - Asistent</catpos>
+  <catpos category="1" position="57">Administrativa - Office manager</catpos>
+  <catpos category="1" position="75">Administrativa - Recepční</catpos>
+  <catpos category="1" position="80">Administrativa - Sekretářka</catpos>
+  <catpos category="1" position="126">Administrativa - Telefonní operátor</catpos>
+  <catpos category="1" position="285">Administrativa - Archivář, správce rejstříku</catpos>
+  <catpos category="2" position="15">Ekonomika, finance, účetnictví - Ekonom</catpos>
+  <catpos category="2" position="22">Ekonomika, finance, účetnictví - Fakturant</catpos>
+  <catpos category="2" position="24">Ekonomika, finance, účetnictví - Finanční analytik</catpos>
+  <catpos category="2" position="25">Ekonomika, finance, účetnictví - Finanční manažer</catpos>
+  <catpos category="2" position="26">Ekonomika, finance, účetnictví - Finanční poradce</catpos>
+  <catpos category="2" position="31">Ekonomika, finance, účetnictví - Hlavní účetní</catpos>
+  <catpos category="2" position="33">Ekonomika, finance, účetnictví - Investiční poradce</catpos>
+  <catpos category="2" position="37">Ekonomika, finance, účetnictví - Konzultant</catpos>
+  <catpos category="2" position="50">Ekonomika, finance, účetnictví - Mzdový účetní</catpos>
+  <catpos category="2" position="94">Ekonomika, finance, účetnictví - Účetní</catpos>
+  <catpos category="2" position="117">Ekonomika, finance, účetnictví - Pokladník</catpos>
+  <catpos category="2" position="136">Ekonomika, finance, účetnictví - Daňový poradce</catpos>
+  <catpos category="2" position="138">Ekonomika, finance, účetnictví - Auditor</catpos>
+  <catpos category="2" position="156">Ekonomika, finance, účetnictví - Rozpočtář, kalkulant</catpos>
+  <catpos category="2" position="157">Ekonomika, finance, účetnictví - Statistik</catpos>
+  <catpos category="2" position="161">Ekonomika, finance, účetnictví - Finanční kontrolor</catpos>
+  <catpos category="2" position="209">Ekonomika, finance, účetnictví - Vedoucí oddělení</catpos>
+  <catpos category="2" position="227">Ekonomika, finance, účetnictví - Specialista pohledávek</catpos>
+  <catpos category="2" position="228">Ekonomika, finance, účetnictví - Specialista reportingu</catpos>
+  <catpos category="2" position="399">Ekonomika, finance, účetnictví - Asistent auditora</catpos>
+  <catpos category="2" position="422">Ekonomika, finance, účetnictví - Asistent daňového poradce</catpos>
+  <catpos category="2" position="430">Ekonomika, finance, účetnictví - Specialista finančních trhů</catpos>
+  <catpos category="2" position="490">Ekonomika, finance, účetnictví - Specialista fakturace a plateb</catpos>
+  <catpos category="5" position="34">Informační technologie - IT manager</catpos>
+  <catpos category="5" position="70">Informační technologie - Programátor</catpos>
+  <catpos category="5" position="81">Informační technologie - Servisní inženýr</catpos>
+  <catpos category="5" position="82">Informační technologie - Servisní technik</catpos>
+  <catpos category="5" position="84">Informační technologie - Správce informačního systému</catpos>
+  <catpos category="5" position="85">Informační technologie - Správce počítačové sítě</catpos>
+  <catpos category="5" position="89">Informační technologie - Systémový administrátor</catpos>
+  <catpos category="5" position="102">Informační technologie - Web dizajnér</catpos>
+  <catpos category="5" position="132">Informační technologie - IT konzultant</catpos>
+  <catpos category="5" position="153">Informační technologie - Databázový analytik</catpos>
+  <catpos category="5" position="234">Informační technologie - IT analytik</catpos>
+  <catpos category="5" position="235">Informační technologie - IT projektový manažer</catpos>
+  <catpos category="5" position="236">Informační technologie - IT tester</catpos>
+  <catpos category="5" position="327">Informační technologie - Specialista IT bezpečnosti</catpos>
+  <catpos category="5" position="328">Informační technologie - IT architekt</catpos>
+  <catpos category="5" position="365">Informační technologie - Specialista technické podpory/IT</catpos>
+  <catpos category="5" position="410">Informační technologie - Webmaster</catpos>
+  <catpos category="5" position="426">Informační technologie - Softwarový inženýr</catpos>
+  <catpos category="5" position="437">Informační technologie - Databázový administrátor</catpos>
+  <catpos category="6" position="1">Marketing, reklama, PR - Account manager</catpos>
+  <catpos category="6" position="8">Marketing, reklama, PR - Brand manager</catpos>
+  <catpos category="6" position="46">Marketing, reklama, PR - Marketingový manažer</catpos>
+  <catpos category="6" position="47">Marketing, reklama, PR - Marketingový pracovník</catpos>
+  <catpos category="6" position="69">Marketing, reklama, PR - Produktový manažer</catpos>
+  <catpos category="6" position="71">Marketing, reklama, PR - Projektový manažer</catpos>
+  <catpos category="6" position="102">Marketing, reklama, PR - Web dizajnér</catpos>
+  <catpos category="6" position="249">Marketing, reklama, PR - PR manažer</catpos>
+  <catpos category="6" position="251">Marketing, reklama, PR - Promotér</catpos>
+  <catpos category="6" position="252">Marketing, reklama, PR - Specialista marketingových analýz</catpos>
+  <catpos category="6" position="321">Marketing, reklama, PR - Copywriter</catpos>
+  <catpos category="6" position="340">Marketing, reklama, PR - Event manager</catpos>
+  <catpos category="6" position="391">Marketing, reklama, PR - Marketingový specialista</catpos>
+  <catpos category="6" position="407">Marketing, reklama, PR - Specialista interní komunikace</catpos>
+  <catpos category="6" position="417">Marketing, reklama, PR - DTP operátor</catpos>
+  <catpos category="6" position="418">Marketing, reklama, PR - Grafický dizajnér</catpos>
+  <catpos category="6" position="419">Marketing, reklama, PR - Art director</catpos>
+  <catpos category="6" position="442">Marketing, reklama, PR - Account executive</catpos>
+  <catpos category="7" position="65">Právo a legislativa - Právník</catpos>
+  <catpos category="7" position="269">Právo a legislativa - Advokátní koncipient</catpos>
+  <catpos category="7" position="270">Právo a legislativa - Exekutor</catpos>
+  <catpos category="7" position="271">Právo a legislativa - Vedoucí právního oddělení</catpos>
+  <catpos category="7" position="456">Právo a legislativa - Notářský koncipient</catpos>
+  <catpos category="8" position="71">Telekomunikace - Projektový manažer</catpos>
+  <catpos category="8" position="90">Telekomunikace - Technik</catpos>
+  <catpos category="8" position="124">Telekomunikace - Technický pracovník</catpos>
+  <catpos category="8" position="126">Telekomunikace - Telefonní operátor</catpos>
+  <catpos category="8" position="183">Telekomunikace - Montážník, montér</catpos>
+  <catpos category="8" position="287">Telekomunikace - Specialista pro rozvoj mobilní sítě</catpos>
+  <catpos category="8" position="288">Telekomunikace - Specialista spojovacích systémů</catpos>
+  <catpos category="9" position="23">Zdravotnictví, farmacie, sociální oblast - Farmaceut</catpos>
+  <catpos category="9" position="42">Zdravotnictví, farmacie, sociální oblast - Lékař</catpos>
+  <catpos category="9" position="48">Zdravotnictví, farmacie, sociální oblast - Masér</catpos>
+  <catpos category="9" position="58">Zdravotnictví, farmacie, sociální oblast - Pečovatel, osobní asistent</catpos>
+  <catpos category="9" position="69">Zdravotnictví, farmacie, sociální oblast - Produktový manažer</catpos>
+  <catpos category="9" position="103">Zdravotnictví, farmacie, sociální oblast - Všeobecná sestra</catpos>
+  <catpos category="9" position="142">Zdravotnictví, farmacie, sociální oblast - Medicínský/farmaceutický reprezentant</catpos>
+  <catpos category="9" position="155">Zdravotnictví, farmacie, sociální oblast - Sociální pracovník</catpos>
+  <catpos category="9" position="184">Zdravotnictví, farmacie, sociální oblast - Oční optik</catpos>
+  <catpos category="9" position="304">Zdravotnictví, farmacie, sociální oblast - Farmaceutický laborant</catpos>
+  <catpos category="9" position="306">Zdravotnictví, farmacie, sociální oblast - Hlavní sestra</catpos>
+  <catpos category="9" position="307">Zdravotnictví, farmacie, sociální oblast - Porodní asistentka</catpos>
+  <catpos category="9" position="308">Zdravotnictví, farmacie, sociální oblast - Zdravotnický asistent</catpos>
+  <catpos category="9" position="310">Zdravotnictví, farmacie, sociální oblast - Asistent (zdravotnictví)</catpos>
+  <catpos category="9" position="311">Zdravotnictví, farmacie, sociální oblast - Veterinární lékař</catpos>
+  <catpos category="9" position="312">Zdravotnictví, farmacie, sociální oblast - Zubní lékař</catpos>
+  <catpos category="9" position="313">Zdravotnictví, farmacie, sociální oblast - Zubní technik</catpos>
+  <catpos category="9" position="331">Zdravotnictví, farmacie, sociální oblast - Monitor klinických studií</catpos>
+  <catpos category="9" position="338">Zdravotnictví, farmacie, sociální oblast - Regulatory affairs manager</catpos>
+  <catpos category="9" position="355">Zdravotnictví, farmacie, sociální oblast - Skladník léčiv</catpos>
+  <catpos category="9" position="371">Zdravotnictví, farmacie, sociální oblast - Radiologický asistent</catpos>
+  <catpos category="9" position="376">Zdravotnictví, farmacie, sociální oblast - Lékařský poradce (Medical advisor)</catpos>
+  <catpos category="9" position="402">Zdravotnictví, farmacie, sociální oblast - Zdravotnický laborant</catpos>
+  <catpos category="9" position="427">Zdravotnictví, farmacie, sociální oblast - Hygienik</catpos>
+  <catpos category="9" position="444">Zdravotnictví, farmacie, sociální oblast - Regulatory affairs specialist</catpos>
+  <catpos category="9" position="445">Zdravotnictví, farmacie, sociální oblast - Fyzioterapeut</catpos>
+  <catpos category="9" position="447">Zdravotnictví, farmacie, sociální oblast - Klinický psycholog</catpos>
+  <catpos category="9" position="449">Zdravotnictví, farmacie, sociální oblast - Dentální hygienik</catpos>
+  <catpos category="9" position="452">Zdravotnictví, farmacie, sociální oblast - Ředitel zdravotnického zařízení</catpos>
+  <catpos category="9" position="459">Zdravotnictví, farmacie, sociální oblast - Optometrista</catpos>
+  <catpos category="9" position="460">Zdravotnictví, farmacie, sociální oblast - Sanitář</catpos>
+  <catpos category="9" position="489">Zdravotnictví, farmacie, sociální oblast - Ortopedický technik</catpos>
+  <catpos category="10" position="1">Obchod - Account manager</catpos>
+  <catpos category="10" position="51">Obchod - Nákupčí</catpos>
+  <catpos category="10" position="53">Obchod - Obchodní manažer</catpos>
+  <catpos category="10" position="54">Obchod - Obchodní referent</catpos>
+  <catpos category="10" position="56">Obchod - Obchodní zástupce, obchodník</catpos>
+  <catpos category="10" position="67">Obchod - Prodavač, prodejce</catpos>
+  <catpos category="10" position="69">Obchod - Produktový manažer</catpos>
+  <catpos category="10" position="97">Obchod - Vedoucí obchodní skupiny</catpos>
+  <catpos category="10" position="98">Obchod - Vedoucí odbytu</catpos>
+  <catpos category="10" position="99">Obchod - Vedoucí prodejny, provozu</catpos>
+  <catpos category="10" position="117">Obchod - Pokladník</catpos>
+  <catpos category="10" position="162">Obchod - Vedoucí nákupu</catpos>
+  <catpos category="10" position="247">Obchod - Doplňovač zboží, merchandiser</catpos>
+  <catpos category="10" position="251">Obchod - Promotér</catpos>
+  <catpos category="10" position="253">Obchod - Telemarketingový pracovník</catpos>
+  <catpos category="10" position="257">Obchod - Key account manager</catpos>
+  <catpos category="10" position="326">Obchod - Ředitel pobočky</catpos>
+  <catpos category="10" position="359">Obchod - Pracovník reklamačního oddělení</catpos>
+  <catpos category="10" position="388">Obchod - Vedoucí úseku prodejny</catpos>
+  <catpos category="10" position="411">Obchod - Referent odbytu</catpos>
+  <catpos category="10" position="438">Obchod - Obchodní analytik</catpos>
+  <catpos category="10" position="455">Obchod - Manažer reklamačního oddělení</catpos>
+  <catpos category="11" position="35">Služby - Kadeřník</catpos>
+  <catpos category="11" position="38">Služby - Kosmetička</catpos>
+  <catpos category="11" position="106">Služby - Zahradník</catpos>
+  <catpos category="11" position="107">Služby - Údržbář</catpos>
+  <catpos category="11" position="108">Služby - Instalatér</catpos>
+  <catpos category="11" position="133">Služby - Zlatník, klenotník</catpos>
+  <catpos category="11" position="164">Služby - Topič</catpos>
+  <catpos category="11" position="339">Služby - Pedikérka, manikérka</catpos>
+  <catpos category="11" position="368">Služby - Květinář</catpos>
+  <catpos category="11" position="372">Služby - Zahradní architekt</catpos>
+  <catpos category="11" position="395">Služby - Obsluha čerpací stanice</catpos>
+  <catpos category="11" position="404">Služby - Stylista, vizážista</catpos>
+  <catpos category="12" position="71">Výroba - Projektový manažer</catpos>
+  <catpos category="12" position="72">Výroba - Projektant</catpos>
+  <catpos category="12" position="79">Výroba - Dělník</catpos>
+  <catpos category="12" position="81">Výroba - Servisní inženýr</catpos>
+  <catpos category="12" position="82">Výroba - Servisní technik</catpos>
+  <catpos category="12" position="91">Výroba - Technolog</catpos>
+  <catpos category="12" position="100">Výroba - Vedoucí výroby</catpos>
+  <catpos category="12" position="137">Výroba - Nástrojař</catpos>
+  <catpos category="12" position="148">Výroba - Kontrolor</catpos>
+  <catpos category="12" position="158">Výroba - Vedoucí údržby</catpos>
+  <catpos category="12" position="166">Výroba - Lakýrník</catpos>
+  <catpos category="12" position="168">Výroba - Kovoobráběč</catpos>
+  <catpos category="12" position="183">Výroba - Montážník, montér</catpos>
+  <catpos category="12" position="196">Výroba - Operátor strojů a zařízení</catpos>
+  <catpos category="12" position="197">Výroba - Procesní inženýr</catpos>
+  <catpos category="12" position="259">Výroba - Vedoucí provozu</catpos>
+  <catpos category="12" position="276">Výroba - Mistr ve výrobě</catpos>
+  <catpos category="12" position="303">Výroba - Plánovač výroby</catpos>
+  <catpos category="12" position="336">Výroba - Balič</catpos>
+  <catpos category="12" position="344">Výroba - Technik údržby</catpos>
+  <catpos category="12" position="387">Výroba - Normovač práce</catpos>
+  <catpos category="12" position="408">Výroba - Sklář</catpos>
+  <catpos category="12" position="435">Výroba - Metrolog</catpos>
+  <catpos category="13" position="77">Státní správa, samospráva - Referent</catpos>
+  <catpos category="13" position="193">Státní správa, samospráva - Rada</catpos>
+  <catpos category="13" position="286">Státní správa, samospráva - Celník</catpos>
+  <catpos category="13" position="362">Státní správa, samospráva - Ředitel odboru</catpos>
+  <catpos category="13" position="377">Státní správa, samospráva - Vyšší referent - specialista</catpos>
+  <catpos category="13" position="378">Státní správa, samospráva - Vrchní rada</catpos>
+  <catpos category="13" position="379">Státní správa, samospráva - Vrchní státní rada</catpos>
+  <catpos category="13" position="380">Státní správa, samospráva - Vyšší státní rada</catpos>
+  <catpos category="13" position="381">Státní správa, samospráva - Státní rada</catpos>
+  <catpos category="13" position="382">Státní správa, samospráva - Odborný rada</catpos>
+  <catpos category="13" position="383">Státní správa, samospráva - Vrchní referent</catpos>
+  <catpos category="13" position="384">Státní správa, samospráva - Odborný referent</catpos>
+  <catpos category="13" position="385">Státní správa, samospráva - Referent - specialista, vyšší referent</catpos>
+  <catpos category="13" position="457">Státní správa, samospráva - Inspektor</catpos>
+  <catpos category="15" position="6">Pomocné práce - Au-pair</catpos>
+  <catpos category="15" position="64">Pomocné práce - Pomocný pracovník</catpos>
+  <catpos category="15" position="79">Pomocné práce - Dělník</catpos>
+  <catpos category="15" position="95">Pomocné práce - Uklízečka</catpos>
+  <catpos category="15" position="111">Pomocné práce - Hosteska</catpos>
+  <catpos category="15" position="263">Pomocné práce - Anketář</catpos>
+  <catpos category="15" position="264">Pomocné práce - Vrátný, informátor</catpos>
+  <catpos category="18" position="17">Elektrotechnika a energetika - Elektrikář</catpos>
+  <catpos category="18" position="19">Elektrotechnika a energetika - Elektromechanik</catpos>
+  <catpos category="18" position="20">Elektrotechnika a energetika - Elektrotechnický inženýr</catpos>
+  <catpos category="18" position="21">Elektrotechnika a energetika - Elektrotechnik</catpos>
+  <catpos category="18" position="36">Elektrotechnika a energetika - Konstruktér</catpos>
+  <catpos category="18" position="71">Elektrotechnika a energetika - Projektový manažer</catpos>
+  <catpos category="18" position="72">Elektrotechnika a energetika - Projektant</catpos>
+  <catpos category="18" position="81">Elektrotechnika a energetika - Servisní inženýr</catpos>
+  <catpos category="18" position="82">Elektrotechnika a energetika - Servisní technik</catpos>
+  <catpos category="18" position="90">Elektrotechnika a energetika - Technik</catpos>
+  <catpos category="18" position="91">Elektrotechnika a energetika - Technolog</catpos>
+  <catpos category="18" position="139">Elektrotechnika a energetika - Opravář</catpos>
+  <catpos category="18" position="143">Elektrotechnika a energetika - Energetik</catpos>
+  <catpos category="18" position="197">Elektrotechnika a energetika - Procesní inženýr</catpos>
+  <catpos category="18" position="229">Elektrotechnika a energetika - Elektronik</catpos>
+  <catpos category="18" position="231">Elektrotechnika a energetika - Obsluha energetických zařízení</catpos>
+  <catpos category="18" position="289">Elektrotechnika a energetika - Technický manažer</catpos>
+  <catpos category="18" position="344">Elektrotechnika a energetika - Technik údržby</catpos>
+  <catpos category="18" position="361">Elektrotechnika a energetika - Revizní technik</catpos>
+  <catpos category="18" position="446">Elektrotechnika a energetika - Programátor PLC</catpos>
+  <catpos category="19" position="68">Překladatelství a tlumočnictví - Překladatel</catpos>
+  <catpos category="19" position="71">Překladatelství a tlumočnictví - Projektový manažer</catpos>
+  <catpos category="19" position="92">Překladatelství a tlumočnictví - Tlumočník</catpos>
+  <catpos category="19" position="178">Překladatelství a tlumočnictví - Korektor</catpos>
+  <catpos category="20" position="4">Stavebnictví a reality - Architekt</catpos>
+  <catpos category="20" position="29">Stavebnictví a reality - Zeměměřič, geodet</catpos>
+  <catpos category="20" position="36">Stavebnictví a reality - Konstruktér</catpos>
+  <catpos category="20" position="49">Stavebnictví a reality - Zedník</catpos>
+  <catpos category="20" position="64">Stavebnictví a reality - Pomocný pracovník</catpos>
+  <catpos category="20" position="71">Stavebnictví a reality - Projektový manažer</catpos>
+  <catpos category="20" position="72">Stavebnictví a reality - Projektant</catpos>
+  <catpos category="20" position="74">Stavebnictví a reality - Realitní makléř</catpos>
+  <catpos category="20" position="86">Stavebnictví a reality - Stavbyvedoucí</catpos>
+  <catpos category="20" position="87">Stavebnictví a reality - Stavební inženýr</catpos>
+  <catpos category="20" position="100">Stavebnictví a reality - Vedoucí výroby</catpos>
+  <catpos category="20" position="109">Stavebnictví a reality - Tesař</catpos>
+  <catpos category="20" position="114">Stavebnictví a reality - Svářeč</catpos>
+  <catpos category="20" position="182">Stavebnictví a reality - Malíř, natěrač</catpos>
+  <catpos category="20" position="183">Stavebnictví a reality - Montážník, montér</catpos>
+  <catpos category="20" position="187">Stavebnictví a reality - Správce budov</catpos>
+  <catpos category="20" position="188">Stavebnictví a reality - Stavební technik</catpos>
+  <catpos category="20" position="275">Stavebnictví a reality - Podlahář, dlaždič</catpos>
+  <catpos category="20" position="278">Stavebnictví a reality - Pracovník vzduchotech. a klimatizace</catpos>
+  <catpos category="20" position="279">Stavebnictví a reality - Přípravář staveb</catpos>
+  <catpos category="20" position="280">Stavebnictví a reality - Jeřábník</catpos>
+  <catpos category="20" position="337">Stavebnictví a reality - Sádrokartonář</catpos>
+  <catpos category="20" position="351">Stavebnictví a reality - Klempíř, pokrývač</catpos>
+  <catpos category="20" position="390">Stavebnictví a reality - Operátor stavebních strojů</catpos>
+  <catpos category="20" position="392">Stavebnictví a reality - Stavební mistr</catpos>
+  <catpos category="20" position="400">Stavebnictví a reality - Stavební zámečník</catpos>
+  <catpos category="20" position="415">Stavebnictví a reality - Statik</catpos>
+  <catpos category="20" position="421">Stavebnictví a reality - Rozpočtář, kalkulant staveb</catpos>
+  <catpos category="20" position="429">Stavebnictví a reality - Bytový architekt</catpos>
+  <catpos category="20" position="431">Stavebnictví a reality - Stavební dozor</catpos>
+  <catpos category="20" position="434">Stavebnictví a reality - Facility manager</catpos>
+  <catpos category="21" position="41">Školství, vzdělávání, věda, výzkum - Laborant</catpos>
+  <catpos category="21" position="73">Školství, vzdělávání, věda, výzkum - Psycholog</catpos>
+  <catpos category="21" position="93">Školství, vzdělávání, věda, výzkum - Učitel</catpos>
+  <catpos category="21" position="116">Školství, vzdělávání, věda, výzkum - Lektor, školitel</catpos>
+  <catpos category="21" position="128">Školství, vzdělávání, věda, výzkum - Vychovatel</catpos>
+  <catpos category="21" position="192">Školství, vzdělávání, věda, výzkum - Výzkumný a vědecký pracovník</catpos>
+  <catpos category="21" position="298">Školství, vzdělávání, věda, výzkum - Sportovní trenér</catpos>
+  <catpos category="21" position="374">Školství, vzdělávání, věda, výzkum - Knihovník</catpos>
+  <catpos category="21" position="386">Školství, vzdělávání, věda, výzkum - Ředitel školy</catpos>
+  <catpos category="21" position="396">Školství, vzdělávání, věda, výzkum - Školník</catpos>
+  <catpos category="21" position="409">Školství, vzdělávání, věda, výzkum - Učitelka mateřské školy</catpos>
+  <catpos category="21" position="432">Školství, vzdělávání, věda, výzkum - Instruktor autoškoly</catpos>
+  <catpos category="21" position="448">Školství, vzdělávání, věda, výzkum - Asistent učitele</catpos>
+  <catpos category="22" position="36">Strojírenství - Konstruktér</catpos>
+  <catpos category="22" position="71">Strojírenství - Projektový manažer</catpos>
+  <catpos category="22" position="72">Strojírenství - Projektant</catpos>
+  <catpos category="22" position="81">Strojírenství - Servisní inženýr</catpos>
+  <catpos category="22" position="90">Strojírenství - Technik</catpos>
+  <catpos category="22" position="91">Strojírenství - Technolog</catpos>
+  <catpos category="22" position="100">Strojírenství - Vedoucí výroby</catpos>
+  <catpos category="22" position="104">Strojírenství - Strojní inženýr</catpos>
+  <catpos category="22" position="110">Strojírenství - Frézař, soustružník</catpos>
+  <catpos category="22" position="114">Strojírenství - Svářeč</catpos>
+  <catpos category="22" position="166">Strojírenství - Lakýrník</catpos>
+  <catpos category="22" position="168">Strojírenství - Kovoobráběč</catpos>
+  <catpos category="22" position="169">Strojírenství - Brusič</catpos>
+  <catpos category="22" position="183">Strojírenství - Montážník, montér</catpos>
+  <catpos category="22" position="189">Strojírenství - Strojník</catpos>
+  <catpos category="22" position="196">Strojírenství - Operátor strojů a zařízení</catpos>
+  <catpos category="22" position="197">Strojírenství - Procesní inženýr</catpos>
+  <catpos category="22" position="259">Strojírenství - Vedoucí provozu</catpos>
+  <catpos category="22" position="303">Strojírenství - Plánovač výroby</catpos>
+  <catpos category="22" position="344">Strojírenství - Technik údržby</catpos>
+  <catpos category="22" position="370">Strojírenství - Programátor CNC</catpos>
+  <catpos category="22" position="401">Strojírenství - Strojní zámečník</catpos>
+  <catpos category="22" position="412">Strojírenství - Seřizovač CNC strojů</catpos>
+  <catpos category="23" position="60">Lidské zdroje a personalistika - Personalista</catpos>
+  <catpos category="23" position="61">Lidské zdroje a personalistika - Personální manažer</catpos>
+  <catpos category="23" position="71">Lidské zdroje a personalistika - Projektový manažer</catpos>
+  <catpos category="23" position="116">Lidské zdroje a personalistika - Lektor, školitel</catpos>
+  <catpos category="23" position="160">Lidské zdroje a personalistika - Personální konzultant</catpos>
+  <catpos category="23" position="209">Lidské zdroje a personalistika - Vedoucí oddělení</catpos>
+  <catpos category="23" position="244">Lidské zdroje a personalistika - Specialista odměňování a benefitů</catpos>
+  <catpos category="23" position="245">Lidské zdroje a personalistika - Specialista pro vzdělávání</catpos>
+  <catpos category="23" position="322">Lidské zdroje a personalistika - Recruiter, specialista pro nábor</catpos>
+  <catpos category="23" position="413">Lidské zdroje a personalistika - Kouč</catpos>
+  <catpos category="23" position="420">Lidské zdroje a personalistika - Pracovní psycholog</catpos>
+  <catpos category="27" position="10">Cestovní ruch, gastronomie, hotelnictví - Číšník</catpos>
+  <catpos category="27" position="40">Cestovní ruch, gastronomie, hotelnictví - Kuchař</catpos>
+  <catpos category="27" position="64">Cestovní ruch, gastronomie, hotelnictví - Pomocný pracovník</catpos>
+  <catpos category="27" position="75">Cestovní ruch, gastronomie, hotelnictví - Recepční</catpos>
+  <catpos category="27" position="118">Cestovní ruch, gastronomie, hotelnictví - Průvodce v cestovním ruchu</catpos>
+  <catpos category="27" position="119">Cestovní ruch, gastronomie, hotelnictví - Barman</catpos>
+  <catpos category="27" position="212">Cestovní ruch, gastronomie, hotelnictví - Animátor volného času</catpos>
+  <catpos category="27" position="213">Cestovní ruch, gastronomie, hotelnictví - Pokojská</catpos>
+  <catpos category="27" position="214">Cestovní ruch, gastronomie, hotelnictví - Palubní průvodčí, steward, letuška</catpos>
+  <catpos category="27" position="259">Cestovní ruch, gastronomie, hotelnictví - Vedoucí provozu</catpos>
+  <catpos category="27" position="296">Cestovní ruch, gastronomie, hotelnictví - Krupiér</catpos>
+  <catpos category="27" position="325">Cestovní ruch, gastronomie, hotelnictví - Sommelier</catpos>
+  <catpos category="27" position="342">Cestovní ruch, gastronomie, hotelnictví - Prodejce letenek, zájezdů</catpos>
+  <catpos category="27" position="357">Cestovní ruch, gastronomie, hotelnictví - Šéfkuchař</catpos>
+  <catpos category="27" position="369">Cestovní ruch, gastronomie, hotelnictví - Provozář</catpos>
+  <catpos category="27" position="406">Cestovní ruch, gastronomie, hotelnictví - Plavčík</catpos>
+  <catpos category="28" position="64">Zemědělství a potravinářství - Pomocný pracovník</catpos>
+  <catpos category="28" position="112">Zemědělství a potravinářství - Pekař</catpos>
+  <catpos category="28" position="134">Zemědělství a potravinářství - Řezník</catpos>
+  <catpos category="28" position="146">Zemědělství a potravinářství - Zootechnik</catpos>
+  <catpos category="28" position="147">Zemědělství a potravinářství - Cukrář</catpos>
+  <catpos category="28" position="185">Zemědělství a potravinářství - Zemědělský inženýr, agronom</catpos>
+  <catpos category="28" position="186">Zemědělství a potravinářství - Zemědělský technik</catpos>
+  <catpos category="28" position="262">Zemědělství a potravinářství - Zemědělský technolog</catpos>
+  <catpos category="28" position="266">Zemědělství a potravinářství - Potravinářský inženýr</catpos>
+  <catpos category="28" position="267">Zemědělství a potravinářství - Potravinářský technik</catpos>
+  <catpos category="28" position="268">Zemědělství a potravinářství - Potravinářský technolog</catpos>
+  <catpos category="29" position="1">Bankovnictví - Account manager</catpos>
+  <catpos category="29" position="24">Bankovnictví - Finanční analytik</catpos>
+  <catpos category="29" position="26">Bankovnictví - Finanční poradce</catpos>
+  <catpos category="29" position="69">Bankovnictví - Produktový manažer</catpos>
+  <catpos category="29" position="71">Bankovnictví - Projektový manažer</catpos>
+  <catpos category="29" position="117">Bankovnictví - Pokladník</catpos>
+  <catpos category="29" position="204">Bankovnictví - Klientský poradce</catpos>
+  <catpos category="29" position="205">Bankovnictví - Hypoteční poradce</catpos>
+  <catpos category="29" position="206">Bankovnictví - Přepážkový pracovník</catpos>
+  <catpos category="29" position="207">Bankovnictví - Pracovník platebního styku</catpos>
+  <catpos category="29" position="208">Bankovnictví - Úvěrový pracovník</catpos>
+  <catpos category="29" position="209">Bankovnictví - Vedoucí oddělení</catpos>
+  <catpos category="29" position="226">Bankovnictví - Risk manager</catpos>
+  <catpos category="29" position="241">Bankovnictví - Referent správy pohledávek</catpos>
+  <catpos category="29" position="326">Bankovnictví - Ředitel pobočky</catpos>
+  <catpos category="29" position="343">Bankovnictví - Specialista back office</catpos>
+  <catpos category="29" position="360">Bankovnictví - Pracovník systému platebních karet</catpos>
+  <catpos category="29" position="428">Bankovnictví - Pracovník treasury</catpos>
+  <catpos category="29" position="439">Bankovnictví - Interní auditor</catpos>
+  <catpos category="29" position="440">Bankovnictví - Specialista rizik</catpos>
+  <catpos category="29" position="441">Bankovnictví - Privátní bankéř</catpos>
+  <catpos category="29" position="472">Bankovnictví - Vztahový manažer</catpos>
+  <catpos category="30" position="16">Vrcholový management - Ekonomický/finanční ředitel</catpos>
+  <catpos category="30" position="55">Vrcholový management - Obchodní ředitel</catpos>
+  <catpos category="30" position="220">Vrcholový management - Ředitel logistiky</catpos>
+  <catpos category="30" position="230">Vrcholový management - Výkonný ředitel</catpos>
+  <catpos category="30" position="238">Vrcholový management - Ředitel IT</catpos>
+  <catpos category="30" position="243">Vrcholový management - Personální ředitel</catpos>
+  <catpos category="30" position="248">Vrcholový management - Marketingový ředitel</catpos>
+  <catpos category="30" position="255">Vrcholový management - Ředitel kvality a ISO</catpos>
+  <catpos category="30" position="290">Vrcholový management - Technický ředitel</catpos>
+  <catpos category="30" position="295">Vrcholový management - Generální ředitel</catpos>
+  <catpos category="30" position="302">Vrcholový management - Country director, manager</catpos>
+  <catpos category="30" position="324">Vrcholový management - Výrobní ředitel</catpos>
+  <catpos category="30" position="389">Vrcholový management - Provozní manažer</catpos>
+  <catpos category="33" position="14">Doprava, spedice, logistika - Celní deklarant</catpos>
+  <catpos category="33" position="43">Doprava, spedice, logistika - Logistik</catpos>
+  <catpos category="33" position="51">Doprava, spedice, logistika - Nákupčí</catpos>
+  <catpos category="33" position="64">Doprava, spedice, logistika - Pomocný pracovník</catpos>
+  <catpos category="33" position="71">Doprava, spedice, logistika - Projektový manažer</catpos>
+  <catpos category="33" position="83">Doprava, spedice, logistika - Skladník</catpos>
+  <catpos category="33" position="98">Doprava, spedice, logistika - Vedoucí odbytu</catpos>
+  <catpos category="33" position="101">Doprava, spedice, logistika - Řidič</catpos>
+  <catpos category="33" position="122">Doprava, spedice, logistika - Přepravce, speditér</catpos>
+  <catpos category="33" position="127">Doprava, spedice, logistika - Vedoucí skladu</catpos>
+  <catpos category="33" position="130">Doprava, spedice, logistika - Zásobovač</catpos>
+  <catpos category="33" position="154">Doprava, spedice, logistika - Koordinátor</catpos>
+  <catpos category="33" position="162">Doprava, spedice, logistika - Vedoucí nákupu</catpos>
+  <catpos category="33" position="163">Doprava, spedice, logistika - Disponent</catpos>
+  <catpos category="33" position="165">Doprava, spedice, logistika - Kurýr, doručovatel</catpos>
+  <catpos category="33" position="171">Doprava, spedice, logistika - Dispečer</catpos>
+  <catpos category="33" position="206">Doprava, spedice, logistika - Přepážkový pracovník</catpos>
+  <catpos category="33" position="215">Doprava, spedice, logistika - Dopravní inženýr</catpos>
+  <catpos category="33" position="216">Doprava, spedice, logistika - Kontrolor dopravy</catpos>
+  <catpos category="33" position="217">Doprava, spedice, logistika - Kontrolor logistiky a zásobování</catpos>
+  <catpos category="33" position="218">Doprava, spedice, logistika - Manažer logistiky</catpos>
+  <catpos category="33" position="219">Doprava, spedice, logistika - Manažer vozového parku</catpos>
+  <catpos category="33" position="221">Doprava, spedice, logistika - Vedoucí dopravy</catpos>
+  <catpos category="33" position="349">Doprava, spedice, logistika - Řidič vysokozdvižného vozíku</catpos>
+  <catpos category="33" position="394">Doprava, spedice, logistika - Strojvedoucí</catpos>
+  <catpos category="33" position="398">Doprava, spedice, logistika - Výpravčí</catpos>
+  <catpos category="33" position="405">Doprava, spedice, logistika - Poštovní doručovatel</catpos>
+  <catpos category="33" position="411">Doprava, spedice, logistika - Referent odbytu</catpos>
+  <catpos category="33" position="414">Doprava, spedice, logistika - Řidič autobusu</catpos>
+  <catpos category="33" position="425">Doprava, spedice, logistika - Letecký mechanik</catpos>
+  <catpos category="33" position="436">Doprava, spedice, logistika - Řidič kamionu</catpos>
+  <catpos category="33" position="450">Doprava, spedice, logistika - Vedoucí pošty</catpos>
+  <catpos category="34" position="62">Pojišťovnictví - Pojistný matematik</catpos>
+  <catpos category="34" position="63">Pojišťovnictví - Pojišťovací poradce</catpos>
+  <catpos category="34" position="261">Pojišťovnictví - Likvidátor škod</catpos>
+  <catpos category="34" position="326">Pojišťovnictví - Ředitel pobočky</catpos>
+  <catpos category="34" position="416">Pojišťovnictví - Underwriter, upisovatel</catpos>
+  <catpos category="34" position="458">Pojišťovnictví - Pojistný technik</catpos>
+  <catpos category="35" position="28">Umění a kultura - Fotograf</catpos>
+  <catpos category="35" position="120">Umění a kultura - Dizajnér</catpos>
+  <catpos category="35" position="145">Umění a kultura - Kulturní referent</catpos>
+  <catpos category="35" position="150">Umění a kultura - Tanečník, choreograf</catpos>
+  <catpos category="35" position="170">Umění a kultura - Aranžér, dekoratér</catpos>
+  <catpos category="35" position="346">Umění a kultura - Kameraman, střihač</catpos>
+  <catpos category="35" position="403">Umění a kultura - Maskér, parukář</catpos>
+  <catpos category="35" position="423">Umění a kultura - Zvukař</catpos>
+  <catpos category="35" position="424">Umění a kultura - Osvětlovač</catpos>
+  <catpos category="35" position="453">Umění a kultura - Stavěč scénických dekorací</catpos>
+  <catpos category="35" position="454">Umění a kultura - Garderobiér</catpos>
+  <catpos category="36" position="36">Dřevozpracující průmysl - Konstruktér</catpos>
+  <catpos category="36" position="88">Dřevozpracující průmysl - Truhlář</catpos>
+  <catpos category="36" position="172">Dřevozpracující průmysl - Dřevařský inženýr</catpos>
+  <catpos category="36" position="173">Dřevozpracující průmysl - Dřevařský technik</catpos>
+  <catpos category="36" position="196">Dřevozpracující průmysl - Operátor strojů a zařízení</catpos>
+  <catpos category="36" position="222">Dřevozpracující průmysl - Čalouník</catpos>
+  <catpos category="36" position="223">Dřevozpracující průmysl - Nábytkář</catpos>
+  <catpos category="36" position="375">Dřevozpracující průmysl - Dřevorubec</catpos>
+  <catpos category="39" position="11">Chemický průmysl - Chemický laborant</catpos>
+  <catpos category="39" position="12">Chemický průmysl - Chemický inženýr</catpos>
+  <catpos category="39" position="91">Chemický průmysl - Technolog</catpos>
+  <catpos category="39" position="196">Chemický průmysl - Operátor strojů a zařízení</catpos>
+  <catpos category="39" position="232">Chemický průmysl - Chemik</catpos>
+  <catpos category="46" position="7">Automobilový průmysl - Automechanik</catpos>
+  <catpos category="46" position="19">Automobilový průmysl - Elektromechanik</catpos>
+  <catpos category="46" position="36">Automobilový průmysl - Konstruktér</catpos>
+  <catpos category="46" position="91">Automobilový průmysl - Technolog</catpos>
+  <catpos category="46" position="107">Automobilový průmysl - Údržbář</catpos>
+  <catpos category="46" position="139">Automobilový průmysl - Opravář</catpos>
+  <catpos category="46" position="148">Automobilový průmysl - Kontrolor</catpos>
+  <catpos category="46" position="166">Automobilový průmysl - Lakýrník</catpos>
+  <catpos category="46" position="167">Automobilový průmysl - Mechanik</catpos>
+  <catpos category="46" position="195">Automobilový průmysl - Autoklempíř</catpos>
+  <catpos category="46" position="196">Automobilový průmysl - Operátor strojů a zařízení</catpos>
+  <catpos category="46" position="197">Automobilový průmysl - Procesní inženýr</catpos>
+  <catpos category="46" position="341">Automobilový průmysl - Přijímací technik</catpos>
+  <catpos category="46" position="344">Automobilový průmysl - Technik údržby</catpos>
+  <catpos category="46" position="354">Automobilový průmysl - Autoelektrikář</catpos>
+  <catpos category="46" position="478">Automobilový průmysl - Vedoucí servisu</catpos>
+  <catpos category="47" position="30">Žurnalistika, polygrafie, média - Grafik</catpos>
+  <catpos category="47" position="76">Žurnalistika, polygrafie, média - Redaktor</catpos>
+  <catpos category="47" position="131">Žurnalistika, polygrafie, média - Tiskař</catpos>
+  <catpos category="47" position="140">Žurnalistika, polygrafie, média - Novinář</catpos>
+  <catpos category="47" position="178">Žurnalistika, polygrafie, média - Korektor</catpos>
+  <catpos category="47" position="191">Žurnalistika, polygrafie, média - Šéfredaktor</catpos>
+  <catpos category="47" position="314">Žurnalistika, polygrafie, média - Knihař</catpos>
+  <catpos category="47" position="315">Žurnalistika, polygrafie, média - Manažer inzerce</catpos>
+  <catpos category="47" position="316">Žurnalistika, polygrafie, média - Produkční</catpos>
+  <catpos category="47" position="317">Žurnalistika, polygrafie, média - Ředitel vydavatelství</catpos>
+  <catpos category="47" position="373">Žurnalistika, polygrafie, média - Editor</catpos>
+  <catpos category="48" position="123">Bezpečnost a ochrana - Pracovník strážní služby</catpos>
+  <catpos category="48" position="135">Bezpečnost a ochrana - Technik BOZP</catpos>
+  <catpos category="48" position="144">Bezpečnost a ochrana - Požární technik</catpos>
+  <catpos category="48" position="151">Bezpečnost a ochrana - Policista</catpos>
+  <catpos category="48" position="175">Bezpečnost a ochrana - Hasič, záchranář</catpos>
+  <catpos category="48" position="194">Bezpečnost a ochrana - Voják</catpos>
+  <catpos category="48" position="211">Bezpečnost a ochrana - Manažer bezpečnosti</catpos>
+  <catpos category="48" position="433">Bezpečnost a ochrana - Vězeňský dozorce</catpos>
+  <catpos category="48" position="451">Bezpečnost a ochrana - Bezpečnostní ředitel</catpos>
+  <catpos category="49" position="115">Vodohospod., lesnictví, životní prostředí - Ekolog, environmentalista</catpos>
+  <catpos category="49" position="121">Vodohospod., lesnictví, životní prostředí - Lesník</catpos>
+  <catpos category="49" position="179">Vodohospod., lesnictví, životní prostředí - Lesní inženýr</catpos>
+  <catpos category="49" position="180">Vodohospod., lesnictví, životní prostředí - Lesní technik</catpos>
+  <catpos category="49" position="300">Vodohospod., lesnictví, životní prostředí - Vodohospodářský inženýr</catpos>
+  <catpos category="49" position="301">Vodohospod., lesnictví, životní prostředí - Vodohospodářský technik</catpos>
+  <catpos category="50" position="198">Hornictví, hutnictví - Horník</catpos>
+  <catpos category="50" position="199">Hornictví, hutnictví - Důlní technik</catpos>
+  <catpos category="50" position="200">Hornictví, hutnictví - Hutník</catpos>
+  <catpos category="50" position="201">Hornictví, hutnictví - Hutní inženýr</catpos>
+  <catpos category="50" position="332">Hornictví, hutnictví - Slévač</catpos>
+  <catpos category="51" position="226">Leasing - Risk manager</catpos>
+  <catpos category="51" position="240">Leasing - Leasingový poradce</catpos>
+  <catpos category="51" position="241">Leasing - Referent správy pohledávek</catpos>
+  <catpos category="51" position="242">Leasing - Vedoucí oddělení leasingu</catpos>
+  <catpos category="52" position="45">Management kvality - Manažer kvality</catpos>
+  <catpos category="52" position="148">Management kvality - Kontrolor</catpos>
+  <catpos category="52" position="152">Management kvality - Inženýr kvality</catpos>
+  <catpos category="52" position="254">Management kvality - Plánovač kvality</catpos>
+  <catpos category="52" position="256">Management kvality - Specialista ISO</catpos>
+  <catpos category="54" position="204">Zákaznická podpora - Klientský poradce</catpos>
+  <catpos category="54" position="237">Zákaznická podpora - Pracovník help desku</catpos>
+  <catpos category="54" position="274">Zákaznická podpora - Vedoucí zákaznického servisu</catpos>
+  <catpos category="55" position="71">Technika, rozvoj - Projektový manažer</catpos>
+  <catpos category="55" position="124">Technika, rozvoj - Technický pracovník</catpos>
+  <catpos category="55" position="197">Technika, rozvoj - Procesní inženýr</catpos>
+  <catpos category="55" position="289">Technika, rozvoj - Technický manažer</catpos>
+  <catpos category="55" position="291">Technika, rozvoj - Vedoucí technického oddělení</catpos>
+  <catpos category="56" position="39">Textilní, kožedělný a oděvní průmysl - Krejčí, šička</catpos>
+  <catpos category="56" position="196">Textilní, kožedělný a oděvní průmysl - Operátor strojů a zařízení</catpos>
+  <catpos category="56" position="273">Textilní, kožedělný a oděvní průmysl - Obuvník</catpos>
+  <catpos category="56" position="293">Textilní, kožedělný a oděvní průmysl - Oděvní návrhář, konstruktér střihů</catpos>
+  <catpos category="56" position="294">Textilní, kožedělný a oděvní průmysl - Střihač</catpos>
+ </offercategorypositions>
+ <regions>
+  <region id="1250" parent_id="1201">Hlavní město Praha</region>
+  <region id="1627" parent_id="11006">Szeged</region>
+  <region id="1628" parent_id="11006">Hódmezővásárhely</region>
+  <region id="1629" parent_id="11006">Csongrád</region>
+  <region id="1630" parent_id="11006">Szentes</region>
+  <region id="1631" parent_id="11006">Makó</region>
+  <region id="1632" parent_id="11013">Győr</region>
+  <region id="1633" parent_id="11013">Sopron</region>
+  <region id="1634" parent_id="11013">Mosonmagyaróvár</region>
+  <region id="1635" parent_id="11013">Csorna</region>
+  <region id="1636" parent_id="11002">Kecskemét</region>
+  <region id="1637" parent_id="11002">Kalocsa</region>
+  <region id="1638" parent_id="11002">Kiskunfélegyháza</region>
+  <region id="1639" parent_id="11002">Kunszentmiklós</region>
+  <region id="1640" parent_id="11002">Baja</region>
+  <region id="1641" parent_id="11003">Pécs</region>
+  <region id="1642" parent_id="11003">Szigetvár</region>
+  <region id="1643" parent_id="11003">Mohács</region>
+  <region id="1644" parent_id="11003">Komló</region>
+  <region id="1645" parent_id="11003">Siklós</region>
+  <region id="1646" parent_id="11004">Békéscsaba</region>
+  <region id="1647" parent_id="11004">Gyula</region>
+  <region id="1648" parent_id="11004">Békés</region>
+  <region id="1649" parent_id="11004">Szarvas</region>
+  <region id="1650" parent_id="11004">Orosháza</region>
+  <region id="1651" parent_id="11005">Miskolc</region>
+  <region id="1652" parent_id="11005">Ózd</region>
+  <region id="1653" parent_id="11005">Sátoraljaújhely</region>
+  <region id="1654" parent_id="11005">Mezőkövesd</region>
+  <region id="1655" parent_id="11005">Kazincbarcika</region>
+  <region id="1656" parent_id="11015">Székesfehérvár</region>
+  <region id="1657" parent_id="11015">Dunaújváros</region>
+  <region id="1658" parent_id="11015">Mór</region>
+  <region id="1659" parent_id="11015">Sárbogárd</region>
+  <region id="1660" parent_id="11015">Bicske</region>
+  <region id="1661" parent_id="11007">Debrecen</region>
+  <region id="1662" parent_id="11007">Hajdúböszörmény</region>
+  <region id="1663" parent_id="11007">Hajdúszoboszló</region>
+  <region id="1664" parent_id="11008">Eger</region>
+  <region id="1665" parent_id="11008">Gyöngyös</region>
+  <region id="1666" parent_id="11008">Hatvan</region>
+  <region id="1667" parent_id="11009">Szolnok</region>
+  <region id="1668" parent_id="11009">Jászberény</region>
+  <region id="1669" parent_id="11009">Törökszentmiklós</region>
+  <region id="1670" parent_id="11009">Karcag</region>
+  <region id="1671" parent_id="11010">Tatabánya</region>
+  <region id="1672" parent_id="11010">Esztergom</region>
+  <region id="1673" parent_id="11010">Tata</region>
+  <region id="1674" parent_id="11010">Komárom</region>
+  <region id="1675" parent_id="11010">Oroszlány</region>
+  <region id="1676" parent_id="11011">Salgótarján</region>
+  <region id="1677" parent_id="11011">Balassagyarmat</region>
+  <region id="1678" parent_id="11012">Érd</region>
+  <region id="1679" parent_id="11012">Cegléd</region>
+  <region id="1680" parent_id="11012">Vác</region>
+  <region id="1681" parent_id="11012">Gödöllő</region>
+  <region id="1682" parent_id="11012">Dunakeszi</region>
+  <region id="1683" parent_id="11016">Kaposvár</region>
+  <region id="1684" parent_id="11016">Siófok</region>
+  <region id="1685" parent_id="11016">Marcali</region>
+  <region id="1686" parent_id="11014">Nyíregyháza</region>
+  <region id="1687" parent_id="11014">Mátészalka</region>
+  <region id="1688" parent_id="11014">Kisvárda</region>
+  <region id="1689" parent_id="11014">Tiszasasvári</region>
+  <region id="1690" parent_id="11018">Szombathely</region>
+  <region id="1691" parent_id="11018">Sárvár</region>
+  <region id="1692" parent_id="11018">Körmend</region>
+  <region id="1693" parent_id="11019">Veszprém</region>
+  <region id="1694" parent_id="11019">Pápa</region>
+  <region id="1695" parent_id="11019">Ajka</region>
+  <region id="1696" parent_id="11019">Várpalota</region>
+  <region id="1697" parent_id="11019">Tapolca</region>
+  <region id="1698" parent_id="11020">Zalaegerszeg</region>
+  <region id="1699" parent_id="11020">Nagykanizsa</region>
+  <region id="1700" parent_id="11020">Keszthely</region>
+  <region id="1701" parent_id="11017">Szekszárd</region>
+  <region id="1702" parent_id="11017">Dombóvár</region>
+  <region id="1703" parent_id="11017">Paks</region>
+  <region id="1704" parent_id="11017">Bonyhád</region>
+  <region id="9" parent_id="0">Slovenská republika</region>
+  <region id="1" parent_id="9">Bratislavský kraj</region>
+  <region id="101" parent_id="1">Bratislava</region>
+  <region id="106" parent_id="1">Malacky</region>
+  <region id="107" parent_id="1">Pezinok</region>
+  <region id="108" parent_id="1">Senec</region>
+  <region id="5" parent_id="9">Trnavský kraj</region>
+  <region id="501" parent_id="5">Dunajská Streda</region>
+  <region id="1801" parent_id="1800">Beograd</region>
+  <region id="1802" parent_id="1801">Beograd - Barajevo</region>
+  <region id="1803" parent_id="1801">Beograd - Čukarica</region>
+  <region id="1804" parent_id="1801">Beograd - Grocka</region>
+  <region id="1805" parent_id="1801">Beograd - Lazarevac</region>
+  <region id="1806" parent_id="1801">Beograd - Mladenovac</region>
+  <region id="1807" parent_id="1801">Beograd - Novi Beograd</region>
+  <region id="1808" parent_id="1801">Beograd - Obrenovac</region>
+  <region id="1809" parent_id="1801">Beograd - Palilula</region>
+  <region id="1810" parent_id="1801">Beograd - Rakovica</region>
+  <region id="1811" parent_id="1801">Beograd - Savski Venac</region>
+  <region id="1812" parent_id="1801">Beograd - Sopot</region>
+  <region id="1813" parent_id="1801">Beograd - Stari Grad</region>
+  <region id="1814" parent_id="1801">Beograd - Surčin</region>
+  <region id="1815" parent_id="1801">Beograd - Voždovac</region>
+  <region id="1816" parent_id="1801">Beograd - Vračar</region>
+  <region id="1817" parent_id="1801">Beograd - Zemun</region>
+  <region id="1818" parent_id="1801">Beograd - Zvezdara</region>
+  <region id="1819" parent_id="1800">Vojvodina</region>
+  <region id="1820" parent_id="1819">Severno-bački okrug</region>
+  <region id="1821" parent_id="1820">Bačka Topola</region>
+  <region id="1822" parent_id="1820">Mali Iđoš</region>
+  <region id="1823" parent_id="1820">Subotica</region>
+  <region id="1824" parent_id="1819">Srednje-banatski okrug</region>
+  <region id="1825" parent_id="1824">Nova Crnja</region>
+  <region id="1826" parent_id="1824">Novi Bečej</region>
+  <region id="1827" parent_id="1824">Sečanj</region>
+  <region id="1828" parent_id="1824">Žitište</region>
+  <region id="1829" parent_id="1824">Zrenjanin</region>
+  <region id="1830" parent_id="1819">Severno-banatski okrug</region>
+  <region id="1831" parent_id="1830">Ada</region>
+  <region id="1832" parent_id="1830">Čoka</region>
+  <region id="1833" parent_id="1830">Kanjiža</region>
+  <region id="1834" parent_id="1830">Kikinda</region>
+  <region id="1835" parent_id="1830">Novi Kneževac</region>
+  <region id="1836" parent_id="1830">Senta</region>
+  <region id="1837" parent_id="1819">Južno-banatski okrug</region>
+  <region id="1838" parent_id="1837">Alibunar</region>
+  <region id="1839" parent_id="1837">Bela Crkva</region>
+  <region id="1840" parent_id="1837">Kovačica</region>
+  <region id="1841" parent_id="1837">Kovin</region>
+  <region id="1842" parent_id="1837">Opovo</region>
+  <region id="1843" parent_id="1837">Pančevo</region>
+  <region id="1844" parent_id="1837">Plandište</region>
+  <region id="1845" parent_id="1837">Vršac</region>
+  <region id="1846" parent_id="1819">Zapadno-bački okrug</region>
+  <region id="1847" parent_id="1846">Apatin</region>
+  <region id="1848" parent_id="1846">Kula</region>
+  <region id="1849" parent_id="1846">Odžaci</region>
+  <region id="1850" parent_id="1846">Sombor</region>
+  <region id="1851" parent_id="1819">Južno-bački okrug</region>
+  <region id="1852" parent_id="1851">Bač </region>
+  <region id="1853" parent_id="1851">Bačka Palanka</region>
+  <region id="1854" parent_id="1851">Bački Petrovac</region>
+  <region id="1855" parent_id="1851">Bečej</region>
+  <region id="1856" parent_id="1851">Beočin</region>
+  <region id="1857" parent_id="1851">Novi Sad-grad</region>
+  <region id="1858" parent_id="1851">Srbobran</region>
+  <region id="1859" parent_id="1851">Sremski Karlovci</region>
+  <region id="1860" parent_id="1851">Temerin</region>
+  <region id="1861" parent_id="1851">Titel</region>
+  <region id="1862" parent_id="1851">Vrbas</region>
+  <region id="1863" parent_id="1851">Žabalj</region>
+  <region id="1864" parent_id="1800">Sremski okrug</region>
+  <region id="1865" parent_id="1864">Inđija</region>
+  <region id="1866" parent_id="1864">Irig</region>
+  <region id="1868" parent_id="1864">Ruma</region>
+  <region id="1869" parent_id="1864">Šid</region>
+  <region id="1870" parent_id="1864">Sremska Mitrovica</region>
+  <region id="1871" parent_id="1864">Stara Pazova</region>
+  <region id="1872" parent_id="1800">Mačvanski okrug</region>
+  <region id="1873" parent_id="1872">Bogatić</region>
+  <region id="1874" parent_id="1872">Koceljeva</region>
+  <region id="1875" parent_id="1872">Krupanj</region>
+  <region id="1876" parent_id="1872">Ljubovija</region>
+  <region id="1877" parent_id="1872">Loznica</region>
+  <region id="1878" parent_id="1872">Mali Zvornik</region>
+  <region id="1879" parent_id="1872">Šabac</region>
+  <region id="1880" parent_id="1872">Vladimirci</region>
+  <region id="1881" parent_id="1800">Kolubarski okrug</region>
+  <region id="1882" parent_id="1881">Lajkovac</region>
+  <region id="1883" parent_id="1881">Ljig </region>
+  <region id="1884" parent_id="1881">Mionica</region>
+  <region id="1885" parent_id="1881">Osečina</region>
+  <region id="1886" parent_id="1881">Ub </region>
+  <region id="1887" parent_id="1881">Valjevo</region>
+  <region id="1888" parent_id="1800">Podunavski okrug</region>
+  <region id="1889" parent_id="1888">Smederevo</region>
+  <region id="1890" parent_id="1888">Smederevska Palanka</region>
+  <region id="1891" parent_id="1888">Velika Plana</region>
+  <region id="1892" parent_id="1800">Braničevski okrug</region>
+  <region id="1893" parent_id="1892">Golubac</region>
+  <region id="1894" parent_id="1892">Kučevo</region>
+  <region id="1895" parent_id="1892">Malo Crniće</region>
+  <region id="1896" parent_id="1892">Petrovac</region>
+  <region id="1897" parent_id="1892">Požarevac</region>
+  <region id="1898" parent_id="1892">Veliko Gradište</region>
+  <region id="1899" parent_id="1892">Žabari</region>
+  <region id="502" parent_id="5">Galanta</region>
+  <region id="1900" parent_id="1892">Žagubica</region>
+  <region id="1901" parent_id="1800">Šumadijski okrug</region>
+  <region id="1902" parent_id="1901">Aranđelovac</region>
+  <region id="1903" parent_id="1901">Batočina</region>
+  <region id="1904" parent_id="1901">Knić</region>
+  <region id="1905" parent_id="1901">Kragujevac-grad</region>
+  <region id="1906" parent_id="1901">Lapovo</region>
+  <region id="1907" parent_id="1901">Rača</region>
+  <region id="1908" parent_id="1901">Topola</region>
+  <region id="1909" parent_id="1800">Pomoravski okrug</region>
+  <region id="1910" parent_id="1909">Ćuprija</region>
+  <region id="1911" parent_id="1909">Despotovac</region>
+  <region id="1912" parent_id="1909">Jagodina</region>
+  <region id="1913" parent_id="1909">Paraćin</region>
+  <region id="1914" parent_id="1909">Rekovac</region>
+  <region id="1915" parent_id="1909">Svilajnac</region>
+  <region id="1916" parent_id="1800">Borski okrug</region>
+  <region id="1917" parent_id="1916">Bor</region>
+  <region id="1918" parent_id="1916">Kladovo</region>
+  <region id="1919" parent_id="1916">Majdanpek</region>
+  <region id="1920" parent_id="1916">Negotin</region>
+  <region id="1921" parent_id="1800">Zaječarski okrug</region>
+  <region id="1922" parent_id="1921">Boljevac</region>
+  <region id="1923" parent_id="1921">Knjaževac</region>
+  <region id="1924" parent_id="1921">Sokobanja</region>
+  <region id="1925" parent_id="1921">Zaječar</region>
+  <region id="1926" parent_id="1800">Zlatiborski okrug</region>
+  <region id="1927" parent_id="1926">Arilje</region>
+  <region id="1928" parent_id="1926">Bajina Bašta</region>
+  <region id="1929" parent_id="1926">Čajetina</region>
+  <region id="1930" parent_id="1926">Kosjerić</region>
+  <region id="1931" parent_id="1926">Nova Varoš</region>
+  <region id="1932" parent_id="1926">Požega</region>
+  <region id="1933" parent_id="1926">Priboj</region>
+  <region id="1934" parent_id="1926">Prijepolje</region>
+  <region id="1935" parent_id="1926">Sjenica</region>
+  <region id="1936" parent_id="1926">Užice</region>
+  <region id="1937" parent_id="1800">Moravički okrug</region>
+  <region id="1938" parent_id="1937">Čačak</region>
+  <region id="1939" parent_id="1937">Gornji Milanovac</region>
+  <region id="1940" parent_id="1937">Ivanjica</region>
+  <region id="1941" parent_id="1937">Lučani</region>
+  <region id="1942" parent_id="1800">Raški okrug</region>
+  <region id="1943" parent_id="1942">Kraljevo</region>
+  <region id="1944" parent_id="1942">Novi Pazar</region>
+  <region id="1945" parent_id="1942">Raška</region>
+  <region id="1946" parent_id="1942">Tutin</region>
+  <region id="1947" parent_id="1942">Vrnjačka Banja</region>
+  <region id="1948" parent_id="1800">Rasinski okrug</region>
+  <region id="1949" parent_id="1948">Aleksandrovac</region>
+  <region id="1950" parent_id="1948">Brus</region>
+  <region id="1951" parent_id="1948">Ćićevac</region>
+  <region id="1952" parent_id="1948">Kruševac</region>
+  <region id="1953" parent_id="1948">Trstenik</region>
+  <region id="1954" parent_id="1948">Varvarin</region>
+  <region id="1955" parent_id="1800">Nišavski okrug</region>
+  <region id="1956" parent_id="1955">Aleksinac</region>
+  <region id="1957" parent_id="1955">Doljevac</region>
+  <region id="1958" parent_id="1955">Gadžin Han</region>
+  <region id="1959" parent_id="1955">Merošina</region>
+  <region id="1960" parent_id="1955">Niš-Crveni Krst</region>
+  <region id="1961" parent_id="1955">Niš-Grad</region>
+  <region id="1962" parent_id="1955">Niš-Mediana</region>
+  <region id="1963" parent_id="1955">Niš-Niška Banja</region>
+  <region id="1964" parent_id="1955">Niš-Palilula</region>
+  <region id="1965" parent_id="1955">Niš-Pantelej</region>
+  <region id="1966" parent_id="1955">Ražanj</region>
+  <region id="1967" parent_id="1955">Svrljig</region>
+  <region id="1968" parent_id="1800">Toplički okrug</region>
+  <region id="1969" parent_id="1968">Blace</region>
+  <region id="1970" parent_id="1968">Kuršumlija</region>
+  <region id="1971" parent_id="1968">Prokuplje</region>
+  <region id="1972" parent_id="1968">Žitorađa</region>
+  <region id="1973" parent_id="1800">Pirotski okrug</region>
+  <region id="1974" parent_id="1973">Babušnica</region>
+  <region id="1975" parent_id="1973">Bela Palanka</region>
+  <region id="1976" parent_id="1973">Dimitovgrad</region>
+  <region id="1977" parent_id="1973">Pirot</region>
+  <region id="1978" parent_id="1800">Jablanički okrug</region>
+  <region id="1979" parent_id="1978">Bojnik</region>
+  <region id="1980" parent_id="1978">Crna Trava</region>
+  <region id="1981" parent_id="1978">Lebane</region>
+  <region id="1982" parent_id="1978">Leskovac</region>
+  <region id="1983" parent_id="1978">Medveđa</region>
+  <region id="1984" parent_id="1978">Vlasotince</region>
+  <region id="1985" parent_id="1800">Kosovo i Metohija</region>
+  <region id="1986" parent_id="1985">Pčinjski okrug</region>
+  <region id="1987" parent_id="1986">Bosilegrad</region>
+  <region id="1988" parent_id="1986">Bujanovac</region>
+  <region id="1989" parent_id="1986">Preševo</region>
+  <region id="1990" parent_id="1986">Surdulica</region>
+  <region id="1991" parent_id="1986">Trgovište</region>
+  <region id="1992" parent_id="1986">Vladičin Han</region>
+  <region id="1993" parent_id="1986">Vranje</region>
+  <region id="1994" parent_id="1985">Kosovski okrug</region>
+  <region id="1995" parent_id="1994">Glogovac</region>
+  <region id="1996" parent_id="1994">Kačanik</region>
+  <region id="1997" parent_id="1994">Kosovo Polje</region>
+  <region id="1998" parent_id="1994">Lipljan</region>
+  <region id="1999" parent_id="1994">Obilić</region>
+  <region id="503" parent_id="5">Hlohovec</region>
+  <region id="2000" parent_id="1994">Podujevo</region>
+  <region id="2001" parent_id="1994">Priština-grad</region>
+  <region id="2002" parent_id="1994">Štimlje</region>
+  <region id="2003" parent_id="1994">Štrpce</region>
+  <region id="2004" parent_id="1994">Uroševac</region>
+  <region id="2005" parent_id="1985">Pećki okrug</region>
+  <region id="2006" parent_id="2005">Dečani</region>
+  <region id="2007" parent_id="2005">Istok</region>
+  <region id="2008" parent_id="2005">Klina</region>
+  <region id="2009" parent_id="2005">Pećinci</region>
+  <region id="2010" parent_id="2005">Đakovica</region>
+  <region id="2011" parent_id="1985">Prizrenski okrug</region>
+  <region id="2012" parent_id="2011">Gora</region>
+  <region id="2013" parent_id="2011">Orahovac</region>
+  <region id="2014" parent_id="2011">Prizren</region>
+  <region id="2015" parent_id="2011">Suva Reka</region>
+  <region id="2016" parent_id="1985">Kosovski-mitrovački okrug</region>
+  <region id="2017" parent_id="2016">Kosovska Mitrovica</region>
+  <region id="2018" parent_id="2016">Leposavić</region>
+  <region id="2019" parent_id="2016">Srbica</region>
+  <region id="2020" parent_id="2016">Vučitrn</region>
+  <region id="2021" parent_id="2016">Zubin Potok</region>
+  <region id="2022" parent_id="2016">Zvečan</region>
+  <region id="2023" parent_id="1985">Kosovsko-pomoravski okrug</region>
+  <region id="2024" parent_id="2023">Gnjilane</region>
+  <region id="2025" parent_id="2023">Kosovska Kamenica</region>
+  <region id="2026" parent_id="2023">Novo Brdo</region>
+  <region id="2027" parent_id="2023">Vitina</region>
+  <region id="504" parent_id="5">Piešťany</region>
+  <region id="505" parent_id="5">Senica</region>
+  <region id="1500" parent_id="1104">London</region>
+  <region id="506" parent_id="5">Skalica</region>
+  <region id="1501" parent_id="1500">Central London</region>
+  <region id="507" parent_id="5">Trnava</region>
+  <region id="1502" parent_id="1500">East London</region>
+  <region id="4" parent_id="9">Trenčiansky kraj</region>
+  <region id="401" parent_id="4">Bánovce nad Bebravou</region>
+  <region id="1503" parent_id="1500">North London</region>
+  <region id="402" parent_id="4">Ilava</region>
+  <region id="1504" parent_id="1500">North West London</region>
+  <region id="403" parent_id="4">Myjava</region>
+  <region id="1505" parent_id="1500">South East London</region>
+  <region id="404" parent_id="4">Nové Mesto nad Váhom</region>
+  <region id="1506" parent_id="1500">South West London</region>
+  <region id="405" parent_id="4">Partizánske</region>
+  <region id="1507" parent_id="1500">West London</region>
+  <region id="406" parent_id="4">Považská Bystrica</region>
+  <region id="407" parent_id="4">Prievidza</region>
+  <region id="1508" parent_id="1104">East of England</region>
+  <region id="408" parent_id="4">Púchov</region>
+  <region id="1509" parent_id="1508">Bedfordshire (Bedford, Luton, Biggleswade)</region>
+  <region id="409" parent_id="4">Trenčín</region>
+  <region id="1510" parent_id="1508">Cambridgeshire (Cambridge, Huntingdon,  March, Peterborough, St Neots, Wisbech)</region>
+  <region id="6" parent_id="9">Nitranský kraj</region>
+  <region id="601" parent_id="6">Komárno</region>
+  <region id="1511" parent_id="1508">Norfolk (Fakenham, Hunstanton, Kings Lynn, North Walsham, Norwich, Thetford)</region>
+  <region id="602" parent_id="6">Levice</region>
+  <region id="1512" parent_id="1508">Suffolk (Bury St Edmunds, Felixstowe, Haverhill, Ipswich, Newmarket, Stowmarket</region>
+  <region id="603" parent_id="6">Nitra</region>
+  <region id="604" parent_id="6">Nové Zámky</region>
+  <region id="1513" parent_id="1104">East Midlands</region>
+  <region id="605" parent_id="6">Šaľa</region>
+  <region id="1514" parent_id="1513">Derbyshire (Buxton, Chesterfield, Derby, Glossop, Ilkeston, Matlock, Swadlincote)</region>
+  <region id="606" parent_id="6">Topoľčany</region>
+  <region id="1515" parent_id="1513">Leicestershire (Coalville, Hinckley, Leicester, Loughborough, Market Harborough, Melton Mowbray)</region>
+  <region id="607" parent_id="6">Zlaté Moravce</region>
+  <region id="1516" parent_id="1513">Lincolnshire (Boston, Gainsborough, Grantham, Lincoln, Louth, Skegness, Spalding, Stamford)</region>
+  <region id="3" parent_id="9">Žilinský kraj</region>
+  <region id="301" parent_id="3">Bytča</region>
+  <region id="1517" parent_id="1513">Northamptonshire (Corby, Daventry, Kettering, Northampton, Wellingborough)</region>
+  <region id="302" parent_id="3">Čadca</region>
+  <region id="1518" parent_id="1513">Nottinghamshire (Mansfield, Newark, Nottingham, Worksop)</region>
+  <region id="303" parent_id="3">Dolný Kubín</region>
+  <region id="1519" parent_id="1513">Rutland (Oakham)</region>
+  <region id="304" parent_id="3">Kysucké Nové Mesto</region>
+  <region id="305" parent_id="3">Liptovský Mikuláš</region>
+  <region id="1520" parent_id="1104">North East England</region>
+  <region id="306" parent_id="3">Martin</region>
+  <region id="1521" parent_id="1520">Durham (Bishop Auckland, Chester Le Street, Consett, Durham, Peterlee)</region>
+  <region id="307" parent_id="3">Námestovo</region>
+  <region id="1522" parent_id="1520">Northumberland (Ashington, Blyth, Cramlington, Hexham)</region>
+  <region id="308" parent_id="3">Ružomberok</region>
+  <region id="1523" parent_id="1520">Teesside (Guisborough, Hartlepool, Middlesbrough, Redcar, Stockton On Tees)</region>
+  <region id="309" parent_id="3">Turčianske Teplice</region>
+  <region id="1524" parent_id="1520">Tyne &amp; Wear (Gateshead, Newcastle Upon Tyne, South Shields, Sunderland, Washington)</region>
+  <region id="310" parent_id="3">Tvrdošín</region>
+  <region id="311" parent_id="3">Žilina</region>
+  <region id="1525" parent_id="1104">North West England</region>
+  <region id="2" parent_id="9">Banskobystrický kraj</region>
+  <region id="201" parent_id="2">Banská Bystrica</region>
+  <region id="1526" parent_id="1525">Cheshire (Chester, Congleton, Crewe, Ellesmere Port, Macclesfield, Northwich, Warrington, Widnes)</region>
+  <region id="202" parent_id="2">Banská Štiavnica</region>
+  <region id="1527" parent_id="1525">Cumbria (Barrow In Furness, Carlisle, Kendal, Keswick, Penrith, Whitehaven, Workington)</region>
+  <region id="203" parent_id="2">Brezno</region>
+  <region id="1528" parent_id="1525">Greater Manchester (Ashton under Lyne,  Bolton, Bury, Manchester, Oldham,  Rochdale,  Sale, Wigan)</region>
+  <region id="204" parent_id="2">Detva</region>
+  <region id="1529" parent_id="1525">Isle of Man (Peel, Port Erin)</region>
+  <region id="205" parent_id="2">Krupina</region>
+  <region id="1530" parent_id="1525">Lancashire (Blackburn, Blackpool, Burnley, Clitheroe, Lancaster, Lytham St Annes, Skelmersdale, Thornton)</region>
+  <region id="206" parent_id="2">Lučenec</region>
+  <region id="1531" parent_id="1525">Merseyside (Bootle, Heswall, Huyton, Kirkby, Liverpool, St Helens, West Kirby)</region>
+  <region id="207" parent_id="2">Poltár</region>
+  <region id="208" parent_id="2">Revúca</region>
+  <region id="1532" parent_id="1104">South East England</region>
+  <region id="209" parent_id="2">Rimavská Sobota</region>
+  <region id="1533" parent_id="1532">Berkshire (Bracknell, Hungerford, Newbury, Reading, Slough)</region>
+  <region id="210" parent_id="2">Veľký Krtíš</region>
+  <region id="1534" parent_id="1532">Buckinghamshire (Amersham, Aylesbury, Beaconsfield, Chesham, Marlow, Milton Keynes)</region>
+  <region id="211" parent_id="2">Zvolen</region>
+  <region id="1535" parent_id="1532">East Sussex (Brighton, Crowborough, Eastbourne, Hastings, Lewes, Uckfield)</region>
+  <region id="212" parent_id="2">Žarnovica</region>
+  <region id="1536" parent_id="1532">Essex (Barking, Basildon, Braintree, Brentwood, Chelmsford, Clacton on Sea, Colchester, Harlow, Southend On Sea, Waltham Abbey)</region>
+  <region id="213" parent_id="2">Žiar nad Hronom</region>
+  <region id="1537" parent_id="1532">Hampshire (Aldershot, Alton, Andover, Basingstoke, Fareham, Petersfield, Portsmouth, Ringwood, Southampton, Winchester)</region>
+  <region id="7" parent_id="9">Prešovský kraj</region>
+  <region id="701" parent_id="7">Bardejov</region>
+  <region id="1538" parent_id="1532">Hertfordshire (Harpenden, Hemel Hempstead, Hertford, Hitchin, Potters Bar, Stevenage, Watford)</region>
+  <region id="702" parent_id="7">Humenné</region>
+  <region id="1539" parent_id="1532">Isle of Wight (Cowes, Freshwater, Newport, Ryde, Shanklin)</region>
+  <region id="703" parent_id="7">Kežmarok</region>
+  <region id="1540" parent_id="1532">Kent (Ashford, Bromley, Canterbury, Chatham, Dover, Folkestone, Gravesend, Sevenoaks, Tunbridge Wells)</region>
+  <region id="704" parent_id="7">Levoča</region>
+  <region id="1541" parent_id="1532">Middlesex (Enfield, Harrow, Hounslow, Staines, Uxbridge)</region>
+  <region id="705" parent_id="7">Medzilaborce</region>
+  <region id="1542" parent_id="1532">Oxfordshire (Abingdon, Banbury, Bicester, Didcot,  Henley on Thames, Oxford, Thame)</region>
+  <region id="706" parent_id="7">Poprad</region>
+  <region id="1543" parent_id="1532">Surrey (Camberley, Camberley, Croydon, Epsom, Farnham, Guildford, Kingston, Leatherhead, Reigate, Woking)</region>
+  <region id="707" parent_id="7">Prešov</region>
+  <region id="1544" parent_id="1532">West Sussex (Bognor Regis, Chichester, Crawley, East Grinstead, Haywards Heath, Horsham, Worthing)</region>
+  <region id="708" parent_id="7">Sabinov</region>
+  <region id="709" parent_id="7">Snina</region>
+  <region id="1545" parent_id="1104">South West England</region>
+  <region id="710" parent_id="7">Stará Ľubovňa</region>
+  <region id="1546" parent_id="1545">Bristol (Bedminster, Brislington, Bristol, Mangotsfield, Stoke Gifford, Westbury on Trym)</region>
+  <region id="711" parent_id="7">Stropkov</region>
+  <region id="1547" parent_id="1545">Cornwall (Bodmin, Bude, Camborne, Falmouth, Launceston, Newquay,  Penzance, St Austell, St Mawes)</region>
+  <region id="712" parent_id="7">Svidník</region>
+  <region id="1548" parent_id="1545">Devon (Barnstaple, Exeter, Plymouth, Tiverton, Torquay)</region>
+  <region id="713" parent_id="7">Vranov nad Topľou</region>
+  <region id="1549" parent_id="1545">Dorset (Bournemouth,  Poole, Weymouth)</region>
+  <region id="8" parent_id="9">Košický kraj</region>
+  <region id="801" parent_id="8">Gelnica</region>
+  <region id="1550" parent_id="1545">Gloucestershire (Cheltenham, Cirencester, Gloucester, Lydney, Stroud, Tewkesbury)</region>
+  <region id="802" parent_id="8">Košice</region>
+  <region id="1551" parent_id="1545">Isles of Scilly</region>
+  <region id="1552" parent_id="1545">North &amp; North East Somerset (Bath, Clevedon, Portishead, Weston Super Mare)</region>
+  <region id="1553" parent_id="1545">Somerset (Bridgwater, Frome, Glastonbury, Taunton, Yeovil)</region>
+  <region id="1554" parent_id="1545">South Gloucestershire (Chipping Sodbury, Thornbury)</region>
+  <region id="1555" parent_id="1545">Wiltshire (Chippenham, Marlborough, Salisbury, Swindon, Trowbridge)</region>
+  <region id="807" parent_id="8">Michalovce</region>
+  <region id="808" parent_id="8">Rožňava</region>
+  <region id="1556" parent_id="1104">West Midlands</region>
+  <region id="809" parent_id="8">Sobrance</region>
+  <region id="1557" parent_id="1556">Birmingham (Birmingham City, Castle Bromwich, Handsworth, Kings Heath, Perry Barr, Selly Oak Yardley)</region>
+  <region id="810" parent_id="8">Spišská Nová Ves</region>
+  <region id="1558" parent_id="1556">Herefordshire (Hereford, Leominster, Ross On Wye)</region>
+  <region id="811" parent_id="8">Trebišov</region>
+  <region id="1559" parent_id="1556">Shropshire (Bridgnorth, Ludlow, Oswestry, Shrewsbury, Telford)</region>
+  <region id="1560" parent_id="1556">Staffordshire (Burton On Trent, Cannock, Lichfield, Stafford, Stoke On Trent, Tamworth, Uttoxeter)</region>
+  <region id="1561" parent_id="1556">Warwickshire (Coventry, Leamington Spa, Nuneaton, Rugby, Stratford Upon Avon, Warwick)</region>
+  <region id="1562" parent_id="1556">West Midlands (Dudley, Solihull, Stourbridge, Sutton Coldfield, Walsall, Wolverhampton)</region>
+  <region id="1563" parent_id="1556">Worcestershire (Bromsgrove, Kidderminster, Malvern, Redditch, Worcester)</region>
+  <region id="1564" parent_id="1104">Yorkshire and the Humber</region>
+  <region id="1565" parent_id="1564">East Riding of Yorkshire (Bridlington, Goole, Hull)</region>
+  <region id="1566" parent_id="1564">Leeds City</region>
+  <region id="1567" parent_id="1564">North &amp; North East Lincolnshire (Barton Upon Humber, Grimsby, Scunthorpe)</region>
+  <region id="1568" parent_id="1564">North Yorkshire (Harrogate, Richmond, Ripon, Scarborough, Selby, Whitby, York)</region>
+  <region id="1569" parent_id="1564">Sheffield (Darnall, Dore, Hackenthorpe, Handsworth, Parson Cross, Sheffield City)</region>
+  <region id="1570" parent_id="1564">South Yorkshire (Barnsley, Chapeltown, Doncaster, Rotherham)</region>
+  <region id="1571" parent_id="1564">West Yorkshire (Bradford, Castleford, Dewsbury, Halifax, Huddersfield, Keighley)</region>
+  <region id="1572" parent_id="1104">Wales</region>
+  <region id="1573" parent_id="1572">Blaenau Gwent (Abertillery, Tredegar)</region>
+  <region id="1574" parent_id="1572">Bridgend (Bridgend, Maesteg, Porthcawl)</region>
+  <region id="1575" parent_id="1572">Caerphilly (Caerphilly, Risca)</region>
+  <region id="1576" parent_id="1572">Cardiff City</region>
+  <region id="1577" parent_id="1572">Carmarthenshire (Ammanford, Carmarthen, Llanelli)</region>
+  <region id="1578" parent_id="1572">Ceredigion (Aberystwyth, Cardigan, Lampeter)</region>
+  <region id="1579" parent_id="1572">Conwy (Abergele, Betws Y Coed, Colwyn Bay, Conwy, Llandudno)</region>
+  <region id="1580" parent_id="1572">Denbighshire (Denbigh, Llangollen, Prestatyn, Rhyl)</region>
+  <region id="1581" parent_id="1572">Flintshire (Buckley, Flint)</region>
+  <region id="1582" parent_id="1572">Gwynedd (Bangor, Caernarfon, Porthmadog)</region>
+  <region id="1583" parent_id="1572">Isle of Anglesey (Amlwch, Holyhead, Menai Bridge)</region>
+  <region id="1584" parent_id="1572">Merthyr Tydfil (Merthyr Tydfil, Treharris)</region>
+  <region id="1585" parent_id="1572">Monmouthshire (Abergavenny, Caldicot, Chepstow, Monmouth)</region>
+  <region id="1586" parent_id="1572">Neath Port Talbot (Neath, Port Talbot, Ystradgynlais)</region>
+  <region id="1587" parent_id="1572">Newport</region>
+  <region id="1588" parent_id="1572">Pembrokeshire (Fishguard, Haverfordwest, Milford Haven, Pembroke, Tenby)</region>
+  <region id="1589" parent_id="1572">Powys (Brecon, Llandrindod Wells, Newtown, Welshpool)</region>
+  <region id="1590" parent_id="1572">Rhondda Cynon Taff (Aberdare, Pontypridd, Tonypandy)</region>
+  <region id="1591" parent_id="1572">Swansea (Gorseinon, Swansea City)</region>
+  <region id="1592" parent_id="1572">Torfaen (Cwmbran, Pontypool)</region>
+  <region id="1593" parent_id="1572">Vale of Glamorgan (Barry, Cowbridge, Penarth)</region>
+  <region id="1594" parent_id="1572">Wrexham</region>
+  <region id="1595" parent_id="1104">Scotland</region>
+  <region id="1596" parent_id="1595">Aberdeenshire (Aberdeen, Alford, Banchory, Banff, Ellon, Fraserburgh, Huntly, Inverurie, Peterhead, Stonehaven)</region>
+  <region id="1597" parent_id="1595">Angus (Arbroath, Dundee, Forfar, Montrose)</region>
+  <region id="1598" parent_id="1595">Argyll &amp; Bute (Campbeltown, Dunoon, Isle Of Islay, Isle Of Mull, Lochgilphead, Oban)</region>
+  <region id="1599" parent_id="1595">Ayrshire (Ayr, Cumnock, Girvan, Irvine, Kilmarnock, Largs)</region>
+  <region id="1600" parent_id="1595">Borders (Duns, Galashiels, Hawick, Kelso, Peebles, Selkirk)</region>
+  <region id="1601" parent_id="1595">Clackmannanshire (Alloa)</region>
+  <region id="1602" parent_id="1595">Dumfries &amp; Galloway (Annan, Dumfries, Kirkcudbright, Moffat, Stranraer)</region>
+  <region id="1603" parent_id="1595">Dunbartonshire (Bearsden, Dumbarton, Kirkintilloch)</region>
+  <region id="1604" parent_id="1595">East Lothian (Dunbar, Haddington, Musselburgh, North Berwick, Tranent)</region>
+  <region id="1605" parent_id="1595">Edinburgh (Craigmillar,  Corstophine, Edinburgh City, Granton, Morningside)</region>
+  <region id="1606" parent_id="1595">Falkirk (BoNess, Falkirk, Grangemouth, Stenhousemuir)</region>
+  <region id="1607" parent_id="1595">Fife (Dunfermline, Glenrothes, Kirkcaldy)</region>
+  <region id="1608" parent_id="1595">Glasgow (Anniesland, Balornock, Glasgow City, Pollokshields, Shettleston)</region>
+  <region id="1609" parent_id="1595">Highland (Aviemore, Fort William, Gairloch,  Inverness, Isle Of Skye, Kyle of Lochalsh, Lybster, Mallaig, Thurso, Ullapool, Wick)</region>
+  <region id="1610" parent_id="1595">Inverclyde (Gourock, Greenock, Port Glasgow)</region>
+  <region id="1611" parent_id="1595">Lanarkshire (Coatbridge, Cumbernauld, East Kilbride, Lanark, Motherwell, Strathaven)</region>
+  <region id="1612" parent_id="1595">Midlothian (Bonnyrigg, Gorebridge, Penicuik)</region>
+  <region id="1613" parent_id="1595">Moray (Buckie, Elgin, Forres, Keith)</region>
+  <region id="1614" parent_id="1595">Orkney and Shetland (Kirkwall, Lerwick)</region>
+  <region id="1615" parent_id="1595">Perth &amp; Kinross (Blairgowrie, Crieff, Perth, Pitlochry)</region>
+  <region id="1616" parent_id="1595">Renfrewshire (Bishopton, Johnstone, Renfrew)</region>
+  <region id="1617" parent_id="1595">Stirling (Dunblane, Stirling)</region>
+  <region id="1618" parent_id="1595">West Lothian (Bathgate, Linlithgow, Livingston)</region>
+  <region id="1619" parent_id="1595">Western Isles (Isle Of Lewis, Isle Of South Uist, Stornoway)</region>
+  <region id="1620" parent_id="1104">Northern Ireland</region>
+  <region id="1621" parent_id="1620">Belfast</region>
+  <region id="1622" parent_id="1620">County Antrim (Antrim, Ballycastle, Ballyclare, Ballymena, Ballymoney, Bushmills, Carrickfergus, Larne, Lisburn)</region>
+  <region id="1623" parent_id="1620">County Armagh (Armagh, Craigavon)</region>
+  <region id="1624" parent_id="1620">County Down (Banbridge, Bangor, Downpatrick, Hillsborough, Newry, Newtownards)</region>
+  <region id="1625" parent_id="1620">County Londonderry (Coleraine, Limavady, Maghera)</region>
+  <region id="1626" parent_id="1620">County Tyrone and Fermanagh (Augher, Cookstown, Dungannon, Enniskillen, Omagh, Strabane)</region>
+  <region id="12" parent_id="0">Česká republika</region>
+  <region id="1201" parent_id="12">Praha</region>
+  <region id="1214" parent_id="12">Středočeský kraj</region>
+  <region id="12011" parent_id="1214">Benešov</region>
+  <region id="12012" parent_id="1214">Beroun</region>
+  <region id="12013" parent_id="1214">Kladno</region>
+  <region id="12014" parent_id="1214">Kolín</region>
+  <region id="12015" parent_id="1214">Kutná Hora</region>
+  <region id="12016" parent_id="1214">Mělník</region>
+  <region id="12017" parent_id="1214">Mladá Boleslav</region>
+  <region id="12018" parent_id="1214">Nymburk</region>
+  <region id="12019" parent_id="1214">Praha - východ</region>
+  <region id="12141" parent_id="1214">Praha - západ</region>
+  <region id="12142" parent_id="1214">Příbram</region>
+  <region id="12143" parent_id="1214">Rakovník</region>
+  <region id="1203" parent_id="12">Jihočeský kraj</region>
+  <region id="12031" parent_id="1203">České Budějovice</region>
+  <region id="12032" parent_id="1203">Český Krumlov</region>
+  <region id="12033" parent_id="1203">Jindřichův Hradec</region>
+  <region id="12034" parent_id="1203">Písek</region>
+  <region id="12035" parent_id="1203">Prachatice</region>
+  <region id="12036" parent_id="1203">Strakonice</region>
+  <region id="12037" parent_id="1203">Tábor</region>
+  <region id="1212" parent_id="12">Plzeňský kraj</region>
+  <region id="12121" parent_id="1212">Domažlice</region>
+  <region id="12122" parent_id="1212">Klatovy</region>
+  <region id="12123" parent_id="1212">Plzeň - jih</region>
+  <region id="12124" parent_id="1212">Plzeň - město</region>
+  <region id="12125" parent_id="1212">Plzeň - sever</region>
+  <region id="12126" parent_id="1212">Rokycany</region>
+  <region id="12127" parent_id="1212">Tachov</region>
+  <region id="1205" parent_id="12">Karlovarský kraj</region>
+  <region id="12051" parent_id="1205">Cheb</region>
+  <region id="12052" parent_id="1205">Karlovy Vary</region>
+  <region id="12053" parent_id="1205">Sokolov</region>
+  <region id="1213" parent_id="12">Ústecký kraj</region>
+  <region id="12131" parent_id="1213">Děčín</region>
+  <region id="12132" parent_id="1213">Chomutov</region>
+  <region id="12133" parent_id="1213">Litoměřice</region>
+  <region id="12134" parent_id="1213">Louny</region>
+  <region id="12135" parent_id="1213">Most</region>
+  <region id="12136" parent_id="1213">Teplice</region>
+  <region id="12137" parent_id="1213">Ústí nad Labem</region>
+  <region id="1208" parent_id="12">Liberecký kraj</region>
+  <region id="12081" parent_id="1208">Česká Lípa</region>
+  <region id="12082" parent_id="1208">Jablonec nad Nisou</region>
+  <region id="12083" parent_id="1208">Liberec</region>
+  <region id="12084" parent_id="1208">Semily</region>
+  <region id="1206" parent_id="12">Královéhradecký kraj</region>
+  <region id="12054" parent_id="1206">Hradec Králové</region>
+  <region id="12055" parent_id="1206">Jičín</region>
+  <region id="12056" parent_id="1206">Náchod</region>
+  <region id="12057" parent_id="1206">Rychnov nad Kněžnou</region>
+  <region id="12058" parent_id="1206">Trutnov</region>
+  <region id="1211" parent_id="12">Pardubický kraj</region>
+  <region id="12111" parent_id="1211">Chrudim</region>
+  <region id="12112" parent_id="1211">Pardubice</region>
+  <region id="12113" parent_id="1211">Svitavy</region>
+  <region id="12114" parent_id="1211">Ústí nad Orlicí</region>
+  <region id="1204" parent_id="12">Kraj Vysočina</region>
+  <region id="12041" parent_id="1204">Havlíčkův Brod</region>
+  <region id="12042" parent_id="1204">Jihlava</region>
+  <region id="12043" parent_id="1204">Pelhřimov</region>
+  <region id="12044" parent_id="1204">Třebíč</region>
+  <region id="12045" parent_id="1204">Žďár nad Sázavou</region>
+  <region id="1202" parent_id="12">Jihomoravský kraj</region>
+  <region id="12021" parent_id="1202">Blansko</region>
+  <region id="12022" parent_id="1202">Brno - město</region>
+  <region id="12023" parent_id="1202">Brno - venkov</region>
+  <region id="12024" parent_id="1202">Břeclav</region>
+  <region id="12025" parent_id="1202">Hodonín</region>
+  <region id="12026" parent_id="1202">Vyškov</region>
+  <region id="12027" parent_id="1202">Znojmo</region>
+  <region id="1215" parent_id="12">Zlínský kraj</region>
+  <region id="12151" parent_id="1215">Kroměříž</region>
+  <region id="12152" parent_id="1215">Uherské Hradiště</region>
+  <region id="12153" parent_id="1215">Vsetín</region>
+  <region id="12154" parent_id="1215">Zlín</region>
+  <region id="1209" parent_id="12">Olomoucký kraj</region>
+  <region id="12091" parent_id="1209">Jeseník</region>
+  <region id="12092" parent_id="1209">Olomouc</region>
+  <region id="12093" parent_id="1209">Prostějov</region>
+  <region id="12094" parent_id="1209">Přerov</region>
+  <region id="12095" parent_id="1209">Šumperk</region>
+  <region id="1210" parent_id="12">Moravskoslezský kraj</region>
+  <region id="12101" parent_id="1210">Bruntál</region>
+  <region id="12102" parent_id="1210">Frýdek - Místek</region>
+  <region id="12103" parent_id="1210">Karviná</region>
+  <region id="12104" parent_id="1210">Nový Jičín</region>
+  <region id="12105" parent_id="1210">Opava</region>
+  <region id="12106" parent_id="1210">Ostrava</region>
+  <region id="1100" parent_id="0">Maďarsko</region>
+  <region id="11001" parent_id="1100">Budapešť</region>
+  <region id="11300" parent_id="11001">Budapešť</region>
+  <region id="11002" parent_id="1100">Báčsko-malokumánská župa (Bács-Kiskun)</region>
+  <region id="11003" parent_id="1100">Župa Baranja (Baranya)</region>
+  <region id="11004" parent_id="1100">Bekešská župa (Békés)</region>
+  <region id="11005" parent_id="1100">Župa Boršod-Abov-Zemplín (Borsod-Abaúj-Zemplén)</region>
+  <region id="11006" parent_id="1100">Čongrádská župa (Csongrád)</region>
+  <region id="11015" parent_id="1100">Stoličnobělehradská župa (Fejér)</region>
+  <region id="11013" parent_id="1100">župa Ráb-Mošoň-Šoproň (Győr-Moson-Sopron)</region>
+  <region id="11007" parent_id="1100">Hajducko-Bihárská župa (Hajdú-Bihar)</region>
+  <region id="11008" parent_id="1100">Hevešská župa (Heves)</region>
+  <region id="11009" parent_id="1100">Jasovsko-Velkokumánsko-Solnocká župa</region>
+  <region id="11010" parent_id="1100">Komárensko-Ostřihomská župa (Komárom-Esztergom)</region>
+  <region id="11011" parent_id="1100">Novohradská župa (Nógrád)</region>
+  <region id="11012" parent_id="1100">Pešťská župa (Pest)</region>
+  <region id="11016" parent_id="1100">Šomoďská župa (Somogy)</region>
+  <region id="11014" parent_id="1100">Sabolčsko-Satumarsko-Berežská župa</region>
+  <region id="11017" parent_id="1100">Tolňanská župa (Tolna)</region>
+  <region id="11018" parent_id="1100">Vašská župa (Vas)</region>
+  <region id="11019" parent_id="1100">Vesprémská župa (Veszprém)</region>
+  <region id="11020" parent_id="1100">Zalanská župa (Zala)</region>
+  <region id="1109" parent_id="0">Belgie</region>
+  <region id="1111" parent_id="0">Kypr</region>
+  <region id="1119" parent_id="0">Dánsko</region>
+  <region id="12157" parent_id="0">Finsko</region>
+  <region id="1108" parent_id="0">Francie</region>
+  <region id="1114" parent_id="0">Řecko</region>
+  <region id="1115" parent_id="0">Nizozemsko</region>
+  <region id="1107" parent_id="0">Irsko</region>
+  <region id="12160" parent_id="0">Island</region>
+  <region id="12158" parent_id="0">Lucembursko</region>
+  <region id="1101" parent_id="0">Německo</region>
+  <region id="12155" parent_id="0">Norsko</region>
+  <region id="1102" parent_id="0">Polsko</region>
+  <region id="1103" parent_id="0">Rakousko</region>
+  <region id="12156" parent_id="0">Rumunsko</region>
+  <region id="1120" parent_id="0">Rusko</region>
+  <region id="1800" parent_id="0">Srbsko</region>
+  <region id="1113" parent_id="0">Španělsko</region>
+  <region id="1112" parent_id="0">Švýcarsko</region>
+  <region id="12159" parent_id="0">Švédsko</region>
+  <region id="1110" parent_id="0">Itálie</region>
+  <region id="1104" parent_id="0">Velká Británie</region>
+  <region id="12161" parent_id="0">Ukrajina</region>
+  <region id="1216" parent_id="0">USA</region>
+  <region id="1106" parent_id="0">Zahraničí ostatní</region>
+ </regions>
+<jobtypes><www.profesia.sk> <jobtype>
+  <type id="1">hlavní pracovní poměr</type>
+  <type id="2">pracovní poměr na méně než 40 hodin týdně</type>
+  <type id="4">dohoda o brigádnické práci studentů, vykonání práce, pracovní činnosti</type>
+  <type id="8">živnost</type>
+ </jobtype>
+</www.profesia.sk><www.workania.hu> <jobtype>
+  <type id="1">hlavní pracovní poměr</type>
+  <type id="2">pracovní poměr na méně než 40 hodin týdně</type>
+  <type id="4">dohoda o brigádnické práci studentů, vykonání práce, pracovní činnosti</type>
+  <type id="8">živnost</type>
+  <type id="32"/>
+ </jobtype>
+</www.workania.hu><www.profesia.cz> <jobtype>
+  <type id="1">hlavní pracovní poměr</type>
+  <type id="2">pracovní poměr na méně než 40 hodin týdně</type>
+  <type id="4">dohoda o brigádnické práci studentů, vykonání práce, pracovní činnosti</type>
+  <type id="8">živnost</type>
+ </jobtype>
+</www.profesia.cz></jobtypes> <skills>
+  <skill id="127" parent_id="3">.NET</skill>
+  <skill id="63" parent_id="2">3ds Max</skill>
+  <skill id="122" parent_id="3">4GL</skill>
+  <skill id="132" parent_id="2">602Office</skill>
+  <skill id="152" parent_id="3">ABAP</skill>
+  <skill id="138" parent_id="2">ACAD</skill>
+  <skill id="165" parent_id="3">ActionScript</skill>
+  <skill id="53" parent_id="3">Ada</skill>
+  <skill id="125" parent_id="4">Administrace LAN/WAN</skill>
+  <skill id="115" parent_id="4">Administrace Lotus Notes</skill>
+  <skill id="26" parent_id="4">Administrace Novell NetWare</skill>
+  <skill id="16" parent_id="4">Administrace UNIX/Linux</skill>
+  <skill id="50" parent_id="4">Administrace VAX/VMS</skill>
+  <skill id="19" parent_id="4">Administrace Windows serverů</skill>
+  <skill id="102" parent_id="2">Adobe Dreamweaver</skill>
+  <skill id="62" parent_id="3">Adobe Flash</skill>
+  <skill id="41" parent_id="2">Adobe Illustrator</skill>
+  <skill id="130" parent_id="2">Adobe InDesign</skill>
+  <skill id="42" parent_id="2">Adobe PageMaker</skill>
+  <skill id="30" parent_id="2">Adobe Photoshop</skill>
+  <skill id="176" parent_id="3">AJAX</skill>
+  <skill id="169" parent_id="2">Allplan</skill>
+  <skill id="159" parent_id="2">Allplan - Nemetschek</skill>
+  <skill id="172" parent_id="2">Amadeus</skill>
+  <skill id="73" parent_id="5">Angličtina</skill>
+  <skill id="83" parent_id="5">Arabština</skill>
+  <skill id="170" parent_id="2">ArCon</skill>
+  <skill id="167" parent_id="2">ArchiCAD</skill>
+  <skill id="173" parent_id="2">ARIS</skill>
+  <skill id="1" parent_id="3">ASP</skill>
+  <skill id="106" parent_id="3">ASP.NET</skill>
+  <skill id="156" parent_id="3">Assembler</skill>
+  <skill id="27" parent_id="2">AutoCAD</skill>
+  <skill id="142" parent_id="2">Autodesk Inventor</skill>
+  <skill id="89" parent_id="5">Bulharština</skill>
+  <skill id="158" parent_id="3">C Shell</skill>
+  <skill id="2" parent_id="3">C/C++</skill>
+  <skill id="107" parent_id="3">C#</skill>
+  <skill id="129" parent_id="2">CAD</skill>
+  <skill id="123" parent_id="2">CATIA</skill>
+  <skill id="160" parent_id="2">CENKROS</skill>
+  <skill id="3" parent_id="3">CGI/Perl</skill>
+  <skill id="51" parent_id="3">COBOL</skill>
+  <skill id="29" parent_id="2">Corel PHOTO-PAINT</skill>
+  <skill id="28" parent_id="2">CorelDRAW</skill>
+  <skill id="80" parent_id="5">Čeština</skill>
+  <skill id="93" parent_id="5">Čínština</skill>
+  <skill id="21" parent_id="1">Daňová evidence</skill>
+  <skill id="87" parent_id="5">Dánština</skill>
+  <skill id="177" parent_id="3">DB2</skill>
+  <skill id="20" parent_id="3">Delphi</skill>
+  <skill id="67" parent_id="3">DirectX</skill>
+  <skill id="146" parent_id="3">Erwin</skill>
+  <skill id="101" parent_id="5">Estonština</skill>
+  <skill id="70" parent_id="1">Fakturace</skill>
+  <skill id="98" parent_id="5">Finština</skill>
+  <skill id="52" parent_id="3">Fortran</skill>
+  <skill id="24" parent_id="3">FoxPro</skill>
+  <skill id="75" parent_id="5">Francouzština</skill>
+  <skill id="171" parent_id="2">Galileo</skill>
+  <skill id="85" parent_id="5">Hebrejština</skill>
+  <skill id="72" parent_id="1">Hospodářská korespondence</skill>
+  <skill id="5" parent_id="3">HTML</skill>
+  <skill id="174" parent_id="2">Human</skill>
+  <skill id="81" parent_id="5">Chorvatština</skill>
+  <skill id="136" parent_id="2">I-DEAS</skill>
+  <skill id="6" parent_id="3">Informix</skill>
+  <skill id="38" parent_id="3">InterBase</skill>
+  <skill id="33" parent_id="2">Internet (e-mail, www)</skill>
+  <skill id="79" parent_id="5">Italština</skill>
+  <skill id="91" parent_id="5">Japonština</skill>
+  <skill id="7" parent_id="3">Java</skill>
+  <skill id="117" parent_id="3">Java EE</skill>
+  <skill id="8" parent_id="3">JavaScript</skill>
+  <skill id="161" parent_id="2">Jeeves</skill>
+  <skill id="4" parent_id="4">Klient/server administrace</skill>
+  <skill id="105" parent_id="5">Korejština</skill>
+  <skill id="92" parent_id="5">Latina</skill>
+  <skill id="108" parent_id="5">Litevština</skill>
+  <skill id="34" parent_id="2">Lotus Notes</skill>
+  <skill id="116" parent_id="3">Lotus Notes script</skill>
+  <skill id="109" parent_id="5">Lotyština</skill>
+  <skill id="78" parent_id="5">Maďarština</skill>
+  <skill id="45" parent_id="3">Magic</skill>
+  <skill id="155" parent_id="3">MFC</skill>
+  <skill id="9" parent_id="2">Microsoft Access</skill>
+  <skill id="10" parent_id="2">Microsoft Excel</skill>
+  <skill id="37" parent_id="2">Microsoft FrontPage</skill>
+  <skill id="40" parent_id="2">Microsoft Outlook</skill>
+  <skill id="12" parent_id="2">Microsoft Powerpoint</skill>
+  <skill id="112" parent_id="2">Microsoft Project</skill>
+  <skill id="23" parent_id="3">Microsoft SQL Server</skill>
+  <skill id="11" parent_id="2">Microsoft Word</skill>
+  <skill id="32" parent_id="2">MicroStation</skill>
+  <skill id="164" parent_id="2">Movex</skill>
+  <skill id="64" parent_id="3">MySQL</skill>
+  <skill id="110" parent_id="1">Mzdové účetnictví</skill>
+  <skill id="166" parent_id="2">Navision</skill>
+  <skill id="74" parent_id="5">Němčina</skill>
+  <skill id="90" parent_id="5">Nizozemština</skill>
+  <skill id="99" parent_id="5">Norština</skill>
+  <skill id="135" parent_id="2">NX (Unigraphics)</skill>
+  <skill id="163" parent_id="2">Omron</skill>
+  <skill id="66" parent_id="3">OpenGL</skill>
+  <skill id="113" parent_id="2">OpenOffice</skill>
+  <skill id="13" parent_id="3">Oracle</skill>
+  <skill id="119" parent_id="3">Oracle Forms</skill>
+  <skill id="35" parent_id="3">Pascal</skill>
+  <skill id="68" parent_id="1">Personalistika</skill>
+  <skill id="44" parent_id="3">Pervasive SQL</skill>
+  <skill id="39" parent_id="3">PHP</skill>
+  <skill id="54" parent_id="3">PL/1</skill>
+  <skill id="120" parent_id="3">PL/SQL</skill>
+  <skill id="22" parent_id="1">Podvojné účetnictví</skill>
+  <skill id="175" parent_id="2">Pohoda</skill>
+  <skill id="71" parent_id="1">Pokladna</skill>
+  <skill id="97" parent_id="5">Polština</skill>
+  <skill id="94" parent_id="5">Portugalština</skill>
+  <skill id="55" parent_id="3">PowerBuilder</skill>
+  <skill id="104" parent_id="2">Pro/ENGINEER</skill>
+  <skill id="121" parent_id="3">Progress</skill>
+  <skill id="143" parent_id="3">Python</skill>
+  <skill id="43" parent_id="2">QuarkXPress</skill>
+  <skill id="88" parent_id="5">Řečtina</skill>
+  <skill id="168" parent_id="2">Revit Architecture</skill>
+  <skill id="118" parent_id="3">RPG</skill>
+  <skill id="86" parent_id="5">Rumunština</skill>
+  <skill id="76" parent_id="5">Ruština</skill>
+  <skill id="14" parent_id="2">SAP</skill>
+  <skill id="111" parent_id="3">SAP</skill>
+  <skill id="61" parent_id="2">SAS</skill>
+  <skill id="103" parent_id="3">SAS</skill>
+  <skill id="162" parent_id="3">SIMATIC STEP 7</skill>
+  <skill id="69" parent_id="1">Skladové hospodářství</skill>
+  <skill id="145" parent_id="5">Slovenština</skill>
+  <skill id="100" parent_id="5">Slovinština</skill>
+  <skill id="56" parent_id="3">Smalltalk</skill>
+  <skill id="140" parent_id="2">Solid Edge</skill>
+  <skill id="124" parent_id="2">SolidWorks</skill>
+  <skill id="114" parent_id="3">SQL</skill>
+  <skill id="82" parent_id="5">Srbština</skill>
+  <skill id="31" parent_id="1">Strojopis</skill>
+  <skill id="15" parent_id="3">Sybase</skill>
+  <skill id="77" parent_id="5">Španělština</skill>
+  <skill id="96" parent_id="5">Švédština</skill>
+  <skill id="36" parent_id="2">T602</skill>
+  <skill id="46" parent_id="3">Tango 2000</skill>
+  <skill id="95" parent_id="5">Turečtina</skill>
+  <skill id="84" parent_id="5">Ukrajinština</skill>
+  <skill id="131" parent_id="3">UML</skill>
+  <skill id="48" parent_id="2">Uživatel IBM i (OS/400)</skill>
+  <skill id="25" parent_id="2">Uživatel Mac OS</skill>
+  <skill id="57" parent_id="2">Uživatel MS Windows</skill>
+  <skill id="49" parent_id="2">Uživatel MS-DOS</skill>
+  <skill id="17" parent_id="2">Uživatel UNIX/Linux</skill>
+  <skill id="128" parent_id="3">VB.NET</skill>
+  <skill id="148" parent_id="3">Visio Studio</skill>
+  <skill id="18" parent_id="3">Visual Basic</skill>
+  <skill id="149" parent_id="3">Visual Studio</skill>
+  <skill id="126" parent_id="5">Vlámština</skill>
+  <skill id="65" parent_id="3">WAP/WML</skill>
+  <skill id="157" parent_id="3">win32 API</skill>
+  <skill id="47" parent_id="3">XML</skill>
+ </skills>
+ <skillcategories>
+  <category id="1" parent_id="0" cat_level_id="1">Administrativní a ekonomické znalosti</category>
+  <category id="16" parent_id="2" cat_level_id="0">CAD/CAM/CAE programy</category>
+  <category id="7" parent_id="3" cat_level_id="0">Databáze</category>
+  <category id="13" parent_id="4" cat_level_id="0">Databáze</category>
+  <category id="10" parent_id="2" cat_level_id="0">Grafické/DTP programy</category>
+  <category id="14" parent_id="4" cat_level_id="0">Groupware nástroje</category>
+  <category id="15" parent_id="4" cat_level_id="0">Hardware a sítě</category>
+  <category id="5" parent_id="0" cat_level_id="3">Jazykové znalosti</category>
+  <category id="9" parent_id="2" cat_level_id="0">Kancelářské programy</category>
+  <category id="11" parent_id="2" cat_level_id="0">Operační systémy</category>
+  <category id="12" parent_id="4" cat_level_id="0">Operační systémy</category>
+  <category id="4" parent_id="0" cat_level_id="2">Počítačové znalosti - administrátor</category>
+  <category id="3" parent_id="0" cat_level_id="2">Počítačové znalosti - programátor</category>
+  <category id="2" parent_id="0" cat_level_id="2">Počítačové znalosti - uživatel</category>
+  <category id="6" parent_id="3" cat_level_id="0">Programovací jazyky</category>
+  <category id="8" parent_id="3" cat_level_id="0">Web technologie</category>
+ </skillcategories>
+ <skilllevels>
+  <level id="3" cat_level_id="1">expert</level>
+  <level id="2" cat_level_id="1">pokročilý</level>
+  <level id="1" cat_level_id="1">základy</level>
+  <level id="6" cat_level_id="2">expert</level>
+  <level id="5" cat_level_id="2">pokročilý</level>
+  <level id="4" cat_level_id="2">základy</level>
+  <level id="9" cat_level_id="3">aktivní</level>
+  <level id="10" cat_level_id="3">expert, tlumočení</level>
+  <level id="11" cat_level_id="3">mateřský jazyk</level>
+  <level id="8" cat_level_id="3">mírně pokročilý</level>
+  <level id="7" cat_level_id="3">základy</level>
+ </skilllevels>
+ <businessareas>
+  <area id="71">Advokátní kanceláře</area>
+  <area id="65">Architektura</area>
+  <area id="1">Automobilový průmysl, výroba dopravních prostředků</area>
+  <area id="9">Bankovnictví, peněžnictví</area>
+  <area id="51">Cestovní kanceláře, agentury apod.</area>
+  <area id="79">Dodávka zemního plynu</area>
+  <area id="4">Doprava, logistika</area>
+  <area id="6">Elektrotechnický průmysl</area>
+  <area id="82">Farmacie</area>
+  <area id="87">Finanční poradenství, zprostředkování finančních služeb a pojištění</area>
+  <area id="2">Hotely, penzióny, ubytovny apod.</area>
+  <area id="3">Chemický průmysl</area>
+  <area id="10">Informační technologie</area>
+  <area id="84">Jiné neuvedené oblasti</area>
+  <area id="12">Jiné obchodní činnosti</area>
+  <area id="67">Jiné služby</area>
+  <area id="73">Jiné vzdělávací organizace</area>
+  <area id="36">Kultura, sport, wellness</area>
+  <area id="54">Leasing</area>
+  <area id="69">Lesnictví</area>
+  <area id="11">Média</area>
+  <area id="66">Nemovitosti</area>
+  <area id="35">Neziskové organizace, občanská sdružení</area>
+  <area id="31">Ostatní průmyslová výroba</area>
+  <area id="22">Personální poradenství, zprostředkování práce a studijních pobytů</area>
+  <area id="55">Pojišťovnictví</area>
+  <area id="17">Poradenství (energetika, BOZP, management kvality apod.)</area>
+  <area id="27">Poštovní služby</area>
+  <area id="70">Právnické činnosti</area>
+  <area id="57">Prodej zboží k dalšímu zpracování a použití (např. velkoobchody)</area>
+  <area id="13">Prodej zboží konečnému spotřebiteli (např. supermarkety, různé typy obchodů)</area>
+  <area id="19">Reklama, propagace, PR</area>
+  <area id="18">Restaurace, bary, jídelny apod.</area>
+  <area id="20">Sklářský, keramický průmysl</area>
+  <area id="76">Státní správa</area>
+  <area id="25">Stavební průmysl</area>
+  <area id="38">Strojírenský průmysl</area>
+  <area id="86">Telekomunikace</area>
+  <area id="14">Textilní, oděvní, kožedělná výroba</area>
+  <area id="75">Těžba nerostů</area>
+  <area id="74">Těžba surovin</area>
+  <area id="28">Tiskařský, vydavatelský průmysl</area>
+  <area id="29">Účetnictví a audit</area>
+  <area id="77">Veřejná správa</area>
+  <area id="83">Veterinární lékařství</area>
+  <area id="85">Výroba alkoholických nápojů a tabákových výrobků</area>
+  <area id="15">Výroba celulózy, papírenských výrobků</area>
+  <area id="61">Výroba kovů nebo kovových výrobků</area>
+  <area id="41">Výroba potravin a nealkoholických nápojů</area>
+  <area id="62">Výroba z gumy, plastů</area>
+  <area id="78">Výroba, rozvod elektřiny</area>
+  <area id="80">Výroba, rozvod páry či vody</area>
+  <area id="72">Základní, střední, vysoké školy</area>
+  <area id="81">Zdravotnictví</area>
+  <area id="68">Zemědělství</area>
+  <area id="5">Zpracování dřeva, výroba nábytku</area>
+ </businessareas>
+ <educationlevels>
+  <level id="6">nástavbové/vyšší odborné vzdělání</level>
+  <level id="11">postgraduální</level>
+  <level id="3">středoškolské bez maturity</level>
+  <level id="5">středoškolské s maturitou</level>
+  <level id="8">student střední školy</level>
+  <level id="9">student vysoké školy</level>
+  <level id="10">vysokoškolské I. stupně</level>
+  <level id="7">vysokoškolské II. stupně</level>
+  <level id="2">základní vzdělání</level>
+ </educationlevels>
+ <currencies>
+  <currency id="1">Sk</currency>
+  <currency id="2">EUR</currency>
+  <currency id="3">USD</currency>
+  <currency id="4">Kč</currency>
+  <currency id="5">Ft</currency>
+  <currency id="6">GBP</currency>
+  <currency id="7">RSD</currency>
+ </currencies>
+ <summerjobs>
+  <summerjob_position_id id="4">Administrativní práce</summerjob_position_id>
+  <summerjob_position_id id="5">Přepisování údajů</summerjob_position_id>
+  <summerjob_position_id id="6">Telefonování</summerjob_position_id>
+  <summerjob_position_id id="7">Anketář</summerjob_position_id>
+  <summerjob_position_id id="8">Práce se zbožím: lehká - balení, doplňování, štítkování</summerjob_position_id>
+  <summerjob_position_id id="9">Práce se zbožím: těžká - vykládání, práce ve skladu</summerjob_position_id>
+  <summerjob_position_id id="10">Prodej zboží</summerjob_position_id>
+  <summerjob_position_id id="11">Práce v pokladně</summerjob_position_id>
+  <summerjob_position_id id="12">Bruslař v hypermarketu</summerjob_position_id>
+  <summerjob_position_id id="13">Vylepování plakátů, materiálů</summerjob_position_id>
+  <summerjob_position_id id="14">Roznášení reklamních materiálů, novin</summerjob_position_id>
+  <summerjob_position_id id="15">Pomocné práce na stavbách</summerjob_position_id>
+  <summerjob_position_id id="16">Stěhování nábytku</summerjob_position_id>
+  <summerjob_position_id id="17">Pomocné práce ve výrobě</summerjob_position_id>
+  <summerjob_position_id id="18">Pomocné práce v kuchyni</summerjob_position_id>
+  <summerjob_position_id id="19">Úklid, pomoc v domácnosti</summerjob_position_id>
+  <summerjob_position_id id="20">Hosteska, promotér</summerjob_position_id>
+  <summerjob_position_id id="21">Komparsista</summerjob_position_id>
+  <summerjob_position_id id="22">Hlídání dítěte</summerjob_position_id>
+  <summerjob_position_id id="23">Doučování</summerjob_position_id>
+  <summerjob_position_id id="24">Jiný typ brigády</summerjob_position_id>
+ </summerjobs>
+</bookcodes>

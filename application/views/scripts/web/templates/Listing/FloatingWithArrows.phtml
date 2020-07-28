@@ -1,0 +1,56 @@
+<?
+function getUrl($view, $page){ 
+	$a = (array) $view->inputGet;
+	unset($a['page']);
+	$a['page'] = $page;
+	 
+	return Utils::addUrlParams($view->path, $a);
+}
+?>
+<? if($this->ListingPagesCount > 1): ?>
+<table cellspacing="0" class="paging noMargin" <?=$this->listingExtra?>>
+	<tr>
+		<td style="width:100px;">&nbsp;</td>
+		<? if($this->listingCurentPage == 0):?>
+	    	<td class="pagButton"></td> 
+	        <td class="pagButton"></td>	 
+        <? else: ?>
+        <td class="pagButton"><a href="<?=getUrl($this, 0)?>" title="první" class="first"></a></td>
+        <td class="pagButton"><a href="<?=getUrl($this, $this->listingPrevPage)?>" title="předchozí" class="prev"></a></td>
+        <? endif; ?>
+   		<td class="numbers">  
+	    	<? 
+			$start = max(0, $this->listingCurentPage - 4);
+			$end = min($this->ListingPagesCount, $this->listingCurentPage + 4);
+			if($start > 0){
+				?>
+				... 
+				<?
+			}
+			for ($i=$start; $i<$end; $i++){		
+				if($i != $this->listingCurentPage):
+				?>	
+				<a href="<?=getUrl($this, $i)?>"><?=($i+1)?></a>
+				<? else: ?>
+				<a href="" class="active"><strong><?=($i+1)?></strong></a>
+				<? endif;
+			}
+			if($end< $this->ListingPagesCount){
+				?>
+				... 
+				<?
+			}
+			 
+			
+		?>	
+	   	</td>
+	   	<? if($this->listingCurentPage + 1  < $this->ListingPagesCount):?>	   	 
+		   	<td class="pagButton"><a href="<?=getUrl($this, $this->listingNextPage)?>" title="další" class="next"></a></td>
+	        <td class="pagButton"><a href="<?=getUrl($this, ($this->ListingPagesCount-1))?>" alt="poslední" class="last"></a></td>
+        <? else: ?>
+        	<td class="pagButton"></td>
+        	<td class="pagButton"></td> 
+        <? endif; ?>
+        <td style="width:100px;">&nbsp;</td> 
+</table> 
+<? endif; ?>

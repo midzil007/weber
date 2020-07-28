@@ -1,0 +1,176 @@
+#menu{
+	background:url(../images/headbg.jpg) repeat-x top #4589df;
+	height:73px;
+	position:relative;
+	padding:0px;
+}
+
+#menu ul#nav{ padding:0px; margin:0px; }
+#menu ul#nav li, #menu ul#nav li a{
+	color:#FFFFFF;
+	font-size:11px;
+	text-decoration:none;
+	display:block;
+	width:83px;
+	height:29px;
+	float:left;
+	padding:44px 4px 0px 4px;
+	margin:0px;
+	text-align:center;
+}
+
+#menu ul#nav li{ padding:0px; width:91px; height:73px; position:relative; }
+
+#nav{ display:block; }
+.preload{ position:absolute; left:-800; top:-800px; }		
+#mmpl_index { background:url(../images/menu/mm_index_o.jpg); }
+#mmpl_pages { background:url(../images/menu/mm_pages_o.jpg); }
+#mmpl_structure { background:url(../images/menu/mm_structure_o.jpg); }
+#mmpl_sf { background:url(../images/menu/mm_sf_o.jpg); }
+#mmpl_events { background:url(../images/menu/mm_events_o.jpg); }
+#mmpl_mailing { background:url(../images/menu/mm_mailing_o.jpg); }
+#mmpl_users { background:url(../images/menu/mm_users_o.jpg); }
+#mmpl_stats { background:url(../images/menu/mm_stats_o.jpg); }
+#mmpl_settings { background:url(../images/menu/mm_settings_o.jpg); }
+#mmpl_intranet { background:url(../images/menu/mm_intranet_o.jpg); }
+#mmpl_enquiry { background:url(../images/menu/mm_enquiry_o.jpg); }
+#mmpl_languages { background:url(../images/menu/mm_languages_o.jpg); }			
+#mmpl_eshop { background:url(../images/menu/mm_eshop_o.jpg); }			
+
+/* menu items */
+#mm_index, #mm_pages, #mm_structure, #mm_events, #mm_mailing{
+	line-height:13px; 
+}
+
+#mm_stats, #mm_sf, #mm_users, #mm_settings, #mm_intranet, #mm_enquiry, #mm_languages, #mm_advertising, #mm_eshop, #mm_pages {
+	line-height:26px;
+}
+ 
+#mm_eshop { background:url(../images/menu/mm_eshop.jpg); }
+#mm_eshop:hover { background:url(../images/menu/mm_eshop_o.jpg); }
+ul#nav li a#mm_eshop.active { background:url(../images/menu/mm_eshop_a.jpg); color:#245184;  } 
+
+
+#mm_index { background:url(../images/menu/mm_index.jpg); }
+#mm_index:hover { background:url(../images/menu/mm_index_o.jpg); }
+ul#nav li a#mm_index.active { background:url(../images/menu/mm_index_a.jpg); color:#245184;  }
+
+
+#mm_pages { background:url(../images/menu/mm_pages.jpg); }
+#mm_pages:hover { background:url(../images/menu/mm_pages_o.jpg); }
+ul#nav li a#mm_pages.active { background:url(../images/menu/mm_pages_a.jpg); color:#245184; }
+ 
+
+#mm_structure { background:url(../images/menu/mm_structure.jpg); }
+#mm_structure:hover { background:url(../images/menu/mm_structure_o.jpg); }
+ul#nav li a#mm_structure.active { background:url(../images/menu/mm_structure_a.jpg); color:#245184; }
+
+
+#mm_stats { background:url(../images/menu/mm_stats.jpg); }
+#mm_stats:hover { background:url(../images/menu/mm_stats_o.jpg); }
+ul#nav li a#mm_stats.active { background:url(../images/menu/mm_stats_a.jpg); color:#245184; }
+
+
+#mm_sf { background:url(../images/menu/mm_sf.jpg); }
+#mm_sf:hover { background:url(../images/menu/mm_sf_o.jpg); }
+ul#nav li a#mm_sf.active { background:url(../images/menu/mm_sf_a.jpg); color:#245184; }
+
+
+#mm_users { background:url(../images/menu/mm_users.jpg); }
+#mm_users:hover { background:url(../images/menu/mm_users_o.jpg); }
+ul#nav li a#mm_users.active { background:url(../images/menu/mm_users_a.jpg); color:#245184; }
+		
+#mm_mailing { background:url(../images/menu/mm_mailing.jpg); }
+#mm_mailing:hover { background:url(../images/menu/mm_mailing_o.jpg); }
+ul#nav li a#mm_mailing.active { background:url(../images/menu/mm_mailing_a.jpg); color:#245184; }
+
+#mm_events { background:url(../images/menu/mm_events.jpg); }
+#mm_events:hover { background:url(../images/menu/mm_events_o.jpg); }
+ul#nav li a#mm_events.active { background:url(../images/menu/mm_events_a.jpg); color:#245184; }
+
+
+#mm_settings { background:url(../images/menu/mm_settings.jpg); }
+#mm_settings:hover { background:url(../images/menu/mm_settings_o.jpg); }
+ul#nav li a#mm_settings.active { background:url(../images/menu/mm_settings_a.jpg); color:#245184; }
+
+#mm_intranet { background:url(../images/menu/mm_intranet.jpg); }
+#mm_intranet:hover { background:url(../images/menu/mm_intranet_o.jpg); }
+ul#nav li a#mm_intranet.active { background:url(../images/menu/mm_intranet_a.jpg); color:#245184; }
+
+#mm_enquiry { background:url(../images/menu/mm_enquiry.jpg); }
+#mm_enquiry:hover { background:url(../images/menu/mm_enquiry_o.jpg); }
+ul#nav li a#mm_enquiry.active { background:url(../images/menu/mm_enquiry_a.jpg); color:#245184; }
+
+#mm_languages { background:url(../images/menu/mm_languages.jpg); }
+#mm_languages:hover { background:url(../images/menu/mm_languages_o.jpg); }
+ul#nav li a#mm_languages.active { background:url(../images/menu/mm_languages_a.jpg); color:#245184; }
+
+#mm_advertising { background:url(../images/menu/mm_advertising.jpg); }
+#mm_advertising:hover { background:url(../images/menu/mm_advertising_o.jpg); }
+ul#nav li a#mm_advertising.active { background:url(../images/menu/mm_advertising_a.jpg); color:#245184; } 
+
+
+/* dropdwon menu */
+
+#dropdown{
+	position:absolute;	
+	z-index:99;
+	top:0px;
+	/*right:78px;	*/
+	width:150px;	
+	display:block;
+	border:1px solid gray;
+	text-align:left;	
+	padding:5px 0px 5px 5px;
+	background:#FFFFFF;
+}
+
+#navDrop{
+	padding:0px;
+	margin:0px;
+}
+
+#navDrop li{ 
+	padding:0px;
+	margin:0px;
+	list-style-type:none;
+}
+#navDrop li a{
+	display:block;
+	height:16px;
+	line-height:16px;
+	padding:2px 0px 2px 24px;
+	font-size:11px;
+	text-decoration:none;
+	
+	background-position:left center;
+	background-repeat:no-repeat;
+}
+
+#navDrop li a:hover, #navDrop li a.active{
+	font-weight:bold;
+	
+}
+
+#mm_s_index { background-image:url(../images/menu/drop/mm_s_index.gif); }
+#mm_s_pages { background-image:url(../images/menu/drop/mm_s_pages.gif);  }
+#mm_s_structure { background-image:url(../images/menu/drop/mm_s_structure.gif); }
+#mm_s_stats { background-image:url(../images/menu/drop/mm_s_stats.gif); }
+#mm_s_sf { background-image:url(../images/menu/drop/mm_s_sf.gif); }
+#mm_s_users { background-image:url(../images/menu/drop/mm_s_users.gif); }		
+#mm_s_mailing { background-image:url(../images/menu/drop/mm_s_mailing.gif); }
+#mm_s_events { background-image:url(../images/menu/drop/mm_s_events.gif); }
+#mm_s_settings { background-image:url(../images/menu/drop/mm_s_settings.gif); }
+#mm_s_intranet { background-image:url(../images/menu/drop/mm_s_intranet.gif); }
+#mm_s_enquiry { background-image:url(../images/menu/drop/mm_s_enquiry.gif); }
+
+#ddMenuTriger{
+	background:url(../images/menu/dd_menu.jpg) no-repeat;
+	width:15px;
+	height:44px;
+	position:absolute;
+	/*right:230px;*/
+	top:22px;
+}
+
+#ddMenuTriger:hover{ background:url(../images/menu/dd_menu-o.jpg) no-repeat; }

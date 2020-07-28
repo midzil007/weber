@@ -1,0 +1,327 @@
+<?$mConversionChecker = new module_ConversionChecker();     
+if($this->basketNode && !$this->inputGet):
+	$conversionAddProducts = $mConversionChecker->renderAddProduct();  
+	$mConversionChecker->deleteConversions();               
+endif;
+if($this->inputGet->done == 1 && $this->basketNode): 
+	$conversionObject = $mConversionChecker->showConversions();     
+	$mConversionChecker->deleteConversions();                       
+else:              
+	$mConversionChecker->deleteConversions();  
+endif;?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<? if ($this->popup):$s = 'style="background:none"';endif; ?>
+<? if ($_COOKIE['wfont']):$cla = 'class="wfont"';endif ?>  
+<html <?= $s ?> <?= $cla ?> xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" lang="cs">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="Language" content="czech"/>
+    <meta name="Distribution" content="global"/>
+    <meta name="Robots" content="INDEX,FOLLOW"/>
+    <meta name="Expires" content="never"/>
+    <meta name="Revisit-after" content="7 Days"/>  
+    <meta name="Resource-type" content="document"/> 
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="keywords" content="<?= $this->pageKw ?>"/>    
+    <meta name="google-site-verification" content="eZxg7vu6-aMuzmqMYI9WBHMr-6A2rXkmqLwFSu8HGCk" />
+    <meta name="google-site-verification" content="koIxq6Hp7bqbXbpZSsKoEbuTq9WJC-A9v45LK2zc_vo" />
+    <meta name="description" content="<?= $this->pageDescription ?>"/>
+    <meta name="google-site-verification" content="<?= $this->settings->getSettingValue('verifyCode') ?>"/>
+<link rel="apple-touch-icon" sizes="57x57" href="/images/faviconJura/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/images/faviconJura/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/images/faviconJura/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/images/faviconJura/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/images/faviconJura/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/images/faviconJura/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/images/faviconJura/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/images/faviconJura/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/faviconJura/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192"  href="/images/faviconJura/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/faviconJura/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/images/faviconJura/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/faviconJura/favicon-16x16.png"> 
+<meta name="msapplication-TileColor" content="#ffffff">   
+<meta name="msapplication-TileImage" content="/images/faviconJura/ms-icon-144x144.png">
+<meta name="theme-color" content="#ffffff">
+    <title><?= ($this->isHomepage ? $this->pageTitleRaw : $this->pageTitle) ?></title>
+     <!-- <?if($_GET['vanoce']):?>     
+  	<link rel="stylesheet" href="/styles/style.a.css">
+  	<?else:?> 
+  	<link rel="stylesheet" href="/styles/style.a.css">
+  	<?endif?>    -->        
+        <link rel="stylesheet" href="/styles/style.aa2222aab.css">  	   
+    <? if ($this->node->nodeId == 4410): ?>  
+        <link rel="stylesheet" href="/styles/basket011.css" type="text/css" media="screen"/>
+    <? endif ?>         
+    
+
+    <!--[if lt IE 9]>
+    <script type='text/javascript' src="/js/reponsiveIE8/html5.js"></script>
+    <script type='text/javascript' src="/js/bootstrap/js/respond.js"></script>
+    <![endif]-->
+    <? $ga = $this->settings->getSettingValue('googleCode');?>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', '<?=$ga?>', 'auto');
+  ga('require', 'displayfeatures'); 
+  <?=$conversionObject->ecommerce;?> 
+  <?=$conversionObject->measuringTransaction;?>
+ <?=$conversionAddProducts;?>      
+  <?=$this->mGooleDim->getGetGooleDimension($this->node, $this->mEshop->basket,$this->mEshop->basket->getSum($this),$this);?>
+   <?=$this->mGooleDim->getIP();?>          
+</script>       
+    <script> 
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return;
+            n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n;
+            n.push = n;
+            n.loaded = !0;
+            n.version = '2.0';
+            n.queue = [];
+            t = b.createElement(e);
+            t.async = !0;
+            t.src = v;
+            s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window,
+            document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1057700440983298');
+        fbq('track', "PageView");
+        <?=$this->mFacebookPixel->getFacebookTrack($this->node, $this->mEshop->basket, $this->mEshop->basket->getSum($this), $this);?>
+    </script>
+    <!-- End Facebook Pixel Code -->
+    <? if ($_COOKIE['wfont']): ?>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,700" rel="stylesheet">
+    <? else: ?>
+        <script>
+            WebFontConfig = {              
+                google: {families: ['Montserrat:400,700','Roboto:400,700']},
+                active: function () {
+                    document.cookie = 'wfont=1; expires=' + (new Date(new Date().getTime() + 86400000)).toGMTString() + '; path=/'
+                }    
+            };    
+        </script>      
+        <script src="//ajax.googleapis.com/ajax/libs/webfont/1/webfont.js" async defer></script>
+    <link rel="prefetch"
+          href="https://fonts.googleapis.com/css?family=Montserrat:400,700|Roboto:400,700" rel="stylesheet"><? endif ?>      
+</head>    
+<!-- Global site tag (gtag.js) - Google Ads: 995776401 --> <script async src="https://www.googletagmanager.com/gtag/js?id=AW-995776401"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'AW-995776401'); </script>
+<?=$conversionObject->adwords;?>  
+<body>
+<div class="main-container">
+    <div id="main">      
+
+    	<?= $this->render('parts/header_new.phtml'); ?>
+        <div class="container bck-white"> 
+        	<?= $this->render($this->container); ?>
+        </div> 
+    </div>    
+        <?= $this->render('parts/footer_new.phtml'); ?>
+</div> 
+ <script type="text/javascript" src="/js/jquery-1.11.1.min.js"></script>
+        <script type="text/javascript" src="/js/st2a.js"></script>
+    <script type="text/javascript" src="/js/jquery.autocomplete.js"></script>
+    <script type="text/javascript" src="/js/jquery-ui.js"></script>
+    <script type="text/javascript" src="/js/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/gallery/jssor.core.js"></script>
+    <script type="text/javascript" src="/js/gallery/jssor.utils.js"></script>
+    <script type="text/javascript" src="/js/gallery/jssor.slider.js"></script>
+    <? if ($this->node->nodeId == 4410): ?>
+        <script type="text/javascript" src="/js/basket2.js">></script>
+    <? endif ?>
+    <? if ($this->showHPBan): ?>
+        <script type="text/javascript" src="/js/hp_fuctions.js" defer async></script>
+    <? endif; ?><? if ($this->isgallery && !$this->isHomepage): ?>
+        <script type="text/javascript">
+            $(".openGallery").click(function (event) {
+                event.preventDefault();
+                $('#photoGalleryPop').lightbox_me({
+                    centered: true,
+                    closeSelector: "#closeGallery"
+                });
+                var index = $(this).attr("data-counter");
+                slider.$GoTo(index);
+            });
+        </script> 
+        <script src="/js/jquery.lightbox_me.js"></script>
+        <script src="/js/gallery.functions.js"></script><? endif; ?>
+    	<script src="/js/jquery.magnific-popup.js"></script> 
+      <script src="/js/enhance.js" defer async></script>
+      <script src="/js/respond.min.js" defer async></script>    
+      <script src="/js/picturefill.min.js" defer async></script>
+      <script src="/js/lazy.js" defer async></script>
+      <script>
+        var _smartsupp = _smartsupp || {};
+        _smartsupp.key = "50a1f511dd87a530fcdf91d1b9ba2ec426d93f71";
+        _smartsupp.gaKey = '<?=$ga?>';
+        window.smartsupp || (function (d) { 
+            var s, c, o = smartsupp = function () {
+                o._.push(arguments)
+            }; 
+            o._ = []; 
+            s = d.getElementsByTagName('script')[0];
+            c = d.createElement('script');
+            c.type = 'text/javascript'; 
+            c.charset = 'utf-8';  
+            c.async = true;
+            c.src = '//www.smartsuppchat.com/loader.js';
+            s.parentNode.insertBefore(c, s);
+        })(document);  
+    </script> 
+<? if (!is_numeric(strpos($this->url, 'nakupni-kosik'))): ?>
+    <script type="text/javascript" defer async>
+        //<![CDATA[
+        var _hwq = _hwq || [];
+        _hwq.push(['setKey', '6F59C8EA4B805078B516648CCBE1991C']);
+        _hwq.push(['setTopPos', '60']);
+        _hwq.push(['showWidget', '21']);
+        (function () {
+            var ho = document.createElement('script'); 
+            ho.async = true;
+            ho.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.heureka.cz/direct/i/gjs.php?n=wdgt&sak=6F59C8EA4B805078B516648CCBE1991C';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ho, s);
+        })();
+        //]]>
+    </script><? endif ?>
+             <?if($this->isgallery == 1):?> 
+         	 <script type="text/javascript" defer async src="/js/scroll1.js"></script> 
+         <?endif?>          
+    <?if($this->virtualni == 1):?>    
+	<link rel="stylesheet" href="/styles/View360.css" type="text/css" media="screen"/> 
+ <script type="text/javascript" src="/js/View360.js"></script> 
+<script>    
+document.addEventListener( "DOMContentLoaded", onLoaded );
+function onLoaded (){    
+    var el = document.getElementById("lightboxBtn");
+    el.addEventListener("click", function(){   
+        openView360(<?=$this->virtualniPocet?>,<?=$this->node->nodeId?>);
+	}, false)
+}         
+</script>   
+<?endif?>          
+  
+ 
+<?if($this->showPrice):?>   
+<script>       
+	$("#noname").click(function(e) {
+           $("#fullname").val("none none");
+           $("#email").val("prodej@specshop.cz");
+            $("#telefon").val("1111111");
+             $("#mesto").val("none");
+              $("#ulice").val("none 2");
+              $("#psc").val("12345");
+               $("#firma").val("");
+              $("#ico").val("");
+              $("#ffirma").val("");
+              $("#ffullname").val("");
+              $("#fulice").val("");
+              $("#ftelefon").val("");
+              $("#fMesto").val(""); 
+              $("#fpsc").val("");
+              e.preventDefault();  }  
+                  );   
+   
+    
+    $('ul.tabs li').click(function(){
+      
+        var tab_id = $(this).attr('data-tab');
+   
+        $('ul.tabs li').removeClass('current');
+        $('.tab-content').removeClass('current');
+
+        $(this).addClass('current');
+        $("#"+tab_id).addClass('current');
+    })         
+    $( "#autoquick" ).keydown(function() {     
+                    $.ajax({      
+          url: "?quickshopSearch=1",    
+         type: "post",       
+        data: {autoquick:$("#autoquick").val()} ,   
+        success: function (response) {
+                $("#auto-q-s").html(response);           
+  
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+
+
+    });   
+}); 
+   
+   function remove(nodeid,path)     
+    {    
+           $.ajax({      
+          url: path,
+         type: "get",        
+        success: function (response) {
+                $("#rightPageBasket").html(response);
+                $(".nodeId"+nodeid).css("display","none");      
+
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+           console.log(textStatus, errorThrown);
+        }
+
+
+    });
+    }
+
+function openFileOption(idorder)  
+{
+		$.ajax({
+	type: "POST",      
+   	url: "/?downloaddoklad=1&idorder="+idorder,    
+  	success: function(response) { 
+  		response = response;
+  		r = $.trim(response);
+  		resp = response;   
+           var a = document.createElement('a');
+           str = response;
+           title = r;            
+     		a.download = title;            
+     		a.href = resp ;          
+     		var evt = document.createEvent('MouseEvents');  
+			evt.initMouseEvent('click', true, true, window, 1, 0, 0, 0, 0, false, false, false, false, 0, null);
+			a.dispatchEvent(evt);                                  		
+        }       
+  });    	  
+} 
+</script>    
+<?endif?>        
+<? if ($this->node->nodeId == 4410 && $this->inputGet->step == 2): ?>  
+        <!-- Foxentry start -->
+        <script type="text/javascript">  
+var Foxentry;
+(function () {
+var e = document.querySelector("script"), s = document.createElement('script');
+s.setAttribute('type', 'text/javascript');
+s.setAttribute('async', 'true');
+s.setAttribute('src', 'https://cdn.foxentry.cz/lib');
+e.parentNode.appendChild(s);
+s.onload = function(){ Foxentry = new FoxentryBase('ieJNR0wJAI'); }
+})();
+</script>
+<!-- Foxentry end -->  
+<?endif?>        
+</body>    
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN" crossorigin="anonymous">
+<?=$conversionObject->sklik;?>  
+</html>
+<?                
+if($_SESSION['redirectPayLink'] && $this->inputGet->done == 1 && $this->basketNode):       
+	$redirectUrl = $_SESSION['redirectPayment'];    
+	$_SESSION['redirectPayment'] = null;?>
+	<script>          
+		redirect("<?=$redirectUrl?>");
+	</script>
+	<?   
+endif;?>

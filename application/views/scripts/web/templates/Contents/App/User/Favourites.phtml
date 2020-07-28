@@ -1,0 +1,36 @@
+<? if(!$this->webUserLogged): ?>
+<p>Prosím registrujte se pokud chcete používat funckci "oblíbené reality".</p>
+<? else: ?>
+<?
+if(!$this->bookmarkedPropertiesCount):
+	?>
+	<p>Zatím nemáte v oblíbených žádné reality.</p>	
+	<?
+else:
+	$this->properties = array();
+	
+	// tipy
+    $filter = new stdClass();
+    $filter->properties = $this->bookmaredProperties;
+    
+    $this->sort = $this->inputGet->s;
+	$this->sortType = $this->inputGet->st;
+		
+	$this->properties = $this->reality->filterProperties(0, '', $view->sort, $view->sortType, $filter);
+		/*
+	foreach ($this->bookmaredProperties as $p){
+		$n = $this->tree->getNodeById($p);
+		if($n){
+			$this->properties[] = $n;			
+		}
+	}
+	*/
+	if($this->properties){
+		echo $this->render('templates/Contents/Reality/Table.phtml');
+	} else {
+		echo '<p>Vaše oblíbené reality již neexistují v nabídce.</p>';
+	}
+endif;
+?>
+
+<? endif; ?>

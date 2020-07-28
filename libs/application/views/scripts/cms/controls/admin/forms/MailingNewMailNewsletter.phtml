@@ -1,0 +1,124 @@
+<?
+
+$mm = new module_Mailing();  
+
+?> 	
+	<table class="modalTable">
+		<tr>
+			<td class="tkey">  
+				Odesílatel - email: 
+			</td>
+			<td>
+				<?=$this->formText('mailSender',$this->input->mailSender, array('style' => 'width:200px;')) ?>			  
+			</td>			
+		</tr> 
+		<tr>
+			<td class="tkey"> 
+				Odesílatel - jméno: 
+			</td>
+			<td> 
+				<?=$this->formText('mailSenderName',$this->input->mailSenderName, array('style' => 'width:200px;')) ?>			  
+			</td>			
+		</tr>  
+		<tr>
+			<td>
+				<h3>PŘÍJEMCI</h3> 
+			</td>
+			<td>
+				<?
+				$groupsAll = $mm->getGroupsSelect(); 
+				$groups = array();
+				foreach ($groupsAll as $ident => $title){ 
+					$groups[$ident] = $title . ' (' . $mm->getUsersCountByGroup($ident) . ')';
+				}  
+				?> 
+				<?=$this->formCheckboxGroup('group', $this->input->group, array(), $groups)?> 			 
+
+			</td> 
+		</tr>
+		<tr>
+			<td>
+			</td>
+			<td>   
+				<p>E-maily oddělte čárkami nebo středníkem. Pokud nejsou v žádné skupině kontaktů, odhlašovací odkaz nebude fungovat.</p>  
+				<?=$this->formTextarea('additionalRecievers', $this->input->additionalRecievers)?>  
+
+			</td> 
+		</tr>
+		<tr>
+			<td>
+				Předmět emailu 
+			</td>
+			<td>
+				<?=$this->formText('mailHead',$this->input->head, array('class'=>'ftext', 'style'=>'width:90%;')) ?>			
+			</td>			
+		</tr>		
+		<tr>
+			<td>
+				Banner
+			</td>
+			<td> 
+				<?php echo $this->formFileSelect('banner',$this->input->banner, array('class'=>'ftext')) ?>		 
+			</td>			
+		</tr>  
+		<tr>
+			<td>
+				Banner - odkaz  (nepovinné)
+			</td>
+			<td>
+				<?php echo $this->formText('bannerUrl',$this->input->bannerUrl, array('class'=>'ftext', 'style'=>'width:90%;')) ?>			
+				
+			</td>			
+		</tr>
+		<tr>	
+			<td>
+				Text (nepovinné)
+			</td> 
+			<td>
+			<?php echo $this->formWysiwyg('mailContent',$this->input->text, 200, 'fck_', array('toolbar' => 'CMSEmailToolbar')); //EmailToolbar ?>
+			</td> 
+		</tr>    
+		<tr>	
+			<td colspan="2">
+				<h2>Produkty</h2>  
+				<p>Zadejte odkazy z webu, popisky nejsou povinné. Tam kde nezadáte popisek, bude použit název produktu.</p>
+				<table cellpadding="0" cellspacing="0" width="100%" border="0">
+					<? 
+					$x = 0; 
+					for($i = 1; $i < 11; $i++ ):
+					$x++;
+					$pn1 = 'purl' . $x;
+					$pn2 = 'ptitle' . $x;  
+					$x++;
+					$pn3 = 'purl' . $x; 
+					$pn4 = 'ptitle' . $x;
+					?>
+					<tr>
+						<td colspan="2"><strong>Produkt <?=$x-1?></strong></td> 
+						<td colspan="2"><strong>Produkt <?=$x?></strong></td> 
+					</tr>  
+					<tr> 
+						<td><small>URL&nbsp;produktu:</small></td>
+						<td><?=$this->formText($pn1,$this->input->$pn1, array('class'=>'ftext', 'style'=>'width:310px;')) ?></td>
+						<td><small>URL&nbsp;produktu:</small></td>
+						<td><?=$this->formText($pn3,$this->input->$pn3, array('class'=>'ftext', 'style'=>'width:310px;')) ?></td>
+					</tr>	 
+					<tr> 
+						<Td><small>Popis</small></td> 
+						<td><?=$this->formText($pn2,$this->input->$pn2, array('class'=>'ftext', 'style'=>'width:310px;')) ?></td>
+						<Td><small>Popis</small></td> 
+						<td><?=$this->formText($pn4,$this->input->$pn4, array('class'=>'ftext', 'style'=>'width:310px;')) ?></td>
+					</tr>			 		
+					<? endfor;?>
+				</table> 
+			</td>
+		<tr> 
+			<td colspan="2">     
+			<?php echo $this->formSubmit('preview', 'Zobrazit náhled', array('class'=>'fsubmit', 'iconClass' => "noteIcon", 'onclick' => '$("#mform").attr("target", "_blank")')) ?>	 	 
+			
+			<?php echo $this->formSubmit('sendMail', 'Odeslat', array('class'=>'fsubmit fsBig', "onclick" => "setWysiwygContent('fck_mailContent');", 'iconClass' => "noteIcon")) ?>
+			<a onclick="window.history.back(); return false;" id="cancelLink" title="Změny nebudou uloženy">Zrušit</a>		
+			
+			</td>
+		</tr>
+	</table> 

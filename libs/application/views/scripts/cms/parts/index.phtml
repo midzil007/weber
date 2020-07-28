@@ -1,0 +1,338 @@
+<?=$this->render('parts/header.phtml'); ?>
+	<? if(!$this->logged): ?>
+		<?=$this->render('controls/admin/login.phtml'); ?>	
+	<? else: ?>
+		<? if(count($this->messages)): ?>
+			<?=$this->render('errors.phtml');?>				  
+		<? endif; ?>
+		<div id="main">		
+	    <?=$this->render('controls/admin/Menu.phtml'); ?>	
+	    <table id="pageTable">
+	    	<tr> 
+	        <td id="leftPart">
+	        	 <div id="tabsleft">
+				    <ul>
+				        <li><a href="#tabs-1">Menu</a></li> 
+				    </ul> 
+				    <div id="tabs-1">  
+						<div>
+						<?php 
+						$menu = array();
+						$menu[] = array(
+							'title' => 'Zboží',
+							'icon' => 'calculator',
+							'onclick' => $this->url(array('amodule' => 'items','action' => 'listItems')),
+							'isSelected' => false,  
+							'params' => ' id="xyy" ',
+							'children' => array(
+								array(
+									'title' => 'Vložit nové zboží',
+									'icon' => 'plus', 
+									'onclick' => $this->url(array('controller' => 'eshop','amodule' => 'items','action' => 'addItem')),
+									'isSelected' => false,
+									'params' => ''
+								)
+							)
+						);
+						$menu[] = array(
+							'title' => 'Objednávky',
+							'icon' => 'cart',
+							'onclick' => '#',
+							'isSelected' => false,
+							'params' => ' ',
+							'children' => array(
+								array(
+									'title' => 'Nevyřízené',
+									'icon' => 'notice',
+									'onclick' => '#',
+									'isSelected' => false,
+									'params' => ''
+								),
+								array(
+									'title' => 'Vyřízené',
+									'icon' => 'check',
+									'onclick' => '#',
+									'isSelected' => false,
+									'params' => ''
+								),
+								array(
+									'title' => 'Stornované',
+									'icon' => 'close',
+									'onclick' => '#',
+									'isSelected' => false,
+									'params' => ''
+								),
+								array(
+									'title' => 'Všechny',
+									'icon' => '',
+									'onclick' => '#',
+									'isSelected' => false,
+									'params' => ''
+								)
+							) 
+						);
+						$menu[] = array(
+							'title' => 'Uživatelé (793)',
+							'icon' => 'person',
+							'onclick' => '#',
+							'isSelected' => true,
+							'params' => ' ' 
+						);
+						$menu[] = array(
+							'title' => 'Přehledy',
+							'icon' => 'signal',
+							'onclick' => '#',
+							'isSelected' => false, 
+							'params' => ' ' 
+						);
+						$menu[] = array(
+							'title' => 'Dárkové vouchery',
+							'icon' => 'suitcase',
+							'onclick' => '#',
+							'isSelected' => false,
+							'params' => '  ',
+							'children' => array( 
+								array(
+									'title' => 'Generování voucherů',
+									'icon' => 'plus',
+									'onclick' => '#',
+									'isSelected' => false,
+									'params' => ''
+								)
+							)
+						);
+						$menu[] = array(
+							'title' => 'Možnosti dopravy',
+							'icon' => 'gear',
+							'onclick' => '#',
+							'isSelected' => false,
+							'params' => '  ',
+							'children' => array( 
+								array(
+									'title' => 'Možnosti platby',
+									'icon' => '',
+									'onclick' => '#',
+									'isSelected' => false,
+									'params' => ''
+								)
+							)
+						); 
+						$menu[] = array(
+							'title' => 'Nastavení',
+							'icon' => 'wrench',
+							'onclick' => '#',
+							'isSelected' => false, 
+							'params' => ' ' 
+						);
+						?>
+						
+						<ul id="leftmenu">   
+							<? 
+							foreach ($menu as $ii => $item):
+								$hasChildren = count($item['children']) && is_array($item['children']); 
+								?>
+							    <li>
+							    	<a <?=($item['isSelected']?'class="clicked"':'')?> href="<?=$item["onclick"]?>"><span <?=(!$item["icon"]?'':'class="ui-icon  ui-icon-' . $item["icon"] . '"')?>></span><?=$item["title"]?></a>
+							    	<?if($hasChildren):?>
+							    	<ul>
+							    	<? foreach ($item['children'] as $iii => $item2):?>
+							    	<a <?=($item2['isSelected']?'class="clicked"':'')?> href="<?=$item2["onclick"]?>"><span <?=(!$item2["icon"]?'':'class="ui-icon  ui-icon-' . $item2["icon"] . '"')?>></span><?=$item2["title"]?></a>
+							    	<? endforeach;?> 
+							    	</ul>
+							    	<? endif;?>
+							    </li>
+						    <? endforeach;?> 
+						</ul> 
+						
+						 <script>
+						    $(function() { 
+						        $( "#leftmenu" ).menu();
+						    }); 
+						    </script>  
+						</div>
+					</div> 
+				</div> 
+                <script type="text/javascript">
+			    $(function() {
+			        $( "#tabsleft" ).tabs();
+			    }); 
+			    </script>
+					 
+	        	<? 
+	        	$this->leftContents = array(
+	        		array(
+	        			'title' => 'Strom XY',
+	        			'content' => 'obsah 45454'
+	        		),
+	        		array(
+	        			'title' => 'Strom XYccc',
+	        			'content' => 'obsah 45ccc454'
+	        		) 
+	        	);
+	        	if(count($this->leftContents)){
+	        		?>
+	        		<div id="accordionRight">
+	        		<h3>Strom webu</h3> 
+	        		<div>  
+						<div id="demo"></div>     
+			        	<div class="clear"></div>      
+					</div>   
+	        		<?
+	        		foreach ($this->leftContents as $i => $c):
+	        			?>
+	        			<h3><?=$c['title']?></h3>
+	        			<div>
+	        				<?=$c['content']?>
+	        			</div>
+	        		<? endforeach;?>   
+	        		
+	        		</div>
+	        		<script>
+				    $(function() {
+				        $( "#accordionRight" ).accordion({ 
+				            heightStyle: "content"
+				        });
+				    });
+				    </script>
+	        		<?
+	        	}
+	        	if($this->showMailing){
+	        		echo $this->showMailing;
+	                echo $this->ContentPane(
+						array('title'=>$this->mailingContentTitle, 'id'=>'mailingPane', 'loadingMessage'=>$this->loadingMessage),		
+						$this->mailingContentHref,
+						'',
+						false,
+						'AccordionPane'
+					);
+	        	}
+	        	
+	        	if($this->showUsersWidget){ 
+	                echo $this->ContentPane(
+						array('title'=>'Uživatelé', 'id'=>'usersPane', 'loadingMessage'=>$this->loadingMessage),		
+						$this->url(array('controller' => 'users','action' => 'showWidget')),
+						'',
+						false,
+						'AccordionPane'
+					);
+	        	}
+	        	
+	        	if($this->showEnquiryWidget){
+	                echo $this->ContentPane(
+						array('title'=>'Ankety', 'id'=>'enquiryPane', 'loadingMessage'=>$this->loadingMessage),		
+						$this->url(array('controller' => 'enquiry','action' => 'showWidget')),
+						'',
+						false,
+						'AccordionPane'
+					);
+	        	}
+	        	
+	        	if($this->showAdvertsWidget){ 
+	                echo $this->ContentPane(
+						array('title'=>'Reklama', 'id'=>'advertsPane', 'loadingMessage'=>$this->loadingMessage),		
+						$this->url(array('action' => 'showWidget')),
+						'', 
+						false,
+						'AccordionPane'
+					); 
+	        	}
+	        	
+	        	if($this->showEshopWidget){ 
+	                echo $this->ContentPane(
+						array('title'=>'E-shop', 'id'=>'eshopPane', 'loadingMessage'=>$this->loadingMessage),		
+						$this->url(array('action' => 'showWidget')),
+						'', 
+						false, 
+						'AccordionPane'
+					);
+	        	}  
+	           	
+	           	if($this->showHelpTree){	           		
+	                echo $this->ContentPane(
+						array('title'=>'Sekce nápovědy','preventCache'=>'true', 'id'=>'intranetPane', 'class' => 'yellowPane', 'loadingMessage'=>'...'),		
+						$this->url(array('controller' => 'help','action' => 'showTree')),
+						'',
+						false,
+						'AccordionPane'
+					);
+	           	}
+	           	
+	           	if($this->showIntranetTree){
+	                echo $this->ContentPane(
+						array('title'=>'Sekce inranetu', 'preventCache'=>'true', 'id'=>'intranetPane', 'class'=>'yellowPane', 'loadingMessage'=>'...'),		
+						$this->url(array('controller' => 'intranet','action' => 'showTree')),
+						'',
+						false,
+						'AccordionPane'
+					);
+	           	}
+	           	
+	           	foreach ($this->leftPanes as $pane){           	
+	                echo $this->ContentPane(
+						array('title'=>$pane['title'], 'preventCache'=>'true', 'id'=>$pane['id'], 'class'=>$pane['class'], 'loadingMessage'=>$pane['loadingMessage']?$pane['loadingMessage']:$this->loadingMessage),		
+						$pane['url'],
+						'',
+						false,
+						'AccordionPane'
+					);
+	           	}
+	          	           	
+	           	if($this->showTree){
+	           		if($this->curentController=='sf'){
+		                echo $this->ContentPane(
+							array('title'=>'Strom adresářů','preventCache'=>'true', 'id'=>'mainTreePane', 'loadingMessage'=>$this->loadingMessage),		
+							$this->url(array('controller' => 'sf','action' => 'showTree', 'cController' => $this->curentController)),
+							'',
+							false,
+							'AccordionPane'
+						);
+	           		} else {
+	           			$c = $this->curentController=='structure'?'structure':'pages'; 
+	           			echo $this->ContentPane(
+							array('title'=>'Strom webu','preventCache'=>'true', 'id'=>'mainTreePane', 'loadingMessage'=>$this->loadingMessage),		
+							$this->url(array('controller' => $c,'action' => 'showTree', 'cController' => $this->curentController)),
+							'',
+							false,
+							'AccordionPane'
+						);
+	           		}
+	           	}
+	           	  
+	           	if($this->showExtraContentsWidget){ 
+	                echo $this->ContentPane(
+						array('title'=>'Detaily, další stránky', 'id'=>'cdeteilsPane', 'loadingMessage'=>$this->loadingMessage),		
+						$this->url(array('action' => 'showDetailsWidget')), 
+						'',  
+						false,
+						'AccordionPane'
+					);
+	        	}
+	           		           		           	
+	           	echo $this->ContentPane(
+						array('title'=>'Nápověda &raquo; ' . $this->allControllers[$this->curentController],'preventCache'=>'false', 'id'=>'helpPane', 'class' => 'helpPaneWidget', 'selected' => ($this->selectedLeftHelpPane?'true':'false'), 'loadingMessage'=>'...'),		
+						$this->url(array('controller' => 'help','action' => 'help','helpSection' => $this->curentController)),
+						'',
+						false,
+						'AccordionPane'
+					);
+				?>
+	        </td>  
+            <td id="rightPart">
+            	<?=$this->render($this->content); ?>   
+            	 
+           
+            	<? if(0 && $this->showBottomPanel): ?>   
+	                <?
+	                echo $this->ContentPane(
+						array('title'=>$this->bottomContentTitle, 'class'=>'tab', 'sizeShare' => "75", 'id'=>'vypisDole', 'loadingMessage'=>$this->loadingMessage),		
+						$this->bottomContentHref
+					);
+					?> 
+            	<? endif; ?>
+            </td>  
+            </tr>
+	    </table> 
+	    </div> 
+	<? endif; ?>
+	<?=$this->render('parts/bottom.phtml'); ?>
+<?=$this->render('parts/footer.phtml'); ?>

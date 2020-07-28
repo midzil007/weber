@@ -1,0 +1,257 @@
+ <?$active = array('addItem' => 'listItems',
+ 					'editproduct' => 'listItems',
+ 					'editorder' => 'listorders', 				
+ 					'delivery' => 'listdelivery',
+ 					'payment' => 'listpayments',
+ 					'addnewreview' => 'listreviews',
+ 					'vouchersgen' => 'listvouchers');
+
+			$currentAction = $this->curentAction;
+			if($active[$this->curentAction]):
+				$currentAction = $active[$this->curentAction];
+			endif;?>
+	        	 <div id="tabsleft" class="ui-tabs ui-widget ui-widget-content ui-corner-all">
+				    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+				        <li class="ui-state-default ui-corner-top ui-tabs-active ui-state-active" role="tab"><a href="#tabs-1">Menu</a></li> 
+				    </ul> 
+				    <div id="tabs-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" role="tabpanel">  
+						<div>
+						<?php  
+						
+						$menu = array(); 
+					if($this->user->group == 'onlyProducts'):
+						$menu[] = array(
+							'title' => 'Zboží ('.$this->totalProduct.')',
+							'icon' => 'calculator',
+							'onclick' => $this->url(array('module' => 'cms', 'controller' => 'eshop','action' => 'listItems'), null,true),
+							'isSelected' => $currentAction=='listItems',  
+							'params' => ' id="xyy" ',
+							
+							'children' => array(
+								array(
+									'title' => 'Nový produkt',
+									'icon' => 'plus', 
+									'onclick' => $this->url(array('module' => 'cms', 'controller' => 'eshop', 'action' => 'addItem'), null,true),
+									'isSelected' => false,
+									'params' => '' 
+								)
+							)
+						); 
+					else:
+					
+						$menu[] = array(
+							'title' => 'Zboží',
+							'icon' => 'calculator',
+							'onclick' => $this->url(array('module' => 'cms', 'controller' => 'eshop','action' => 'listItems'), null,true),
+							'isSelected' => $currentAction=='listItems',  
+							'params' => ' id="xyy" ',
+							'children' => array(
+								array(
+									'title' => 'Nový produkt',
+									'icon' => 'plus', 
+									'onclick' => $this->url(array('module' => 'cms', 'controller' => 'eshop', 'action' => 'addItem'), null,true),
+									'isSelected' => t,
+									'params' => '' 
+								)
+							)
+						);
+					 
+						$menu[] = array( 
+							'title' => 'Objednávky'.$totalOrders,  
+							'icon' => 'cart',
+							'onclick' => $this->url(array('module' => 'cms', 'controller' => 'eshop', 'action' => 'listorders'), null,true),
+							'isSelected' => $currentAction=='listorders',  
+							'params' => ' ',
+							'childrenSub' => array(
+								array(
+									'title' => '<span class="ui-icon  ui-icon-notice"></span>Nevyřízené'.$totalOrdersNev,
+									'icon' => 'notice',
+									'onclick' => $this->url(array('module' => 'cms', 'controller' => 'eshop', 'action' => 'listorders', 'filter2'=> 'WAIT'), null,true),
+									'isSelected' => $this->request->getParam('filter2') == 'WAIT',
+									'params' => ''
+								),
+								array(
+									'title' => '<span class="ui-icon  ui-transfer-e-w"></span>Odeslané'.$totalOrdersSend,
+									'icon' => 'transfer-e-w',
+									'onclick' => $this->url(array('module' => 'cms', 'controller' => 'eshop', 'action' => 'listorders', 'filter2'=> 'SEND'), null,true),
+									'isSelected' => $this->request->getParam('filter2') == 'SEND',
+									'params' => ''
+								),
+								array(
+									'title' => '<span class="ui-icon  ui-icon-check"></span>Zadané'.$totalOrdersZad,
+									'icon' => 'check',
+									'onclick' => $this->url(array('module' => 'cms', 'controller' => 'eshop', 'action' => 'listorders', 'filter2'=> 'TEXTED'), null,true),
+									'isSelected' => $this->request->getParam('filter2') == 'TEXTED',
+									'params' => '' 
+								),
+								array(
+									'title' => '<span class="ui-icon  ui-icon-close"></span>Stornované'.$totalOrdersCancel,
+									'icon' => 'close',
+									'onclick' => $this->url(array('module' => 'cms', 'controller' => 'eshop', 'action' => 'listorders', 'filter2'=> 'CANCEL'), null,true),
+									'isSelected' => $this->request->getParam('filter2') == 'CANCEL' ,
+									'params' => '' 
+								)
+								
+							) 
+						);
+						$menu[] = array(
+							'title' => 'Zákazníci',
+							'icon' => 'person',
+							'onclick' => $this->url(array('module' => 'cms', 'controller' => 'eshop', 'action' => 'listcustomers'), null,true),
+							'isSelected' => $currentAction=='listcustomers',
+							'params' => ' ' 
+						); 
+						/*
+						$menu[] = array(
+							'title' => 'Dárkové vouchery',
+							'icon' => 'suitcase',
+							'onclick' => $this->url(array('amodule' => 'items','action' => 'listvouchers', 'ajax' => '0', 'language' => 'cz')),
+							'isSelected' => false,
+							'params' => '  ',
+							'children' => array( 
+								array(
+									'title' => 'Generování voucherů',
+									'icon' => 'plus',
+									'onclick' => $this->url(array('amodule' => 'items','action' => 'vouchersgen', 'ajax' => '0', 'language' => 'cz')),
+									'isSelected' => false,
+									'params' => ''
+								)
+							)
+						);
+						*/
+						if($this->user->group == 'Superadmin'):
+						$menu[] = array(
+							'title' => 'Konverze',
+							'icon' => 'wrench',
+							'onclick' =>  $this->url(array('module' => 'cms', 'controller' => 'eshop', 'action' => 'conversion'), null,true),
+							//'onclick' => $this->url(array('amodule' => 'items','action' => 'listItems')),
+							'isSelected' => $currentAction=='conversion', 
+							'params' => ' '  
+						);
+						endif;
+						$menu[] = array(
+							'title' => 'Nastavení e-shopu',
+							'icon' => 'wrench',
+							'onclick' => $this->url(array('module' => 'cms', 'controller' => 'eshop', 'action' => 'settings'), null,true),
+							//'onclick' => $this->url(array('amodule' => 'items','action' => 'listItems')),
+							'isSelected' => $currentAction=='settings', 
+							'params' => ' '  
+						);
+						$menu[] = array(
+							'title' => 'Možnosti dopravy',
+							'icon' => 'gear',
+							'onclick' => $this->url(array('module' => 'cms', 'controller' => 'eshop', 'action' => 'listdelivery'), null,true),
+							'isSelected' => $currentAction=='listdelivery',
+							'params' => '  ',
+							'children' => array(  
+								array(
+									'title' => 'Vložit dopravu',
+									'icon' => '',
+									'onclick' => $this->url(array('module' => 'cms', 'controller' => 'eshop', 'action' => 'delivery'), null,true),
+									'isSelected' => false,
+									'params' => ''
+								)
+							)
+						); 
+						$menu[] = array(
+							'title' => 'Možnosti platby',
+							'icon' => 'gear',
+							'onclick' => $this->url(array('module' => 'cms', 'controller' => 'eshop', 'action' => 'listpayments'), null,true),
+							'isSelected' => $currentAction=='listpayments',
+							'params' => '  ',
+							'children' => array( 
+								array(
+									'title' => 'Vložit platbu',
+									'icon' => 'plus',
+									'onclick' => $this->url(array('module' => 'cms', 'controller' => 'eshop', 'action' => 'payment'), null,true),
+									'isSelected' => false,
+									'params' => ''
+								)
+							)
+						); 
+						$menu[] = array(
+								'title' => 'Hodnocení e-shopu',
+								'icon' => 'star',
+								'onclick' => $this->url(array('module' => 'cms', 'controller' => 'eshop', 'action' => 'listreviews'), null,true),
+								'isSelected' => $currentAction=='listreviews',
+								'params' => '  ',
+								'children' => array( 
+										array(
+												'title' => 'Vložit hodnocení',
+												'icon' => 'plus',
+												'onclick' => $this->url(array('module' => 'cms', 'controller' => 'eshop', 'action' => 'addnewreview'), null,true),
+												'isSelected' => false,
+												'params' => ''
+										)
+								)
+						);
+
+						$menu[] = array(
+								'title' => 'Dárkové poukazy', 
+								'icon' => 'key',
+								'onclick' => $this->url(array('module' => 'cms', 'controller' => 'eshop', 'action' => 'listvouchers'), null,true),
+								'isSelected' => $currentAction=='listvouchers',
+								'params' => '  ',
+								'children' => array( 
+										array(
+												'title' => 'Vygenerovaní poukazu',
+												'icon' => 'plus',
+												'onclick' => $this->url(array('module' => 'cms', 'controller' => 'eshop', 'action' => 'vouchersgen'), null,true),
+												'isSelected' => false,
+												'params' => ''  
+										)
+								)
+						);
+						
+						$menu[] = array(
+							'title' => 'Prodávanost produktů',
+							'icon' => 'signal',
+							'onclick' => $this->url(array('module' => 'cms', 'controller' => 'eshop', 'action' => 'stats'), null,true),
+							'isSelected' => $currentAction=='stats',
+							'params' => ' ' 
+						);
+					endif;
+					
+						?>
+						
+						<ul id="leftmenu" class="ui-menu ui-widget ui-widget-content ui-corner-all ui-menu-icons" role="menu">   
+							<?  
+							
+							foreach ($menu as $ii => $item):
+								$hasChildren = count($item['children']) && is_array($item['children']); 
+								$childrenSub = count($item['childrenSub']) && is_array($item['childrenSub']);
+								?>
+								
+								
+							    <li class="ui-menu-item" role="presentation"> 
+							    	<a class="ui-corner-all <?=($item['isSelected']?'clicked':'')?>" href="<?=$item["onclick"]?>"><span <?=(!$item["icon"]?'':'class="ui-icon  ui-icon-' . $item["icon"] . '"')?>></span><?=$item["title"]?></a>
+							    	<?if($hasChildren):?> 
+							    	<ul style="display: none;">
+							    	<? foreach ($item['children'] as $iii => $item2):?> 
+							    	<a href="<?=$item2["onclick"]?>"><span <?=(!$item2["icon"]?'':'class="ui-icon  ui-icon-' . $item2["icon"] . '"')?>></span><?=$item2["title"]?></a>
+							    	<? endforeach;?>  
+							    	</ul>
+							    	<? endif;?>
+							    	<?if($childrenSub):?>
+							    		<? foreach ($item['childrenSub'] as $iii => $item2):?> 
+							    		 	<li><a class="menu-mar-left <?=($item2['isSelected']?'clicked':'')?>" href="<?=$item2["onclick"]?>"><span <?=(!$item2["icon"]?'':'class="ui-icon  ui-icon-' . $item2["icon"] . '"')?>></span><?=$item2["title"]?></a></li>
+							    		<? endforeach;?>
+							    	
+							    	<? endif;?>
+							    </li>
+						    <? endforeach;?> 
+						</ul> 
+						
+						 <script>
+						    $(function() { 
+						        $( "#leftmenu" ).menu();
+						    }); 
+						    </script>  
+						</div>
+					</div> 
+				</div> 
+                <script type="text/javascript">
+			    $(function() {
+			        $( "#tabsleft" ).tabs();
+			    }); 
+			    </script> 

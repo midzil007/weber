@@ -1,0 +1,56 @@
+/* anketa */
+.box {
+	padding:6px;
+	min-height:20px;
+}
+
+.enquiry{
+	padding:5px 0px 0px 0px;
+	
+}
+
+.enquiry_top{
+	background: url(/images/anketa_t.gif) no-repeat left;
+	height:6px;
+	overflow: hidden;
+}
+
+.enquiry_bottom{
+	background:url(/images/anketa_b.gif) no-repeat left top;
+	height:10px;
+	overflow: hidden;
+
+}
+
+.enquiry_body{
+	background:url(/images/anketa_bg.gif) repeat-y left;
+	padding:2px 2px 2px 8px;	
+}
+.enquiry_body strong {
+	color: #0f4096;
+	font-weight: bold;
+	font-size: 10px;
+	padding-left: 4px;
+	display: block;
+}
+
+.enquiry_body table#tbl {
+	margin: 0;
+	font-size: 11px;
+	width:100%;
+}
+
+.enquiry_body table#tbl td.question { font-size:10px; }
+
+.bgcolor {
+	height: 7px; 
+	overflow: hidden;	
+	border:1px solid white;
+}
+
+.bgcolor:hover { border:1px solid #9d9d9d; cursor:help; }
+
+.bar {
+	width: 70px;
+}
+

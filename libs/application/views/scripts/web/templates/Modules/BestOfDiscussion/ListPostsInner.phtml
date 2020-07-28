@@ -1,0 +1,34 @@
+		
+		<? 
+		if(count($this->posts)):?>
+		<div id="postsList">  
+			
+				<?
+				$x = 0; 
+				foreach ($this->posts as $post){ 
+					$user = new module_WebUser($post['author']);  
+					?>			 
+					<div class="boPost <?=($x%2==0?' first':'')?>">
+						<div class="bodAutor">
+							<?=$user->getUserInfo($this, false)?>			 			
+						</div>		 		 
+						<div class="bodContent"> 
+              <div class="boActions">  
+                  <a href="#boForm" onclick="addquote(<?=$post['id']?>, '<?=$post['author']?>'  )">reagovat</a>             
+              </div>            
+              <div class="boUserLine">      
+                <?=$user->getUserNameLink($this)?> 	      
+  							<small><?=helper_FrontEnd::getNiceDateTime($post['added'], 'd.m.Y H:i', 'dnes')?></small> 
+  						</div>        
+              <div  id="message_<?=$post['id']?>">                      
+							<?=module_Bb2Html::getHtml($post['text'])?>      
+              </div>   
+						</div>    
+						<div class="clear"> </div>
+					</div> 
+					<? 
+					$x++;
+				}
+			?>   
+		</div>
+		<?endif;?>  

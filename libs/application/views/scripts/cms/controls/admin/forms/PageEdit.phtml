@@ -1,0 +1,51 @@
+	<? //($this->inVersions?'<div id="err_editContentandVersionForm"></div>':'<div id="err_newContentForm"></div>') ?>	
+	<div id="err_newContentForm"></div>
+	<form action="" method="get" id="newContentForm"  name="newContentForm">	
+	<? if ($this->inVersions): ?>
+		<h1>Editace verze <?=$this->content->localId ?></h1>		
+		<?php echo $this->formHidden('title_edit',$this->cnode->title) ?>
+		<?php echo $this->formHidden('description_edit',$this->cnode->description) ?>						
+	<? endif; ?>
+	<table class="modalTable">			
+		<? if (!$this->inVersions): ?>	
+		<tr>
+			<td class="formcell  tkey">Název</td>
+			<td class="formcell"><?php echo $this->formText('title_edit',$this->cnode->title, array('class'=>'ftext')) ?></td>
+		</tr>
+		<!--
+		<tr>
+			<td class="formcell">Popis</td>
+			<td class="formcell"><?php echo $this->formTextarea('description_edit',$this->cnode->description, array('class'=>'ftext')) ?></td>
+		</tr>
+		-->
+		<? endif; ?>
+		
+		<? if (!$this->inFileBranch): ?>	
+		<? $this->content->showAdmin($this); ?>				
+		<tr>
+			<td class="formcell">Zobrazit v </td>
+			<td class="formcell"><?php echo $this->formSelect('showInNavigation', $this->showInValReverse[$this->cnode->showInNavigation] , array('autocomplete'=>'true','value'=>$this->showInValReverse[$this->cnode->showInNavigation]), $this->showIn) ?></td>
+		</tr>
+		<tr>
+			<td class="formcell">Stav</td> 		
+			<td class="formcell"><?php echo $this->formSelect('state', $this->content->state , array('autocomplete'=>'true','value'=>$this->content->state), $this->contentStates) ?></td>
+		</tr>
+		<? endif; ?>
+	
+		<? if ($this->inVersions): ?>
+		
+		<? endif; ?>			
+		<tr>	
+			<td class="formcell" colspan="2">
+				
+				<? if ($this->inVersions): ?>					
+					<?php echo $this->formSubmit('saveContentB', 'Uložit', array('class'=>'fsubmit', "onclick" => $this->addSubmitFunction . " setWysiwygContent('fck_html'); return submitFormAjax('newContentForm', '".$this->url(array('controller' => 'pages','action' => 'update', 'contentNode' => $this->cnode->nodeId, 'contentId'=>$this->content->id ))."', 'pageEditVersions', 'tab-submit', '', 1 );", 'iconClass' => "noteIcon")) ?>								
+					<?php echo $this->formSubmit('backContentV', 'Zpět na výpis verzí', array('class'=>'fsubmit', "onclick" => "return refreshTab('pageEditVersions', '".$this->url(array('controller' => 'pages','action' => 'versions', 'contentNode' => $this->cnode->nodeId))."');", 'iconClass' => "noteIcon")) ?>								
+				<? else: ?>				
+					<?php echo $this->formSubmit('saveContentB', 'Uložit', array('class'=>'fsubmit', "onclick" => $this->addSubmitFunction . " setWysiwygContent('fck_html'); return submitFormAjax('newContentForm', '".$this->url(array('controller' => 'pages','action' => 'update', 'contentNode' => $this->cnode->nodeId))."', 'vypisDole', 'modal', '', 1 );", 'iconClass' => "noteIcon")) ?>								
+				<? endif; ?>				
+			</td>
+		</tr> 
+		
+	</table>		
+	</form>

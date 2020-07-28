@@ -1,0 +1,92 @@
+<table style="border:1px solid black;width:100%;border-collapse:collapse;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+	<thead>
+		<tr>
+			<th width="34%" style="padding:10px;text-align:left;background-color:#ededed;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+			Název
+			</th>
+			<th width="11%" style="text-align:center;padding:10px;background-color:#ededed;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">Množství</th><th width="18%" style="text-align:right;padding:10px;background-color:#ededed;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+Jednotková cena&nbsp;s DPH
+			</th><th width="18%" style="text-align:right;padding:10px;background-color:#ededed;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">Celkem bez DPH</th><th width="18%" style="text-align:right;padding:10px;background-color:#ededed;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+Celkem&nbsp;s DPH</th>
+		</tr>
+	</thead>
+	<?php  
+			    foreach ($this->items as $id => $data): 
+              	$x++;
+                	$childId = $data['itemNodeId'];
+                	$child = $this->tree->getNodeById($childId);
+                	$count = $data['count'];
+                	  
+	              	if(!$child){ continue; } 
+	              	$c = $child->getTheRightContent();
+	              	  
+	              	$dphQuote = ($c->getPropertyValue('dphQuote'));   
+	              	
+	            		$price  = $data['price'];      
+	            		$url =  $c->getDetailUrl($this, $child,true);
+	            		   
+	            		$skladem = $activeVariant['skladem'];
+	            		$barva = $activeVariant['title'] ? ', '.$activeVariant['title']:'';
+	            		$velikost= $activeVariant['titleOption'] ? ', '.$activeVariant['titleOption']: '';
+	            		$sum = ($price*$count);
+	            		
+	            		$dph = round( ($sum / (1 + ($dphQuote/100)) * ($dphQuote/100)), 2);
+	            		$sumBezDPH = $sum-$dph;
+	            		$this->order[paymentPrice];
+	            		$dphDel = round( ($this->order['deliveryPrice'] / (1 + ($dphQuote/100)) * ($dphQuote/100)), 2);
+	            		$sumDelBezDPH = $this->order['deliveryPrice'] - $dphDel;
+	            		$dphPay = round(( $this->order['paymentPrice'] / (1 + ($dphQuote/100)) * ($dphQuote/100)), 2);
+	            		$sumPayBezDPH = $this->order['paymentPrice'] - $dphPay;
+	            		 
+	                ?>
+	<tbody>
+    	<tr>   
+        	<td style="padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important"><a href="<?=$url?>"><?=$child->title?></a><br/>
+			</td>
+			<td style="text-align:center;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important"><?=$count?> ks</td>
+			<td style="text-align:right;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+<?=helper_FrontEnd::price($price)?>&nbsp;Kč</td>
+			<td style="text-align:right;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important"><?=helper_FrontEnd::price(round($sumBezDPH))?>&nbsp;Kč</td><td style="text-align:right;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+<?=helper_FrontEnd::price($sum)?>&nbsp;Kč</td>
+		</tr>
+<?endforeach;?>
+		<tr>
+			<td style="padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important"><?=$this->order['deliveryText']?>
+			</td>
+			<td style="text-align:center;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+1 x
+			</td>
+			<td style="text-align:right;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+              &nbsp;
+            </td>
+            <td style="text-align:right;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important"><?=helper_FrontEnd::price($sumDelBezDPH)?>&nbsp;Kč
+            </td>
+            <td style="text-align:right;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+<?=helper_FrontEnd::price($this->order['deliveryPrice'])?>&nbsp;Kč</td>
+		</tr>
+		<tr>
+			<td style="padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important"><?=$this->order['paymentText']?>
+			</td>
+			<td style="text-align:center;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+1 x
+			</td>
+			<td style="text-align:right;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+              &nbsp;
+            </td>
+            <td style="text-align:right;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important"><?=helper_FrontEnd::price($sumPayBezDPH)?>&nbsp;Kč
+            </td>
+            <td style="text-align:right;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+<?=helper_FrontEnd::price($this->order['paymentPrice'])?>&nbsp;Kč
+			</td>
+		</tr>
+		<tr style="font-weight:bold">
+			<td colspan="3" style="text-align:left;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">Celkem</td>
+			<td style="text-align:right;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important"><?=helper_FrontEnd::price($this->sumOrderBezDPH )?>&nbsp;Kč
+			</td>
+			<td style="text-align:right;padding:3px 10px;padding-bottom:5px;font-size:12px!important;font-family:Arial,Helvetica,sans-serif!important">
+<?=helper_FrontEnd::price($this->sumOrder )?>&nbsp;Kč
+			</td>
+		</tr>
+</tbody>
+</table>
+          

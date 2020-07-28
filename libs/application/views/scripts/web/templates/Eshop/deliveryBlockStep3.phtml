@@ -1,0 +1,44 @@
+<?php 
+$doprava = $this->mEshop->basket->getDeliveryDetail();
+$platba = $this->mEshop->basket->getPaymentDetail();
+
+
+$items = $this->mEshop->basket->getItems();
+$voucher = $this->mEshop->basket->voucher;
+$deliveryPrice = $this->mEshop->basket->getDeliveryPrice2();
+$payment = $this->mEshop->basket->getPaymentPrice();
+$mp = new module_Eshop_PriceCalc($voucher, $items, $deliveryPrice, $payment);
+
+
+if($mp->sumBezDopravy >= 1700){
+                  	 	$platba['cena'] = 0; 
+                  	 }
+                  	  
+//if($delivery){
+//	$platby = $doprava[$delivery]['payments'];
+//}
+?>         
+                <div id="doprava">
+                  <div class="payLeft">
+                  	<span class="fBold fs14 blockDisplay">Doprava</span>
+                  	<p><?=$doprava['nazev']?> <?=$doprava['price']?$doprava['price']:0?> Kč</p>
+                  	<?if($doprava['popis']):?>
+                  		<p class="note">Poznámka: <?=$doprava['popis']?></p>
+                  <?endif;?>
+                <div class="spacer10"></div>
+                <span class="fBold fs14 blockDisplay">Platba</span>
+                 <p><?=$platba['nazev']?> <?=$platba['cena']?$platba['cena']:0?> Kč</p>
+                 <?if($platba['popis']):?>
+                	 <p class="note">Poznámka: <?=$platba['popis']?></p> 
+            	<?endif?>
+            	<?if($this->mEshop->basket->getNote()):?>
+ 
+            	<span class="fBold fs14 blockDisplay">Poznámka</span>  
+        		<?=$this->mEshop->basket->getNote()?> 
+        		<?endif;?>
+            </div>
+            <div class="payRight">
+        	
+        	</div>    
+              <div class="clear"></div>	   
+            </div>

@@ -1,0 +1,15 @@
+		<?
+		if(count($this->options)){
+			foreach ($this->options as $ident => $title):
+				$r = rand(0,99999999);
+				$selected = isset($this->optionsChecked[$ident])?1:0; 
+			  	
+				?>
+				<div <?=$this->atribs?>>
+					<?= $this->formCheckbox($this->checkboxGroupName . '[' . $ident . ']', $selected, array('disableHidden' => true,'id' => 'ch' . $r, 'checked' => $selected)) ?>
+					<label for="ch<?= $r ?>"><?= $title ?></label>
+				</div>
+			<? endforeach;     
+		}	 
+		?>
+			

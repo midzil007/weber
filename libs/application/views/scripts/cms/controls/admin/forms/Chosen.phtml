@@ -1,0 +1,28 @@
+ 
+<select data-placeholder="Vyberte možnost" name="<?=$this->name?>[]" style="width:<?=$this->view->attribs['width'] ? $this->view->attribs['width'] : '350px'?>;" multiple class="chosen-select" tabindex="8">
+ 		<option value=""></option>
+ 		<?
+ 		  
+ 		 foreach($this->options as $item):?>
+            <option <?=in_array($item['id'],$this->value) ? 'selected' : ''?> value="<?=$item['id']?>" class="level<?=$item['level']?>"><?=$item['title']?></option>
+         <?endforeach;?>       
+</select>
+          
+<?if(!$this->renderChosen):?>
+<link rel="stylesheet" href="/admin/css/chosen/chosen.css">	
+	<script src="/admin/js/chosen/chosen.jquery.js" type="text/javascript"></script>
+	<script src="/admin/js/chosen/docsupport/prism.js" type="text/javascript" charset="utf-8"></script>
+  <?$this->renderChosen = true;?>
+ <?endif;?>
+ <script type="text/javascript">
+    var config = {
+      '.chosen-select'           : {},
+      '.chosen-select-deselect'  : {allow_single_deselect:true},
+      '.chosen-select-no-single' : {disable_search_threshold:10},
+      '.chosen-select-no-results': {no_results_text:'Oops, nothing found!'},
+      '.chosen-select-width'     : {width:"95%"}
+    }
+    for (var selector in config) {
+      $(selector).chosen(config[selector]);
+    }
+  </script>

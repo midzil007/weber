@@ -1,0 +1,405 @@
+<?
+
+list($totalRev,$rev) = $this->mReviews->showSingleRev($this->node->nodeId);?>
+<div id="pright" class="detail">
+<div class="fLeft marBottom10">
+	<h1><?=$this->pageTitleRaw?></h1>
+</div>
+<?if($totalRev->total>0):?>
+	<div class="fLeft revText marTop20 marLeft10 marBottom10">
+		<div class="emptyStarsMini marRight3">
+			<div style="width:<?=$totalRev->total*19?>px;" class="fullStarsMini"></div>
+		</div>
+		<span class="fs11 greyColor1 lineHeight20">(<?=$totalRev->count?>)</span>
+	</div>
+<?endif;?> 
+<div class="clear"></div>
+<?
+$value = $this->selectedVariant;
+$z = $this->content->getPropertyValue('znacka');
+$html = $this->html;
+
+$photo = $this->mVarianta->getResizedPhotos($value['obrazky']);
+$pathPhoto = helper_FrontEnd::getFirstPhoto($photo,'pMinic4' , false);
+
+if($z){
+	$znacka = $this->mProducts->getZnacky($z, false);
+} 
+
+$preText = $this->content->getPropertyValue('preText');
+$c = new content_Product();
+$c->getPropertyByName('photos')->value = $value['obrazky'];
+
+$photos = $photo;//$view->content->getFilesNames('photos');  
+     	 
+$p = helper_FrontEnd::getPhoto('photos', $c, $c->fotoCropShowName);
+if(count($p)){ 
+	$img = $p['path'];
+} else {
+	$img = '/images/categoryImg.jpg'; 
+}
+$images = helper_FrontEnd::getResizedPhotos($photos, 'pShow', 'pFull');
+$full = helper_FrontEnd::getResizedPhotos($photos, 'pShow3', 'pShow');		 	 
+$this->mainImg = $img;     
+
+?>  
+    
+ <div class="img fLeft posRelative" >
+ 	<div class="posAbsolute" id="prodPriznaky">
+ 	<?if($this->selectedVariant['discount']>0):?>
+ 		<span class="blockDisplay discount">
+ 			<span class="fBold white fs16 marLeft10 i-block marTop5">-30%</span></span>
+ 	<?endif;?>
+ 	<?if($this->selectedVariant['novinka']):?>
+ 		<span class="blockDisplay  novinka"></span>
+ 	<?endif;?>
+ 	<?if($this->selectedVariant['akce']):?>
+ 		<span class="blockDisplay  akce"></span>
+ 	<?endif;?>
+ 	<?if($this->selectedVariant['enerClass'] > 2 ):?>
+ 		<span class="blockDisplay  ECO" ></span>
+ 	<?endif;?>
+ 	<?if($this->selectedVariant['enerClass'] > 0 ):?>
+ 		<span class="blockDisplay  enerClass">
+ 			<span class="fBold fs16 marLeft10 greenColor1 i-block"><?=$this->mVarianta->variantProperty['enerClass']['selection'][$this->selectedVariant['enerClass']]?></span>
+ 		</span>
+ 	<?endif;?>
+ </div>
+ 	<div class="botip" rel="Zvětšit obrázek" alt="Zvětšit obrázek"  id="imgBorder">
+		<?$z = 1;?> 
+		<? foreach ($images as $value):
+		$descr .= ' '.$value['name'];
+		?>   
+			<div class="gimgItem tAlignCenter">     
+				<a target="_blank" rel="[images]" id="mb<?=$z?>"  class="mbb <?=($z>1?'disable':'')?> <?=($z==1?'detailImgA':'')?>" href="<?=$value['fullPath']?>" target="_blank"><img <?=$this->schema?'itemprop="image"':''?> src="<?=$value['path']?>" id="imgId<?=$z?>"  class="i <?=($z==1?'detailImg':'')?>"  /></a>
+				<div class="multiBoxDesc mb<?=$z?> mbHidden"> </div>
+				<?if($z==1):?> 
+					<div class="multiBoxDesc mb<?=$z?> mbHidden"> </div>	
+				<?endif;?>
+				</div>
+			<?$z++;?>   
+		<? endforeach; ?> 
+		 
+	</div> 
+	<script type="text/javascript"> 	 
+	window.addEvent('domready', function(){
+		box = new multiBox({
+			mbClass: '.mbb',//class you need to add links that you want to trigger multiBox with (remember and update CSS files)
+			container: $(document.body),//where to inject multiBox
+			descClassName: 'multiBoxDesc',//the class name of the description divs
+			useOverlay: false,//use a semi-transparent background. default: false;  
+			addDownload: false,//do you want the files to be downloadable?
+			addRollover: false,//add rollover fade to each multibox link
+			addOverlayIcon: false,//adds overlay icons to images within multibox links
+			addChain: false,//cycle through all images fading them out then in 
+			recalcTop: true,//subtract the height of controls panel from top position
+			addTips: false,//adds MooTools built in 'Tips' class to each element (see: http://mootools.net/docs/Plugins/Tips)
+			autoOpen: 0//to auto open a multiBox element on page load change to (1, 2, or 3 etc)
+		}); 
+	});
+	</script>
+	 
+	<?
+	 
+	$counImages = count($images);
+	 if($counImages > 1):
+	 	$height = '95';
+	 	
+	 if ($counImages>3):  
+	 	$height = '235';
+	 endif;
+	 if($counImages>6):
+	 	$height = '350'; 
+	 endif;
+	 if($counImages>9):
+	 	$height = '470'; 
+	 endif;
+	 ?>
+	<div id="galleryStrip">
+	<?if ($counImages>3):?>
+		<a href="#" id="allPhoto" onclick="return showBlock3('galleryStrip', '125','<?=$height?>')">Zobrazit celou fotogalerii</a>
+	<?endif;?>
+<table>
+	<tbody>
+		<?$i = 0?> 
+		<?
+		$iii = $margin = 1;
+		$count = count($images);
+		$rozdil = $count -($count%3);
+		foreach ($images as $key=>$value): ?>
+	
+		<?if($iii!=1):?>
+		<?$class="class='hidenimg'";?>
+		<?endif;?>
+		<?if($iii%4==0 || $iii == 1):?>
+		<tr id="showVis" <?=$class?>>
+		<?endif;?>	
+    		<td>
+    		<a onclick="return showImage('<?=$value['fullPath']?>', '<?=$value['name']?>', '<?=$full[$key]['fullPath']?>', <?=$i+1?>);" href="<?=$full[$key]['fullPath']?>" target="_blank">
+				<img style="width:100px;" class="botip" rel="Zvětšit obrázek" alt="Zvětšit obrázek" src="<?=$full[$key]['path']?>" alt="<?=$value['name']?>" >
+			</a>
+    		</td>
+    	<?if($iii%3==0):?>
+		</tr>
+		<?endif;?>
+    		<?$i++;
+    		$iii++;?>
+		<?endforeach;?>
+</tbody></table>
+</div>
+<? endif;?>
+</div> 
+<div class="fLeft marLeft20" id="prodRight">
+<p class="greyColor marBottom20"><?=$preText?></p>
+<div id="innerBorder" class="fLeft">
+<?if($this->selectedVariant['discount']):?>
+	<p class="textBlack">Běžná cena: <span class="tLineThrough"><?=helper_FrontEnd::price($this->selectedVariant['price2'])?> Kč</span>
+		<span class="red fBold i-block marLeft5">SLEVA <?=$this->selectedVariant['discount']?>%</span>
+	</p>
+<?endif;?> 
+	<p class="blackText fs35"><strong><?=helper_FrontEnd::price($this->selectedVariant['price'])?> Kč </strong><span class="greyColor2 fs16">vč. DPH</span></p>
+	 <? if($this->selectedVariant['skladem'] == 1):?>
+<form action="<?=$this->confirmUrl?>" method="post"> 
+            	<input type="hidden" name="variantId" rel="<?=$this->selectedVariant['sizeId']?>" id="sizeSend" value="<?=$this->selectedVariant['id']?>"> 
+            	<input type="hidden" name="urlProduckt" value="<?=$this->url?>">
+            	<input type="hidden" name="price" value="<?=$this->selectedVariant['price']?>"> 
+            	 
+            		<input type="hidden" name="pid" value="<?=$this->node->nodeId?>_<?=$this->selectedVariant['id']?>_<?=$this->selectedVariant['sizeId']?>" />
+            		<input type="hidden" name="action" value="buy" />   
+               		<input type="hidden" name="count" value="1" class="ks"> 
+               		<button type="submit" id="buttBig"></button>
+     
+		</form>
+<?endif;?>
+</div>
+
+<?if($this->selectedVariant['id'] || $this->selectedVariant['bioFresh'] || $this->selectedVariant['noFrost'] || $this->selectedVariant['enerClass'] > 2 || $this->selectedVariant['smartFrost']):?>
+<p class="blackText fs14">Technologie:</p>
+<table class="marBottom20">
+	<tr>
+		<?if($this->selectedVariant['id']):?>
+			<td><a href="#"><img src="/images/activegreen.jpg.jpeg" alt="Active Green" width="67" height="44"></a></td>
+		<?endif;?>
+		<?if($this->selectedVariant['bioFresh']):?>
+			<td><a href="#"><img src="/images/biofresh.jpg.jpeg" alt="Bio Fresh" width="63" height="42"></a></td>
+		<?endif;?>
+		<?if($this->selectedVariant['noFrost']):?>
+			<td><a href="#"><img src="/images/nofrost.jpg.jpeg" alt="No Frost" width="63" height="42"></a></td>
+		<?endif;?>
+		<?if($this->selectedVariant['enerClass'] >2):?>
+			<td><a href="#"><img src="/images/usporne.jpg.jpeg" alt="Usporne" width="60" height="40"></a></td>
+		<?endif;?>
+		<?if($this->selectedVariant['id']):?>
+			<td><a href="#"><img src="/images/wine.jpg.jpeg" alt="Vinotéka" width="63" height="42"></a></td>
+		<?endif;?>
+		<?if($this->selectedVariant['smartFrost']):?>
+			<td><a href="#"><img src="/images/pkt_smartfrost.gif" alt="SmartFrost" width="63" height="41"></a></td>
+		<?endif;?>
+	</tr>
+</table>
+<?endif;?>
+<table id="params"> 
+	<tr><td class="tabFirst">Záruka:</td><td><span class="blackText fBold"><?=$this->selectedVariant['title']?></span></td></tr>
+	<tr><td class="tabFirst">Barva:</td><td><a href="#"><span class="blackText fBold"><?=$this->mVarianta->renderOption('color',$this->selectedVariant['color'])?></span></a></td></tr>
+	<?if($this->selectedVariant['enerClass']):?>
+		<tr><td class="tabFirst">Úspornost:</td><td><a href="#"><span class="blackText fBold"><?=$this->mVarianta->renderOption('enerClass',$this->selectedVariant['enerClass'])?></span></a></td></tr>
+	<?endif;?>
+	<?if($this->selectedVariant['spotreba']):?>
+		<tr><td class="tabFirst">Spotřeba:</td><td><?=$this->selectedVariant['spotreba']?> kWh/rok</td></tr>
+	<?endif;?>
+	<tr><td class="tabFirst">Dostupnost:</td><td><span class="fBold greenText"><?=$this->mVarianta->skladOptions[$this->selectedVariant['skladem']]?></span></td></tr>
+	<?if($this->selectedVariant['EAN']):?>
+		<tr><td class="tabFirst">EAN:</td><td><?=$this->selectedVariant['EAN']?></td></tr>
+	 <?endif;?>
+	<tr><td class="tabFirst">Výrobce:</td><td><a href="#"><span class="blueText fBold">LIEBHERR</span></a></td></tr>  
+</table>
+
+<?=$this->renderParents?>
+<div id="addToThis">
+	<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style">
+<a class="addthis_button_facebook_like" fb:like:layout="button_count" fb:like:href="<?=$this->url?>"></a>
+<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+<a class="addthis_counter addthis_pill_style"></a>
+</div>
+
+<!-- AddThis Button END -->
+</div>
+		<?if($margin):?>	
+		<?$margin = $margin * 86;
+		$margin = 'style="margin-top:'.$margin.'px;"';?>
+	<?else:?>
+		<?$margin = ''?>
+	<?endif;?>
+	</div>	   
+	<div class="tabs fLeft" id="tabosis" >
+		<ul class="tab-nav posAbsolute margin0 pad0 " id="home">
+			<li id="llt4_t1" class="active fBold fLeft"><a id="lt4_t1"  onclick="return showTab('t4_t', 1)" href="#">Popis produktu</a></li>
+			<?if($totalRev->total>0):?>
+            <li id="llt4_t2" class="fBold fLeft"><a id="lt4_t2"  class="i-table" onclick="return showTab('t4_t', 2)" href="#">Hodnocení zákazníku 
+            		<span class="emptyStarsMini marRight3 i-block vAlingMid ">
+					<span class="i-block fullStarsMini" style="width:<?=$totalRev->total*19?>px;" class="fullStarsMini"></span>
+					</span>
+				</a>
+			</li>
+			<?endif;?>
+            <li id="llt4_t4" class="fBold fLeft"><a id="lt4_t4"  onclick="return showTab('t4_t', 4)" href="#">Dotaz a přání</a></li>
+            <?if(count($this->souvisejici)>0):?> 
+            	<li id="llt4_t5" class="fBold fLeft"><a id="lt4_t5"  onclick="return showTab('t4_t', 5)" href="#">Doporučujeme dokoupit (<?=count($this->souvisejici)?>)<span class="starsDetail"></span></a></li>
+            <?endif;?> 
+		</ul>	
+			
+		<div class="tab-container posRelative" id="tabContentContainer">
+                                <div class="inner">
+                                    <div class="content">
+                                        <div id="tt4_t1" class="tab-1"> 
+                                        	<div class="fLeft">
+                								<?=$html?>
+                							</div>
+                							<div class="fLeft padLeft20  padRight20 padTop15" id="bgrProductLie">
+                								<img alt="Liebherr" class="marBottom10" src="/images/lieProduct.png">
+                								Liebherr je německý výrobce špičkových chladniček a mrzniček. Již od roku 1960 se drží techniologicky i kvalitou .. Výsledkem jsou ledničky a chladničky s vysokou spolehlivostí, technologicky .. které uchovávají vaše potraviny déle čerstvé a hodnotné..  
+                							</div>  
+                							<?if(count($this->files)):
+											?>
+											 <div id="dl">
+												<h4>Ke stažení:</h4>
+												<? 
+												foreach ($this->files as $filepath => $name): 
+													$fullpath = content_SFSFile::getFileFullPath($filepath);
+													$ico = Utils::getFileIcoImage($fullpath);
+													?>	
+													<?= $ico ?> 
+													<a title="Otevřít '<?= $name ?>' do nového okna" target="_blank" href="<?=$filepath?>"> <?= $name ?> <i><?=Utils::getWebFileSize($fullpath)?></i></a> <br />														
+																	
+													<? 
+												endforeach; 	
+												?>
+											</div>
+											<?			
+										endif;	
+										?>	
+										
+                						</div>
+                						<div id="tt4_t2" class="tab-1"> 
+                							              							<h3>Recenze <?=$this->node->title?>:</h3>
+<div class="spacer10"></div>	
+
+<div id="revSummary">
+<div id="revResG" class="fLeft" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+<strong>Celkové hodnocení </strong>(<span itemprop="ratingValue"><?=$totalRev->total?> známka</span>/<span itemprop="reviewCount"><?=$totalRev->count?></span> hlasů):</div>
+				<div class="emptyStars fLeft marLeft10">
+					<div style="width:<?=$totalRev->total*27.6?>px;" class="fullStars"></div>
+				</div>
+				<div class="clear"></div>
+
+				
+</div>	
+<?
+$inc = 0;
+foreach ($rev as $item):
+			$inc++;
+			if($inc > 11){
+				break;
+			}
+			if(!$item['date'])
+				continue;
+			$name = '';?>
+			<div class="revName fstRev tAlignCenter marTop5 marRight15 fLeft">
+			<span class="userIcon blockDisplay"></span>
+			<?$name = $item['name']?$item['name']:'Ověřený zákazník';?>
+			<span><?=$name?></span>			
+			<p></p>
+			</div>
+			<div class="revName fLeft">
+				<div class="emptyStars">
+					<div style="width:<?=$item['rating']*28?>px;" class="fullStars"></div>
+				</div>
+				<table>
+					<?if($item['pros']):?>
+					<tr>
+						<td><span class="plus">+</span></td>
+						<td><span class="plus"><?=$item['pros']?></span></td>
+					</tr>
+					<?endif?>
+					<?if($item['cons']):?>
+					<tr>
+						<td><span class="minus">-</span></td>
+						<td><span class="minus"><?=$item['cons']?></span></td>
+					</tr>
+					<?endif?>
+					<?if($item->reaction):?>
+					<tr>
+						<td>?</td>
+						<td><?=$item->reaction?></td>
+					</tr>
+					<?endif?>
+					<?if($item['summary']):?>
+					<tr>
+						<td></td>
+						<td colspan="1"><?=$item['summary']?></td>
+					</tr>
+					<?endif?>
+				</table>
+			</div>	
+			<div class="revText fs11 fRight marLeft10">
+				<p>celkem:</p>
+				<div class="emptyStarsMini">
+					<div style="width:<?=$item['rating']*19?>px;" class="fullStarsMini"></div>
+				</div>
+				
+				
+			</div>
+			<div class="lineGrad"></div>	
+			
+		<?endforeach;?>
+              							</div>
+              							<div id="tt4_t5" class="tab-1"> 
+                <?=$this->render('parts/alternativeProducts.phtml'); ?>
+              							</div>    
+              							 <div class="tab-1" id="tt4_t4"" <?=($video?'style="min-height:600px;"':'')?>> 
+                 							<? if($video ):   
+               									$AE = new AutoEmbed();    
+												$AE->parseUrl($video);   
+												$AE->setWidth(740); 
+												$AE->setHeight(500); 
+											//$imageURL = $AE->getImageURL();
+												$AE->setParam('wmode','transparent'); 
+											$AE->setParam('autoplay','false');  
+											$vcode = $AE->getEmbedCode();
+                								?>
+                							<div class="spacer10"></div>
+                							<?=$vcode?>
+                							<div class="spacer10"></div> 
+                						<? endif;?>
+              							</div>
+              							      
+              							
+                 
+                              </div>
+                                    </div>
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="clear"></div>  
+
+                            </div>  
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4fa237f86cbb7ec9"></script>
+   <script type="text/javascript" charset="utf-8">
+					window.addEvent('load', init4);
+					$('tabosis').setStyle('display', 'none');
+					function init4() {     
+						$('tabosis').setStyle('display', ''); 
+						var query = location.href.split('#');
+						if(query[1]){	
+							showTab('t4_t', query[1].replace('tab',''));
+						}
+						else
+							{  
+							showTab('t4_t', 1);
+							}         
+					} 
+					
+					
+				</script>  
+</div>
+		

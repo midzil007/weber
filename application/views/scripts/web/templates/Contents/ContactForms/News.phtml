@@ -1,0 +1,30 @@
+  <div class="news-content"> 
+  		<div >
+  		      <div class="spacer10"></div>
+            <form method="post" action="">
+              
+				<?= $this->render('parts/SecurityCode.phtml'); ?>	  
+			<div class="row">
+		<div class="col-md-12">
+			<div class="col-sm-3">Váš e-mail:  <span class="cred">*</span></div>
+			<div class="col-sm-9">
+				<div class="form-group">
+					  <?=$this->formText('email', $this->input->email, array('class' => 'form-control news-content-input'))?>
+				</div>   
+			</div>
+		</div>
+		</div>
+		<div class="row">
+		<div class="col-md-12">        
+				<div class="col-sm-12">      
+		 	<div class="form-group">
+				<button name="send" class="goBasket pull-right addItem" id="sendBtn">Odeslat</button>
+	   		</div>   
+	   </div>   
+		</div>
+		 
+	</div> 
+            </form>     
+        </div>    
+         </div> 
+         

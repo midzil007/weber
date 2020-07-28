@@ -1,0 +1,38 @@
+<table class="banners">	 
+	<? 
+	//pr($this->node);
+	//pr($this->advertsPositions);
+	if(count($this->advertsPositions) && is_array($this->advertsPositions)){
+		echo $this->formHidden('saveAdverts', 1);
+	}
+	foreach ($this->advertsPositions as $position): 
+		$this->position = $position;
+		$this->identificator = $position->identificator;
+		$banners = $position->getAdverts();
+	?>
+	<tr>
+		<td class="formcell">
+			<fieldset class="bannerPosition">
+				<legend><?=$position->title?></legend>
+				<div id="pos_<?=$position->identificator?>">
+					<? 
+					foreach ($banners as $banner):  
+						$banner->posIdentificator = $this->identificator;
+						$this->banner = $banner;
+						?>
+						<div id="pos_d_<?=mt_rand()?>">
+						<?
+						echo $this->render('controls/admin/forms/_AdvertForm.phtml');
+						?>
+						</div>
+					<? endforeach; ?>	 
+				</div> 
+				<div class="addB">
+					<?php echo $this->formSubmit('addBannerFileContentB' . $position->identificator , 'Přidat banner', array('class'=>'fsubmit', "onclick" => "return addAdvert('" . $this->url(array('action' => 'addadvertForm', 'identificator' => $position->identificator)) . "', '$position->identificator')", 'iconClass' => "noteIcon")) ?>	
+				</div>
+			</fieldset>
+			
+		</td>
+	</tr>	
+	<? endforeach; ?>	
+</table>

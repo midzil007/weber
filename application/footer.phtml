@@ -1,0 +1,25 @@
+					
+		
+			<div class="footer">
+                <div class="left">
+                	<a href="http://www.eportaly.cz/" target="_blank">ePortály s.r.o.</a> 
+	                	<?php		
+						$x = 1;						
+						$footer = $this->tree->getNodeChildren(34747, 'FOLDER');
+						?> 
+						<? foreach ($footer  as $menuItem):							
+							$visible = helper_FrontEnd::isPathInActivePath($menuItem->path, $this->curentPath);
+							$mClass = '';
+							if($visible){
+								$mClass = ' class="active"';
+							}						
+							$url = Utils::getWebPath($menuItem->path);							
+						?>					
+						&nbsp;&nbsp;&nbsp;¦&nbsp;&nbsp;&nbsp;<a <?=$mClass?> href="<?=$url?>"><?=$menuItem->title?></a>
+						<?
+							$x++;
+						endforeach; 
+						?>	
+                </div>
+                <div class="right">webdesign, tvorba www stránek: Bestof.cz</div> 
+            </div>    

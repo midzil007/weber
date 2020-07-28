@@ -1,0 +1,25 @@
+	<ul id="maintree" class="tree">
+	<?
+	//pr($this->mainTree); 		
+	function drawTree($node){
+		$chCount = count($node['children']);
+		$class = $chCount?'':'class="sheet.gif"';
+		?>
+		<li <?=$class?>><a href="/cms/structure/index/node/<?=$node['id']?>" id="n<?=$node['id']?>"><?=$node['title']?></a>
+		<?
+		if($chCount){
+			?><ul><?
+			foreach ($node['children'] as $subnode){
+				drawTree($subnode);
+			}
+			?></ul><?
+		}
+		?>
+		</li>
+		<?
+	}
+	drawTree($this->mainTree);	
+	?>	
+	</ul>
+	<a href="#" onclick="expandAll('maintree');return false">Expand all</a>
+	<a href="#" onclick="collapseAll('maintree');return false">Collapse all</a>

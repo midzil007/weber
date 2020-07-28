@@ -1,0 +1,202 @@
+			<h2>Objednané zboží</h2>			
+			<?php  
+			$items = $this->mEshop->basket->getItems(); 
+			$detailDoprava = $this->mEshop->basket->getDeliveryDetail();
+			$detailPlatba = $this->mEshop->basket->getPaymentDetail();
+			$itemsCount = count($items);
+			
+			 
+			$voucher = $this->mEshop->basket->voucher;
+			$deliveryPrice = $this->mEshop->basket->getDeliveryPrice2();
+			$payment = $this->mEshop->basket->getPaymentPrice();
+			$mp = new module_Eshop_PriceCalc($voucher, $items, $deliveryPrice, $payment);
+			
+			
+if($mp->sumBezDopravy >= 1700){
+                  	 	$detailPlatba['cena'] = 0; 
+                  	 }
+                  	    
+			?> 
+			
+			<?php 
+				$this->listOverview = true;  
+				
+				$shopper = $this->mEshop->basket->getShopper();  
+				$shopper->fjmeno = $shopper->fjmeno? $shopper->fjmeno : $shopper->jmeno;
+				$shopper->fprijmeni = $shopper->fprijmeni? $shopper->fprijmeni : $shopper->prijmeni;
+				$shopper->fulice = $shopper->fulice? $shopper->fulice : $shopper->ulice;
+				$shopper->fmesto = $shopper->fmesto? $shopper->fmesto : $shopper->mesto;
+				$shopper->fpsc = $shopper->fpsc? $shopper->fpsc : $shopper->psc;
+			?>   
+
+	
+			<table style="width: 100%; text-align: left;"> 
+              <tbody><tr>
+                <th scope="col" align="left">Zboží</th>
+                <th align="left"> </th>
+                <th align="left">Kusů</th> 
+                <th align="left">Skladem</th> 
+                <th align="left">Cena / Kus</th>
+                <th align="left">Celkem bez DPH</th>
+                <th align="left">DPH</th>
+                <th align="left">Celkem s DPH</th>
+              </tr>  
+              <? 
+              $x = 0;
+			  
+				//$voucher = $this->faktura->voucher;
+				$voucher = $this->mEshop->basket->voucher;
+				$mv = new module_Voucher();
+				if($voucher['znacky'])
+				{
+					$znacky = explode(',',$voucher['znacky']);
+					foreach($znacky as $znacka)
+						$znackyCiselnik[$znacka] = $mv->getZnackaByNodeId($znacka);
+				}
+              foreach ($items as $id => $data): 
+              	$x++;
+                	$child = $data['item'];
+                	$count = $data['count'];
+                	
+	              	if(!$child){ continue; } 
+	              	$c = $child->getPublishedContent();
+	              	
+	              	$dphQuote = ($c->getPropertyValue('dphQuote'));   
+	              	
+	              	$activeVariant = $this->mVarianta->getVariantById($data['variantId'],false);
+			 			 
+			 			$photos = $this->mVarianta->getResizedPhotos($activeVariant['obrazky']);
+            			$p = helper_FrontEnd::getFirstPhoto($photos,'pMinic2' , false);
+            			  
+	            		if(count($p)){
+	            			$img = Utils::getWebUrl() . $p['path']; 
+	            		} else {  
+	            			$img = Utils::getWebUrl() . '/images/categoryImg.jpg';
+	            		} 
+	            		$price  = $data['price'];    
+	            		$url = $c->getDetailUrl($this, $child).'?variant='.$data['variantId'];  
+	            		  
+	            		$skladem = $activeVariant['skladem'];
+	            		$barva = $activeVariant['title'] ? ', '.$activeVariant['title']:'';
+	            		$velikost= $activeVariant['titleOption'] ? ', '.$activeVariant['titleOption']: '';
+	            		 
+	                ?>
+              <tr <?=($itemsCount==$x?'class="last"':'')?>> 
+                <td valign="top" scope="row"> 
+                	<img style="height: 50px" src="<?=$img?>" alt=" " />    
+                </td>
+                <td> 
+                	<a href="<?=$url?>">
+                	<span><?=$child->title?> </span></a></td> 
+                <td> 
+                	<?=$count?>   
+                	</td>    
+                <td>
+	                 <?=$skladem?>   
+                </td>  
+                <td><span><?=helper_FrontEnd::price($price)?>,-</span></td>
+                <?
+                $sum = ($price*$count);
+                $dph = round( ($sum / (1 + ($dphQuote/100)) * ($dphQuote/100)), 2);  
+				$sumBezDPH = $sum - $dph;
+                ?>
+                <td>
+                	<span class="cena"><?=helper_FrontEnd::price($sumBezDPH)?> Kč</span> 
+				</td>
+				<td> 
+                	<span class="cena"><?=helper_FrontEnd::price($dph)?> Kč</span> 
+				</td>
+				<td>
+                	<span class="cena"><?=helper_FrontEnd::price($sum)?> Kč</span> 
+				</td>
+              </tr>  
+              <? endforeach;?> 
+              </tbody></table> 
+              
+			<h2>Shrnutí objednávky</h2>                 
+            <h4>Doprava</h4>
+                  	<p><?=$detailDoprava['nazev']?></p>
+                  	<?if($detailDoprava['popis']):?>  
+                  	<p class="note">Poznámka: <?=$detailDoprava['popis']?></p>
+                  <?endif;?> 
+                
+                 <h4>Platba</h4>
+                 <p><?=$detailPlatba['nazev']?></p>
+                    
+          <div> 
+          	 <p>Cena zboží bez DPH<span><?=helper_FrontEnd::price($mp->sumBezDph)?> Kč</span></p>
+            <p>DPH  <span><?=helper_FrontEnd::price($mp->dph)?> Kč</span></p>
+            <? if($mp->delivery):?>
+            <p>Doprava s DPH <?=$this->dph?>%<span><?=helper_FrontEnd::price($mp->delivery)?> Kč</span></p>
+            <? endif;?>  
+			<? if($mp->payment):?>
+            <p>Cena dopravy s DPH <span><?=helper_FrontEnd::price($mp->payment)?> Kč</span></p>
+            <? endif;?>    
+			<? if($voucher):?>
+			<p>Mezisoučet<span><?=helper_FrontEnd::price($mp->subtotal)?> Kč</span></p>
+            <p>Kupón <?=Utils::getHelpIco(htmlspecialchars($mp->helpText))?><span>- <?=$mp->voucher['value']?></span></p>
+            <? endif;?>
+            
+            <p class="total">Celkem k úhradě<span id="shopPrice"><?=helper_FrontEnd::price($mp->sum)?> Kč</span></p>
+            <? if($this->inputGet->successPay):?>
+            <h3>Zaplaceno pomocí PaySec, nehraďte.</h3>  
+            <? endif;?>
+          </div>   
+              
+          <?php 
+          $delivery = $this->mEshop->basket->getDelivery(true); 
+          $payment = $this->mEshop->basket->getPayment(true); 
+          ?>
+          <h2>Fakturačí údaje</h2>
+                   <table> 
+                   <?if($shopper->firma):?>
+                   	<tr>
+                 		<td>Firma:</td><td><?=$shopper->firma?><td>
+                 	</tr>
+                   <?endif;?>
+                   	<tr>
+                 		<td>Jméno:</td><td><?=$shopper->fullname?><td>
+                 	</tr>
+                 	<tr>
+                      <td>Ulice:</td><td><?=$shopper->ulice?></td>
+                      </tr>
+                     <tr>
+                      <td>Město:</td> <td><?=$shopper->mesto?></td>
+                      </tr>
+                     <tr>
+                      <td>PSČ:</td><td><?=$shopper->psc?></td>
+                     </tr>
+                     </table>
+           		<h3>Dodací adresa</h3>    
+                   <table>
+                   <?if($shopper->ffirma):?>
+                   	<tr>
+                 		<td>Firma:</td><td><?=$shopper->ffirma?><td>
+                 	</tr>
+                   <?endif;?>
+                   	<tr>
+                   		<td>Jméno:</td>
+                   		<td><?=($shopper->ffullname?$shopper->ffullname:$shopper->fullname)?></td>
+                   	</tr> 
+                   	<tr>
+                   		<td>Ulice:</td>
+                   		<td><?=($shopper->fulice?$shopper->fulice:$shopper->ulice)?></td>
+                   	</tr>
+                   	<tr> 
+                   			<td>Město:</td>
+                   			<td><?=($shopper->fMesto?$shopper->fMesto:$shopper->mesto)?></td>
+                   	</tr>
+                   	<tr>
+                   		<td>PSČ:</td> 
+                   		<td><?=($shopper->fpsc?$shopper->fpsc:$shopper->psc)?></td>
+                   	</tr> 
+                  </table>
+          
+          			<table>
+                      	<tr>  
+                      		<td>E-mail:</td><td><?=$shopper->email?></td>
+                      	</tr>
+                      	<tr>
+                      	<td>Telefon:</td><td><?=$shopper->telefon?></td>
+                      	</tr>
+                      </table>

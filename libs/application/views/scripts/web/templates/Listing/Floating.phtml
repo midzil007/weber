@@ -1,0 +1,61 @@
+<?
+if(!function_exists('getUrl')){
+	function getUrl($view, $page){
+		$a = (array) $view->inputGet;
+		unset($a['page']);
+		$a['page'] = $page;  
+		$path = $view->path;
+	 
+		if($view->inputGet->sortType){
+			$a['sort'] = 'price'.$view->inputGet->sortType;
+		}
+		if($view->inputGet->sort=='soldPrice')
+        $a['sort']= 'soldPrice';
+		return Utils::addUrlParams($path, $a);
+	}
+}  
+$this->ListingPagesCount = intval($this->ListingPagesCount);
+?>     
+<? if($this->ListingPagesCount > 1): ?> 
+<div class="pagination <?=$this->pagginatorClass?>">
+<?		
+
+$start = max(0, $this->listingCurentPage - 2);
+		$end = min($this->ListingPagesCount, $this->listingCurentPage + 3);
+		$endListing = min($this->ListingPagesCount, $this->listingCurentPage+1);
+	//	e($endListing);
+		if($start == 0 && $this->ListingPagesCount >=6){
+			$end = 5;
+		}
+		else if($start == 1 && $this->ListingPagesCount >7){
+			$end = 6;
+		}
+			 ;
+			?>
+			<?if($this->listingCurentPage > 0){?>
+			<a title="Předchozí" href="<?=getUrl($this, $start+1)?>"><span>&lt;</span></a>
+			<?}
+		$rozdil = $end-($this->listingCurentPage+1);
+		if($rozdil  == 0){
+			$start= $start - 2;
+		}
+		if($rozdil  == 1){
+			$start= $start - 1;
+		}
+		$start = $start>0?$start:0;
+		for ($i=$start; $i<$end; $i++){
+			if($i != $this->listingCurentPage):  
+			?>	
+			<a href="<?=getUrl($this, $i)?>"><span><?=($i+1)?></span></a>
+			<? else: ?>
+			<a href="" class="selected"><span><?=($i+1)?></span></a>
+			<? endif;
+		}
+		if($endListing < $this->ListingPagesCount ){
+			?>
+			<a title="Následující" href="<?=getUrl($this, $endListing)?>" class=""><span>&gt;</span></a>  
+			<?
+		} 
+	?>	
+</div>     
+<? endif; ?>  

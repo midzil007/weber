@@ -1,0 +1,17 @@
+	<div class="helpWidget">
+		<?=$this->helpText?>
+		<ul>
+		<? foreach ($this->children as $child): 
+				if($content = $child->getPublishedContent()):
+				?>	
+				<li>
+					<a href="" onclick="return showHelp('<?=$this->url(array('controller' =>'help', 'action' => 'fullHelp', 'helpSectionId' => $this->helpNodeId, 'helpDetail' => $child->nodeId, 'helpnode' => $child->nodeId ))?>')" title="<?=Utils::getReducedText($content->getPropertyValue('html'))?>">
+					<?=$child->title?>
+				</a>
+					  
+				</li>
+			
+		<? 		endif;
+			endforeach; ?>
+		</ul>
+	</div>

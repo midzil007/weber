@@ -1,0 +1,55 @@
+
+<?   
+
+if(($this->isEdit || $this->isVersion) && $this->node->getSuperType() != 'files'): ?>
+	<div class="taright">
+		<div class="fl_left">	
+		Typ: <b><?=$this->content->userName?></b> 
+		<?=Utils::getHelpIco('Pokud chcete změnit typ nebo vytvořit novou verzi identického typu použijte tlačítko vpravo.')?>
+		</div>
+		 
+		 	</div>	  
+<? endif; ?>
+
+<table class="modalTable">
+	<? if(count($this->languages->availableLanguages) > 1 && 0): ?>
+	<tr>
+		<td class="formcell tkey tkey_form"><?=$this->cp_Translate['jazyk'] ?></td>
+		<td class="formcell">
+			<?= $this->formSelect('state', $this->content->state , array('autocomplete'=>'true','value'=>$this->content->state), $this->languages->availableLanguages) ?>
+			<?= $this->formSubmit('changeLangSave', 'Přepnout a uložit', array('class'=>'fsubmit', "onclick" => $this->addSubmitFunction . $wysiwyg . "return  submitFormAjax('PageForm', '".$this->url(array('controller' => 'structure','action' => $action))."', '$refreshTab', '$jsAction', '', 1 );", 'iconClass' => "noteIcon")); ?>	
+			<?= $this->formSubmit('changeLang', 'Přepnout', array('class'=>'fsubmit', "onclick" => $this->addSubmitFunction . $wysiwyg . "return  submitFormAjax('PageForm', '".$this->url(array('controller' => 'structure','action' => $action))."', '$refreshTab', '$jsAction', '', 1 );", 'iconClass' => "noteIcon")); ?>	
+			 
+		</td>
+	</tr>
+	<? endif; ?>
+	<tr>
+		<td class="formcell tkey tkey_form"><?=$this->cp_Translate[$this->content->nodeTitle] ?> <span class="redValid">*</span></td>
+		<td class="formcell"><?php echo $this->formText('pageTitle',$this->node->title, array('class'=>'ftext95 validate[required,length[0,100]] text-input')) ?>
+			
+		</td>
+	</tr>
+	<? $this->content->showAdmin($this); ?>	
+	<? if($this->isEdit || $this->isVersion): ?> 
+	<? if ($this->acl->isAllowed($this->user->group, 'changeState')): 
+		//$this->content->state = $this->content->state?$this->content->state:'PUBLISHED'; 
+	?>
+	<tr>
+		<td class="formcell">Stav</td>		 
+		<td class="formcell">
+			<?php echo $this->formSelect('state', $this->content->state , array('autocomplete'=>'true','value'=>$this->content->state), $this->contentStates) ?>
+			
+			<?= Utils::getHelpIco('Obsah je vidět na webu pouze pokud je ve stavu “publikovaný”.'); ?>
+		</td>
+	</tr>
+	<? endif; ?> 
+	<? endif; ?> 
+	
+	<tr>
+		<td colspan="2">  
+ </td> 
+</tr>	
+</table>   
+<? if($this->request->getParam('showSaveButton')):?>
+<?=$this->render('controls/admin/forms/_Save.phtml'); ?> 
+<? endif;?>

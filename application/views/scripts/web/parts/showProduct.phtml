@@ -1,0 +1,83 @@
+<?
+$nodeProd = $this->tree->getNodeById($this->inputGet->nodeid);
+$cProductProduct = $nodeProd->getPublishedContent();
+$variantId = $this->inputGet->varid;
+$varianta = $this->mVarianta->getVariantById($this->inputGet->varid);
+$photos = $this->mVarianta->getResizedPhotos($varianta['obrazky']);
+$p = helper_FrontEnd::getFirstPhoto($photos,'pShowc2' , false);
+			$dif = $price2 - $price;
+			$pa = $price2/100;
+			$dif= round($dif/$pa);
+			$yellow = '';
+			$yellow = $dif>50?' yellow':'';
+			$dif = $dif ? '-'.round($dif).'% ':'';
+			$s = $red =  '';
+	if($product['discount']){
+		$s = ' marRight5';
+		$red = 'class="redPrice"';
+}
+			if(!$this->inputGet->isalternative):
+				$price2 = $price2? '<span class="underLine" '.$googleHighPrice.'>'.helper_FrontEnd::price($price2).'  Kč</span>':'';
+			endif;
+			?>
+ 				<div class="img">
+                            <div class="status">
+		   					<?$s='';?>
+		   						<?if($varianta['discount']):?>
+		   						<?$googleOffer = $this->schema?'AggregateOffer':'';
+		   						$googlePrice = $this->schema?'itemprop="lowPrice"':'';?>
+		   						<p class="dct<?=$yellow?>"><span></span><?=$dif?></p>
+		   						<?else:?>
+		   						<?$s = ' marRight5"';
+		   						$googleOffer = $this->schema?'Offer':'';
+		   						$googleHighPrice = '';
+		   						$googlePrice = $this->schema?'itemprop="price"':'';?>
+		   						<?endif;?>  
+		   					</div>
+                            	<? if(count($isNovinka)):?> 
+								<span style="background-image: url(<?=$isNovinka['obrazek']?>);" class="ico_novinka" title="<?=$isNovinka['nazev']?>"></span> 
+								<? endif;?>
+                                <a href="<?=$nodeProd->path?>?variantId=<?=$variantId?>"><img  src="<?=$p['path']?>" title="<?=$nodeProd->title?>" alt="<?=$nodeProd->title?>"></a>
+                            </div>
+
+                              <?if($cProductProduct->id):
+            		 					 				$varColors = $this->mVarianta->getVariantsByIdProduct($cProductProduct->id);
+                            		$pathPhoto = null;
+            		 				if(count($varColors)>1):
+            		 				end($varColors);
+									$lastKey = key($varColors);
+            		 				$ivar = 1;
+            		 				$varCl = '';
+            		 				foreach ($varColors  as $key=>$value):
+            		 				if( $ivar == 6)
+            		 				{
+            		 					break;
+            		 				}
+            		 				$photo = $this->mVarianta->getResizedPhotos($value['obrazky']);
+            		 				$pathPhoto = helper_FrontEnd::getFirstPhoto($photo,'pMinic2' , false);            		 						
+            		 				?>
+									      		 		<div class="miniImg <?=$varCl?>">
+            		 						<a href="<?=$nodeProd->path?>?variantId=<?=$value['id']?>">
+            		 						<img  class="variantImgs" rel="<?=$value['id']?>" atr="<?=$nodeProd->nodeId?>" alt="" src="<?=$pathPhoto['path']?>"></a>		
+            		 					</div>        <?
+            		 				$ivar++;
+            		 				endforeach;
+            		 				else:?>
+            		 				<div class="emptyMini"></div>
+            		 				<?endif;
+
+            		 			endif;?>
+            		 			<div class="mimiClear"></div>
+
+									<h3>
+								<a <?=$this->schema?'itemprop="url"':''?>  href="<?=$nodeProd->path?>?variant=<?=$variantId?>">
+									<span class="black fs14 fNormal" <?=$this->schema?'itemprop="name"':''?>><?=$nodeProd->title?></span>
+								</a>
+		   					</h3>
+								
+                                <p <?=$this->schema?'itemprop="offers" itemscope itemtype="http://schema.org/'.$googleOffer.'"':''?> class="price" <?=$s?>>
+                                <?if($varianta['discount']):?>
+                                	<span class="tLineThrough grey <?=$s?>"><?=helper_FrontEnd::price($varianta['price2'])?></span>
+                                <?endif;?>
+                                Cena: <span <?=$red?> <?=$googlePrice?>><strong><?=helper_FrontEnd::price($varianta['price'])?> Kč</strong></span></p>
+                            <div class="clear"></div>

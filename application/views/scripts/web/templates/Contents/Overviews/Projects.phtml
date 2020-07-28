@@ -1,0 +1,30 @@
+<?=$this->pageText?>
+<div id="projects">
+	<? 
+	if(count($this->children)):
+	foreach ($this->children as $project):
+		$content = $project->getPublishedContent();		
+			//$content->onUpdate();  
+			// pr($content->getFilesNames('photo')); 
+			//$url = Utils::getWebPath($project->path);
+			$url = $content->getPropertyValue('url');
+			$foto = helper_FrontEnd::showPhoto($content->getPropertyValue('photo'), $content->fotoMiniName, false);
+			// e($foto); 
+			?>
+			<div class="project"> 
+				<? if ($foto['path']): ?> 
+				<a href="<?=$url?>" target="_blank" class="pimg">
+					<img src="<?=$foto['path']?>" alt="" />
+				</a>  
+				<? endif; ?>    
+				 
+            	<h2><a href="<?=$url?>" target="_blank"><?=$project->title?></a></h2> 
+            	<?=$content->getPropertyValue('html')?>
+            </div>				  
+		 
+	<? 	
+		endforeach; 
+	endif;	 
+	?>
+    <div class="clear">&nbsp;</div>
+</div>

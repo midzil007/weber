@@ -1,0 +1,96 @@
+<script type="text/javascript" charset="utf-8">
+function ShowNextOption(classEl){
+	set = false;
+	$('.'+classEl).each(function( index ) {
+		if($(this).css('display')=='none' && set==false){
+			set = true;
+			$(this).css({'display' : ''});
+		}
+		});
+		return false;
+}
+
+function showText(element){   
+		$('#'+element).toggle("slow");
+		return false;
+		};
+</script>
+<form id="PageForm" class="validate" name="PageForm" method="post">	
+<div id="tabsDetail" class="ui-tabs ui-widget ui-widget-content ui-corner-all"> 
+    <ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all" role="tablist"> 
+    	<li class="ui-state-default ui-corner-top ui-tabs-active ui-state-active"><a href="#tabsd-1">Obecné</a></li> 
+        <li class="ui-state-default ui-corner-top"><a href="#tabsd-2">Kategorie</a></li> 
+        <li class="ui-state-default ui-corner-top"><a href="#tabsd-3">Příznaky</a></li> 
+        <li class="ui-state-default ui-corner-top"><a href="#tabsd-4">Značky</a></li>       
+        <li class="ui-state-default ui-corner-top"><a href="#tabsd-5">Emaily zákazníkům</a></li>            
+    </ul>
+    
+    <div id="tabsd-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="display: block;">
+  
+    	<table class="normal">	
+		<tbody>		
+			<?foreach ($this->eshopSettings as $setting):?>
+			<tr>
+			<?
+			$span = '';
+			if('ordersEmail' == $setting['variable'] || 'ordersEmailName' == $setting['variable'] || 'dph' == $setting['variable']):
+							$span = ' <span class="redValid">*</span>';
+					
+			endif;?>
+			<td class="formcell"><?=$this->cp_Translate[$setting['variable']] ?><?=$span?></td>			
+			<td class="formcell"> 
+				<?php 
+				switch ($setting['formType']){
+					default:
+					case 'Text':
+						$cl = 'ftext';
+						if('ordersEmail' == $setting['variable']):
+							$cl = 'ftext validate[required,custom[email]] text-input';
+						elseif('ordersEmailName' == $setting['variable']):
+							$cl = 'ftext  validate[required,length[0,100]] text-input';
+						elseif('dph' == $setting['variable']):
+							$cl = 'ftext validate[required,custom[onlyNumber]] text-input';
+						endif;
+						echo $this->{'form'.$setting['formType']}($setting['variable'], $setting['value'], array('class' => $cl));
+						break;
+						
+					case 'Select':						 
+						
+						$options = array();
+						$o = explode(';', $setting['options']);
+						foreach ($o as $opt){
+							list($k, $v) = explode('=', $opt);
+							$options[$k] = $v;
+						}
+												
+						echo $this->{'form'.$setting['formType']}($setting['variable'], $setting['value'], array('class' => 'ftext', 'value'=>$setting['value']), $options );
+				}
+				 ?>
+			</td>						
+		</tr>
+			<?endforeach;?>		
+		</tbody>
+		</table>
+    </div>
+    <div id="tabsd-2" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="display: none;">
+    	<?=$this->render('controls/admin/modules/Eshop/Settings_kategorie.phtml')?>  
+    	
+    </div>
+    <div id="tabsd-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="display: none;">
+    	<?=$this->render('controls/admin/modules/Eshop/Settings_priznaky.phtml')?>  
+    </div>
+    <div id="tabsd-4" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="display: none;">
+	    <?=$this->render('controls/admin/modules/Eshop/Settings_znacky.phtml')?>
+    </div> 
+    <div id="tabsd-5" class="ui-tabs-panel ui-widget-content ui-corner-bottom" style="display: none;">
+	    <?=$this->render('controls/admin/modules/Eshop/Settings_emaily.phtml')?>  
+    </div>
+</div> 
+<?=$this->render('controls/admin/forms/_Save.phtml'); ?>  
+</form>
+<script type="text/javascript">
+    $(function() {
+        $( "#tabsDetail" ).tabs();
+    }); 
+    </script>
+    
