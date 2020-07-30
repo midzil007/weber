@@ -9,8 +9,8 @@ class module_ImportWeb {
     private $_categories = array(
             'https://www.weber.com/CZ/cs/grily/'
     );
+  
 
-    
 
     function __construct($view)
     {
