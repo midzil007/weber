@@ -534,6 +534,12 @@ echo json_encode($images);
 			$mAdmin->renderProducts($view); 
 			die;   
 		}
+
+		if($view->inputGet->loadProducts){
+			$mAdmin = new module_ImportWeb($view);      
+			pr($mAdmin->separeteProduct(false));   
+			die;
+		}
 		    
 		               
 		if($view->inputGet->adminDelivery){
