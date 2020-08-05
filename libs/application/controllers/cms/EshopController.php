@@ -1883,11 +1883,11 @@ die;
 		$parentId = $this->input->parent;   
 		 
 		$ctype = $this->input->contentType;
-		$content = Content::init($ctype, $this->input, $this->acl);			
+		$content = Content::init($ctype, $this->input, $this->acl);	 		
 		if(method_exists($content, 'preSave')){
 			$this->input = $content->preSave($this->input, $this->view); 
 		}
-		
+		   
 		//pr($this->input);return ;
 		
 		$err = $this->checkFormNewPage();
@@ -1895,7 +1895,7 @@ die;
 		if(!$err){
 			$err = $this->checkSEOForm();	
 		}
-		
+		   
 		if(!$err){ // ok	
 			
 			//content
@@ -1919,10 +1919,10 @@ die;
 			// pr($n); die(); 
 			
 			//save		
-	    	$this->tree->addNode($n, false , false);
+			$this->tree->addNode($n, false , false);  
 	    	$this->tree->pareNodeAndContent($n->nodeId, $content->id, $content->_name);
 			$this->view->mVariant->saveVariats($this->input,$content->id);
-			
+			  
 		//	$this->view->mProducts->savePositionCategories($content->id,$this->input->parent);
 			if(method_exists($content, 'afterNodeSave')){
 				$content->afterNodeSave( $this->view, $n); 

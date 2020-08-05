@@ -57,10 +57,10 @@ class content_Product extends Content {
     	$this->properties[] = new ContentProperty('preText','Wysiwyg','', array(),array(), array(  'height' => 250));     
     	$this->properties[] = new ContentProperty('parametry','Wysiwyg','', array(),array(), array(  'height' => 250));
 		$this->properties[] = new ContentProperty('html','Wysiwyg','', array(),array(), array(  'height' => 250));  
-		$this->properties[] = new ContentProperty('isOnMerchant','Hidden','', array(), array(), array(), false);	 
-		$this->properties[] = new ContentProperty('disable_product','Checkbox','', array(), array(), array(), false);	     
+
+		     
 		$this->properties[] = new ContentProperty('heureka-title','Text','', array(), array(), array(), false);   
-		$this->properties[] = new ContentProperty('skryto','Checkbox','', array(), array(), array(), false); 
+		
     	$this->properties[] = new ContentProperty('parent','MultiPageSelect','', array(), array('root' => 3801, 'display' => 'FOLDER')); 
 		$this->properties[] = new ContentProperty('video','Wysiwyg','', array(),array(), array(  'height' => 250));  
 		$this->properties[] = new ContentProperty('zboziProduct','Wysiwyg','', array(),array(), array(  'height' => 250));    		 		            	   
@@ -74,11 +74,11 @@ class content_Product extends Content {
 			$this->properties[] = new ContentProperty('znacka','Select', '', array(), $znacky, array(), false);
 		//	$this->properties[] = new ContentProperty('rada','Select', '', array(), $znacky, array(), false);
     	//}      
-    		$this->properties[] = new ContentProperty('virtualni','Checkbox','', array(), array(), array(), false); 
-			$this->properties[] = new ContentProperty('pocet-virtualni','Text','', array(), array(), array(), false); 
+    		
     	$this->properties[] = new ContentProperty('dphQuote','Select', '', array(), $dph, array(), false);   
 		$this->properties[] = new ContentProperty('akce','CheckboxGroup','', array(), array(), array(), false); 
 		$this->properties[] = new ContentProperty('souvisejici','MultiPageSelect','', array(), array('root' => 3801, 'display' => 'ITEM', 'sort'=>'title'));
+		$this->properties[] = new ContentProperty('prop','MultiPageSelect','', array(), array('root' => 76947, 'display' => 'ITEM', 'sort'=>'title'));
 		$this->properties[] = new ContentProperty('pece','MultiPageSelect','', array(), array('root' => 3801, 'display' => 'ITEM', 'sort'=>'title'));
 		//$this->properties[] = new ContentProperty('filty','MultiPageSelect','', array(), array('root' => 3801, 'display' => 'ITEM', 'sort'=>'title')); 
 
@@ -86,7 +86,7 @@ class content_Product extends Content {
 	// $this->properties[] = new ContentProperty('poradi','Text','', array(), array(), array(), false);	
 		$this->properties[] = new ContentProperty('sold','Text','', array(), array(), array(), false);	
 		$this->properties[] = new ContentProperty('rating','Hidden','', array(), array(), array(), false);
-		$this->properties[] = new ContentProperty('dateArchived','Hidden','', array(), array(), array(), false);
+		
 		
 		
     } 
@@ -312,13 +312,12 @@ class content_Product extends Content {
      	$view->mBasket->saveLastVisitedToCookie($view->node->nodeId,$view->selectedVariant['id']);
 		if($_GET['galll'])
 		$view->showHPBan = false;
-			return $view->render(Zend_Registry::getInstance()->config->view->contentsDir . $template);
-		
-    	
+		return $view->render(Zend_Registry::getInstance()->config->view->contentsDir . $template);
+
 	}
     
 
-	private function getSouvisejici($view,$pece)
+	private function getSouvisejici($view,$pece = false)
 	{
 		$souvisejici = $pece ? "pece":"souvisejici";
 		$souvisejici = $this->getPropertyValue($souvisejici);   

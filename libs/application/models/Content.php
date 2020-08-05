@@ -284,10 +284,10 @@ class Content
     	}
     	if(method_exists($this, 'onSave')){
     		$this->onSave();
-    	}
-    	//pr($data); pr($this); return ;
+		}
+		
+		//pr($data); pr($this); return ;		      
     	Zend_Registry::getInstance()->db->insert($this->_name, $this->insertData);
-    	
     	if(method_exists($this, 'afterSave')){
     		$this->afterSave();    
     	}  

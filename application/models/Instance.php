@@ -537,10 +537,11 @@ echo json_encode($images);
 
 		if($view->inputGet->loadProducts){
 			$mAdmin = new module_ImportWeb($view);      
-			pr($mAdmin->separeteProduct(false));   
-			die;
+			//pr($mAdmin->addActicle(false));     
+			pr($mAdmin->addNewSimple(false));   
+			die;               
 		}
-		    
+		       
 		               
 		if($view->inputGet->adminDelivery){
 			$mAdmin = new module_ImportAdmin($view);      

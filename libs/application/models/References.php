@@ -62,12 +62,12 @@ class References
 	
 	function addReference($nodeId, $contentId, $refNodeId){
 		if(!$this->db->fetchOne("SELECT node FROM `" . $this->_tableName . "` WHERE node = :node AND content = :content AND refNode = :refNode", array('node' => $nodeId, 'content' => $contentId, 'refNode' => $refNodeId))){
+			$nodeId = $nodeId ? $nodeId : 0; 
 			$data = array(
 				'node' => $nodeId,
 				'content' => $contentId,
 				'refNode' => $refNodeId
-			);
-			
+			);  
 			$this->db->insert($this->_tableName, $data);
 		}		
 	}

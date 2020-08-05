@@ -298,11 +298,11 @@ static function generateBreadCrumbs($view, $dontshow = array(), $homeTitle = 'Ú
 					$path = $replace[$path][0];
 					  
 				}  
-				if($view->domainName && $path != '/jura'){ 
+				if($view->domainName && $path != '/weber'){ 
 					$path = self::getPathOneAdmin($view, $path); 
 				} 
 				if($title !='e-shop'){
-					if($homeTitle && $path=="/jura")
+					if($homeTitle && $path=="/weber")
 					$title = $homeTitle;     
 					$xhtml .= '<a href="' . $path . '">' . $title . '</a> » ';
 					}   

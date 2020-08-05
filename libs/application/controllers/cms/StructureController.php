@@ -258,8 +258,7 @@ class Cms_StructureController extends CmsController
 	{
 		$this->view->parentId = $this->request->getParam('parentId');
 		$this->view->isEdit = false;		
-		$this->setViewNode();				
-
+		$this->setViewNode();				    
 		if(isset($this->input->save)){  
 			list($state, $message, $redir) = $this->saveNewAction();   
 			if($state){
@@ -566,6 +565,9 @@ class Cms_StructureController extends CmsController
 		
 	public function saveNewAction()
 	{				
+		$this->input->order = $this->input->order ? $this->input->order : 0;
+		$this->input->level = $this->input->level ? $this->input->level : 0; 
+		$this->input->position = $this->input->position ? $this->input->position : 0; 
 		$err = $this->checkFormNewNode();
 		if(!$err){
 			$err = $this->checkSEOForm();	
@@ -588,15 +590,16 @@ class Cms_StructureController extends CmsController
 			
 			$lang = Zend_Registry::getInstance()->languages->language;
 			$lang = $lang?$lang:'cz';
-			
+		
 			
 			$err2 = $content->save();	
 			
 			//node				
-			$parentId = $this->request->getParam('parentId');						
+			$parentId = $this->request->getParam('parentId');	    
+			     						
 			$n = Node::init('FOLDER', $parentId, $this->input, $this->view);
 			$n->saveAdverts($content->adverts, $content);
-			
+		  
 			//save		
 	    	$this->tree->addNode($n);
 	    	$this->tree->pareNodeAndContent($n->nodeId, $content->id, $content->_name); 

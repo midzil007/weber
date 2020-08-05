@@ -1521,7 +1521,7 @@ public function getWordPieces($count)
     	} else if($params['allcol']) { 
     		$select->from(array( 'cm' => $this->_tableName), array('*')); 		  
     	}  else {    
-    		$select->from(array( 'cm' => $this->_tableName), array($disc, 'cid' => 'cm.id','virtualni','pocet-virtualni', 'znacka', 'zboziProduct', 'cm.poradi as prodporadi', 'sold','n.id', 'n.title', 'n.path', 'n.parent', 'dateModif', 'dateCreate', 'html', 'files', 'parent', 'znacka', 'video',  'souvisejici',  'state', 'dphQuote', 'preText')); 		  
+    		$select->from(array( 'cm' => $this->_tableName), array($disc, 'cid' => 'cm.id', 'znacka', 'zboziProduct', 'cm.poradi as prodporadi', 'sold','n.id', 'n.title', 'n.path', 'n.parent', 'dateModif', 'dateCreate', 'html', 'files', 'parent', 'znacka', 'video',  'souvisejici',  'state', 'dphQuote', 'preText')); 		  
     	}  
     	
 		$select->join(   
