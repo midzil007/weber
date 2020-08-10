@@ -406,7 +406,7 @@ class module_ImportWeb {
            $t = explode('<span class="bee__product-title">', $html);
            unset($t[0]);
            foreach($t as $item)
-           { 
+           {   
                
                $temp = explode("</span>",$item); 
                $title = $temp[0];
