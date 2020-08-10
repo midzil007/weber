@@ -1652,10 +1652,7 @@ public function getWordPieces($count)
          	$select->where('onSection =?', '1');
          }
 		  
-		if($params['cms'] != '1'){
-		  $select->where('disable_product  = ?', '0');  
-		}
-		 
+		
      {
      	//$select->where('n.id in ('.$params['souvisejici'].' )');
      }  

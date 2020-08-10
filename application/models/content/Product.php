@@ -62,7 +62,7 @@ class content_Product extends Content {
 		$this->properties[] = new ContentProperty('heureka-title','Text','', array(), array(), array(), false);   
 		
     	$this->properties[] = new ContentProperty('parent','MultiPageSelect','', array(), array('root' => 3801, 'display' => 'FOLDER')); 
-		$this->properties[] = new ContentProperty('video','Wysiwyg','', array(),array(), array(  'height' => 250));  
+		$this->properties[] = new ContentProperty('garancy','Wysiwyg','', array(),array(), array(  'height' => 250));  
 		$this->properties[] = new ContentProperty('zboziProduct','Wysiwyg','', array(),array(), array(  'height' => 250));    		 		            	   
     	$this->properties[] = new ContentProperty('files','MultiFileSelect','', array(), array(), array('showSelectFile' => true, 'inputWidth' => '300', 'maxFiles' => 10, 'showUploadFile' => true, 'uploadFileDirectoryNodeId' => 53098));
     	// $this->properties[] = new ContentProperty('photos','MultiFileSelect','', array(), array(), array('showSelectFile' => true, 'inputWidth' => '300', 'maxFiles' => 20, 'showUploadFile' => true, 'uploadFileDirectoryNodeId' => 3880 ));
@@ -230,7 +230,21 @@ class content_Product extends Content {
  		}  
 		return false;
 	}
-	
+
+	private function renderProp($view,$prop)
+	{
+		$vals = helper_MultiSelect::getMultiSelectValues($prop); 
+		foreach($vals as $item)
+		{
+			$node = $view->tree->getNodeById($item);
+			$article = $node->getPublishedContent();			  
+			$authorPhoto = helper_FrontEnd::getPhoto('photos', $article, $article->fotoShowName , $article->fotoShowName, 1);
+
+			$text .= '<div class="prop"><p><img src='.$authorPhoto['path'].' alt='.$node->title.'><p>
+							<p>'.$node->title.'</p></div>'; 
+		}   
+		return $text;
+	}
    
     function show($view, $node){
     	// nasetovat sklad
@@ -258,10 +272,7 @@ class content_Product extends Content {
  		}
 		$params = array();   
      
-		if($_SESSION['sl'] && $this->setSleva())   
-		{  
-			$params['sleva'] = $_SESSION['sl'];
-		}
+		$view->prop = $this->renderProp($view, $this->getPropertyValue('prop'));
     	$view->selectedVariant = $view->mVarianta->getVariantsByIdProduct($this->id,true,false,$params);
 		/// není skladem
 		if(!$view->selectedVariant)
@@ -273,13 +284,13 @@ class content_Product extends Content {
     	$view->files = $view->content->getFilesNames('files');
      	$view->path = $view->curentPath = $this->getDetailUrl($view, $node, false);
 		$view->priznaky = $this->getPriznaky(); 
-     	$arraysNodeKavovary = array(7391,74760,7234);
-		$view->isKavovary = false;
-		foreach ($arraysNodeKavovary as $value) {
-			if(in_array($value, $vals)){
-				$view->isKavovary = true;
+     	$arraysNodeGril = array(76931);
+
+		foreach ($arraysNodeGril as $value) {
+			if(in_array($value, $vals)){  
+				$view->rada = $view->tree->getNodeById(max($parents));
 			}
-		}      
+		}       
  		$view->renderParents = $this->renderCategories($vals, $view);
     	if(!$path){
     		$view->parentMax = $path = $view->tree->getNodeById(max($vals));
@@ -304,7 +315,8 @@ class content_Product extends Content {
 		} 
  		$minParent  = $view->tree->getNodeSimple(min($parents));
  		$view->parentTitle = $minParent->title;
-     	$view->curentNode = $path;
+		$view->curentNode = $path;
+		$view->garancy = $this->getPropertyValue('garancy');       
      	$view->curentPath = $path->path;
 		$view->productNode = $view->node;    
 		$vsechnyZnacky = $view->tree->getNodeSimple(74592);

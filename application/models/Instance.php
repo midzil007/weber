@@ -537,9 +537,13 @@ echo json_encode($images);
 
 		if($view->inputGet->loadProducts){
 			$mAdmin = new module_ImportWeb($view);      
-			//pr($mAdmin->addActicle(false));     
-			pr($mAdmin->addNewSimple(false));   
-			die;               
+			//pr($mAdmin->separeteProductCategory());       // načte produkty ze sekce  
+			//pr($mAdmin->setProducts());                 // načte z weber    
+			//pr($mAdmin->addActicle(false));                                 
+			pr($mAdmin->insertProducts());                                  
+			   
+		
+			die;                    
 		}
 		       
 		               
@@ -553,7 +557,7 @@ echo json_encode($images);
 			$mAdmin = new module_ImportAdmin($view);        
 			$mAdmin->renderPayments();   
 			die;
-		}  
+		}   
 		
 		if($_GET['quickAddItem'] && $view->input->count > 0){  
 			$view->mEshop->basket->addItemQuickShop($view->input->nodeId,$view->input->count,$view->input->price,$view,$view->input->variantId);

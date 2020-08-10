@@ -1,10 +1,7 @@
 <?php  
-$this->disableH1 = true;    
-$mImWeb = new module_ImportWeb($this);
-$object = $mImWeb->show($this);   
-   
 
-$product = $this->node;  
+$this->disableH1 = true;    
+$product = $this->node;
 list($totalRev,$rev) = $this->mReviews->showSingleRev($this->node->nodeId);   
 $this->productPath = $this->node->path;  
 $c = $this->content;    
@@ -36,22 +33,18 @@ $c = $this->content;
             		
             		//$akce = $c->getPriznaky();   
             		$skladem = $this->selectedVariant['skladem'];
-            		$price  = $this->price = $object->price;//$this->selectedVariant['price'];   
+            		$price  = $this->price = $this->selectedVariant['price'];   
             		$price2  =  $this->price2 = $this->selectedVariant['price2'];  
             		//$kod  = $c->getPropertyValue('kod');  
-            		//$znacka  = $c->getPropertyValue('znacka');   
-					$text  = '<div class="template-details-items-list-wrapper js-slider-wrapper">'.
-							($object->otherText);//$c->getPropertyValue('html');
-							pr($text);
-							die;   
+            		//$znacka  = $c->getPropertyValue('znacka');  
+            		$text  =  $c->getPropertyValue('html');
             		$preText  = str_replace('<p></p>', '',  $c->getPropertyValue('preText')); 
             		$preText  = str_replace('<p> </p>', '', $preText);     
-					$parametry  =  '<ul><li class="bee__flyout__elem flyout-ctr">
-						<div class="flyout-content bee__flyout__content bee__flyout__part bee__flyout__content--full-width">'.($object->params).'</ul>';//$c->getPropertyValue('parametry');      
-            		$akce = $c->getPriznaky();     
+            		$parametry  =  $c->getPropertyValue('parametry');      
+            		$akce = $c->getPriznaky();   
 					$akceTop = $c->getPriznaky(true);  
             		$alternativy  = $this->selectedVariant['alternativy'];    
-					$souvisejici = json_decode($object->shiping);//$this->souvisejici;
+            		$souvisejici = $this->souvisejici;
             		$darky = $c->getPropertyValue('darek');   
             		//$prodejne = $c->getPropertyValue('prodejny');   
             	 
@@ -69,10 +62,6 @@ $c = $this->content;
 			$p = helper_FrontEnd::getPhoto('photos', $c, $c->fotoCropShowName);
 			$images = helper_FrontEnd::getResizedPhotos($photos, 'pShow', 'pFull');
 			$full = helper_FrontEnd::getResizedPhotos($photos, 'pMinic4', 'pShow');	  
-
-
- 
-			$images = json_decode($object->images);
 			$this->mainImg = $img;         
 			$descr = $this->node->title;
 			 if($this->schema): 
@@ -106,7 +95,7 @@ $c = $this->content;
 						$actulPos;?>            
 					<span id="navi-minus" class="arrow" onclick="setNavi(this,<?=$countImgJs?>)" rel="<?=($actulPos-1) < 0 ? $countImgJs : $actulPos-1?>" rel="0" class="navi"></span>
                     	<?foreach($images as $im):?>
-                    		<a href="<?=$im['fullPath']?>" title="" class="mb img-responsive openGallery photo<?=$inc?>" <?=$inc == 0 ? 'id="mb1"' :''?> rel="[images]" data-counter="<?=$inc?>"><img <?=$this->schema?'itemprop="image"':''?> src="<?=$im?>" alt="<?=$im['name']?>" /> <span id="zoom-icon"></span></a>
+                    		<a href="<?=$im['fullPath']?>" title="" class="mb img-responsive openGallery photo<?=$inc?>" <?=$inc == 0 ? 'id="mb1"' :''?> rel="[images]" data-counter="<?=$inc?>"><img <?=$this->schema?'itemprop="image"':''?> src="<?=$im['path']?>" alt="<?=$im['name']?>" /> <span id="zoom-icon"></span></a>
                     	<?$inc++;endforeach?>
                     	<span href="#" id="navi-plus" class="arrow navi" onclick="setNavi(this,<?=$countImgJs?>);"  rel="<?=($actulPos > $countImgJs ? 0 : $actulPos+1)?>"></span>
                        <div class="clear"></div>
@@ -120,10 +109,9 @@ $c = $this->content;
 		<a href="#" id="allPhoto" onclick="return showBlock()">Zobrazit celou galerii</a>
 		  <div class="clear"></div> 
 	<?endif; 
-	
 		foreach ($images as $key=>$value): ?>
     		<a class="mini-photos" onclick="return false;" rel="<?=$i?>" href="<?=$full[$key]['fullPath'] ?>" target="_blank">
-				<img class="botip" rel="Zvětšit obrázek" alt="Zvětšit obrázek" src="<?=$value ?>" alt="<?=$value['name'] ?>" >
+				<img class="botip" rel="Zvětšit obrázek" alt="Zvětšit obrázek" src="<?=$full[$key]['path'] ?>" alt="<?=$value['name'] ?>" >
 			</a>   	
 		<?endforeach; ?>  
 </div> 
@@ -131,8 +119,8 @@ $c = $this->content;
 	<div class="info">
 	<?$this->pageTitleRaw = $this->difp?$this->pageTitleRaw .= ', SLEVA '.$this->difp:$this->pageTitleRaw;?>
 	<div class="title">
-		 <h1 <?=$this->schema?'itemprop="name"':''?>><?=$object->title?><?$this->pageTitleRaw?> <?=$object->color?></h1>
-		    
+		 <h1 <?=$this->schema?'itemprop="name"':''?>><?=$this->pageTitleRaw?> </h1>
+		  
 		<?if($totalRev->total>0):?>
 			<div class="revText marTop17 marLeft10 marBottom10">
 				  
@@ -229,13 +217,13 @@ email: <span class="rr"><strong><a href="mailto:prodej@specshop.cz">prodej@specs
 		   
 	</div> 
 	 <?endif?>        
-		<p>Kód: <strong><?=$product->nodeId?></strong> | Záruka: <strong><?if($this->isKavovary):?>25 měsíců (IČO 12) <?else:?>24 měsíců (IČ 12) <?endif?></strong></p>
-		<p>Řada: <strong><?=$object->line?></strong></p>
-		<p>Barva: <strong><?=$object->color?></strong></p>
-		<p>Articl: <strong><?=$object->articl?></strong></p>
-		<?if($this->virtualni == 1):?>    
-				<a href="Javascript://" id="lightboxBtn" ><img src="/images/360icon.png" alt="Prohlídka 360°" /></a>      
-		<?endif?>       
+		
+		<?if($this->rada):?>
+			<p>Řada: <strong><a href="<?=$this->rada->path?>"><?=$this->rada->title?></a></strong></p>
+		<?endif?>
+		<p>Kód: <strong><?=$product->nodeId?></strong> </p>
+		
+		   
 	</div>
 	<?$tabsInc = 1;?>  
 	<div class="spacer10"></div> 	
@@ -248,14 +236,18 @@ email: <span class="rr"><strong><a href="mailto:prodej@specshop.cz">prodej@specs
     	   <?$tabsInc++?>  
     <?endif?>  
    
-     <?if($this->pece):?> 
-    	<li><a class="tabik" href="#tabs-<?=$tabsInc?>">Péče o výrobek</a></li>
+     <?if($this->prop):?> 
+    	<li><a class="tabik" href="#tabs-<?=$tabsInc?>">Vlastnosti</a></li>
     	 <?$tabsInc++?>   
     <?endif?>  
     <?if($this->souvisejici):?> 
     	<li><a class="tabik" href="#tabs-<?=$tabsInc?>">Příslušenství</a></li>
     	 <?$tabsInc++?>  
-    <?endif?>     
+	<?endif?>    
+	<?if($this->garancy):?> 
+    	<li><a class="tabik" href="#tabs-<?=$tabsInc?>">Záruka</a></li>
+    	 <?$tabsInc++?>   
+    <?endif?>   
    	<?if($rev):?> 
     <li><a class="tabik" href="#tabs-<?=$tabsInc?>">Hodnocení (<?=$totalRev->count?>)  
     	<!-- <span class="emptyStarsMini marRight3 i-block vAlingMid ">  
@@ -297,20 +289,16 @@ email: <span class="rr"><strong><a href="mailto:prodej@specshop.cz">prodej@specs
   	<div id="tabs-<?=$tabsInc?>" class="pull-left t-w">
   				 <?$tabsInc++?>
   				 <h3 class="tab-t">Technické parametry - <?=$this->node->title?>:</h3>    
-    	<?=$parametry?>  
-  	</div>
+    		<?=$parametry?>  
+  	</div>  
   <?endif?>
   
    <? 
-   $souv = $souvisejici;
-
-   if($this->pece):
-   $this->souvisejici = $this->pece?> 
+   if($this->prop):?>
   <div id="tabs-<?=$tabsInc?>" class="pull-left t-w">
   			 <?$tabsInc++?>    
-  			 <h3 class="tab-t">Péče o výrobek:</h3>
-			
-     <?=$this->render('parts/alternativeProducts.phtml'); ?>
+  			 <h3 class="tab-t">Vlastnosti:</h3>
+			<?=$this->prop?>
   </div> 
    <?endif?> 
    <?if($souv):  
@@ -318,16 +306,14 @@ email: <span class="rr"><strong><a href="mailto:prodej@specshop.cz">prodej@specs
   <div id="tabs-<?=$tabsInc?>" class="pull-left t-w">
   			 <?$tabsInc++?>    
   			 <h3 class="tab-t">Příslušenství:</h3>
-			   <?foreach($this->souvisejici as $it):?>
-			   <p><?=$it?></p>
-				<?endforeach;?>
-				<h3 class="tab-t">Technologie:</h3>  
-			   <?foreach(json_decode($object->properties) as $key=> $it):?>
-			   <p><img src="<?=$key?>"><?=$it?></p>
-				<?endforeach;?>
      <?=$this->render('parts/alternativeProducts.phtml'); ?>
   </div>
    <?endif?>    
+   <div id="tabs-<?=$tabsInc?>" class="pull-left t-w">
+  			 <?$tabsInc++?>    
+  			 <h3 class="tab-t">Záruka:</h3>
+			<?=$this->garancy; ?>
+  </div> 
    <?if($rev):?> 
   <div id="tabs-<?=$tabsInc?>" class="pull-left t-w">  
   			 <?$tabsInc++?> 
@@ -430,13 +416,12 @@ foreach ($rev as $item):
             </div>
             <div style="position: absolute; display: block; background: url(/img/loading.gif) no-repeat center center;
                 top: 0px; left: 0px;width: 100%;height:100%;">
-         </div> ´ 
+         </div> 
         </div>
  
         <!-- Slides Container -->
         <div u="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 1200px; height: 770px; overflow: hidden;"><!--h356 w800-->
-			<?$inc = 0;
-		 
+        	<?$inc = 0;
         	foreach($images as $key=>$im):?>
             <div>
             	<img u="image" src="<?=$im['fullPath']?>" alt="gal" class="original<?=$inc?>" /> 

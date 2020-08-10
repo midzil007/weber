@@ -8,7 +8,33 @@ header ( 'Content-Type: text/html; charset=UTF-8' );
  */
 class module_ImportWeb {  
     private $_categories = array(
-            'https://www.weber.com/CZ/cs/grily/'
+
+        //grily
+        //   '76931|76932' => 'https://www.weber.com/CZ/cs/grily/grily-na-d%C5%99ev%C4%9Bn%C3%A9-uhl%C3%AD/',
+      //     '76931|76933' => 'https://www.weber.com/CZ/cs/grily/plynov%C3%A9-grily/',
+    //       '76931|76934' => 'https://www.weber.com/CZ/cs/grily/elektrick%C3%A9-grily/',
+  //         '76931|76935' => 'https://www.weber.com/CZ/cs/grily/p%C5%99enosn%C3%A9-grily/',
+//           '76931|76936' => 'https://www.weber.com/CZ/cs/grily/peletov%C3%A9-grily/',
+
+           // přislušenství
+           '78401|78667' => 'https://www.weber.com/CZ/cs/p%C5%99%C3%ADslu%C5%A1enstv%C3%AD/grilov%C3%A1n%C3%AD/grilovac%C3%AD-n%C3%A1%C4%8Din%C3%AD/',
+           '78401|78668' => 'https://www.weber.com/CZ/cs/p%C5%99%C3%ADslu%C5%A1enstv%C3%AD/grilov%C3%A1n%C3%AD/gourmet-bbq-system/',
+           '78401|78669' => 'https://www.weber.com/CZ/cs/p%C5%99%C3%ADslu%C5%A1enstv%C3%AD/grilov%C3%A1n%C3%AD/brikety--uhl%C3%AD-a-dal%C5%A1%C3%AD-p%C5%99%C3%ADslu%C5%A1enstv%C3%AD/',
+           '78401|78670' => 'https://www.weber.com/CZ/cs/p%C5%99%C3%ADslu%C5%A1enstv%C3%AD/grilov%C3%A1n%C3%AD/igrill--teplom%C4%9Bry-a-%C4%8Dasova%C4%8De/',
+           '78401|78671' => 'https://www.weber.com/CZ/cs/p%C5%99%C3%ADslu%C5%A1enstv%C3%AD/grilov%C3%A1n%C3%AD/ot%C3%A1%C4%8Dec%C3%AD-%C5%A1p%C3%ADzy/',
+           '78401|78672' => 'https://www.weber.com/CZ/cs/p%C5%99%C3%ADslu%C5%A1enstv%C3%AD/grilov%C3%A1n%C3%AD/p%C3%A1nve-a-planchy/',
+           '78401|78673' => 'https://www.weber.com/CZ/cs/p%C5%99%C3%ADslu%C5%A1enstv%C3%AD/grilov%C3%A1n%C3%AD/ko%C5%A1e--p%C3%A1nve-a-misky/',
+           '78401|78674' => 'https://www.weber.com/CZ/cs/p%C5%99%C3%ADslu%C5%A1enstv%C3%AD/grilov%C3%A1n%C3%AD/stojany-na-grilov%C3%A1n%C3%AD-a-ro%C5%BEn%C4%9B/',
+           '78401|78675' => 'https://www.weber.com/CZ/cs/p%C5%99%C3%ADslu%C5%A1enstv%C3%AD/grilov%C3%A1n%C3%AD/ud%C3%ADc%C3%AD-lup%C3%ADnky-a-%C5%A1pal%C3%ADky--ud%C3%ADc%C3%AD-prk%C3%A9nka-a-p%C5%99%C3%ADslu%C5%A1enstv%C3%AD/',
+           '78401|78676' => 'https://www.weber.com/CZ/cs/p%C5%99%C3%ADslu%C5%A1enstv%C3%AD/grilov%C3%A1n%C3%AD/patrov%C3%BD-grilovac%C3%AD-syst%C3%A9m-elevations/',
+           
+
+           '78401|78677' => 'https://www.weber.com/CZ/cs/p%C5%99%C3%ADslu%C5%A1enstv%C3%AD/grilov%C3%A1n%C3%AD/keramika/',
+           '78401|78678' => 'https://www.weber.com/CZ/cs/p%C5%99%C3%ADslu%C5%A1enstv%C3%AD/grilov%C3%A1n%C3%AD/grilovac%C3%AD-a-pizza-kameny/',
+           '78401|78679' => 'https://www.weber.com/CZ/cs/p%C5%99%C3%ADslu%C5%A1enstv%C3%AD/grilov%C3%A1n%C3%AD/d%C5%99ev%C4%9Bn%C3%A9-pelety/',
+           '78401|78680' => 'https://www.weber.com/CZ/cs/p%C5%99%C3%ADslu%C5%A1enstv%C3%AD/grilov%C3%A1n%C3%AD/weber-connect/',
+           
+
     );
 
     private  $_tableSepareteProd = 'separeProduct';
@@ -29,7 +55,6 @@ class module_ImportWeb {
         foreach($data as $item)
         {
             $array = (array)(json_decode($item['properties']));  
-            
             foreach($array as $key => $it)
             {
                 $isExist = $this->db->fetchOne("select id from Nodes where `parent` = 76947 AND `type` LIKE 'ITEM' and title =?",$it);   
@@ -52,15 +77,15 @@ class module_ImportWeb {
                     $err2 = $content->save ();        
 		            $this->tree->addNode ( $newNode, false, false );          
                     $this->tree->pareNodeAndContent ( $newNode->nodeId, $content->id, $content->_name );	
-                }   
-                     
+                }    
             }
         }
     }
 
     private function getPropertiesId($title)
     {
-        return $this->db->fetchOne("select id from Nodes where `parent` = 76947 AND `type` LIKE 'ITEM' and title =?",$title);   
+        $id = $this->db->fetchOne("select id from Nodes where `parent` = 76947 AND `type` LIKE 'ITEM' and title =?",$title);   
+        return $id > 0 ? $id : '';
     }
 
     private function importImageArticles($img) {
@@ -94,16 +119,36 @@ class module_ImportWeb {
         $contentArticles->getPropertyByName ( 'photos' )->value = $path; 
         $contentArticles->createFiles ();    
 		return $path;
-	}
+    }
 
     public function addNewSimple($data) {
         $input = new stdClass();
-        $data = (object)$this->db->fetchRow("select * from ".$this->_tableSepareteProd." where id = 1");
 		$input->title = $input->pageTitle = $data->title;      
         list($inputContent,$variant) = $this->setInput($data);   
 		$this->addNodesAction ( 3801, $input, $inputContent, $variant);   
     } 
     
+    public function insertProducts()
+    { 
+        $data = $this->db->fetchAll("select * from ".$this->_tableSepareteProd." where insert_product = '0'");  
+        foreach($data as $item)
+        {
+            $object = (object)$item;
+            $this->addNewSimple($object);
+            $dataSaveToDB['insert_product'] = '1'; 
+            $where = $this->db->quoteInto('id =?',$object->id);  
+            $this->db->update($this->_tableSepareteProd,$dataSaveToDB,$where);   
+        }  
+    }
+
+    private function getRada($name)
+    {
+          
+        $name = trim(str_replace("&reg;","®",$name));
+        $id = $this->db->fetchOne("select id from Nodes where `type` LIKE 'FOLDER' and title =?",$name);   
+        return $id > 0 ? '|'.$id : "";     
+    }
+
     private function setInput($data)
 	{
         $input = new stdClass();
@@ -111,25 +156,28 @@ class module_ImportWeb {
 		$mVarianta = new module_Varianta();  
 		$varianta = array();        
         $input->pageTitle = $data->title;          
-		$inputContent->html = strip_tags((string)$data->DESCRIPTION); // zakomentovat  
+        $inputContent->html = $data->mainText;
+        $inputContent->parametry = $data->params;
         $inputContent->dphQuote = 21;         
-        $inputContent->znacka = 1;      
+        $inputContent->znacka = 1;         
         $inputContent->rating = 0;       
-        $inputContent->sold = 0;      
+        $inputContent->sold = 0;        
+        $inputContent->garancy = $data->garanty;
         $varianta['model'] = $data->articl;     
 		$varianta['skladem'] = 1;
         $varianta['price'] =  $data->price;
         foreach($mVarianta->variantProperty['color']['selection'] as $key=>$ite)
         {
             if($data->color == $ite)
-            $varianta['color'] = $key;
+            $varianta['color'] = $key;  
         }     
         foreach((array)json_decode($data->properties) as $it)
-        {
-            $articles[] = $this->getPropertiesId($it);
+        { 
+            if($it)
+                $articles[] = $this->getPropertiesId($it);
         }
         $inputContent->prop = implode("|",$articles);
-        $inputContent->parentSection =  $data->parent;
+        $inputContent->parentSection =  $data->parent.$this->getRada($data->line); 
         $inputContent->state = 'PUBLISHED';       
         foreach(json_decode($data->images) as $item)
         {  
@@ -204,27 +252,63 @@ class module_ImportWeb {
 
     // upravit aby to vzalo vše z cyklu
     public function separeteProduct($url = false)
-    {
-        $url = 'https://www.weber.com/CZ/cs/grily/grily-na-d%C5%99ev%C4%9Bn%C3%A9-uhl%C3%AD/';
-
-        $html = file_get_contents($url); 
+    {    
+    foreach($this->_categories as $keyCat=>$url){
+        pr($url);    
+        $html = file_get_contents($url);  
         $t = explode('<div class="template-product-all-grills-featured js-all-grills-featured">', $html);
         $tt = explode('<div class="template-product-all-grills-list is-hidden js-all-grills-list', $t[1]);
         $htmlDom = new DOMDocument();
         $htmlDom->loadHTML($tt[0]);
-        $links = $htmlDom->getElementsByTagName('a');
+        $links = $htmlDom->getElementsByTagName('a');  
         $extractedLinks = array();
-        $data['parent'] = '76932|76931';
-        foreach($links as $link){
+        $data['parent'] = $keyCat;        
+        foreach($links as $link){ 
             if(is_numeric(strpos($link->getAttribute('href'),'https')))
                 $extractedLinks[$link->getAttribute('href')] = $link->getAttribute('href');
-               
         }
+        pr($extractedLinks);     
+        die;      
         foreach ($extractedLinks as $item)
         {
             $data['url'] = $item;
+            pr($item);  
+            if($this->db->fetchOne("select id from ".$this->_tableSepareteProd." where url =?",$item));
             $this->db->insert($this->_tableSepareteProd,$data);  
         }  
+    }
+    }
+
+    // upravit aby to vzalo vše z cyklu
+    public function separeteProductCategory($url = false)
+    {    
+    foreach($this->_categories as $keyCat=>$url){
+        pr($url);        
+        $html = file_get_contents($url);  
+        $t = explode('search-result-items tiles-container bee__search-result-items bee__tiles-container hide-compare', $html);
+        $tt = explode('search-result-footer bee__search-result-footer', $t[1]);
+       // pr($tt[0]);
+       // die;     
+        $htmlDom = new DOMDocument();
+        $htmlDom->loadHTML($tt[0]);
+        $links = $htmlDom->getElementsByTagName('a');  
+             
+        $extractedLinks = array();
+        $data['parent'] = $keyCat;        
+        foreach($links as $link){ 
+            
+            if(is_numeric(strpos($link->getAttribute('href'),'/CZ/cs/'))){
+                    $extractedLinks[$link->getAttribute('href')] = 'https://www.weber.com/'.$link->getAttribute('href');
+                }
+        }       
+        foreach ($extractedLinks as $item)
+        {
+            $data['url'] = $item;
+            pr($item);  
+            if($this->db->fetchOne("select id from ".$this->_tableSepareteProd." where url =?",$item));
+            $this->db->insert($this->_tableSepareteProd,$data);  
+        }  
+    }
     }
 
     private function helperChart($text)
@@ -232,6 +316,9 @@ class module_ImportWeb {
         $text = str_replace("&eacute;","ě",$text);
         $text = str_replace("&iacute;","í",$text);
         $text = str_replace("&aacute;","á",$text);
+        $text = str_replace("&reg;","®",$text);
+        $text = str_replace("&yacute;","ý",$text);
+        
         return trim($text);
     }
 
@@ -239,20 +326,115 @@ class module_ImportWeb {
        $data = $this->db->fetchAll("select id,url from ".$this->_tableSepareteProd." where checked = '0'");  
        foreach($data as $item)
        {
-           $this->separeteData($item['url'],$item['id']);
+           $this->separeteDataPrislusenstvi($item['url'],$item['id']);
        }  
     }   
+   
+       // todo řata.... přidat
+       public function separeteDataPrislusenstvi($url = false,$id = false)   
+       {     
+          // $url = 'https://www.weber.com/CZ/cs/grily/grily-na-d%C5%99ev%C4%9Bn%C3%A9-uhl%C3%AD/%C5%99ada-master-touch/17401004.html';
+           $html = file_get_contents($url); 
+           $t = explode('<div class="bee__pdp-hero__description">', $html);     
+           $tt = explode('</div>', $t[1]);   
+           $dataSaveToDB = array();
+           $dataSaveToDB['mainText'] = trim(strip_tags($tt[0])); // text nahoře 
+           //title
+           $t = explode('<h2 class="bee__pdp-hero__product-name">', $html);   
+           $tt = explode('<br/>', $t[1]);        
+           $title =  $this->helperChart($tt[0]);
+           $tte = explode('</h2>', $this->helperChart($tt[0]));      
+           $dataSaveToDB['title'] = $tte[0];
+           // cena
+           $t = explode('<span class="bee__price--sales">', $html);  
+           $tt = explode('</span>', $t[1]);   
+           $price = str_replace(",00 Kč","",trim($tt[0]));
+           $price = str_replace(".","",$price);
+           $dataSaveToDB['price'] = $price;    
+           /// articl
+           $t = explode('<p id="bee__pdp-hero__product-id">Artikl. č. #', $html);  
+           $tt = explode('</p>', $t[1]);   
+           $articl = $tt[0];  
+           $dataSaveToDB['articl'] = $articl;
+    
+           //images        
+           $t = explode('<div class="bee__pdp-hero--right">', $html);
+           $tt = explode('</span></span></button>', $t[1]);     
+           $dom = new DOMDocument();
+           $dom->loadHTML( $tt[0] );
+           foreach( $dom->getElementsByTagName( 'img' ) as $node )
+           {            
+               $images[] =  str_replace("?auto=compress,format&fit=fill&h=950&w=1000&trim=color&trimtol=10&bg=0FFF&pad=50","",$node->getAttribute( 'src' ) );
+           }  
+           $dataSaveToDB['images'] = json_encode($images);
+   
+           // parametry asi ještě doladit do jiného html
+           $t = explode('<div class="flyout-content bee__flyout__content bee__flyout__part bee__flyout__content--full-width">', $html);
+           $tt = explode('<li class="bee__flyout__elem flyout-ctr">', $t[1]);   
+           $dataSaveToDB['params'] =  '
+           <div class="flyout-content bee__flyout__content bee__flyout__part bee__flyout__content--full-width">'.($tt[0]).'';//$c->getPropertyValue('parametry');      ;
+           $tt = (str_replace("</li>","",$dataSaveToDB['params']));
+           $ttqw = explode('<div class="bee__pdp-hero--right">',  $tt);     
+           $dataSaveToDB['params'] = (str_replace("</ul>","</li></ul>",$ttqw[0]));   
+           // prozkoumejte vlastnosti
+           $t = explode('<div class="template-details-items-list-wrapper js-slider-wrapper">', $html);
+           $tt = explode('</section>', $t[1]);  
+           // images k vlastnostem
+           $ttt = explode("background-image: url('",$tt[0]);
+           unset($ttt[0]);
+           array_pop($ttt);
+           $imagesVlastnosti = array();
+           foreach($ttt as $it){
+               $im = explode("?auto=compress",$it); 
+               if(!in_array($im[0],$imagesVlastnosti))
+               { 
+                   $imagesVlastnosti[] = $im[0];
+               }
+           }
+           $inc = 0;
+           $dom = new DOMDocument();       
+           $dom->loadHTML($tt[0]);
+           $headings = $dom->getElementsByTagName('h3');
+           foreach($headings as $item)
+           {
+               $vlastnosti[$imagesVlastnosti[$inc]] = trim(mb_convert_encoding( $item->nodeValue, "Windows-1252", "UTF-8" )); 
+               $inc++;
+           }
+           $dataSaveToDB['properties'] = json_encode($vlastnosti);
+           
+           // doporučujeme dokoupit
+           $t = explode('<span class="bee__product-title">', $html);
+           unset($t[0]);
+           foreach($t as $item)
+           { 
+               
+               $temp = explode("</span>",$item); 
+               $title = $temp[0];
+               $souuviseji[$title] = $this->helperChart($title);
+           }
+           $newObject = new stdClass(); 
+           $dataSaveToDB['shiping'] = json_encode($souuviseji);
+           $dataSaveToDB['checked'] = '1';   
+           //zaruka 
+      
+           //přislušentsví upozorněni
+           if($dataSaveToDB['images'])
+           {  
+               $where = $this->db->quoteInto('id =?',$id);  
+               $this->db->update($this->_tableSepareteProd,$dataSaveToDB,$where);   
+           }
+       }    
     
 
     // todo řata.... přidat
-    public function separeteData($url = false,$id = false) 
+    public function separeteData($url = false,$id = false)   
     {   
-        $url = 'https://www.weber.com/CZ/cs/grily/grily-na-d%C5%99ev%C4%9Bn%C3%A9-uhl%C3%AD/%C5%99ada-master-touch/17401004.html';
+       // $url = 'https://www.weber.com/CZ/cs/grily/grily-na-d%C5%99ev%C4%9Bn%C3%A9-uhl%C3%AD/%C5%99ada-master-touch/17401004.html';
         $html = file_get_contents($url); 
-        $t = explode('<div class="bee__pdp-hero__description">', $html);   
+        $t = explode('<div class="bee__pdp-hero__description">', $html);     
         $tt = explode('</div>', $t[1]);   
         $dataSaveToDB = array();
-        $dataSaveToDB['mainText'] = trim(strip_tags($tt[0])); // text nahoře
+        $dataSaveToDB['mainText'] = trim(strip_tags($tt[0])); // text nahoře 
         //title
         $t = explode('<h2 class="bee__pdp-hero__product-name">', $html);   
         $tt = explode('<br/>', $t[1]);        
@@ -265,7 +447,8 @@ class module_ImportWeb {
         // řada
         $t = explode('<h1 class="bee__pdp-hero__series-name">', $html); 
         $tt = explode('</h1>', $t[1]);   
-        $dataSaveToDB['line'] = trim(str_replace("Řada","",$tt[0]));
+        $dataSaveToDB['line'] = $tt[0];  
+        
         // cena
         $t = explode('<span class="bee__price--sales">', $html);  
         $tt = explode('</span>', $t[1]);   
@@ -297,9 +480,10 @@ class module_ImportWeb {
         $tt = (str_replace("</li>","",$dataSaveToDB['params']));
         $dataSaveToDB['params'] = (str_replace("</ul>","</li></ul>",$tt));
         //zaruka --- přislušentsti upozorněni
-        $tes = explode('<div class="bee__flyout__content bee__flyout__part flyout-content">',$tt[1]);
-        $test = explode('</dl>',$tes[1]);
+        $tes = explode('<div class="bee__flyout__content bee__flyout__part flyout-content">',$t[1]);
+        $test = explode('</dl>',$tes[1]);          
         $dataSaveToDB['garanty'] = $test[0].'</dl></div></div>';
+        pr($dataSaveToDB['garanty']);      
         // prozkoumejte vlastnosti
         $t = explode('<div class="template-details-items-list-wrapper js-slider-wrapper">', $html);
         $tt = explode('</section>', $t[1]);  
@@ -339,18 +523,21 @@ class module_ImportWeb {
         $newObject = new stdClass(); 
         $dataSaveToDB['shiping'] = json_encode($souuviseji);
         $dataSaveToDB['checked'] = '1'; 
-
+        pr($dataSaveToDB);  
+        die;     
         //zaruka 
 
         //přislušentsví upozorněni
-        $where = $this->db->quoteInto('id =?',$id);  
-        $this->db->update($this->_tableSepareteProd,$dataSaveToDB,$where);  
-        die;   
+        if($dataSaveToDB['images'])
+        {  
+            $where = $this->db->quoteInto('id =?',$id);  
+            $this->db->update($this->_tableSepareteProd,$dataSaveToDB,$where);   
+        }
     }    
 
     public function show()
     {
-        e("FDS");   
+
         return (object)$this->db->fetchRow("select * from ".$this->_tableSepareteProd." where id = 1");
     }
 }
